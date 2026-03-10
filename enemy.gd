@@ -270,8 +270,8 @@ func launch_enemy(Player):
 	motion.x = launch_x
 	
 	var vertical_force = Player.motion.y * 1.05
-	if abs(Player.motion.y) < 100 and Player.is_on_floor():
-		vertical_force = -300 
+	# if abs(Player.motion.y) < 100 and Player.is_on_floor():
+	# 	vertical_force = -300 
 	motion.y = vertical_force 
 	
 	grounded = false
