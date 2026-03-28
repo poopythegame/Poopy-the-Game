@@ -1,4 +1,6 @@
 extends CharacterBody2D
+class_name Player
+
 @onready var gamemanager: Node2D = %gamemanager
 @onready var collision: CollisionShape2D = $Collision
 @onready var camera_2d: Camera2D = $Camera2D
@@ -194,9 +196,10 @@ func attempt_grapple_start():
 		rot = 0
 
 func physics_process_grapple(delta):
-	# 1. APPLY GRAVITY
-	# We apply gravity first so it naturally accelerates/decelerates you based on the slope of the swing.
-	motion.y += GRAVITY * delta
+	# 1. SET PLAYER MOTION
+	var target = topspeed * 1.5
+	if motion.length() < target:
+		motion = motion.normalized() * target
 
 	# 2. CALCULATE ROPE GEOMETRY
 	var vector_to_player = global_position - grapple_anchor_pos
@@ -222,6 +225,8 @@ func physics_process_grapple(delta):
 			
 			# Capture the speed we had BEFORE we hit the limit (Conservation of Energy)
 			var speed_preservation = motion.length()
+			if speed_preservation > target:
+				speed_preservation = target
 			
 			# Remove the outward component (Project onto Tangent)
 			motion -= rope_dir * radial_speed
@@ -477,9 +482,6 @@ func physics_process_normal(delta):
 			elif canairdash:
 				motion.x += abs(motion.x) * 0.15 * Input.get_axis("left", "right")
 				canairdash = false
-	
-	#This is the speedometer
-	gamemanager.displayspeed(motion.x, motion.y)
 	
 
 		
