@@ -131,16 +131,13 @@ func engage_freeze():
 	rot = 0
 	
 	# Ensure collision is ON generally (we manage exceptions later)
-	$CollisionShape2D.set_deferred("disabled", false)
+	$CollisionShape2D.disabled = false
 
 func disengage_freeze():
 	isfrozen = false
 	is_traveling = false
 	
 	# Make sure we interact with player again
-	var player = get_tree().get_first_node_in_group("Player")
-	if player:
-		remove_collision_exception_with(player)
 	
 	if anchor:
 		anchor.visible = false
@@ -157,16 +154,13 @@ func process_grid_input():
 	if Input.is_action_just_pressed("ui_right"): input_vector.x += 1
 	
 	if input_vector != Vector2.ZERO:
-		# Calculate POTENTIAL new grid coordinates
-		var new_coords = grid_coords + input_vector
-		
-		# BOUNDARY CHECK: Only move if x and y are between -1 and 1
-		# This creates a 3x3 grid (Center + 1 step in any direction)
-		if abs(new_coords.x) <= 1 and abs(new_coords.y) <= 1:
-			grid_coords = new_coords
-			# Calculate target based on ORIGIN, not current position
-			target_position = frozen_origin + (grid_coords * GRID_OFFSET)
-			is_traveling = true
+		var dx = clamp(input_vector.x, -1, 1)
+		var dy = clamp(input_vector.y, -1, 1)
+		grid_coords.x += dx
+		grid_coords.y += dy
+		grid_coords.x = clamp(grid_coords.x, -1, 1)
+		grid_coords.y = clamp(grid_coords.y, -1, 1)
+		position = frozen_origin + grid_coords * GRID_OFFSET		
 
 func process_frozen_behavior(delta):
 	# 1. CHECK PLAYER GRAPPLE STATE
@@ -178,11 +172,6 @@ func process_frozen_behavior(delta):
 	
 	# 2. MANAGE GHOSTING
 	# If we are moving OR player is grappling -> Player passes through us
-	if player:
-		if is_traveling or player_grappling:
-			add_collision_exception_with(player)
-		else:
-			remove_collision_exception_with(player)
 
 	# 3. MOVEMENT vs STATIONARY
 	if is_traveling:

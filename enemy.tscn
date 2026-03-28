@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cnaop4u3ja5n"]
+[gd_scene load_steps=6 format=3 uid="uid://cnaop4u3ja5n"]
 
 [ext_resource type="Texture2D" uid="uid://c0wjtb64dng2k" path="res://icon.svg" id="1_7k104"]
 [ext_resource type="Script" uid="uid://c4s4srij28h5u" path="res://enemy.gd" id="1_qi2p4"]
@@ -8,33 +8,34 @@
 a = Vector2(0, -32)
 b = Vector2(0, 16)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4gyqm"]
-radius = 40.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi2p4"]
+size = Vector2(47, 46.5)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=2146216453]
-position = Vector2(-1, 0)
+[node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_qi2p4")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1919438296]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0.999996, -1.90735e-06)
 scale = Vector2(0.365039, 0.364062)
 texture = ExtResource("1_7k104")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=23482499]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 8)
 shape = SubResource("SegmentShape2D_7k104")
 
-[node name="WallCast" type="RayCast2D" parent="CollisionShape2D" unique_id=1445813081]
+[node name="WallCast" type="RayCast2D" parent="CollisionShape2D"]
 target_position = Vector2(50, 0)
 
-[node name="RayCast" type="RayCast2D" parent="CollisionShape2D" unique_id=1945367816]
+[node name="RayCast" type="RayCast2D" parent="CollisionShape2D"]
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=1292933880]
+[node name="Hitbox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1675620483]
-shape = SubResource("CircleShape2D_4gyqm")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, -0.25)
+shape = SubResource("RectangleShape2D_qi2p4")
 
-[node name="anchor" parent="." unique_id=1188406791 instance=ExtResource("2_4gyqm")]
+[node name="anchor" parent="." instance=ExtResource("2_4gyqm")]
+visible = false
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
