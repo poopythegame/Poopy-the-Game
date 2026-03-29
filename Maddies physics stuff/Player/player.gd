@@ -254,7 +254,7 @@ func physics_process_grapple(delta):
 	rope_line.visible = true
 	rope_line.clear_points()
 	rope_line.add_point(Vector2.ZERO) 
-	rope_line.add_point(to_local(grapple_anchor_pos))
+	rope_line.add_point(rope_line.to_local(grapple_anchor_pos))
 	
 	# Rotate sprite to face velocity
 	#if motion.length() > 10:
