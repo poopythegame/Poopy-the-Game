@@ -51,6 +51,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Line2D" type="Line2D" parent="." unique_id=723573574]
+visible = false
 position = Vector2(0, -20)
 points = PackedVector2Array(0, 0)
 width = 3.0
