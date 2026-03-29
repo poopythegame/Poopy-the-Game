@@ -6,6 +6,8 @@ extends CanvasLayer
 
 func _process(_delta: float) -> void:
 	var raw_vspeed = abs(player.motion.y) - 50
+	if raw_vspeed < 0:
+		raw_vspeed = 0
 	var raw_hspeed = abs(player.motion.x)
 	var vspeed = raw_vspeed / 30.0 # 30 px = 1 m
 	var hspeed = raw_hspeed / 30.0
