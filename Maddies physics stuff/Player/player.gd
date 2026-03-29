@@ -195,11 +195,10 @@ func attempt_grapple_start():
 		canstomp = true
 		rot = 0
 
-func physics_process_grapple(delta):
-	# 1. SET PLAYER MOTION
-	var target = topspeed * 1.5
-	if motion.length() < target:
-		motion = motion.normalized() * target
+func physics_process_grapple(delta: float):
+	# 1. APPLY GRAVITY
+	# We apply gravity first so it naturally accelerates/decelerates you based on the slope of the swing.
+	motion.y += GRAVITY * delta
 
 	# 2. CALCULATE ROPE GEOMETRY
 	var vector_to_player = global_position - grapple_anchor_pos
@@ -225,8 +224,6 @@ func physics_process_grapple(delta):
 			
 			# Capture the speed we had BEFORE we hit the limit (Conservation of Energy)
 			var speed_preservation = motion.length()
-			if speed_preservation > target:
-				speed_preservation = target
 			
 			# Remove the outward component (Project onto Tangent)
 			motion -= rope_dir * radial_speed
