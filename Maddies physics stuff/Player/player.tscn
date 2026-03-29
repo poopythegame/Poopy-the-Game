@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bea558noe02pm"]
 
-[ext_resource type="Script" uid="uid://bkxp05jsmh5cy" path="res://Maddies physics stuff/Player/player.gd" id="1_3r5ht"]
+[ext_resource type="Script" uid="uid://cao44c0ijrk3m" path="res://scripts/player.gd" id="1_mx6bk"]
 [ext_resource type="SpriteFrames" uid="uid://cxxlgiysiu6jf" path="res://assets/animations/player.tres" id="2_mx6bk"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_0s3b8"]
-b = Vector2(0, -16)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mx6bk"]
+size = Vector2(48, 44)
 
 [node name="Player" type="CharacterBody2D" unique_id=1678918478]
 floor_constant_speed = true
@@ -12,7 +12,7 @@ floor_block_on_wall = false
 floor_max_angle = 1.55334
 floor_snap_length = 12.0
 safe_margin = 0.16
-script = ExtResource("1_3r5ht")
+script = ExtResource("1_mx6bk")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1087660946]
 position = Vector2(0, -17)
@@ -20,35 +20,8 @@ scale = Vector2(0.07, 0.07)
 sprite_frames = ExtResource("2_mx6bk")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.29890805
+frame_progress = 0.834896
 offset = Vector2(0, -27.03)
-
-[node name="Collision" type="CollisionShape2D" parent="." unique_id=1044009796]
-shape = SubResource("SegmentShape2D_0s3b8")
-
-[node name="Raycast" type="RayCast2D" parent="Collision" unique_id=1716484835]
-target_position = Vector2(0, 4)
-
-[node name="WallCast" type="RayCast2D" parent="Collision" unique_id=686402840]
-position = Vector2(0, -9)
-target_position = Vector2(5, 0)
-hit_from_inside = true
-
-[node name="ControlLockTimer" type="Timer" parent="." unique_id=1963449955]
-wait_time = 0.5
-one_shot = true
-
-[node name="IdleTimer" type="Timer" parent="." unique_id=1030390948]
-wait_time = 6.0
-one_shot = true
-
-[node name="JumpBufferTimer" type="Timer" parent="." unique_id=725728242]
-wait_time = 0.1
-one_shot = true
-
-[node name="CoyoteTimer" type="Timer" parent="." unique_id=874012185]
-wait_time = 0.1
-one_shot = true
 
 [node name="Line2D" type="Line2D" parent="." unique_id=723573574]
 visible = false
@@ -57,7 +30,6 @@ points = PackedVector2Array(0, 0)
 width = 3.0
 default_color = Color(0.18359, 0.18359, 0.18359, 1)
 
-[connection signal="timeout" from="ControlLockTimer" to="." method="_on_control_lock_timer_timeout"]
-[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
-[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
-[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=1600860729]
+position = Vector2(-2, -22)
+shape = SubResource("RectangleShape2D_mx6bk")
