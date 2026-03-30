@@ -30,15 +30,19 @@ func _physics_process(delta: float) -> void:
 
 func grounded_physics(delta: float):
 	var n_collisions: int = get_slide_collision_count()
-	var angle: float = 0.0
+	var surface_angle: float = 0.0
 	for i in range(n_collisions):
 		var collision: KinematicCollision2D = get_slide_collision(i)
-		angle += collision.get_normal().angle()
-	angle /= n_collisions
+		surface_angle += collision.get_normal().angle()
+	surface_angle /= n_collisions
 	if n_collisions <= 0:
-		angle = 0
-	rotation = angle + PI/2
-	up_direction = Vector2.from_angle(angle)
+		surface_angle = 0
+	surface_angle += PI/2
+	rotation = surface_angle
+	var normal = Vector2.from_angle(surface_angle)
+	print(normal)
+	up_direction = normal
+	var surface_dir = Vector2.from_angle(surface_angle + PI/2)
 
 	#region Forces
 	motion.y += gravity * delta
@@ -54,26 +58,27 @@ func grounded_physics(delta: float):
 	motion.x += dir * speed * delta
 	if Input.is_action_just_pressed("jump"):
 		motion.y -= jump_strength * delta
+		print(motion.y)
 	#endregion
 
-	var slope: float = up_direction.x
+	var slope: float = 0
 	var dx = motion.x - motion.y * slope
 	var dy = motion.y
-	velocity.x = clamp(dx, -max_speed, max_speed)
-	velocity.y = clamp(dy, -max_speed, max_speed)
+	motion.x = clamp(dx, -max_speed, max_speed)
+	motion.y = clamp(dy, -max_speed, max_speed)
+	velocity = motion
 	move_and_slide()
 
 	#region Animation
 	if abs(motion.x) >= max_speed:
 		sprite.play("run")
-		sprite.speed_scale = motion.x / 30
+		sprite.speed_scale = motion.x / 90
 	elif abs(motion.x) > 0:
 		sprite.play("walk")
-		sprite.speed_scale = motion.x / 30
+		sprite.speed_scale = motion.x / 90
 	else:
 		sprite.play("idle")
 	#endregion
-
 	if !is_on_floor():
 		state = State.AIRBORNE
 		velocity = Vector2.ZERO
@@ -107,4 +112,5 @@ func airborne_physics(delta: float):
 	sprite.play("jump")
 
 	if is_on_floor():
+		motion = Vector2.ZERO
 		state = State.GROUNDED

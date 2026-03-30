@@ -193,10 +193,11 @@ metadata/_edit_lock_ = true
 
 [node name="Player" parent="." unique_id=119389902 instance=ExtResource("1_q8hoo")]
 position = Vector2(-1692, -941)
-gravity = 60.0
+gravity = 1.0
 speed = 420.0
-deceleration = 0.0
-max_speed = 200.0
+deceleration = 6.0
+max_speed = 900.0
+jump_strength = 1000000.0
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1869083540]
 zoom = Vector2(3.5, 3.5)

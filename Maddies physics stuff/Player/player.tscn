@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://cxxlgiysiu6jf" path="res://assets/animations/player.tres" id="2_mx6bk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mx6bk"]
-size = Vector2(48, 44)
+size = Vector2(24, 44)
 
 [node name="Player" type="CharacterBody2D" unique_id=1678918478]
 floor_constant_speed = true
