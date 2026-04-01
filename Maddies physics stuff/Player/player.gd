@@ -1,5 +1,5 @@
 extends CharacterBody2D
-@onready var gamemanager: Node2D = %gamemanager
+@onready var main: CanvasLayer = get_parent().get_node("main")
 @onready var collision: CollisionShape2D = $Collision
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var anchor: Area2D = $"../anchor"
@@ -479,7 +479,7 @@ func physics_process_normal(delta):
 				canairdash = false
 	
 	#This is the speedometer
-	gamemanager.displayspeed(motion.x, motion.y)
+	main.displayspeed(motion.x, motion.y)
 	
 
 		
