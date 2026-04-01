@@ -1,11 +1,11 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var gamemanager: Node2D = %gamemanager
 @onready var collision: CollisionShape2D = $Collision
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var anchor: Area2D = $"../anchor"
 @onready var rope_line: Line2D = $Line2D # Make sure the name matches your node
+@onready var floor_cast: RayCast2D = $Collision/Raycast
 
 ### ### Maddie's Ultra-Simple Sonic Physics!! ### ###
 ## The absolute bare minimum needed to make a Sonic fangame.
@@ -298,6 +298,15 @@ func physics_process_normal(delta):
 				is_touching_surface = true
 				surface_normal = n
 				break
+	elif !jumping:
+		var space = get_world_2d().space
+		var state = PhysicsServer2D.space_get_direct_state(space)
+		var query = PhysicsRayQueryParameters2D.create(to_global(Vector2(0,-5)), to_global(Vector2(0,20)))
+		var result = state.intersect_ray(query)
+		if result:
+			is_touching_surface = true
+			surface_normal = result.normal
+			position = result.position
 
 	# --- 2. CALCULATE SLOPE DATA ---
 	if is_touching_surface:
@@ -447,8 +456,8 @@ func physics_process_normal(delta):
 
 
  #(Debug) Speed Boost
-	#if Input.is_action_just_pressed("boost"):
-	#	motion.x += 500 * Input.get_axis("left", "right")
+	if Input.is_action_just_pressed("boost"):
+		motion.x += 500 * Input.get_axis("left", "right")
 		
 #	var actionlist = ["action", "grapple", "dual"]
 #	var index = 0
@@ -692,14 +701,6 @@ func animate():
 	else:
 		idleset = true
 		$IdleTimer.stop()
-
-
-func _on_idle_timer_timeout():
-	if abs(motion.x) < 1:
-		$Sprite.play("idleanim")
-
-
-
 
 # Timer signals
 
