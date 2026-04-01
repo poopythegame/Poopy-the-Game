@@ -308,7 +308,7 @@ func physics_process_normal(delta):
 	$Collision.rotation = rot
 	$Sprite.rotation = lerp_angle($Sprite.rotation, rot, 0.25)
 
-	# --- 4. MOMENTUM CONVERSION & LANDING ---
+	# --- 4. MOMENTUM CONVERSION & LsssssANDING ---
 	if is_touching_surface:
 		# If we were airborne and just touched a valid surface...
 		if not grounded:
