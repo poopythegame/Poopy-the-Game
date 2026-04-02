@@ -27,7 +27,7 @@ var grid_coords := Vector2.ZERO # Tracks grid steps (e.g. 1,0 or -1,-1)
 var target_position := Vector2.ZERO 
 var is_traveling := false 
 
-const GRID_OFFSET = 70.0 
+const GRID_OFFSET = 85.0 
 const TRAVEL_SPEED = 800.0 
 const ARRIVAL_DISTANCE = 5.0 
 
@@ -277,8 +277,6 @@ func launch_enemy(Player):
 	motion.x = launch_x
 	
 	var vertical_force = Player.motion.y * 1.05
-	if abs(Player.motion.y) < 100 and Player.is_on_floor():
-		vertical_force = -300 
 	motion.y = vertical_force 
 	
 	grounded = false
