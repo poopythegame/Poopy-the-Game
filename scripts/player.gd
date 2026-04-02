@@ -21,6 +21,7 @@ var coyote_timer: float = 0
 var motion: Vector2 = Vector2.ZERO
 
 @onready var sprite: AnimatedSprite2D = $Sprite
+@onready var floor_cast: RayCast2D = $FloorCast
 
 func _physics_process(delta: float) -> void:
 	if state == State.GROUNDED:
@@ -29,20 +30,14 @@ func _physics_process(delta: float) -> void:
 		airborne_physics(delta)
 
 func grounded_physics(delta: float):
-	var n_collisions: int = get_slide_collision_count()
-	var surface_angle: float = 0.0
-	for i in range(n_collisions):
-		var collision: KinematicCollision2D = get_slide_collision(i)
-		surface_angle += collision.get_normal().angle()
-	surface_angle /= n_collisions
-	if n_collisions <= 0:
-		surface_angle = 0
-	surface_angle += PI/2
-	rotation = surface_angle
+	var surface_angle = 0.0
+	if floor_cast.is_colliding():
+		surface_angle = floor_cast.get_collision_normal().angle()
+	rotation = surface_angle + PI/2
 	var normal = Vector2.from_angle(surface_angle)
 	print(normal)
 	up_direction = normal
-	var surface_dir = Vector2.from_angle(surface_angle + PI/2)
+	var surface_dir = Vector2.from_angle(surface_angle - PI/2)
 
 	#region Forces
 	motion.y += gravity * delta
@@ -61,7 +56,7 @@ func grounded_physics(delta: float):
 		print(motion.y)
 	#endregion
 
-	var slope: float = 0
+	var slope: float = normal.x
 	var dx = motion.x - motion.y * slope
 	var dy = motion.y
 	motion.x = clamp(dx, -max_speed, max_speed)

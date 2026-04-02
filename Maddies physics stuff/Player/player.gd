@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Player
+class_name Player2
 
 @onready var gamemanager: Node2D = %gamemanager
 @onready var collision: CollisionShape2D = $Collision

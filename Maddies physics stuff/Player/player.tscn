@@ -33,3 +33,6 @@ default_color = Color(0.18359, 0.18359, 0.18359, 1)
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=1600860729]
 position = Vector2(-2, -22)
 shape = SubResource("RectangleShape2D_mx6bk")
+
+[node name="FloorCast" type="RayCast2D" parent="." unique_id=373632081]
+target_position = Vector2(0, 10)

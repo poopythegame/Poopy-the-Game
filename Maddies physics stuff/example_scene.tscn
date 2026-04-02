@@ -192,12 +192,10 @@ sources/0 = SubResource("TileSetAtlasSource_oebfb")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." unique_id=119389902 instance=ExtResource("1_q8hoo")]
-position = Vector2(-1692, -941)
-gravity = 1.0
-speed = 420.0
-deceleration = 6.0
-max_speed = 900.0
-jump_strength = 1000000.0
+position = Vector2(-535, -968)
+speed = 650.0
+max_speed = 12000.0
+jump_strength = 12500.0
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1869083540]
 zoom = Vector2(3.5, 3.5)
@@ -277,7 +275,7 @@ position = Vector2(-1787, -958)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="CharacterBody2D2" parent="." unique_id=192950522 instance=ExtResource("8_62vkk")]
-position = Vector2(-1204, -964)
+position = Vector2(-1519, -914)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="CharacterBody2D" parent="CharacterBody2D2" unique_id=1527492635 instance=ExtResource("8_62vkk")]
@@ -285,7 +283,7 @@ position = Vector2(-1787, -958)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="CharacterBody2D3" parent="." unique_id=786723878 instance=ExtResource("8_62vkk")]
-position = Vector2(-800, -921)
+position = Vector2(-1661, -959)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="CharacterBody2D" parent="CharacterBody2D3" unique_id=1974392137 instance=ExtResource("8_62vkk")]
