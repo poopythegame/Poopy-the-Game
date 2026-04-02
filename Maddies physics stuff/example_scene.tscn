@@ -196,7 +196,7 @@ distance = 16.0
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." unique_id=1943409005 instance=ExtResource("1_q8hoo")]
-position = Vector2(310, -30)
+position = Vector2(-1761, -901)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=579132428]
 zoom = Vector2(3.5, 3.5)
@@ -245,7 +245,7 @@ position = Vector2(400, -272)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D" unique_id=579691045]
 position = Vector2(-2705, 392)
 scale = Vector2(8.23569, 7.82381)
-polygon = PackedVector2Array(5.82829, -37.8332, 5.57561, -46.0134, 60.2256, -46.0134, 65.0826, -47.0359, 67.9967, -51.126, 67.9967, -62.3737, 78.8034, -62.3737, 88.27432, -74.38831, 108.551926, -83.7188, 120.2085, -93.17711, 130.28659, -97.906265, 147.04294, -88.95922, 155.543, -95.0943, 157.12102, -98.92879, 166.34915, -124.36397, 172.90598, -124.36397, 171.085, -36.8107)
+polygon = PackedVector2Array(5.82829, -37.8332, 5.57561, -46.0134, 60.2256, -46.0134, 65.0826, -47.0359, 67.9967, -51.126, 67.9967, -62.3737, 78.8034, -62.3737, 88.27432, -74.38831, 107.701965, -91.3877, 120.45135, -93.304924, 130.52943, -93.68837, 147.04294, -88.95922, 154.3283, -91.51552, 160.39943, -91.13207, 168.77759, -91.00426, 182.25552, -107.492386, 171.085, -36.8107)
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D/CollisionPolygon2D" unique_id=777756820]
@@ -279,7 +279,7 @@ color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 
 [node name="CharacterBody2D" parent="." unique_id=466183402 instance=ExtResource("8_62vkk")]
-position = Vector2(-1786, -950.00006)
+position = Vector2(-1681, -918)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="CharacterBody2D" parent="CharacterBody2D" unique_id=1446162879 instance=ExtResource("8_62vkk")]
@@ -287,7 +287,7 @@ position = Vector2(-1787, -958)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="CharacterBody2D2" parent="." unique_id=1528777139 instance=ExtResource("8_62vkk")]
-position = Vector2(-1204, -964)
+position = Vector2(-1560.0001, -755)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="CharacterBody2D" parent="CharacterBody2D2" unique_id=315393051 instance=ExtResource("8_62vkk")]
@@ -295,7 +295,7 @@ position = Vector2(-1787, -958)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="CharacterBody2D3" parent="." unique_id=1761644047 instance=ExtResource("8_62vkk")]
-position = Vector2(-800, -921)
+position = Vector2(-874.00006, -923)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="CharacterBody2D" parent="CharacterBody2D3" unique_id=719700460 instance=ExtResource("8_62vkk")]

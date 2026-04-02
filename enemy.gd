@@ -36,10 +36,99 @@ const SLIDE_THRESHOLD = 100.0
 const BOUNCE_FORGIVENESS_X = 50.0 
 
 func _ready():
+	var player = get_tree().get_first_node_in_group("Player")
+	if player:
+		add_collision_exception_with(player)
 	if anchor:
 		anchor.visible = false
 		anchor.monitoring = false
 		anchor.monitorable = false
+
+func physics_process_normal(delta):
+
+# --- 1. SURFACE DETECTION ---
+	# We need to know if we hit ANY surface (Floor, Wall, or Ceiling), not just the floor.
+	var is_touching_surface = false
+	var surface_normal = Vector2.UP # Default
+	
+	if is_on_floor():
+		# Always allow standing on the ground (0° / 360°)
+		is_touching_surface = true
+		surface_normal = get_floor_normal()
+	elif is_on_ceiling() or is_on_wall():
+		# If we hit a wall or ceiling, strictly check if it's an angled slope.
+		for i in get_slide_collision_count():
+			var col = get_slide_collision(i)
+			var n = col.get_normal()
+			
+			# A perfectly flat wall has a Y normal of 0.
+			# A perfectly flat ceiling has an X normal of 0.
+			# We ONLY want to attach if both X and Y are greater than 0 (meaning it's angled).
+			if abs(n.x) > 0.01 and abs(n.y) > 0.01: 
+				is_touching_surface = true
+				surface_normal = n
+				break
+	# else:
+	# 	var space = get_world_2d().space
+	# 	var state = PhysicsServer2D.space_get_direct_state(space)
+	# 	var query = PhysicsRayQueryParameters2D.create(to_global(Vector2(0,-5)), to_global(Vector2(0,20)))
+	# 	var result = state.intersect_ray(query)
+	# 	if result:
+	# 		is_touching_surface = true
+	# 		surface_normal = result.normal
+	# 		position = result.position
+
+	# --- 2. CALCULATE SLOPE DATA ---
+	if is_touching_surface:
+		slopeangle = surface_normal.angle() + (PI/2)
+		slopefactor = surface_normal.x
+	else:
+		slopefactor = 0
+
+	# --- 3. ROTATION VISUALS ---
+	$CollisionShape2D.rotation = rot
+	$Sprite2D.rotation = lerp_angle($Sprite2D.rotation, rot, 0.25)
+
+	# --- 4. MOMENTUM CONVERSION & LANDING ---
+	if is_touching_surface:
+		# If we were airborne and just touched a valid surface...
+		if not grounded:
+			# MOMENTUM CONVERSION
+			# We only convert if the slope is steep enough (>= 0.25 radians).
+			if abs(slopeangle) >= 0.25 and abs(motion.y) > abs(motion.x): 
+				motion.x = motion.y * slopefactor
+			
+			grounded = true
+			
+		# Update orientation to match the new surface
+		up_direction = surface_normal
+		rot = slopeangle
+		
+	else: 
+		# --- LEAVING THE FLOOR ---
+		if not $CollisionShape2D/RayCast.is_colliding() and grounded:
+			grounded = false
+			motion = get_real_velocity()
+			rot = 0
+			up_direction = Vector2(0, -1)
+	# Gravity
+	if not is_on_floor() and rot == 0:
+		motion.y += GRAVITY * delta
+		# The basic Gravity procedure.
+		# We only trigger this if you're in the air. Otherwise, your vertical motion- 
+		# -would try to increase infinitely while you're on the ground.
+	else:
+		if abs(slopefactor) == 1: # If running up a perfectly vertical wall...
+			motion.y = 0
+			# This makes sure you don't get any unwanted horizontal air speed when- 
+			# -riding a perfectly U-shaped crevice. (Most of the time, at least.)
+			# Without this, the motion addition below would cause you to drift off to-
+			# -the side after launching yourself upwards.
+		else:
+			motion.y = 50
+			# This tries to help you stick to the ground, though it's not very-
+			# -effective at high speeds.
+	velocity = Vector2(motion.x, motion.y).rotated(rot)
 
 func _physics_process(delta):
 	
@@ -55,58 +144,13 @@ func _physics_process(delta):
 	# --- 3. FROZEN STATE LOGIC ---
 	if isfrozen:
 		process_frozen_behavior(delta)
-		return # Stop standard physics here
-		
-	# --- 4. STANDARD PHYSICS ---
-	check_generous_bounce()
-	check_player_impact(delta)
-	
-	# Slope & Gravity Logic
-	if is_on_floor():
-		slopeangle = get_floor_normal().angle() + (PI/2)
-		slopefactor = get_floor_normal().x
 	else:
-		slopefactor = 0
+		check_generous_bounce()
+		check_player_impact(delta)
+		physics_process_normal(delta)
 
-	$CollisionShape2D.rotation = rot
-	$Sprite2D.rotation = lerp_angle($Sprite2D.rotation, rot, 0.25)
-
-	if is_on_floor():
-		if not grounded:
-			if abs(slopeangle) >= 0.25 and abs(motion.y) > abs(motion.x):
-				motion.x += motion.y * slopefactor
-			grounded = true
-		up_direction = get_floor_normal()
-		rot = slopeangle
-	else:
-		if grounded:
-			grounded = false
-			motion = get_real_velocity()
-			rot = 0
-			up_direction = Vector2(0, -1)
-
-	if not is_on_floor():
-		motion.y += GRAVITY * delta
-	elif motion.y >= 0: 
-		if abs(slopefactor) == 1:
-			motion.y = 0
-
-	if is_on_floor():
-		if abs(motion.x) < SLIDE_THRESHOLD:
-			motion.x = move_toward(motion.x, 0, acc)
-		else:
-			motion.x = move_toward(motion.x, 0, acc * 0.1)
-
-	if is_on_floor():
-		motion.x += (acc * SLOPEMULT) * slopefactor
-
-	var current_rot = rot
-	if motion.y < 0: 
-		current_rot = 0
-		
-	velocity = Vector2(motion.x, motion.y).rotated(current_rot)
 	move_and_slide()
-	slope_stuck_failsafe()
+	# slope_stuck_failsafe()
 
 # --- NEW FROZEN LOGIC ---
 
@@ -251,7 +295,7 @@ func launch_enemy(Player):
 	hit_cooldown = true
 	hit_timer = 1 
 	
-	var launch_x = Player.motion.x * 1.3
+	var launch_x = Player.motion.x * 2
 	#if abs(launch_x) < 200 and abs(launch_x) >= 25:
 		#var dir = sign(global_position.x - Player.global_position.x)
 		#if dir == 0: dir = 1
