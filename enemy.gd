@@ -119,17 +119,6 @@ func physics_process_normal(delta):
 		# The basic Gravity procedure.
 		# We only trigger this if you're in the air. Otherwise, your vertical motion- 
 		# -would try to increase infinitely while you're on the ground.
-	else:
-		if abs(slopefactor) == 1: # If running up a perfectly vertical wall...
-			motion.y = 0
-			# This makes sure you don't get any unwanted horizontal air speed when- 
-			# -riding a perfectly U-shaped crevice. (Most of the time, at least.)
-			# Without this, the motion addition below would cause you to drift off to-
-			# -the side after launching yourself upwards.
-		else:
-			motion.y = 50
-			# This tries to help you stick to the ground, though it's not very-
-			# -effective at high speeds.
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 
 func _physics_process(delta):
