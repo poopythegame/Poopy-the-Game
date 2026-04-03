@@ -59,6 +59,8 @@ func physics_process_normal(delta):
 		# If we hit a wall or ceiling, strictly check if it's an angled slope.
 		for i in get_slide_collision_count():
 			var col = get_slide_collision(i)
+			if col.get_collider().is_in_group("Player"):
+				continue
 			var n = col.get_normal()
 			
 			# A perfectly flat wall has a Y normal of 0.
@@ -149,7 +151,7 @@ func _physics_process(delta):
 		check_player_impact(delta)
 		physics_process_normal(delta)
 
-	move_and_slide()
+		move_and_slide()
 	# slope_stuck_failsafe()
 
 # --- NEW FROZEN LOGIC ---

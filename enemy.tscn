@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://c4s4srij28h5u" path="res://enemy.gd" id="1_qi2p4"]
 [ext_resource type="PackedScene" uid="uid://fieh7uoavdwx" path="res://anchor.tscn" id="2_4gyqm"]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qi2p4"]
+b = Vector2(0, 23)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qi2p4"]
 size = Vector2(47, 46.5)
 
@@ -17,6 +20,7 @@ scale = Vector2(0.365039, 0.364062)
 texture = ExtResource("1_7k104")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1315883769]
+shape = SubResource("SegmentShape2D_qi2p4")
 
 [node name="WallCast" type="RayCast2D" parent="CollisionShape2D" unique_id=684008330]
 target_position = Vector2(50, 0)
@@ -31,9 +35,5 @@ shape = SubResource("RectangleShape2D_qi2p4")
 
 [node name="anchor" parent="." unique_id=48107963 instance=ExtResource("2_4gyqm")]
 visible = false
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=302749761]
-position = Vector2(1, -0.25)
-shape = SubResource("RectangleShape2D_qi2p4")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
