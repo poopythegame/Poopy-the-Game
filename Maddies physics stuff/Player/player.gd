@@ -294,7 +294,7 @@ func physics_process_normal(delta):
 			# A perfectly flat wall has a Y normal of 0.
 			# A perfectly flat ceiling has an X normal of 0.
 			# We ONLY want to attach if both X and Y are greater than 0 (meaning it's angled).
-			if abs(n.x) > 0.01 and abs(n.y) > 0.01: 
+			if !is_zero_approx(n.x) and !is_zero_approx(n.y):
 				is_touching_surface = true
 				surface_normal = n
 				break
@@ -304,9 +304,11 @@ func physics_process_normal(delta):
 		var query = PhysicsRayQueryParameters2D.create(to_global(Vector2(0,-5)), to_global(Vector2(0,20)))
 		var result = state.intersect_ray(query)
 		if result:
-			is_touching_surface = true
-			surface_normal = result.normal
-			position = result.position
+			var n = result.normal
+			if !is_zero_approx(n.x) or !is_zero_approx(n.y):
+				is_touching_surface = true
+				surface_normal = result.normal
+				position = result.position
 
 	# --- 2. CALCULATE SLOPE DATA ---
 	if is_touching_surface:
