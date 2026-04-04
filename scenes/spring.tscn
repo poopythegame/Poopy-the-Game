@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bf48swe3lsv8b"]
+
+[ext_resource type="Script" uid="uid://5hqlfc31k5tw" path="res://scripts/spring.gd" id="1_6vrsj"]
+[ext_resource type="Texture2D" uid="uid://poy2l887xr1d" path="res://assets/textures/placeholder/green.png" id="1_61klm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vrsj"]
+size = Vector2(68, 68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6w1c"]
+size = Vector2(68, 70)
+
+[node name="Spring" type="StaticBody2D" unique_id=52043480]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_6vrsj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=641863887]
+scale = Vector2(0.065, 0.065)
+texture = ExtResource("1_61klm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2135051986]
+shape = SubResource("RectangleShape2D_6vrsj")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=75027467]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1745073308]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_f6w1c")

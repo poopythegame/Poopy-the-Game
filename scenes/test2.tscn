@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://Maddies physics stuff/Player/player.tscn" id="1_cy281"]
 [ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/spike.tscn" id="2_uxr5t"]
+[ext_resource type="PackedScene" uid="uid://bf48swe3lsv8b" path="res://scenes/spring.tscn" id="3_uxr5t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51wsq"]
 size = Vector2(351, 117)
@@ -26,5 +27,7 @@ position = Vector2(66, 2)
 zoom = Vector2(3.5, 3.5)
 
 [node name="Spike" parent="." unique_id=2118102836 instance=ExtResource("2_uxr5t")]
-position = Vector2(162.00002, -9.000004)
-scale = Vector2(0.073246956, 0.073246956)
+position = Vector2(192, -16)
+
+[node name="Spring" parent="." unique_id=52043480 instance=ExtResource("3_uxr5t")]
+position = Vector2(275, -17)

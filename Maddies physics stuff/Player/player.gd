@@ -11,6 +11,7 @@ class_name Player
 @export var death_time: float = 0.5
 
 var dying: bool = false
+var springing: bool = false
 
 ### ### Maddie's Ultra-Simple Sonic Physics!! ### ###
 ## The absolute bare minimum needed to make a Sonic fangame.
@@ -306,7 +307,7 @@ func physics_process_normal(delta):
 				is_touching_surface = true
 				surface_normal = n
 				break
-	elif !jumping:
+	elif !jumping and !springing:
 		var space = get_world_2d().space
 		var state = PhysicsServer2D.space_get_direct_state(space)
 		var query = PhysicsRayQueryParameters2D.create(to_global(Vector2(0,-5)), to_global(Vector2(0,20)))
@@ -319,7 +320,7 @@ func physics_process_normal(delta):
 				position = result.position
 
 	# --- 2. CALCULATE SLOPE DATA ---
-	if is_touching_surface:
+	if is_touching_surface and !springing:
 		slopeangle = surface_normal.angle() + (PI/2)
 		slopefactor = surface_normal.x
 	else:
@@ -356,11 +357,13 @@ func physics_process_normal(delta):
 
 
 # Gravity
-	if not is_on_floor() and rot == 0:
+	if not is_on_floor() and rot == 0 or springing:
 		motion.y += GRAVITY * delta
 		# The basic Gravity procedure.
 		# We only trigger this if you're in the air. Otherwise, your vertical motion- 
 		# -would try to increase infinitely while you're on the ground.
+		if springing and motion.y >= 0:
+			springing = false
 	else:
 		if abs(slopefactor) == 1: # If running up a perfectly vertical wall...
 			motion.y = 0
@@ -565,6 +568,8 @@ func physics_process_normal(delta):
 	
 
 # Set Velocity to the Motion variable, but rotated.
+	if motion.y != 50:
+		print(motion)
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 	
 	# Right here's where the magic happens.
