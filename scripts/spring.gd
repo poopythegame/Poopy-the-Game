@@ -12,9 +12,7 @@ func _contact(body: Node2D):
     if body is Player:
         var player: Player = body
         var player_pos = player.global_position
-        if player_pos.y < global_position.y:
-            var motion = Vector2.ZERO
-            motion.y -= force
-            # motion = motion.rotated(global_rotation)
-            player.motion += motion
-            player.springing = true
+        var motion = Vector2.ZERO
+        motion.y -= force
+        player.motion += motion
+        player.springing = true
