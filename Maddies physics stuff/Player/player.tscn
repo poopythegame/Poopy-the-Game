@@ -1,7 +1,12 @@
 [gd_scene format=3 uid="uid://bea558noe02pm"]
 
 [ext_resource type="Script" uid="uid://bkxp05jsmh5cy" path="res://Maddies physics stuff/Player/player.gd" id="1_3r5ht"]
+[ext_resource type="Shader" uid="uid://jl2epyexbnke" path="res://shaders/destroy.gdshader" id="2_3wf3c"]
 [ext_resource type="SpriteFrames" uid="uid://cxxlgiysiu6jf" path="res://assets/animations/player.tres" id="2_mx6bk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jnnhn"]
+shader = ExtResource("2_3wf3c")
+shader_parameter/t = 0.0
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0s3b8"]
 b = Vector2(0, -16)
@@ -15,6 +20,7 @@ safe_margin = 0.16
 script = ExtResource("1_3r5ht")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1087660946]
+material = SubResource("ShaderMaterial_jnnhn")
 position = Vector2(0, -17)
 scale = Vector2(0.07, 0.07)
 sprite_frames = ExtResource("2_mx6bk")

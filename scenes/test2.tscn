@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bxu55fa6fc0eu"]
+
+[ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://Maddies physics stuff/Player/player.tscn" id="1_cy281"]
+[ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/spike.tscn" id="2_uxr5t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51wsq"]
+size = Vector2(351, 117)
+
+[node name="Test2" type="Node2D" unique_id=555859491]
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1190149811]
+
+[node name="ColorRect" type="ColorRect" parent="Ground" unique_id=1735033707]
+offset_right = 351.0
+offset_bottom = 117.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=112833008]
+position = Vector2(175.5, 58.5)
+shape = SubResource("RectangleShape2D_51wsq")
+
+[node name="Player" parent="." unique_id=1678918478 instance=ExtResource("1_cy281")]
+position = Vector2(66, 2)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=714915220]
+zoom = Vector2(3.5, 3.5)
+
+[node name="Spike" parent="." unique_id=2118102836 instance=ExtResource("2_uxr5t")]
+position = Vector2(162.00002, -9.000004)
+scale = Vector2(0.073246956, 0.073246956)

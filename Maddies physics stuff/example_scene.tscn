@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ccvtjilgokcnb" path="res://Maddies physics stuff/collision_polygon_2d.gd" id="7_pvwt8"]
 [ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://enemy.tscn" id="8_62vkk"]
 [ext_resource type="PackedScene" uid="uid://bighj27oiag44" path="res://scenes/ui.tscn" id="8_dkxqa"]
+[ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/spike.tscn" id="9_dkxqa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oebfb"]
 texture = ExtResource("2_e7m5p")
@@ -196,7 +197,7 @@ distance = 16.0
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." unique_id=1943409005 instance=ExtResource("1_q8hoo")]
-position = Vector2(-1761, -901)
+position = Vector2(-1760, -901)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=579132428]
 zoom = Vector2(3.5, 3.5)
@@ -258,7 +259,7 @@ position = Vector2(800, -544)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D2" unique_id=1036711703]
 position = Vector2(-3625, 464)
 scale = Vector2(8.23569, 7.82381)
-polygon = PackedVector2Array(69.0896, -36.8107, 69.0896, -66.4638, 94.3455, -66.4638, 94.3455, -44.9909, 117.659, -44.9909, 117.537, -36.8107)
+polygon = PackedVector2Array(69.0896, -36.8107, 69.0896, -66.4638, 94.3455, -66.4638, 94.3455, -44.9909, 117.659, -44.9909, 117.658646, -36.810707)
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D2/CollisionPolygon2D" unique_id=307386845]
@@ -307,3 +308,8 @@ position = Vector2(-80, -272)
 
 [node name="HeadsUpDisplay" parent="." unique_id=1425205857 node_paths=PackedStringArray("player") instance=ExtResource("8_dkxqa")]
 player = NodePath("../Player")
+
+[node name="Spike" parent="." unique_id=2118102836 instance=ExtResource("9_dkxqa")]
+position = Vector2(-1484, -717)
+rotation = 3.1415927
+scale = Vector2(-0.075, -0.075)

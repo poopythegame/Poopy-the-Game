@@ -6,6 +6,11 @@ class_name Player
 @onready var anchor: Area2D = $"../anchor"
 @onready var rope_line: Line2D = $Line2D # Make sure the name matches your node
 @onready var floor_cast: RayCast2D = $Collision/Raycast
+@onready var death_tween = get_tree().create_tween()
+
+@export var death_time: float = 0.5
+
+var dying: bool = false
 
 ### ### Maddie's Ultra-Simple Sonic Physics!! ### ###
 ## The absolute bare minimum needed to make a Sonic fangame.
@@ -147,6 +152,9 @@ const GRAPPLE_RANGE = 400.0
 
 func _physics_process(delta):
 	
+	if dying:
+		return
+
 	# 1. CHECK FOR GRAPPLE START
 	# If we press the button and aren't already grappling...
 	if Input.is_action_pressed("grapple") and not is_grappling: 
@@ -725,6 +733,28 @@ func deathanim():
 	$Sprite.play("idle")
 	motion.y = -500
 	motion.x = 0
+
+func die():
+	if death_tween.is_running():
+		death_tween.kill()
+		death_tween = get_tree().create_tween()
+	motion = Vector2.ZERO
+	dying = true
+	var sprite = $Sprite
+	sprite.play("idle")
+	var mat: ShaderMaterial = sprite.material
+	death_tween.set_ease(Tween.EASE_IN)
+	death_tween.set_trans(Tween.TRANS_CUBIC)
+	print(mat.get_shader_parameter("t"))
+	death_tween.tween_property(mat, "shader_parameter/t", 1.0, death_time)
+	death_tween.tween_interval(0.3)
+	death_tween.tween_callback(restart)
+
+func restart():
+	death_tween.kill()
+	var mat: ShaderMaterial = $Sprite.material
+	mat.set_shader_parameter("t", 0.0)
+	get_tree().reload_current_scene()
 
 #Fairer Cemera
 
