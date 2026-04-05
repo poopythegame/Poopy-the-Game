@@ -4,15 +4,24 @@ class_name Player
 @onready var main: InGameOverlay = get_parent().get_node("InGameOverlay")
 @onready var collision: CollisionShape2D = $Collision
 @onready var camera_2d: Camera2D = $Camera2D
-@onready var anchor: Area2D = $"../anchor"
+# @onready var anchor: Area2D = $"../anchor"
 @onready var rope_line: Line2D = $Line2D # Make sure the name matches your node
 @onready var floor_cast: RayCast2D = $Collision/Raycast
 @onready var death_tween = get_tree().create_tween()
 
 @export var death_time: float = 0.5
+@export var max_health: int = 100
 
 var dying: bool = false
 var springing: bool = false
+# Vector2 or null
+var last_safe_grounded_pos = null
+var health: float = max_health:
+	set(value):
+		health = value
+		if main.is_node_ready():
+			main.log_health(health, max_health)
+var has_initialized_health = false
 
 ### ### Maddie's Ultra-Simple Sonic Physics!! ### ###
 ## The absolute bare minimum needed to make a Sonic fangame.
@@ -150,7 +159,6 @@ var grapple_ang_vel := 0.0     # Angular Velocity
 # Max distance to grab an anchor
 const GRAPPLE_RANGE = 400.0 
 ### ### ### ### ### ### ### ### ### ###
-
 
 func _physics_process(delta):
 	
@@ -324,6 +332,11 @@ func physics_process_normal(delta):
 	if is_touching_surface and !springing:
 		slopeangle = surface_normal.angle() + (PI/2)
 		slopefactor = surface_normal.x
+		var col = get_last_slide_collision()
+		if col:
+			var surface = col.get_collider()
+			if !(surface is Spike):
+				last_safe_grounded_pos = global_position
 	else:
 		slopefactor = 0
 
@@ -641,7 +654,19 @@ func physics_process_normal(delta):
 	#slope_failsafe()
 	move_and_slide()
 
+func _process(delta: float) -> void:
+	if health <= 0 and !dying:
+		die()
+	if !has_initialized_health and main.is_node_ready():
+		has_initialized_health = true
+		main.log_health(health, max_health)
 
+
+func take_damage(amount: float) -> void:
+	health -= amount
+	global_position = last_safe_grounded_pos
+	if health <= 0:
+		die()
 
 
 # That's the main part of the script done with.
@@ -754,8 +779,7 @@ func die():
 	var mat: ShaderMaterial = sprite.material
 	death_tween.set_ease(Tween.EASE_IN)
 	death_tween.set_trans(Tween.TRANS_CUBIC)
-	print(mat.get_shader_parameter("t"))
-	death_tween.tween_property(mat, "shader_parameter/t", 1.0, death_time)
+	death_tween.tween_property(mat, "shader_parameter/t", 1.0, 0.5)
 	death_tween.tween_interval(0.3)
 	death_tween.tween_callback(restart)
 

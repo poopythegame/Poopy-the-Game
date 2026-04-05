@@ -7,7 +7,8 @@ class_name InGameOverlay
 @onready var horizontal_speed: Label = $left/HorizontalSpeed
 @onready var vertical_speed: Label = $right/VerticalSpeed
 @onready var p_rank = $"right/p-rank"
-@onready var healthbar = $left/healthbar #won't worry about it rn btw
+@onready var healthbar = $left/HealthBar
+@onready var health_label = $left/HealthBar/HealthNumber
 @onready var minutes_label = $left/HBoxContainer/minutes
 @onready var seconds_label = $left/HBoxContainer/seconds
 @onready var msec_label = $left/HBoxContainer/msec
@@ -19,7 +20,7 @@ var seconds: int = 0
 var mseconds: int = 0 
 
 func _ready():
-	stopwatch_paused = false 
+	stopwatch_paused = false
 	print("tonight's the night...")
 
 func _process(delta): 
@@ -32,7 +33,7 @@ func _process(delta):
 	p_rank.text = "p-rank - " + str(prank)
 	# stopwatch (time) 
 	if Input.is_action_just_pressed("r"): # !!!!! THIS IS FOR THE SAKE OF DEBUGGING NOT A PERMANENT FEATURE !!!!!
-		stopwatch_paused = !stopwatch_paused 
+		stopwatch_paused = !stopwatch_paused
 	if not stopwatch_paused:
 		time += delta
 	mseconds = fmod(time, 1) * 100
@@ -50,3 +51,7 @@ func display_speed(x, y):
 	var hspeed = raw_hspeed / 30.0
 	horizontal_speed.text = "%0.1f m/s" % hspeed
 	vertical_speed.text = "%0.1f m/s" % vspeed
+
+func log_health(value: float, max: float) -> void:
+	health_label.text = str(int(value))
+	healthbar.value = value / max

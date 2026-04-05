@@ -5,6 +5,13 @@
 [sub_resource type="LabelSettings" id="LabelSettings_6koj1"]
 font_size = 13
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6koj1"]
+bg_color = Color(0.9851462, 0, 0.25752294, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
 [node name="InGameOverlay" type="CanvasLayer" unique_id=1911954101]
 script = ExtResource("1_erikh")
 
@@ -57,8 +64,28 @@ size_flags_horizontal = 0
 text = "— m/s"
 metadata/_edit_use_anchors_ = true
 
-[node name="healthbar" type="ProgressBar" parent="left" unique_id=865238034]
+[node name="HealthBar" type="ProgressBar" parent="left" unique_id=865238034]
+custom_minimum_size = Vector2(0, 25.265)
 layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_6koj1")
+max_value = 1.0
+show_percentage = false
+
+[node name="HealthNumber" type="Label" parent="left/HealthBar" unique_id=1506112805]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "—"
+horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="left" unique_id=1598092254]
 layout_mode = 2

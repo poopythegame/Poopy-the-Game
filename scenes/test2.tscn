@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://Maddies physics stuff/Player/player.tscn" id="1_cy281"]
 [ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/spike.tscn" id="2_uxr5t"]
 [ext_resource type="PackedScene" uid="uid://bf48swe3lsv8b" path="res://scenes/spring.tscn" id="3_uxr5t"]
+[ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/in_game_overlay.tscn" id="4_51wsq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51wsq"]
 size = Vector2(351, 117)
@@ -31,3 +32,5 @@ position = Vector2(192, -16)
 
 [node name="Spring" parent="." unique_id=52043480 instance=ExtResource("3_uxr5t")]
 position = Vector2(275, -17)
+
+[node name="InGameOverlay" parent="." unique_id=1911954101 instance=ExtResource("4_51wsq")]

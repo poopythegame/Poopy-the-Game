@@ -1,4 +1,7 @@
 extends StaticBody2D
+class_name Spike
+
+@export var damage: float = 20
 
 @onready var area: Area2D = $Area2D
 
@@ -10,4 +13,5 @@ func _contact(body: Node2D):
     if body is Player:
         var player: Player = body
         if player.global_position.y < global_position.y and player.motion.y > 0:
-            player.die()
+            player.take_damage(20)
+            print(player.health)
