@@ -7,10 +7,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwnqp"]
 radius = 105.0
 
-[node name="anchor" type="Area2D" unique_id=639998098 groups=["GrapplePoints"]]
+[node name="anchor" type="Area2D" unique_id=159874303 groups=["GrapplePoints"]]
 script = ExtResource("1_vwnqp")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1417688667]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1323682844]
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("1_tillw")
 

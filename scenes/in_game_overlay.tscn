@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://ba1g5kyug022g"]
+
+[ext_resource type="Script" uid="uid://ctl0k7lht8h4k" path="res://scripts/in_game_overlay.gd" id="1_erikh"]
+
+[node name="InGameOverlay" type="CanvasLayer" unique_id=1911954101]
+script = ExtResource("1_erikh")
+
+[node name="right" type="VBoxContainer" parent="." unique_id=1466593241]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_top = 8.0
+offset_right = -45.0
+offset_bottom = 112.0
+grow_horizontal = 0
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="Sppedlabely" type="Label" parent="right" unique_id=1525694678]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="p-rank" type="Label" parent="right" unique_id=12148069]
+layout_mode = 2
+text = "p-rank - x"
+
+[node name="left" type="VBoxContainer" parent="." unique_id=1427920809]
+offset_left = 7.0000005
+offset_top = 8.0
+offset_right = 121.0
+offset_bottom = 116.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Speedlabel" type="Label" parent="left" unique_id=1218336077]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="healthbar" type="ProgressBar" parent="left" unique_id=865238034]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="left" unique_id=1598092254]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="time" type="Label" parent="left/HBoxContainer" unique_id=1461104325]
+layout_mode = 2
+text = "time - "
+
+[node name="minutes" type="Label" parent="left/HBoxContainer" unique_id=1229699404]
+layout_mode = 2
+text = "00:"
+
+[node name="seconds" type="Label" parent="left/HBoxContainer" unique_id=902125147]
+layout_mode = 2
+text = "00."
+
+[node name="msec" type="Label" parent="left/HBoxContainer" unique_id=1078000673]
+layout_mode = 2
+text = "00"
+
+[node name="coins" type="Label" parent="left" unique_id=791635388]
+layout_mode = 2
+text = "coins - x"
