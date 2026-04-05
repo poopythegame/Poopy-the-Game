@@ -504,7 +504,7 @@ func physics_process_normal(delta):
 				canairdash = false
 	
 	#This is the speedometer
-	main.displayspeed(motion.x, motion.y)
+	main.display_speed(motion.x, motion.y)
 	
 
 		

@@ -4,8 +4,8 @@ class_name InGameOverlay
 # TW: DEXTER REFRENCES/BRAINROT AHEAD!!! AKA how to know I wrote the code: fandom refrences :,(
 
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
-@onready var speedlabel: Label = $left/Speedlabel
-@onready var sppedlabely: Label = $right/Sppedlabely
+@onready var horizontal_speed: Label = $left/HorizontalSpeed
+@onready var vertical_speed: Label = $right/VerticalSpeed
 @onready var p_rank = $"right/p-rank"
 @onready var healthbar = $left/healthbar #won't worry about it rn btw
 @onready var minutes_label = $left/HBoxContainer/minutes
@@ -43,6 +43,10 @@ func _process(delta):
 	msec_label.text = "%03d" % mseconds
 	
 	
-func displayspeed(speed, speedy):
-	speedlabel.text =  str(abs(int(speed))) + "mph"
-	sppedlabely.text = str(-(int(speedy - 50))) + "mph"
+func display_speed(x, y):
+	var raw_vspeed = abs(y) - 50
+	var raw_hspeed = abs(x)
+	var vspeed = raw_vspeed / 30.0 # 30 px = 1 m
+	var hspeed = raw_hspeed / 30.0
+	horizontal_speed.text = "%0.1f m/s" % hspeed
+	vertical_speed.text = "%0.1f m/s" % vspeed

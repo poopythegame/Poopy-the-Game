@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ctl0k7lht8h4k" path="res://scripts/in_game_overlay.gd" id="1_erikh"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_6koj1"]
+font_size = 13
+
 [node name="InGameOverlay" type="CanvasLayer" unique_id=1911954101]
 script = ExtResource("1_erikh")
 
@@ -18,8 +21,17 @@ scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="Sppedlabely" type="Label" parent="right" unique_id=1525694678]
+[node name="Label" type="Label" parent="right" unique_id=750251155]
 layout_mode = 2
+size_flags_horizontal = 8
+text = "Vertical"
+label_settings = SubResource("LabelSettings_6koj1")
+uppercase = true
+
+[node name="VerticalSpeed" type="Label" parent="right" unique_id=1525694678]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "— m/s"
 metadata/_edit_use_anchors_ = true
 
 [node name="p-rank" type="Label" parent="right" unique_id=12148069]
@@ -33,8 +45,16 @@ offset_right = 121.0
 offset_bottom = 116.0
 scale = Vector2(1.5, 1.5)
 
-[node name="Speedlabel" type="Label" parent="left" unique_id=1218336077]
+[node name="Label" type="Label" parent="left" unique_id=2092137028]
 layout_mode = 2
+text = "Horizontal"
+label_settings = SubResource("LabelSettings_6koj1")
+uppercase = true
+
+[node name="HorizontalSpeed" type="Label" parent="left" unique_id=1218336077]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "— m/s"
 metadata/_edit_use_anchors_ = true
 
 [node name="healthbar" type="ProgressBar" parent="left" unique_id=865238034]
