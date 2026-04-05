@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
+@onready var main: InGameOverlay = get_parent().get_node("InGameOverlay")
 @onready var collision: CollisionShape2D = $Collision
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var anchor: Area2D = $"../anchor"
@@ -501,6 +502,9 @@ func physics_process_normal(delta):
 			elif canairdash:
 				motion.x += abs(motion.x) * 0.15 * Input.get_axis("left", "right")
 				canairdash = false
+	
+	#This is the speedometer
+	main.displayspeed(motion.x, motion.y)
 	
 
 		
