@@ -2,21 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bk4548x327urk" path="res://Maddies physics stuff/example_level_FOR_NOW_LVL_1.gd" id="1_dkxqa"]
 [ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://Maddies physics stuff/Player/player.tscn" id="1_q8hoo"]
+[ext_resource type="Script" uid="uid://d4ajvlowai1f2" path="res://Maddies physics stuff/gamemanager.gd" id="1_uq5n0"]
 [ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://UI stuff (HELLO FELLOW CODERS!)/in_game.tscn" id="2_62552"]
 [ext_resource type="Texture2D" uid="uid://bet2iwomwf03l" path="res://Maddies physics stuff/brackeys_platformer_assets/sprites/world_tileset.png" id="2_e7m5p"]
-[ext_resource type="PackedScene" uid="uid://cphck7o4au8e3" path="res://lvl_end_global.tscn" id="3_62552"]
 [ext_resource type="PackedScene" uid="uid://c38kn0vik32mt" path="res://animatable_body_2d.tscn" id="3_oebfb"]
 [ext_resource type="PackedScene" uid="uid://clqlkh7oduonp" path="res://killzone.tscn" id="5_4d4pi"]
 [ext_resource type="PackedScene" uid="uid://fieh7uoavdwx" path="res://anchor.tscn" id="6_ojq0h"]
 [ext_resource type="Script" uid="uid://ccvtjilgokcnb" path="res://Maddies physics stuff/collision_polygon_2d.gd" id="7_pvwt8"]
 [ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://enemy.tscn" id="8_62vkk"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_fh7tq"]
-radius = 110.64357
-
-[sub_resource type="GDScript" id="GDScript_dkxqa"]
-script/source = "extends Node2D
-"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oebfb"]
 texture = ExtResource("2_e7m5p")
@@ -205,22 +198,6 @@ distance = 16.0
 script = ExtResource("1_dkxqa")
 metadata/_edit_lock_ = true
 
-[node name="main" parent="." unique_id=507318417 instance=ExtResource("2_62552")]
-
-[node name="DEV NOTES -> DELETE LATER!!" type="Label" parent="." unique_id=292509160]
-offset_left = 740.0
-offset_top = -411.0
-offset_right = 1083.0
-offset_bottom = -388.0
-text = "temp end (for the sake of testing stopwatch)"
-
-[node name="level_end" parent="." unique_id=496126979 instance=ExtResource("3_62552")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="level_end" unique_id=2133361774]
-z_index = 2
-position = Vector2(922, -347)
-shape = SubResource("CircleShape2D_fh7tq")
-
 [node name="Player" parent="." unique_id=1205493242 instance=ExtResource("1_q8hoo")]
 position = Vector2(-394, -41)
 
@@ -231,7 +208,7 @@ position_smoothing_speed = 15.0
 [node name="gamemanager" type="Node2D" parent="Player" unique_id=447504870]
 unique_name_in_owner = true
 position = Vector2(16, 16)
-script = SubResource("GDScript_dkxqa")
+script = ExtResource("1_uq5n0")
 
 [node name="Speedlabel" type="Label" parent="Player/gamemanager" unique_id=1949956529]
 offset_left = -184.0
@@ -326,3 +303,5 @@ scale = Vector2(0.848544, 0.947876)
 
 [node name="anchor2" parent="." unique_id=507954957 instance=ExtResource("6_ojq0h")]
 position = Vector2(-80, -272)
+
+[node name="main" parent="." unique_id=507318417 instance=ExtResource("2_62552")]
