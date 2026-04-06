@@ -14,4 +14,4 @@ func _contact(body: Node2D):
         var player: Player = body
         if player.global_position.y < global_position.y and player.motion.y > 0:
             player.take_damage(20)
-            print(player.health)
+            player.bounce(500)

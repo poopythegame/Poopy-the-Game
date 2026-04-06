@@ -14,8 +14,6 @@ class_name Player
 
 var dying: bool = false
 var springing: bool = false
-# Vector2 or null
-var last_safe_grounded_pos = null
 var health: float = max_health:
 	set(value):
 		health = value
@@ -332,11 +330,6 @@ func physics_process_normal(delta):
 	if is_touching_surface and !springing:
 		slopeangle = surface_normal.angle() + (PI/2)
 		slopefactor = surface_normal.x
-		var col = get_last_slide_collision()
-		if col:
-			var surface = col.get_collider()
-			if !(surface is Spike):
-				last_safe_grounded_pos = global_position
 	else:
 		slopefactor = 0
 
@@ -664,10 +657,16 @@ func _process(delta: float) -> void:
 
 func take_damage(amount: float) -> void:
 	health -= amount
-	global_position = last_safe_grounded_pos
 	if health <= 0:
 		die()
 
+func bounce(strength: float) -> void:
+	var dir = Vector2(-.5,-0.75)
+	if $Sprite.flip_h:
+		dir.x = 1
+	var force = dir * strength
+	motion += force
+	springing = true
 
 # That's the main part of the script done with.
 # Now let's move on to extra functions and timer signals.
