@@ -268,7 +268,7 @@ position = Vector2(12601, 480)
 position = Vector2(12241, 520)
 
 [node name="anchor4" parent="anchor/anchor4" instance=ExtResource("6_ojq0h")]
-position = Vector2(5104, 232)
+position = Vector2(5104, 56)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(400, -272)
@@ -516,7 +516,7 @@ position = Vector2(14400, -9792)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D14"]
 position = Vector2(-1656, 10216)
 scale = Vector2(8.23569, 7.82381)
-polygon = PackedVector2Array(20.399, -15.3378, 35.8133, -15.3378, 51.4833, -11.2477, 67.0254, -11.2477, 70.9109, -10.2252, 73.8251, -7.15764, 74.7964, -3.06756, 73.8251, 1.02252, 70.9109, 4.09008, 67.0254, 5.1126, 43.7122, 5.1126, 39.8267, 6.13512, 36.9125, 9.20268, 35.9412, 13.2928, 36.9125, 17.3828, 39.8267, 20.4504, 43.7122, 21.4729, 129.194, 21.4729, 133.079, 20.4504, 135.994, 17.3828, 136.965, 13.2928, 136.965, 5.1126, 175.82, 5.1126, 183.591, 6.13512, 187.477, 8.18016, 191.362, 13.2928, 192.334, 17.3828, 195.248, 20.4504, 199.133, 21.4729, 237.989, 21.4729, 245.76, 21.4729, 245.76, 17.3828, 257.416, 17.3828, 257.416, 13.2928, 339.012, 13.2928, 342.898, 12.2702, 345.812, 9.20268, 346.783, 5.1126, 346.783, -3.06756, 358.44, -3.06756, 358.44, -19.4279, 370.097, -19.4279, 370.097, 48.0584, -10.6852, 51.126, -10.6852, -19.4279, 4.85693, -19.4279)
+polygon = PackedVector2Array(28.17, -11.2477, 51.4833, -11.2477, 67.0254, -11.2477, 70.9109, -10.2252, 73.8251, -7.15764, 74.7964, -3.06756, 73.8251, 1.02252, 70.9109, 4.09008, 67.0254, 5.1126, 43.7122, 5.1126, 39.8267, 6.13512, 36.9125, 9.20268, 35.9412, 13.2928, 36.9125, 17.3828, 39.8267, 20.4504, 43.7122, 21.4729, 129.194, 21.4729, 133.079, 20.4504, 135.994, 17.3828, 136.965, 13.2928, 136.965, 5.1126, 160.278, 5.1126, 160.289, 49.7486, -10.6852, 51.126, -10.6852, -19.4279, 4.85693, -19.4279)
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D14/CollisionPolygon2D"]
@@ -527,12 +527,25 @@ polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 position = Vector2(28800, -19584)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D15"]
-position = Vector2(-14776, 19520)
+position = Vector2(-14776, 19328)
 scale = Vector2(8.23569, 7.82381)
-polygon = PackedVector2Array(175.82, 51.126, 175.82, 59.3061, 152.507, 59.3061, 43.7122, 51.126, -10.6852, 51.126, -10.6852, -22.4954, 245.76, -22.4954, 269.073, 18.4054, 175.82, 0, 169.02, 0, 164.163, 2.04504, 162.221, 6.13512, 160.278, 26.5855, 160.278, 51.126)
+polygon = PackedVector2Array(175.82, 51.126, 175.82, 59.3061, 152.507, 59.3061, 43.7122, 51.126, -10.6852, 51.126, -10.6852, -22.4954, 245.76, -22.4954, 218.561, -2.04504, 168.049, -2.04504, 164.163, -1.02252, 161.249, 2.04504, 160.278, 6.13512, 160.278, 51.126)
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D15/CollisionPolygon2D"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
+
+[node name="StaticBody2D16" type="StaticBody2D" parent="StaticBody2D"]
+position = Vector2(28800, -19584)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D16"]
+position = Vector2(-16056, 19816)
+scale = Vector2(8.23569, 7.82381)
+polygon = PackedVector2Array(160.278, 29.6531, 191.362, 29.6531, 191.362, 21.4729, 237.989, 21.4729, 245.76, 21.4729, 245.76, 17.3828, 257.416, 17.3828, 257.416, 13.2928, 339.012, 13.2928, 342.898, 12.2702, 345.812, 9.20268, 346.783, 5.1126, 346.783, -3.06756, 358.44, -3.06756, 358.44, -19.4279, 370.097, -19.4279, 370.097, 48.0584, 160.289, 49.7486)
+script = ExtResource("7_pvwt8")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D16/CollisionPolygon2D"]
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 
@@ -549,7 +562,7 @@ position = Vector2(3209.6, 124.656)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("8_62vkk")]
-position = Vector2(10147.7, 375.747)
+position = Vector2(10160.8, 197.268)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="anchor2" parent="." instance=ExtResource("6_ojq0h")]

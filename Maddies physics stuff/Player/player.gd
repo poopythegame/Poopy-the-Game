@@ -340,7 +340,7 @@ func physics_process_normal(delta):
 				
 				# 2. DYNAMICALLY EXTEND (Only while grounded)
 				# We use min() to put a hard limit on the extension so it doesn't grow infinitely at high speeds
-				var speed_reach = abs(motion.x) * delta * 15.0 
+				var speed_reach = abs(motion.x) * delta * 18.0 
 				
 				$Collision/Raycast.target_position = Vector2(0, base_ray_length + speed_reach)
 				$Collision/Raycast.force_raycast_update() 
