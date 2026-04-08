@@ -42,6 +42,7 @@ enabled=PackedStringArray()
 [global_group]
 
 GrapplePoints=""
+Enemy=""
 
 [input]
 

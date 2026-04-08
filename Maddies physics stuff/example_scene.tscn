@@ -293,7 +293,7 @@ script = ExtResource("7_pvwt8")
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 
-[node name="CharacterBody2D" parent="." unique_id=466183402 instance=ExtResource("8_62vkk")]
+[node name="CharacterBody2D" parent="." unique_id=466183402 groups=["Enemy"] instance=ExtResource("8_62vkk")]
 position = Vector2(-1681, -918)
 scale = Vector2(0.848544, 0.947876)
 
@@ -301,7 +301,7 @@ scale = Vector2(0.848544, 0.947876)
 position = Vector2(-1787, -958)
 scale = Vector2(0.848544, 0.947876)
 
-[node name="CharacterBody2D2" parent="." unique_id=1528777139 instance=ExtResource("8_62vkk")]
+[node name="CharacterBody2D2" parent="." unique_id=1528777139 groups=["Enemy"] instance=ExtResource("8_62vkk")]
 position = Vector2(-1560.0001, -755)
 scale = Vector2(0.848544, 0.947876)
 
@@ -309,7 +309,7 @@ scale = Vector2(0.848544, 0.947876)
 position = Vector2(-1787, -958)
 scale = Vector2(0.848544, 0.947876)
 
-[node name="CharacterBody2D3" parent="." unique_id=1761644047 instance=ExtResource("8_62vkk")]
+[node name="CharacterBody2D3" parent="." unique_id=1761644047 groups=["Enemy"] instance=ExtResource("8_62vkk")]
 position = Vector2(-874.00006, -923)
 scale = Vector2(0.848544, 0.947876)
 

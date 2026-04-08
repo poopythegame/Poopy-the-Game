@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Enemy
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -17,6 +18,8 @@ var slopefactor := 0.0
 # --- POSITIONING & TRAVEL VARIABLES ---
 var frozen_origin := Vector2.ZERO # The exact center (start of freeze)
 var grid_coords := Vector2.ZERO # Tracks grid steps (e.g. 1,0 or -1,-1)
+var next_grid_coords := Vector2.ZERO
+var grid_move_tween: Tween = null
 var target_position := Vector2.ZERO 
 var is_traveling := false 
 
@@ -27,6 +30,8 @@ const ARRIVAL_DISTANCE = 5.0
 # --- HITBOX VARIABLES ---
 var hit_cooldown := false
 var hit_timer := 0.0
+
+var vulnerable: bool = false
 
 # --- STATS ---
 var SLOPEMULT = 2
@@ -124,9 +129,9 @@ func physics_process_normal(delta):
 func _physics_process(delta):
 	
 	# --- 1. TOGGLE FREEZE (Press Only) ---
-	if Input.is_action_just_pressed("enemyfreeze"):
-		if not isfrozen:
-			engage_freeze()
+	# if Input.is_action_just_pressed("enemyfreeze"):
+	# 	if not isfrozen:
+	# 		engage_freeze()
 	
 	# --- 2. HANDLE REPOSITIONING INPUT (Hold Only) ---
 	if isfrozen and Input.is_action_pressed("enemyfreeze"):
@@ -146,6 +151,8 @@ func _physics_process(delta):
 # --- NEW FROZEN LOGIC ---
 
 func engage_freeze():
+	if !vulnerable:
+		return
 	isfrozen = true
 	is_traveling = false
 	motion = Vector2.ZERO
@@ -191,11 +198,28 @@ func process_grid_input():
 	if input_vector != Vector2.ZERO:
 		var dx = clamp(input_vector.x, -1, 1)
 		var dy = clamp(input_vector.y, -1, 1)
-		grid_coords.x += dx
-		grid_coords.y += dy
-		grid_coords.x = clamp(grid_coords.x, -1, 1)
-		grid_coords.y = clamp(grid_coords.y, -1, 1)
-		position = frozen_origin + grid_coords * GRID_OFFSET		
+		next_grid_coords.x += dx
+		next_grid_coords.y += dy
+		next_grid_coords.x = clamp(next_grid_coords.x, -1, 1)
+		next_grid_coords.y = clamp(next_grid_coords.y, -1, 1)
+		position = frozen_origin + next_grid_coords * GRID_OFFSET
+		# If colliding, instantly undo the movement.
+		var is_colliding = test_move(global_transform, Vector2.ZERO)
+		if is_colliding:
+			next_grid_coords = grid_coords
+		else:
+			if grid_move_tween != null and grid_move_tween.is_running():
+				grid_move_tween.kill()
+			grid_move_tween = create_tween()
+			grid_move_tween.tween_property(self, "grid_coords", next_grid_coords, 0.1)
+			grid_move_tween.tween_callback(finish_grid_move)
+			grid_move_tween.set_trans(Tween.TRANS_CUBIC)
+			grid_move_tween.set_ease(Tween.EASE_IN)
+	
+	position = frozen_origin + grid_coords * GRID_OFFSET
+
+func finish_grid_move():
+	grid_coords = next_grid_coords
 
 func process_frozen_behavior(delta):
 	# 1. CHECK PLAYER GRAPPLE STATE
@@ -273,7 +297,7 @@ func check_player_impact(delta):
 					perform_bounce(Player)
 				else:
 					launch_enemy(Player)
-				return 
+				vulnerable = true
 
 func perform_bounce(Player):
 	Player.motion.y = abs(Player.motion.y) * -1

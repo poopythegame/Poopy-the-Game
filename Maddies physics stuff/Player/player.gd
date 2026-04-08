@@ -182,7 +182,6 @@ func _physics_process(delta):
 		# If NOT grappling, we run your original Maddie Physics
 		physics_process_normal(delta)
 
-
 ### ### NEW GRAPPLE FUNCTIONS ### ###
 func attempt_grapple_start():
 	var all_anchors = get_tree().get_nodes_in_group("GrapplePoints")
@@ -578,8 +577,8 @@ func physics_process_normal(delta):
 	
 
 # Set Velocity to the Motion variable, but rotated.
-	if motion.y != 50:
-		print(motion)
+	# if motion.y != 50:
+	# 	print(motion)
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 	
 	# Right here's where the magic happens.
@@ -653,6 +652,17 @@ func _process(delta: float) -> void:
 	if !has_initialized_health and main.is_node_ready():
 		has_initialized_health = true
 		main.log_health(health, max_health)
+	if Input.is_action_just_pressed("enemyfreeze"):
+		var enemies = get_tree().get_nodes_in_group("Enemy")
+		var choice: Enemy = null
+		var min_dist = INF
+		for enemy in enemies:
+			var dist = enemy.global_position.distance_to(global_position)
+			if dist < min_dist:
+				choice = enemy
+				min_dist = dist
+		if choice and !choice.isfrozen:
+			choice.engage_freeze()
 
 
 func take_damage(amount: float) -> void:
