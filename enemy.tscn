@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c0wjtb64dng2k" path="res://icon.svg" id="1_7k104"]
 [ext_resource type="PackedScene" uid="uid://fieh7uoavdwx" path="res://anchor.tscn" id="2_4gyqm"]
+[ext_resource type="Script" uid="uid://c4s4srij28h5u" path="res://enemy.gd" id="GDScript_0e48y"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qi2p4"]
 b = Vector2(0, 23)
@@ -11,7 +12,7 @@ size = Vector2(47, 46.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=130443028]
 collision_layer = 2
-script = SubResource("GDScript_0e48y")
+script = ExtResource("GDScript_0e48y")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=575999639]
 position = Vector2(0.999996, -1.90735e-06)
