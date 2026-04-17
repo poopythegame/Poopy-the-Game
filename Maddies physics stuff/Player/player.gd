@@ -236,7 +236,7 @@ func physics_process_grapple(delta: float):
 		
 		if radial_speed > 0:
 			# We are moving outwards. We need to redirect this energy.
-			
+				
 			# Capture the speed we had BEFORE we hit the limit (Conservation of Energy)
 			var speed_preservation = motion.length()
 			

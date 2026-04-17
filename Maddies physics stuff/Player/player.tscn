@@ -9,7 +9,7 @@ shader = ExtResource("2_3wf3c")
 shader_parameter/t = 0.0
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0s3b8"]
-b = Vector2(0, -16)
+b = Vector2(0, -32)
 
 [node name="Player" type="CharacterBody2D" unique_id=1678918478]
 floor_constant_speed = true
@@ -21,12 +21,11 @@ script = ExtResource("1_3r5ht")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1087660946]
 material = SubResource("ShaderMaterial_jnnhn")
-position = Vector2(-1.4210855e-14, -13)
 scale = Vector2(0.053413477, 0.053413477)
 sprite_frames = ExtResource("2_mx6bk")
 animation = &"idle"
 autoplay = "idle"
-offset = Vector2(0, -27.03)
+offset = Vector2(0, -270.04)
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1044009796]
 shape = SubResource("SegmentShape2D_0s3b8")
@@ -35,8 +34,7 @@ shape = SubResource("SegmentShape2D_0s3b8")
 target_position = Vector2(0, 4)
 
 [node name="WallCast" type="RayCast2D" parent="Collision" unique_id=686402840]
-position = Vector2(0, -9)
-target_position = Vector2(5, 0)
+target_position = Vector2(7, 0)
 hit_from_inside = true
 
 [node name="ControlLockTimer" type="Timer" parent="." unique_id=1963449955]
