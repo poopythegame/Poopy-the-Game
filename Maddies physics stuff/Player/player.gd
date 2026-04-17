@@ -230,7 +230,7 @@ func physics_process_grapple(delta: float):
 		global_position = grapple_anchor_pos + (rope_dir * grapple_length)
 		
 		# --- B. VELOCITY CONSTRAINT (NO FRICTION) ---
-		
+			
 		# 1. Check if we are trying to move OUT of the circle
 		var radial_speed = motion.dot(rope_dir)
 		
@@ -313,17 +313,6 @@ func physics_process_normal(delta):
 				is_touching_surface = true
 				surface_normal = n
 				break
-	elif !jumping and !springing:
-		var space = get_world_2d().space
-		var state = PhysicsServer2D.space_get_direct_state(space)
-		var query = PhysicsRayQueryParameters2D.create(to_global(Vector2(0,-5)), to_global(Vector2(0,20)))
-		var result = state.intersect_ray(query)
-		if result:
-			var n = result.normal
-			if !is_zero_approx(n.x) or !is_zero_approx(n.y):
-				is_touching_surface = true
-				surface_normal = result.normal
-				position = result.position
 
 	# --- 2. CALCULATE SLOPE DATA ---
 	if is_touching_surface and !springing:
@@ -353,11 +342,68 @@ func physics_process_normal(delta):
 		
 	else: 
 		# --- LEAVING THE FLOOR ---
-		if not $Collision/Raycast.is_colliding() and grounded:
-			grounded = false
-			motion = get_real_velocity()
-			rot = 0
-			up_direction = Vector2(0, -1)
+		var base_ray_length = 4.0 # (Keep your custom value here)
+		
+		if grounded:
+			if jumping:
+				grounded = false
+				motion = get_real_velocity() 
+				rot = 0
+				up_direction = Vector2(0, -1)
+				# 1. MID-AIR ENFORCEMENT (Jump): Reset raycast instantly
+				$Collision/Raycast.target_position = Vector2(0, base_ray_length)
+			else:
+				var should_detach = false
+				
+				# 2. DYNAMICALLY EXTEND (Only while grounded)
+				# We use min() to put a hard limit on the extension so it doesn't grow infinitely at high speeds
+				var speed_reach = abs(motion.x) * delta * 18.0 
+				
+				$Collision/Raycast.target_position = Vector2(0, base_ray_length + speed_reach)
+				$Collision/Raycast.force_raycast_update() 
+				
+				# 3. CHECK COLLISION AND ANGLE
+				if not $Collision/Raycast.is_colliding():
+					should_detach = true
+				else:
+					var hit_point = $Collision/Raycast.get_collision_point()
+					var distance_to_floor = global_position.distance_to(hit_point)
+					
+					# CLIFF DETECTOR: If the floor is found, but it's too far down, it's a ledge drop, not a slope!
+					# (You can tweak the '20.0' if you find yourself falling off very steep slopes)
+					if distance_to_floor > (base_ray_length + 20.0):
+						should_detach = true
+					else:
+						var ray_normal = $Collision/Raycast.get_collision_normal()
+						var next_slopeangle = ray_normal.angle() + (PI/2)
+						var angle_diff = abs(angle_difference(rot, next_slopeangle))
+						
+						if angle_diff >= deg_to_rad(50):
+							should_detach = true
+						else:
+							# SMOOTH ATTACHMENT FIX
+							up_direction = ray_normal
+							rot = next_slopeangle
+							
+							var temp_vel = velocity
+							velocity = Vector2(0, (distance_to_floor / delta) * 1.5).rotated(rot) 
+							move_and_slide() 
+							velocity = temp_vel
+							
+				# 4. APPLY DETACHMENT
+				if should_detach:
+					grounded = false
+					motion = get_real_velocity()
+					rot = 0
+					up_direction = Vector2(0, -1)
+					
+				# 5. RESET RAYCAST
+				$Collision/Raycast.target_position = Vector2(0, base_ray_length)
+
+		else:
+			# --- MID-AIR ENFORCEMENT (Falling) ---
+			# If the player is already mid-air (grounded is false), guarantee the raycast is locked to normal.
+			$Collision/Raycast.target_position = Vector2(0, base_ray_length)
 
 
 
