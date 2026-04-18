@@ -310,7 +310,7 @@ func launch_enemy(Player):
 	hit_cooldown = true
 	hit_timer = 1 
 	
-	var launch_x = Player.motion.x * 2
+	var launch_x = Player.motion.x * 1.25
 	#if abs(launch_x) < 200 and abs(launch_x) >= 25:
 		#var dir = sign(global_position.x - Player.global_position.x)
 		#if dir == 0: dir = 1

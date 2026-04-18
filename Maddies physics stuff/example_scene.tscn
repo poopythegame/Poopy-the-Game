@@ -213,8 +213,6 @@ shape = SubResource("CircleShape2D_fh7tq")
 [node name="Player" parent="." unique_id=1088987096 instance=ExtResource("1_q8hoo")]
 position = Vector2(7821, -464)
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1763242490]
-
 [node name="Camera2D2" type="Camera2D" parent="Player" unique_id=579132428]
 zoom = Vector2(3.5, 3.5)
 position_smoothing_speed = 15.0
@@ -552,20 +550,20 @@ script = ExtResource("7_pvwt8")
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 
+[node name="CharacterBody2D4" parent="." unique_id=1842525380 instance=ExtResource("8_62vkk")]
+position = Vector2(15199.987, 80.00034)
+scale = Vector2(0.51843876, 0.8072463)
+
+[node name="CharacterBody2D3" parent="." unique_id=2095928702 groups=["Enemy"] instance=ExtResource("8_62vkk")]
+position = Vector2(8991.998, -88.000404)
+scale = Vector2(0.6109745, 0.85163707)
+
+[node name="CharacterBody2D2" parent="." unique_id=271275857 groups=["Enemy"] instance=ExtResource("8_62vkk")]
+position = Vector2(6680.9995, -199.99994)
+scale = Vector2(0.7200269, 0.89846885)
+
 [node name="CharacterBody2D" parent="." unique_id=305874911 instance=ExtResource("8_62vkk")]
 position = Vector2(-216, -104)
-scale = Vector2(0.848544, 0.947876)
-
-[node name="CharacterBody2D" parent="CharacterBody2D" unique_id=271275857 groups=["Enemy"] instance=ExtResource("8_62vkk")]
-position = Vector2(8128.04, -101.279)
-scale = Vector2(0.848544, 0.947876)
-
-[node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D" unique_id=2095928702 groups=["Enemy"] instance=ExtResource("8_62vkk")]
-position = Vector2(3209.6, 124.656)
-scale = Vector2(0.848544, 0.947876)
-
-[node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D/CharacterBody2D" unique_id=1842525380 instance=ExtResource("8_62vkk")]
-position = Vector2(10160.8, 197.268)
 scale = Vector2(0.848544, 0.947876)
 
 [node name="anchor2" parent="." unique_id=1757765603 instance=ExtResource("6_ojq0h")]
