@@ -309,7 +309,7 @@ func physics_process_normal(delta):
 			# A perfectly flat wall has a Y normal of 0.
 			# A perfectly flat ceiling has an X normal of 0.
 			# We ONLY want to attach if both X and Y are greater than 0 (meaning it's angled).
-			if !is_zero_approx(n.x) and !is_zero_approx(n.y):
+			if abs(n.x) > 0.01 and abs(n.y) > 0.01:
 				is_touching_surface = true
 				surface_normal = n
 				break
