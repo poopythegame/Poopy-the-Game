@@ -211,7 +211,7 @@ position = Vector2(922, -347)
 shape = SubResource("CircleShape2D_fh7tq")
 
 [node name="Player2" parent="." unique_id=889532577 groups=["Player"] instance=ExtResource("1_q8hoo")]
-position = Vector2(135, -1075)
+position = Vector2(-4568, -727)
 
 [node name="Camera2D" type="Camera2D" parent="Player2" unique_id=1931933336]
 
