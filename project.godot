@@ -39,6 +39,7 @@ enabled=PackedStringArray()
 
 GrapplePoints=""
 Enemy=""
+Player=""
 
 [input]
 
