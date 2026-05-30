@@ -50,7 +50,6 @@ func _ready():
 		anchor.monitorable = false
 
 func physics_process_normal(delta):
-
 # --- 1. SURFACE DETECTION ---
 	# We need to know if we hit ANY surface (Floor, Wall, or Ceiling), not just the floor.
 	var is_touching_surface = false
@@ -71,19 +70,10 @@ func physics_process_normal(delta):
 			# A perfectly flat wall has a Y normal of 0.
 			# A perfectly flat ceiling has an X normal of 0.
 			# We ONLY want to attach if both X and Y are greater than 0 (meaning it's angled).
-			if abs(n.x) > 0.01 and abs(n.y) > 0.01: 
+			if abs(n.x) > 0.01 and abs(n.y) > 0.01:
 				is_touching_surface = true
 				surface_normal = n
 				break
-	# else:
-	# 	var space = get_world_2d().space
-	# 	var state = PhysicsServer2D.space_get_direct_state(space)
-	# 	var query = PhysicsRayQueryParameters2D.create(to_global(Vector2(0,-5)), to_global(Vector2(0,20)))
-	# 	var result = state.intersect_ray(query)
-	# 	if result:
-	# 		is_touching_surface = true
-	# 		surface_normal = result.normal
-	# 		position = result.position
 
 	# --- 2. CALCULATE SLOPE DATA ---
 	if is_touching_surface:
@@ -113,18 +103,97 @@ func physics_process_normal(delta):
 		
 	else: 
 		# --- LEAVING THE FLOOR ---
-		if not $CollisionShape2D/RayCast.is_colliding() and grounded:
-			grounded = false
-			motion = get_real_velocity()
-			rot = 0
-			up_direction = Vector2(0, -1)
-	# Gravity
+		var base_ray_length = 4.0 # (Keep your custom value here)
+		
+		if grounded:
+			var should_detach = false
+			
+			# 2. DYNAMICALLY EXTEND (Only while grounded)
+			# We use min() to put a hard limit on the extension so it doesn't grow infinitely at high speeds
+			var speed_reach = abs(motion.x) * delta * 18.0 
+			
+			$CollisionShape2D/RayCast.target_position = Vector2(0, base_ray_length + speed_reach)
+			$CollisionShape2D/RayCast.force_raycast_update()
+			
+			# 3. CHECK COLLISION AND ANGLE
+			if not $CollisionShape2D/RayCast.is_colliding():
+				should_detach = true
+			else:
+				var hit_point = $CollisionShape2D/RayCast.get_collision_point()
+				var distance_to_floor = global_position.distance_to(hit_point)
+				
+				# CLIFF DETECTOR: If the floor is found, but it's too far down, it's a ledge drop, not a slope!
+				# (You can tweak the '20.0' if you find yourself falling off very steep slopes)
+				if distance_to_floor > (base_ray_length + 20.0):
+					should_detach = true
+				else:
+					var ray_normal = $CollisionShape2D/RayCast.get_collision_normal()
+					var next_slopeangle = ray_normal.angle() + (PI/2)
+					var angle_diff = abs(angle_difference(rot, next_slopeangle))
+					
+					if angle_diff >= deg_to_rad(50):
+						should_detach = true
+					else:
+						# SMOOTH ATTACHMENT FIX
+						up_direction = ray_normal
+						rot = next_slopeangle
+						
+						var temp_vel = velocity
+						velocity = Vector2(0, (distance_to_floor / delta) * 1.5).rotated(rot) 
+						move_and_slide() 
+						velocity = temp_vel
+						
+			# 4. APPLY DETACHMENT
+			if should_detach:
+				grounded = false
+				motion = get_real_velocity()
+				rot = 0
+				up_direction = Vector2(0, -1)
+				
+			# 5. RESET RAYCAST
+			$CollisionShape2D/RayCast.target_position = Vector2(0, base_ray_length)
+
+		else:
+			# --- MID-AIR ENFORCEMENT (Falling) ---
+			# If the player is already mid-air (grounded is false), guarantee the raycast is locked to normal.
+			$CollisionShape2D/RayCast.target_position = Vector2(0, base_ray_length)
+# Gravity
 	if not is_on_floor() and rot == 0:
 		motion.y += GRAVITY * delta
 		# The basic Gravity procedure.
 		# We only trigger this if you're in the air. Otherwise, your vertical motion- 
 		# -would try to increase infinitely while you're on the ground.
+	else:
+		if abs(slopefactor) == 1: # If running up a perfectly vertical wall...
+			motion.y = 0
+			# This makes sure you don't get any unwanted horizontal air speed when- 
+			# -riding a perfectly U-shaped crevice. (Most of the time, at least.)
+			# Without this, the motion addition below would cause you to drift off to-
+			# -the side after launching yourself upwards.
+		else:
+			motion.y = 50
+			# This tries to help you stick to the ground, though it's not very-
+			# -effective at high speeds.
+	if is_on_ceiling() and not grounded: # If you bonk your head on the ceiling...
+		if motion.y < 0: # If you're moving up...
+			motion.y = 100
+			# Get sent right back down.
+
+	if is_on_wall() and $CollisionShape2D/WallCast.is_colliding(): # If you bump into a wall...
+		motion.x = 0
+		motion.y = 0
+		# Stop moving.
+
+	if is_on_floor() and abs(slopefactor) < 0.25: # If you're on flat, or near-flat ground...
+		motion.x = move_toward(motion.x, 0, acc - 1)
+		# Slow to a stop.
+		## We shouldn't be able to stand perfectly still on a steep slope, right? Right.
+	elif is_on_floor() and abs(slopefactor) > 0.25:
+		motion.x = move_toward(motion.x, 0, acc)
+	
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
+	#slope_failsafe()
+	move_and_slide()
 
 func _physics_process(delta):
 	
