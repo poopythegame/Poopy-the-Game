@@ -183,6 +183,10 @@ func physics_process_normal(delta):
 		motion.x = 0
 		motion.y = 0
 		# Stop moving.
+	
+	if grounded and abs(slopeangle) > 1.5: # If you're on a wall...
+		if abs(motion.x) < 80: # ...and you're moving too slow...
+			position += Vector2(0, -(14)).rotated(rot)
 
 	if is_on_floor() and abs(slopefactor) < 0.25: # If you're on flat, or near-flat ground...
 		motion.x = move_toward(motion.x, 0, acc - 1)
@@ -379,7 +383,7 @@ func launch_enemy(Player):
 	hit_cooldown = true
 	hit_timer = 1 
 	
-	var launch_x = Player.motion.x + 250
+	var launch_x = Player.motion.x + 125
 	#if abs(launch_x) < 200 and abs(launch_x) >= 25:
 		#var dir = sign(global_position.x - Player.global_position.x)
 		#if dir == 0: dir = 1
