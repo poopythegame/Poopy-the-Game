@@ -211,9 +211,11 @@ position = Vector2(922, -347)
 shape = SubResource("CircleShape2D_fh7tq")
 
 [node name="Player2" parent="." unique_id=889532577 groups=["Player"] instance=ExtResource("1_q8hoo")]
-position = Vector2(-4568, -727)
+position = Vector2(10632, -295)
 
-[node name="Camera2D" type="Camera2D" parent="Player2" unique_id=1931933336]
+[node name="Camera2D" type="Camera2D" parent="Player2"]
+zoom = Vector2(3.5, 3.5)
+position_smoothing_speed = 15.0
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1708269569]
 tile_set = SubResource("TileSet_uq5n0")
@@ -550,7 +552,7 @@ position = Vector2(15199.987, 80.00034)
 scale = Vector2(0.51843876, 0.8072463)
 
 [node name="CharacterBody2D3" parent="." unique_id=2095928702 groups=["Enemy"] instance=ExtResource("8_62vkk")]
-position = Vector2(8991.998, -88.000404)
+position = Vector2(10972.001, 251)
 scale = Vector2(0.6109745, 0.85163707)
 
 [node name="CharacterBody2D2" parent="." unique_id=271275857 groups=["Enemy"] instance=ExtResource("8_62vkk")]
