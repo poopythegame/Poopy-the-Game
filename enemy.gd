@@ -196,7 +196,6 @@ func physics_process_normal(delta):
 	
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 	#slope_failsafe()
-	move_and_slide()
 
 func _physics_process(delta):
 	
@@ -214,8 +213,8 @@ func _physics_process(delta):
 		process_frozen_behavior(delta)
 	else:
 		# check_generous_bounce()
-		check_player_impact(delta)
 		physics_process_normal(delta)
+		check_player_impact(delta)
 
 		move_and_slide()
 	# slope_stuck_failsafe()
@@ -363,7 +362,7 @@ func perform_bounce(Player):
 	hit_timer = 0.2 
 
 func launch_enemy(Player):
-	disengage_freeze() 
+	disengage_freeze()
 	hit_cooldown = true
 	hit_timer = 1 
 	
@@ -377,8 +376,7 @@ func launch_enemy(Player):
 	var vertical_force = Player.motion.y * 1.05
 	# if abs(Player.motion.y) < 100 and Player.is_on_floor():
 	# 	vertical_force = -300 
-	motion.y = vertical_force 
-	
+	motion.y = vertical_force	
 	grounded = false
 	rot = 0
 	position.y -= 8 
