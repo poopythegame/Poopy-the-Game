@@ -181,7 +181,6 @@ func physics_process_normal(delta):
 
 	if is_on_wall() and $CollisionShape2D/WallCast.is_colliding(): # If you bump into a wall...
 		motion.x = 0
-		motion.y = 0
 		# Stop moving.
 	
 	if grounded and abs(slopeangle) > 1.5: # If you're on a wall...
@@ -214,7 +213,7 @@ func _physics_process(delta):
 	if isfrozen:
 		process_frozen_behavior(delta)
 	else:
-		check_generous_bounce()
+		# check_generous_bounce()
 		check_player_impact(delta)
 		physics_process_normal(delta)
 
@@ -324,7 +323,6 @@ func process_frozen_behavior(delta):
 		velocity = Vector2.ZERO
 		
 		# IMPORTANT: Now that we are stationary, we allow interaction!
-		check_generous_bounce()
 		check_player_impact(delta)
 
 func stop_traveling():
@@ -339,20 +337,6 @@ func stop_traveling():
 	# so the next move is relative to the wall, you can uncomment this:
 	# frozen_origin = global_position
 	# grid_coords = Vector2.ZERO
-
-# --- STANDARD FUNCTIONS ---
-
-func check_generous_bounce():
-	if hit_cooldown: return
-	var player = get_tree().get_first_node_in_group("Player")
-	if not player: return
-	var is_bounce_state = player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action"))
-	if not is_bounce_state: return
-
-	var dx = abs(player.global_position.x - global_position.x)
-	var dy = player.global_position.y - global_position.y 
-	if dx < (40 + BOUNCE_FORGIVENESS_X) and dy < 0 and dy > -100:
-		perform_bounce(player)
 
 func check_player_impact(delta):
 	if hit_cooldown:
@@ -383,7 +367,7 @@ func launch_enemy(Player):
 	hit_cooldown = true
 	hit_timer = 1 
 	
-	var launch_x = Player.motion.x + 125
+	var launch_x = Player.motion.x + 75
 	#if abs(launch_x) < 200 and abs(launch_x) >= 25:
 		#var dir = sign(global_position.x - Player.global_position.x)
 		#if dir == 0: dir = 1

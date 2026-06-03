@@ -405,9 +405,6 @@ func physics_process_normal(delta):
 			# If the player is already mid-air (grounded is false), guarantee the raycast is locked to normal.
 			$Collision/Raycast.target_position = Vector2(0, base_ray_length)
 
-
-
-
 # Gravity
 	if not is_on_floor() and rot == 0 or springing:
 		motion.y += GRAVITY * delta
