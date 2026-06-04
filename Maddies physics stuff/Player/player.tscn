@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bea558noe02pm"]
+[gd_scene load_steps=6 format=3 uid="uid://bea558noe02pm"]
 
 [ext_resource type="Script" uid="uid://bkxp05jsmh5cy" path="res://Maddies physics stuff/Player/player.gd" id="1_3r5ht"]
 [ext_resource type="Shader" uid="uid://jl2epyexbnke" path="res://shaders/destroy.gdshader" id="2_3wf3c"]
@@ -11,7 +11,7 @@ shader_parameter/t = 0.0
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0s3b8"]
 b = Vector2(0, -32)
 
-[node name="Player" type="CharacterBody2D" unique_id=1678918478]
+[node name="Player" type="CharacterBody2D"]
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 1.55334
@@ -19,41 +19,41 @@ floor_snap_length = 12.0
 safe_margin = 0.16
 script = ExtResource("1_3r5ht")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1087660946]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_jnnhn")
-scale = Vector2(0.053413477, 0.053413477)
+scale = Vector2(0.0534135, 0.0534135)
 sprite_frames = ExtResource("2_mx6bk")
 animation = &"idle"
 autoplay = "idle"
 offset = Vector2(0, -270.04)
 
-[node name="Collision" type="CollisionShape2D" parent="." unique_id=1044009796]
+[node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_0s3b8")
 
-[node name="Raycast" type="RayCast2D" parent="Collision" unique_id=1716484835]
+[node name="Raycast" type="RayCast2D" parent="Collision"]
 target_position = Vector2(0, 4)
 
-[node name="WallCast" type="RayCast2D" parent="Collision" unique_id=686402840]
+[node name="WallCast" type="RayCast2D" parent="Collision"]
 target_position = Vector2(7, 0)
 hit_from_inside = true
 
-[node name="ControlLockTimer" type="Timer" parent="." unique_id=1963449955]
+[node name="ControlLockTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
-[node name="IdleTimer" type="Timer" parent="." unique_id=1030390948]
+[node name="IdleTimer" type="Timer" parent="."]
 wait_time = 6.0
 one_shot = true
 
-[node name="JumpBufferTimer" type="Timer" parent="." unique_id=725728242]
+[node name="JumpBufferTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 
-[node name="CoyoteTimer" type="Timer" parent="." unique_id=874012185]
+[node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 
-[node name="Line2D" type="Line2D" parent="." unique_id=723573574]
+[node name="Line2D" type="Line2D" parent="."]
 visible = false
 position = Vector2(0, -20)
 points = PackedVector2Array(0, 0)

@@ -776,9 +776,11 @@ func animate():
 	elif jumping:
 		$Sprite.play("jump")
 		if abs(motion.x) <= 0:
-			$Sprite.speed_scale = 1
-		else:
+			$Sprite.speed_scale = 1.5
+		elif abs(motion.x) > 0 and abs(motion.x) < 700:
 			$Sprite.speed_scale = abs(motion.x) / 80
+		elif abs(motion.x) >= 600:
+			$Sprite.speed_scale = 600
 	
 	# Idle animation
 	

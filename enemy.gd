@@ -23,7 +23,7 @@ var grid_move_tween: Tween = null
 var target_position := Vector2.ZERO 
 var is_traveling := false 
 
-const GRID_OFFSET = 70.0 
+const GRID_OFFSET = 100.0 
 const TRAVEL_SPEED = 800.0 
 const ARRIVAL_DISTANCE = 5.0 
 
@@ -261,10 +261,10 @@ func process_grid_input():
 	if is_traveling: return
 
 	var input_vector = Vector2.ZERO
-	if Input.is_action_just_pressed("ui_up"): input_vector.y -= 1
-	if Input.is_action_just_pressed("ui_down"): input_vector.y += 1
-	if Input.is_action_just_pressed("ui_left"): input_vector.x -= 1
-	if Input.is_action_just_pressed("ui_right"): input_vector.x += 1
+	if Input.is_action_pressed("ui_up"): input_vector.y -= 1
+	if Input.is_action_pressed("ui_down"): input_vector.y += 1
+	if Input.is_action_pressed("ui_left"): input_vector.x -= 1
+	if Input.is_action_pressed("ui_right"): input_vector.x += 1
 	
 	if input_vector != Vector2.ZERO:
 		var dx = clamp(input_vector.x, -1, 1)
@@ -366,7 +366,7 @@ func launch_enemy(Player):
 	hit_cooldown = true
 	hit_timer = 1 
 	
-	var launch_x = Player.motion.x + 75
+	var launch_x = Player.motion.x * 1.3
 	#if abs(launch_x) < 200 and abs(launch_x) >= 25:
 		#var dir = sign(global_position.x - Player.global_position.x)
 		#if dir == 0: dir = 1
