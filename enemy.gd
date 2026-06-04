@@ -319,10 +319,10 @@ func process_frozen_behavior(delta):
 				stop_traveling()
 	else:
 		# STATIONARY
-		velocity = Vector2.ZERO
 		
 		# IMPORTANT: Now that we are stationary, we allow interaction!
-		check_player_impact(delta)
+		if test_player_impact(delta):
+			disengage_freeze()
 
 func stop_traveling():
 	is_traveling = false
@@ -355,6 +355,18 @@ func check_player_impact(delta):
 					launch_enemy(Player)
 				vulnerable = true
 
+func test_player_impact(delta):
+	var overlapping_bodies = hitbox.get_overlapping_bodies()
+	for body in overlapping_bodies:
+		if body.name == "Player" or body.is_in_group("Player"):
+			var Player = body 
+			
+			if (Player.jumping or Player.isrolling) and (not Player.is_grappling):
+				if Player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
+					return false
+				else:
+					return true
+
 func perform_bounce(Player):
 	Player.motion.y = abs(Player.motion.y) * -1
 	if "exitgrapple" in Player: Player.exitgrapple = false
@@ -362,7 +374,6 @@ func perform_bounce(Player):
 	hit_timer = 0.2 
 
 func launch_enemy(Player):
-	disengage_freeze()
 	hit_cooldown = true
 	hit_timer = 1 
 	
