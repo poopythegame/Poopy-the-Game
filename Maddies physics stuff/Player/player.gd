@@ -714,11 +714,11 @@ func take_damage(amount: float) -> void:
 		die()
 
 func bounce(strength: float) -> void:
-	var dir = Vector2(-.5,-0.75)
+	var dir = Vector2(-.5,-1)
 	if $Sprite.flip_h:
-		dir.x = 1
+		dir.x = -dir.x
 	var force = dir * strength
-	motion += force
+	motion = force
 	springing = true
 
 # That's the main part of the script done with.
