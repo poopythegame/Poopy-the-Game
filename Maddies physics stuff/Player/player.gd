@@ -753,7 +753,7 @@ func animate():
 		$Sprite.flip_h = false
 	
 	if isskidding:
-		$Sprite.play("idle")
+		$Sprite.play("skid")
 	
 	if isrolling:
 		$Sprite.play("jump")
