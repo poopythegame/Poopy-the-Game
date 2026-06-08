@@ -1,48 +1,42 @@
 [gd_scene format=3 uid="uid://bxu55fa6fc0eu"]
 
 [ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://Maddies physics stuff/Player/player.tscn" id="1_cy281"]
-[ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/spike.tscn" id="2_uxr5t"]
 [ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/in_game_overlay.tscn" id="4_51wsq"]
-[ext_resource type="PackedScene" uid="uid://bf48swe3lsv8b" path="res://scenes/spring.tscn" id="4_jorxo"]
-[ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://enemy.tscn" id="5_kamxp"]
 [ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/coin.tscn" id="6_kamxp"]
 [ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/dash_panel.tscn" id="6_mkcba"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51wsq"]
-size = Vector2(798, 117)
+size = Vector2(2145, 117)
 
 [node name="Test2" type="Node2D" unique_id=555859491]
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1190149811]
 
 [node name="ColorRect" type="ColorRect" parent="Ground" unique_id=1735033707]
-offset_right = 798.0
+offset_right = 2144.0
 offset_bottom = 117.0
 color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=112833008]
-position = Vector2(399, 58.5)
+position = Vector2(1072.5, 58.5)
 shape = SubResource("RectangleShape2D_51wsq")
 
 [node name="Player" parent="." unique_id=1678918478 instance=ExtResource("1_cy281")]
-position = Vector2(289, -1)
+position = Vector2(101, -6)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=714915220]
 zoom = Vector2(3.5, 3.5)
 
-[node name="Spike" parent="." unique_id=2118102836 instance=ExtResource("2_uxr5t")]
-position = Vector2(639, -17)
-
 [node name="InGameOverlay" parent="." unique_id=1911954101 instance=ExtResource("4_51wsq")]
 
-[node name="Spring" parent="." unique_id=52043480 instance=ExtResource("4_jorxo")]
-position = Vector2(706, -17)
-
 [node name="DashPanel" parent="." unique_id=685655057 instance=ExtResource("6_mkcba")]
-position = Vector2(363, -32)
-
-[node name="CharacterBody2D" parent="." unique_id=130443028 groups=["Enemy"] instance=ExtResource("5_kamxp")]
-position = Vector2(570, -23)
+position = Vector2(218, -8)
 
 [node name="Coin" parent="." unique_id=1725540365 instance=ExtResource("6_kamxp")]
-position = Vector2(774, -29)
+position = Vector2(370, -37)
+
+[node name="Coin2" parent="." unique_id=672887556 instance=ExtResource("6_kamxp")]
+position = Vector2(442, -36)
+
+[node name="Coin3" parent="." unique_id=1988470552 instance=ExtResource("6_kamxp")]
+position = Vector2(515, -36)
