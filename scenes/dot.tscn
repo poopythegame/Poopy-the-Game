@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cq2gsyvw602v0"]
+
+[ext_resource type="Script" uid="uid://p5tp4ec7gy13" path="res://scripts/dot.gd" id="1_1c7to"]
+[ext_resource type="Script" uid="uid://dted7xl7gy5vr" path="res://scripts/draw_circle.gd" id="1_c4igg"]
+
+[node name="Dot" type="Node2D" unique_id=155795907]
+z_index = -1002
+script = ExtResource("1_1c7to")
+
+[node name="DrawCircle" type="Node2D" parent="." unique_id=169751490]
+script = ExtResource("1_c4igg")
+radius = 2.5
+color = Color(0.27735636, 0.5324906, 0.68963504, 1)
+filled = true

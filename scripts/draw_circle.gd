@@ -17,5 +17,13 @@ class_name DrawCircle
 		color = value
 		queue_redraw()
 
+@export var filled: bool = false:
+	set(value):
+		filled = value
+		queue_redraw()
+
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, radius, color, false, stroke_width)
+	if filled:
+		draw_circle(Vector2.ZERO, radius, color, true, 0)
+	else:
+		draw_circle(Vector2.ZERO, radius, color, false, stroke_width)

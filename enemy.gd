@@ -1,11 +1,13 @@
 extends CharacterBody2D
 class_name Enemy
 
+@export var dot_spawn_distance = 10
+
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var hitbox: Area2D = $Hitbox
 @onready var anchor: Area2D = $anchor
-
+@onready var dot_prefab: PackedScene = load("res://scenes/dot.tscn")
 
 # --- PHYSICS VARIABLES ---
 var isfrozen = false
@@ -32,6 +34,10 @@ var hit_cooldown := false
 var hit_timer := 0.0
 
 var vulnerable: bool = false
+var spawning_dots: bool = false
+var distance_since_last_dot_spawn: float = 0
+var prev_pos: Vector2
+var dot_spawn_host: Node
 
 # --- STATS ---
 var SLOPEMULT = 2
@@ -48,6 +54,7 @@ func _ready():
 		anchor.visible = false
 		anchor.monitoring = false
 		anchor.monitorable = false
+	dot_spawn_host = get_tree().current_scene
 
 func physics_process_normal(delta):
 # --- 1. SURFACE DETECTION ---
@@ -157,6 +164,10 @@ func physics_process_normal(delta):
 			# --- MID-AIR ENFORCEMENT (Falling) ---
 			# If the player is already mid-air (grounded is false), guarantee the raycast is locked to normal.
 			$CollisionShape2D/RayCast.target_position = Vector2(0, base_ray_length)
+	
+	if grounded:
+		spawning_dots = false
+
 # Gravity
 	if not is_on_floor() and rot == 0:
 		motion.y += GRAVITY * delta
@@ -212,11 +223,22 @@ func _physics_process(delta):
 	if isfrozen:
 		process_frozen_behavior(delta)
 	else:
+		prev_pos = global_position
 		# check_generous_bounce()
 		physics_process_normal(delta)
 		check_player_impact(delta)
 
 		move_and_slide()
+		if spawning_dots:
+			var dist = global_position.distance_to(prev_pos)
+			distance_since_last_dot_spawn += dist
+			if distance_since_last_dot_spawn > dot_spawn_distance:
+				distance_since_last_dot_spawn = 0
+				var dot: Node2D = dot_prefab.instantiate()
+				dot.global_position = global_position
+				dot_spawn_host.add_child(dot)
+				print("spawned dot")
+
 	# slope_stuck_failsafe()
 
 # --- NEW FROZEN LOGIC ---
@@ -396,6 +418,7 @@ func launch_enemy(Player):
 	position.y -= 8 
 	$Sprite2D.rotation = 0
 	$CollisionShape2D.rotation = 0
+	spawning_dots = true
 
 func slope_stuck_failsafe():
 	if is_on_floor() and abs(motion.x) > 50 and get_real_velocity().length() < 10:
