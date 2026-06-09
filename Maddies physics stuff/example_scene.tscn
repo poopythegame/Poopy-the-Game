@@ -549,24 +549,7 @@ script = ExtResource("7_pvwt8")
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 
-<<<<<<< HEAD
-[node name="StaticBody2D3" type="StaticBody2D" parent="StaticBody2D"]
-position = Vector2(800, -544)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D3"]
-position = Vector2(13648, 3352)
-scale = Vector2(8.23569, 7.82381)
-polygon = PackedVector2Array(15.5422, -46.0134, -7.77087, -72.5989, 15.5422, -72.5989, 31.0844, -76.689, 62.1686, -76.689, 62.1686, -68.5088, 69.9397, -68.5088, 69.9397, -60.3286, 77.7107, -60.3286, 77.7107, -52.1485, 93.2528, -52.1485, 93.2528, -82.8241, 108.795, -82.8241, 124.337, -86.9142, 155.421, -86.9142, 155.421, -78.734, 163.192, -78.734, 163.192, -70.5538, 170.963, -70.5538, 170.963, -62.3737, 155.421, -62.3737, 155.421, -46.0134)
-script = ExtResource("7_pvwt8")
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D3/CollisionPolygon2D"]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
-
-[node name="CharacterBody2D4" parent="." instance=ExtResource("8_62vkk")]
-=======
 [node name="CharacterBody2D4" parent="." unique_id=721977727 instance=ExtResource("8_62vkk")]
->>>>>>> a1a8de76a7634eb729b975c0025880cda8371fe2
 position = Vector2(17625.6, 4200)
 scale = Vector2(0.518439, 0.807246)
 
@@ -574,13 +557,8 @@ scale = Vector2(0.518439, 0.807246)
 position = Vector2(8960, -88)
 scale = Vector2(0.610974, 0.851637)
 
-<<<<<<< HEAD
-[node name="CharacterBody2D2" parent="." groups=["Enemy"] instance=ExtResource("8_62vkk")]
-position = Vector2(6816, -184)
-=======
 [node name="CharacterBody2D2" parent="." unique_id=1168493737 groups=["Enemy"] instance=ExtResource("8_62vkk")]
 position = Vector2(6681, -200)
->>>>>>> a1a8de76a7634eb729b975c0025880cda8371fe2
 scale = Vector2(0.720027, 0.898469)
 
 [node name="CharacterBody2D" parent="." unique_id=1559405905 instance=ExtResource("8_62vkk")]
@@ -590,43 +568,15 @@ scale = Vector2(0.848544, 0.947876)
 [node name="anchor2" parent="." unique_id=441813177 instance=ExtResource("6_ojq0h")]
 position = Vector2(-80, -272)
 
-<<<<<<< HEAD
-[node name="Spike" parent="." instance=ExtResource("9_dkxqa")]
-position = Vector2(7632, -464)
-=======
 [node name="AnimatableBody2D3" parent="." unique_id=1763827932 instance=ExtResource("9_dkxqa")]
 position = Vector2(10520, -272)
 
 [node name="Spike" parent="." unique_id=285296727 instance=ExtResource("9_dkxqa")]
 position = Vector2(-1493, -721)
->>>>>>> a1a8de76a7634eb729b975c0025880cda8371fe2
 
 [node name="AnimatableBody2D4" parent="." unique_id=1814301600 instance=ExtResource("11_fh7tq")]
 position = Vector2(11088, -64)
 
-<<<<<<< HEAD
-[node name="DashPanel" parent="." instance=ExtResource("13_h0rbv")]
-position = Vector2(5888, -128)
-force = 750.0
-
-[node name="DashPanel2" parent="." instance=ExtResource("13_h0rbv")]
-position = Vector2(6368, -128)
-force = 750.0
-
-[node name="DashPanel3" parent="." instance=ExtResource("13_h0rbv")]
-position = Vector2(10536, 296)
-force = 750.0
-
-[node name="Spike2" parent="." instance=ExtResource("9_dkxqa")]
-position = Vector2(7664, -464)
-
-[node name="Spike3" parent="." instance=ExtResource("9_dkxqa")]
-position = Vector2(7696, -464)
-
-[node name="CharacterBody2D5" parent="." groups=["Enemy"] instance=ExtResource("8_62vkk")]
-position = Vector2(17304, 1112)
-=======
 [node name="CharacterBody2D5" parent="." unique_id=1541119725 groups=["Enemy"] instance=ExtResource("8_62vkk")]
 position = Vector2(17160, 1160)
 scale = Vector2(0.518439, 0.807247)
->>>>>>> a1a8de76a7634eb729b975c0025880cda8371fe2
