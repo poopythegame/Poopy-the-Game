@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="poopy experimental build"
 run/main_scene="res://Maddies physics stuff/example_scene.tscn"
-config/features=PackedStringArray("4.4", "Mobile")
+config/features=PackedStringArray("4.6", "Mobile")
 run/max_fps=60
 config/icon="res://Maddies physics stuff/amy icon.png"
 

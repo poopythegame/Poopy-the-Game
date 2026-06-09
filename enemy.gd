@@ -246,6 +246,8 @@ func engage_freeze():
 	# Ensure collision is ON generally (we manage exceptions later)
 	$CollisionShape2D.disabled = false
 
+	hit_timer = 0
+
 func disengage_freeze():
 	isfrozen = false
 	is_traveling = false
@@ -341,7 +343,7 @@ func check_player_impact(delta):
 	if hit_cooldown:
 		hit_timer -= delta
 		if hit_timer <= 0: hit_cooldown = false
-		return 
+		return
 	
 	var overlapping_bodies = hitbox.get_overlapping_bodies()
 	for body in overlapping_bodies:
