@@ -747,29 +747,34 @@ func animate():
 		# Set Sprite scale and Collision scale based your direction.
 		# This is how the Sprite is able to turn when you move.
 	var direction = Input.get_axis("left", "right")
-	if direction < 0:
+	if direction < 0 and not isskidding:
 		$Sprite.flip_h = true
-	elif direction > 0:
+	elif direction > 0 and not isskidding:
 		$Sprite.flip_h = false
-	
-	if isskidding:
-		$Sprite.play("skid")
+
 	
 	if isrolling:
 		$Sprite.play("jump")
 		$Sprite.speed_scale = abs(motion.x) / 80
 		
 	elif grounded:
-		if abs(motion.x) < 1: # If you're standing still, or at least EXTREMELY CLOSE to standing still...
+		if isskidding:
+			if sign(motion.x) > 0:
+				$Sprite.flip_h = false
+			else:
+				$Sprite.flip_h = true
+			$Sprite.play("skid")
+		
+		if abs(motion.x) < 1 and not isskidding: # If you're standing still, or at least EXTREMELY CLOSE to standing still...
 			$Sprite.speed_scale = 1
 			# Reset the Speed Scale.
 			
-		elif abs(motion.x) < topspeed - 10: # If you're moving, but not at your Top Speed yet...
+		elif abs(motion.x) < topspeed - 10 and not isskidding: # If you're moving, but not at your Top Speed yet...
 			$Sprite.play("walk")
 			$Sprite.speed_scale = 0.5 + (abs(motion.x) / 350)
 			# Play Walking Animation at half speed, quickening it as you move faster and faster.
 			
-		elif abs(motion.x) >= topspeed: # If you've reached, or are at least close enough to your Top Speed...
+		elif abs(motion.x) >= topspeed and not isskidding: # If you've reached, or are at least close enough to your Top Speed...
 			$Sprite.play("run")
 			$Sprite.speed_scale = abs(motion.x)/90
 			# Play Running Animation, quickening it even further if you escalate past your Top Speed.
