@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://Maddies physics stuff/Player/player.tscn" id="1_cy281"]
 [ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/in_game_overlay.tscn" id="4_51wsq"]
+[ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://enemy.tscn" id="5_jorxo"]
 [ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/coin.tscn" id="6_kamxp"]
 [ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/dash_panel.tscn" id="6_mkcba"]
 
@@ -40,3 +41,6 @@ position = Vector2(442, -36)
 
 [node name="Coin3" parent="." unique_id=1988470552 instance=ExtResource("6_kamxp")]
 position = Vector2(515, -36)
+
+[node name="CharacterBody2D" parent="." unique_id=1760042011 groups=["Enemy"] instance=ExtResource("5_jorxo")]
+position = Vector2(667, -22)

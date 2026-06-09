@@ -365,6 +365,7 @@ func test_player_impact(delta):
 			
 			if (Player.jumping or Player.isrolling) and (not Player.is_grappling):
 				if Player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
+					perform_bounce(Player)
 					return false
 				else:
 					return true
