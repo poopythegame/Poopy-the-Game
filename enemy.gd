@@ -24,7 +24,7 @@ var target_position := Vector2.ZERO
 var is_traveling := false 
 
 const GRID_OFFSET = 100.0 
-const TRAVEL_SPEED = 1300.0 
+const TRAVEL_SPEED = 1600.0 
 const ARRIVAL_DISTANCE = 5.0 
 
 # --- HITBOX VARIABLES ---

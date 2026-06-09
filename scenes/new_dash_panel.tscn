@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c5oi22mpsg7se"]
+
+[ext_resource type="Script" uid="uid://cr3drh4v7i2ll" path="res://scripts/dash_panel.gd" id="1_proyd"]
+[ext_resource type="Texture2D" uid="uid://poy2l887xr1d" path="res://assets/textures/placeholder/green.png" id="2_uiwi0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2g2j0"]
+size = Vector2(68, 34)
+
+[node name="DashPanel" type="Node2D" unique_id=203562222]
+z_index = -1001
+script = ExtResource("1_proyd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=849902879]
+scale = Vector2(0.065, 0.065)
+texture = ExtResource("2_uiwi0")
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 509.0204)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=576495798]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=256236214]
+shape = SubResource("RectangleShape2D_2g2j0")
