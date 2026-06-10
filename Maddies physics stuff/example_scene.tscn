@@ -242,7 +242,7 @@ position = Vector2(-664, -800)
 position = Vector2(0, -64)
 
 [node name="AnimatableBody2D2" parent="." unique_id=1610291748 instance=ExtResource("3_oebfb")]
-position = Vector2(40, -64)
+position = Vector2(7288, -248)
 
 [node name="killzone" parent="." unique_id=1834296494 instance=ExtResource("5_4d4pi")]
 position = Vector2(-736, -104)
@@ -268,7 +268,7 @@ position = Vector2(12601, 480)
 position = Vector2(12241, 520)
 
 [node name="anchor4" parent="anchor/anchor4" unique_id=1227595537 instance=ExtResource("6_ojq0h")]
-position = Vector2(7529.6, 4176)
+position = Vector2(10201.602, 1855.9995)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=209740423]
 position = Vector2(400, -272)
@@ -461,7 +461,7 @@ position = Vector2(25600, -17408)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D11/StaticBody2D11" unique_id=1810027424]
 position = Vector2(-41496, 35400)
 scale = Vector2(8.23569, 7.82381)
-polygon = PackedVector2Array(47.5978, -72.5989, 70.9109, -72.5989, 70.9109, -56.2386, 71.8823, -52.1485, 74.7964, -49.0809, 78.682, -48.0584, 78.682, -32.7206, 36.9126, -32.7206, -30.1128, -3.06756, -53.4259, -3.06756, -53.4259, -19.4279, -30.1128, -19.4279, -30.1128, -154.4, 47.5978, -154.4)
+polygon = PackedVector2Array(47.5978, -72.5989, 70.9109, -72.5989, 70.9109, -56.2386, 71.8823, -52.1485, 74.7964, -49.0809, 78.682, -48.0584, 78.682, -32.7206, 59.254395, -19.427876, 49.540527, -18.405355, 49.540527, -32.72063, 36.9126, -32.7206, -30.1128, -3.06756, -53.4259, -3.06756, -53.4259, -19.4279, -30.1128, -19.4279, -30.1128, -154.4, 47.5978, -154.4)
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D11/StaticBody2D11/CollisionPolygon2D" unique_id=562739981]
@@ -474,7 +474,7 @@ position = Vector2(25600, -17408)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D11/StaticBody2D11/StaticBody2D11" unique_id=1062774968]
 position = Vector2(-63515.2, 52740.8)
 scale = Vector2(8.23569, 7.82381)
-polygon = PackedVector2Array(79.0704, -96.7305, 591.96, -96.7305, 591.96, 242.746, 296.66, 246.836, 296.66, 230.476, 335.515, 230.476, 335.515, 197.755, 351.057, 197.755, 366.599, 193.665, 529.792, 193.665, 529.792, 66.8727, 413.226, 66.8727, 413.226, 103.683, 397.684, 103.683, 397.684, 17.7917, 373.399, 17.7917, 374.37, 66.8727, 354.943, 99.5933, 354.943, 114.931, 304.431, 114.931, 304.431, 109.819, 265.576, 109.819, 261.302, 108.387, 258.388, 106.342, 256.445, 103.274, 256.445, 84.8691, 258.388, 81.8016, 261.302, 79.7565, 265.187, 78.734, 358.44, 78.734, 358.44, 17.3828, 296.66, 17.7917, 296.66, 19.8368, 288.889, 19.8368, 288.889, 9.61158, 250.034, 9.61158, 250.034, 11.6566, 242.263, 11.6566, 242.263, 1.43143, 203.407, 1.43143, 203.407, 3.47647, 195.636, 3.47647, 195.636, -19.019, 79.0704, -23.109)
+polygon = PackedVector2Array(79.0704, -96.7305, 591.96, -96.7305, 591.9601, 271.37662, 296.6599, 271.37662, 296.66, 230.476, 335.515, 230.476, 335.515, 197.755, 351.057, 197.755, 366.599, 193.665, 529.792, 193.665, 529.792, 66.8727, 413.226, 66.8727, 413.226, 103.683, 397.684, 103.683, 397.684, 17.7917, 373.399, 17.7917, 374.37, 66.8727, 354.943, 99.5933, 354.943, 114.931, 304.431, 114.931, 304.431, 109.819, 265.576, 109.819, 261.302, 108.387, 258.388, 106.342, 256.445, 103.274, 256.445, 84.8691, 258.388, 81.8016, 261.302, 79.7565, 265.187, 78.734, 358.44, 78.734, 358.44, 17.3828, 296.66, 17.7917, 296.66, 19.8368, 288.889, 19.8368, 288.889, 9.61158, 250.034, 9.61158, 250.034, 11.6566, 242.263, 11.6566, 242.263, 1.43143, 203.407, 1.43143, 203.407, 3.47647, 195.636, 3.47647, 195.636, -19.019, 79.0704, -23.109)
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D11/StaticBody2D11/StaticBody2D11/CollisionPolygon2D" unique_id=361439956]
@@ -501,9 +501,9 @@ polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 position = Vector2(25600, -17408)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D13/StaticBody2D11" unique_id=1283522391]
-position = Vector2(-59843.2, 48812.8)
+position = Vector2(-88056, 73304)
 scale = Vector2(8.23569, 7.82381)
-polygon = PackedVector2Array(94.224, -93.0493, 591.572, -93.0493, 591.572, 224.954, 397.295, 225.977, 397.295, 193.256, 529.403, 193.256, 529.403, 70.5539, 405.066, 70.5539, 354.554, 114.522, 304.043, 114.522, 304.043, 109.41, 265.187, 109.41, 261.302, 108.387, 258.388, 106.342, 256.445, 103.274, 256.445, 84.8691, 258.388, 81.8016, 261.302, 79.7565, 265.187, 78.734, 358.44, 78.734, 358.44, 17.3828, 288.5, 17.3828, 288.5, 9.20268, 241.874, 9.20268, 241.874, 1.02252, 195.248, 1.02252, 195.248, -19.4279, 94.2241, -32.7206)
+polygon = PackedVector2Array(94.22412, -91.00424, 136.96484, -91.00424, 136.96484, -58.2836, 144.73596, -33.743134, 152.50696, -25.562988, 175.82019, -17.382813, 199.1333, -17.382813, 199.1333, -9.202667, 129.19385, -9.202667, 94.2241, -32.7206)
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D13/StaticBody2D11/CollisionPolygon2D" unique_id=22120714]
@@ -527,7 +527,7 @@ polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 position = Vector2(28800, -19584)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D15" unique_id=1418141401]
-position = Vector2(-12350.4, 23448)
+position = Vector2(-9678.399, 21128)
 scale = Vector2(8.23569, 7.82381)
 polygon = PackedVector2Array(175.82, 51.126, 175.82, 59.3061, 152.507, 59.3061, 43.7122, 51.126, -10.6852, 51.126, -10.6852, -22.4954, 245.76, -22.4954, 218.561, -2.04504, 168.049, -2.04504, 164.163, -1.02252, 161.249, 2.04504, 160.278, 6.13512, 160.278, 51.126)
 script = ExtResource("7_pvwt8")
@@ -540,7 +540,7 @@ polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 position = Vector2(28800, -19584)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D16" unique_id=1989376830]
-position = Vector2(-13630.4, 23936)
+position = Vector2(-10958.399, 21616)
 scale = Vector2(8.23569, 7.82381)
 polygon = PackedVector2Array(160.278, 29.6531, 191.362, 29.6531, 191.362, 21.4729, 237.989, 21.4729, 245.76, 21.4729, 245.76, 17.3828, 257.416, 17.3828, 257.416, 13.2928, 339.012, 13.2928, 342.898, 12.2702, 345.812, 9.20268, 346.783, 5.1126, 346.783, -3.06756, 358.44, -3.06756, 358.44, -19.4279, 370.097, -19.4279, 370.097, 48.0584, 160.289, 49.7486)
 script = ExtResource("7_pvwt8")
@@ -555,24 +555,16 @@ position = Vector2(800, -544)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/StaticBody2D3" unique_id=368122379]
 position = Vector2(13648, 3352)
 scale = Vector2(8.23569, 7.82381)
-polygon = PackedVector2Array(15.5422, -46.0134, -7.77087, -72.5989, 15.5422, -72.5989, 31.0844, -76.689, 62.1686, -76.689, 62.1686, -68.5088, 69.9397, -68.5088, 69.9397, -60.3286, 77.7107, -60.3286, 77.7107, -52.1485, 93.2528, -52.1485, 93.2528, -82.8241, 108.795, -82.8241, 124.337, -86.9142, 155.421, -86.9142, 155.421, -78.734, 163.192, -78.734, 163.192, -70.5538, 170.963, -70.5538, 170.963, -62.3737, 155.421, -62.3737, 155.421, -46.0134)
+polygon = PackedVector2Array(-23.31311, -21.4729, -31.084106, -21.4729, -36.912476, -23.517944, -41.76941, -26.58551, -44.68347, -30.675568, -46.62622, -37.83322, -46.62622, -46.013367, -46.62622, -54.193542, -44.68347, -60.328644, -41.76941, -65.44125, -36.912476, -68.508804, -31.084106, -70.55385, -23.31311, -70.55385, -15.541992, -70.55385, -7.77087, -72.5989, 15.5422, -72.5989, 31.0844, -76.689, 62.1686, -76.689, 62.1686, -68.5088, 69.9397, -68.5088, 69.9397, -60.3286, 77.7107, -60.3286, 77.7107, -52.1485, 93.2528, -52.1485, 93.2528, -82.8241, 108.795, -82.8241, 124.337, -86.9142, 155.421, -86.9142, 155.421, -78.734, 163.192, -78.734, 163.192, -70.5538, 170.963, -70.5538, 170.963, -62.3737, 155.421, -62.3737, 155.42114, 11.247742, 132.10803, 51.126007, 132.10803, -5.1125793, 132.10803, -13.292755, 131.1366, -17.382813, 128.22241, -20.450378, 124.336914, -21.4729)
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D3/CollisionPolygon2D" unique_id=1774110985]
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 
-[node name="CharacterBody2D4" parent="." unique_id=727532791 instance=ExtResource("8_62vkk")]
-position = Vector2(17625.6, 4200)
+[node name="CharacterBody2D4" parent="." unique_id=727532791 groups=["Enemy"] instance=ExtResource("8_62vkk")]
+position = Vector2(8960.001, -80)
 scale = Vector2(0.518439, 0.807246)
-
-[node name="CharacterBody2D3" parent="." unique_id=951570058 groups=["Enemy"] instance=ExtResource("8_62vkk")]
-position = Vector2(8960, -88)
-scale = Vector2(0.610974, 0.851637)
-
-[node name="CharacterBody2D2" parent="." unique_id=1623640478 groups=["Enemy"] instance=ExtResource("8_62vkk")]
-position = Vector2(6816, -184)
-scale = Vector2(0.720027, 0.898469)
 
 [node name="CharacterBody2D" parent="." unique_id=77147107 instance=ExtResource("8_62vkk")]
 position = Vector2(-216, -104)
@@ -608,3 +600,15 @@ position = Vector2(7696, -464)
 
 [node name="CharacterBody2D5" parent="." unique_id=25059938 groups=["Enemy"] instance=ExtResource("8_62vkk")]
 position = Vector2(17304, 1112)
+
+[node name="AnimatableBody2D3" parent="." unique_id=1320134838 instance=ExtResource("3_oebfb")]
+position = Vector2(7288, -192)
+
+[node name="AnimatableBody2D6" parent="." unique_id=1404958661 instance=ExtResource("3_oebfb")]
+position = Vector2(7288, -328)
+
+[node name="CharacterBody2D6" parent="." unique_id=1558670083 groups=["Enemy"] instance=ExtResource("8_62vkk")]
+position = Vector2(6816, -184)
+
+[node name="CharacterBody2D2" parent="." unique_id=1758512752 groups=["Enemy"] instance=ExtResource("8_62vkk")]
+position = Vector2(9752, 104)
