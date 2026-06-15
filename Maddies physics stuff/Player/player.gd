@@ -764,27 +764,17 @@ func animate():
 		$Sprite.flip_h = false
 
 	if isairdashing:
-<<<<<<< HEAD
 		var airdashrot = motion.y / 750 * sign(motion.x)
 		
 		airdashrot = clamp(airdashrot, -PI/2, PI/2)
 		
 		$Sprite.rotation = lerp_angle($Sprite.rotation, airdashrot, 1)
 				
-=======
-		var airdashrot = 0
-		if abs(airdashrot) < PI/2:
-			airdashrot = motion.y / 750 * sign(motion.x)
-		$Sprite.rotation = lerp_angle($Sprite.rotation, airdashrot, 1)
->>>>>>> ce5e937fd8ab30fe244013f0bc86f5bb22500689
 		if sign(motion.x) > 0:
 			$Sprite.flip_h = false
 		elif sign(motion.x) < 0:
 			$Sprite.flip_h = true
-<<<<<<< HEAD
 			
-=======
->>>>>>> ce5e937fd8ab30fe244013f0bc86f5bb22500689
 		$Sprite.play("airdash")
 		$Sprite.speed_scale = 1
 	
