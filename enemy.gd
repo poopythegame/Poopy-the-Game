@@ -214,14 +214,19 @@ func _physics_process(delta):
 	# if Input.is_action_just_pressed("enemyfreeze"):
 	# 	if not isfrozen:
 	# 		engage_freeze()
-	
-	# --- 2. HANDLE REPOSITIONING INPUT (Hold Only) ---
-	if isfrozen and Input.is_action_pressed("enemyfreeze"):
-		process_grid_input()
+		
 
 	# --- 3. FROZEN STATE LOGIC ---
 	if isfrozen:
-		process_frozen_behavior(delta)
+		var allow_launching = true
+		if Input.is_action_pressed("enemyfreeze"):
+			# hit_cooldown = true
+			# hit_timer = 0.2
+			allow_launching = false
+			process_grid_input()	
+		if Input.is_action_pressed("down"):
+			allow_launching = false
+		process_frozen_behavior(delta, allow_launching)
 	else:
 		prev_pos = global_position
 		# check_generous_bounce()
@@ -282,7 +287,7 @@ func disengage_freeze():
 		anchor.monitorable = false
 
 func process_grid_input():
-	if is_traveling: return
+	if is_traveling: return false
 
 	var input_vector = Vector2.ZERO
 	if Input.is_action_pressed("ui_up"): input_vector.y -= 1
@@ -310,13 +315,16 @@ func process_grid_input():
 			grid_move_tween.tween_callback(finish_grid_move)
 			grid_move_tween.set_trans(Tween.TRANS_CUBIC)
 			grid_move_tween.set_ease(Tween.EASE_IN)
+		position = frozen_origin + grid_coords * GRID_OFFSET
+		return true
 	
 	position = frozen_origin + grid_coords * GRID_OFFSET
+	return false
 
 func finish_grid_move():
 	grid_coords = next_grid_coords
 
-func process_frozen_behavior(delta):
+func process_frozen_behavior(delta, allow_launching):
 	# 1. CHECK PLAYER GRAPPLE STATE
 	var player = get_tree().get_first_node_in_group("Player")
 	var player_grappling = false
@@ -345,7 +353,7 @@ func process_frozen_behavior(delta):
 		# STATIONARY
 		
 		# IMPORTANT: Now that we are stationary, we allow interaction!
-		if test_player_impact(delta):
+		if allow_launching and test_player_impact(delta):
 			disengage_freeze()
 
 func stop_traveling():
@@ -380,6 +388,10 @@ func check_player_impact(delta):
 				vulnerable = true
 
 func test_player_impact(delta):
+	if hit_cooldown:
+		hit_timer -= delta
+		if hit_timer <= 0: hit_cooldown = false
+		return
 	var overlapping_bodies = hitbox.get_overlapping_bodies()
 	for body in overlapping_bodies:
 		if body.name == "Player" or body.is_in_group("Player"):
@@ -396,7 +408,7 @@ func perform_bounce(Player):
 	Player.motion.y = abs(Player.motion.y) * -1
 	if "exitgrapple" in Player: Player.exitgrapple = false
 	hit_cooldown = true
-	hit_timer = 0.2 
+	hit_timer = 0.2
 
 func launch_enemy(Player):
 	hit_cooldown = true
