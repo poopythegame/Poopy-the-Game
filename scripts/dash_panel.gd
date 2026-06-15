@@ -19,3 +19,4 @@ func _contact(body):
 			motion.x = -1
 		motion *= strength
 		player.motion = motion
+#testcasecomment

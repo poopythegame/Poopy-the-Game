@@ -85,6 +85,10 @@ var canairdash = false
 
 var isrolling = false
 
+var isairdashing = false
+
+var isstomping = false
+
 ## Fixes for problems involving walls and steep slopes.
 
 var falloffwall = false
@@ -519,7 +523,7 @@ func physics_process_normal(delta):
 
  #(Debug) Speed Boost
 	if Input.is_action_just_pressed("boost"):
-		motion.x += 500 * Input.get_axis("left", "right")
+		motion.x += 750 * Input.get_axis("left", "right")
 		
 #	var actionlist = ["action", "grapple", "dual"]
 #	var index = 0
@@ -536,6 +540,8 @@ func physics_process_normal(delta):
 			motion.x = move_toward(motion.x, topspeed, AIRDRAG)
 			
 	if is_on_floor():
+		isairdashing = false
+		isstomping = false
 		canairdash = true
 		canstomp = true
 	
@@ -547,9 +553,13 @@ func physics_process_normal(delta):
 				elif motion.y >= 450:
 					motion.y += 225
 					canstomp = false
+					isstomping = true
+					isairdashing = false
 			elif canairdash:
 				motion.x += abs(motion.x) * 0.15 * Input.get_axis("left", "right")
 				canairdash = false
+				isairdashing = true
+				isstomping = false
 	
 	#This is the speedometer
 	main.display_speed(motion.x, motion.y)
@@ -747,11 +757,26 @@ func animate():
 		# Set Sprite scale and Collision scale based your direction.
 		# This is how the Sprite is able to turn when you move.
 	var direction = Input.get_axis("left", "right")
+	
 	if direction < 0 and not isskidding:
 		$Sprite.flip_h = true
 	elif direction > 0 and not isskidding:
 		$Sprite.flip_h = false
 
+	if isairdashing:
+		var airdashrot = motion.y / 750 * sign(motion.x)
+		
+		airdashrot = clamp(airdashrot, -PI/2, PI/2)
+		
+		$Sprite.rotation = lerp_angle($Sprite.rotation, airdashrot, 1)
+				
+		if sign(motion.x) > 0:
+			$Sprite.flip_h = false
+		elif sign(motion.x) < 0:
+			$Sprite.flip_h = true
+			
+		$Sprite.play("airdash")
+		$Sprite.speed_scale = 1
 	
 	if isrolling:
 		$Sprite.play("jump")
@@ -778,7 +803,7 @@ func animate():
 			$Sprite.play("run")
 			$Sprite.speed_scale = abs(motion.x)/90
 			# Play Running Animation, quickening it even further if you escalate past your Top Speed.
-	elif jumping:
+	elif jumping and not isairdashing:
 		$Sprite.play("jump")
 		if abs(motion.x) <= 0:
 			$Sprite.speed_scale = 1.5
