@@ -24,6 +24,6 @@ class_name DrawCircle
 
 func _draw() -> void:
 	if filled:
-		draw_circle(Vector2.ZERO, radius, color, true)
+		draw_circle(Vector2.ZERO, radius, color, true, 0)
 	else:
 		draw_circle(Vector2.ZERO, radius, color, false, stroke_width)
