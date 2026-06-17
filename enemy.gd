@@ -23,7 +23,8 @@ var grid_coords := Vector2.ZERO # Tracks grid steps (e.g. 1,0 or -1,-1)
 var next_grid_coords := Vector2.ZERO
 var grid_move_tween: Tween = null
 var target_position := Vector2.ZERO 
-var is_traveling := false 
+var is_traveling := false
+var freeze_ghost_timer := 0.0
 
 const GRID_OFFSET = 100.0 
 const TRAVEL_SPEED = 1600.0 
@@ -251,7 +252,9 @@ func engage_freeze():
 	motion = Vector2.ZERO
 	velocity = Vector2.ZERO
 	
-	# Save the center point and reset grid coordinates
+	# --- NEW: Start the 0.2s invulnerability timer ---
+	freeze_ghost_timer = 0.2
+	
 	frozen_origin = global_position
 	target_position = global_position
 	grid_coords = Vector2.ZERO
@@ -265,16 +268,19 @@ func engage_freeze():
 	$CollisionShape2D.rotation = 0
 	rot = 0
 	
-	# Ensure collision is ON generally (we manage exceptions later)
 	$CollisionShape2D.disabled = false
-
 	hit_timer = 0
 
 func disengage_freeze():
 	isfrozen = false
 	is_traveling = false
 	
-	# Make sure we interact with player again
+	# --- NEW: Restore default pass-through state when unfrozen ---
+	var player = get_tree().get_first_node_in_group("Player")
+	if player and not player in get_collision_exceptions():
+		add_collision_exception_with(player)
+		
+	hitbox.set_deferred("monitoring", true)
 	
 	if anchor:
 		anchor.visible = false
@@ -283,6 +289,11 @@ func disengage_freeze():
 
 func process_grid_input():
 	if is_traveling: return
+
+	# --- NEW: PREVENT GRID MOVE WHILE GRAPPLING ---
+	var player = get_tree().get_first_node_in_group("Player")
+	if player and "is_grappling" in player and player.is_grappling:
+		return # Deny input entirely if player is attached
 
 	var input_vector = Vector2.ZERO
 	if Input.is_action_pressed("ui_up"): input_vector.y -= 1
@@ -298,7 +309,7 @@ func process_grid_input():
 		next_grid_coords.x = clamp(next_grid_coords.x, -1, 1)
 		next_grid_coords.y = clamp(next_grid_coords.y, -1, 1)
 		position = frozen_origin + next_grid_coords * GRID_OFFSET
-		# If colliding, instantly undo the movement.
+		
 		var is_colliding = test_move(global_transform, Vector2.ZERO)
 		if is_colliding:
 			next_grid_coords = grid_coords
@@ -317,18 +328,39 @@ func finish_grid_move():
 	grid_coords = next_grid_coords
 
 func process_frozen_behavior(delta):
+	# --- NEW: TICK GHOST TIMER ---
+	if freeze_ghost_timer > 0:
+		freeze_ghost_timer -= delta
+
 	# 1. CHECK PLAYER GRAPPLE STATE
 	var player = get_tree().get_first_node_in_group("Player")
 	var player_grappling = false
 	if player and "is_grappling" in player and player.is_grappling:
 		player_grappling = true
-	# (Alternatively, check if player is overlapping Anchor if you don't have that var)
 	
 	# 2. MANAGE GHOSTING
-	# If we are moving OR player is grappling -> Player passes through us
+	# We ghost if we are traveling, if the 0.2s timer is active, or if player is grappling.
+	var should_ghost = is_traveling or (freeze_ghost_timer > 0) or player_grappling
+	
+	if player:
+		if should_ghost:
+			# Disable physical collisions and hitbox interactions
+			if not player in get_collision_exceptions():
+				add_collision_exception_with(player)
+			hitbox.set_deferred("monitoring", false)
+		else:
+			# Become a solid, interactable object
+			if player in get_collision_exceptions():
+				remove_collision_exception_with(player)
+			hitbox.set_deferred("monitoring", true)
 
 	# 3. MOVEMENT vs STATIONARY
 	if is_traveling:
+		if anchor and anchor.visible:
+			anchor.visible = false
+			anchor.monitoring = false
+			anchor.monitorable = false
+
 		var distance = global_position.distance_to(target_position)
 		
 		if distance < ARRIVAL_DISTANCE:
@@ -343,18 +375,26 @@ func process_frozen_behavior(delta):
 				stop_traveling()
 	else:
 		# STATIONARY
-		
-		# IMPORTANT: Now that we are stationary, we allow interaction!
-		if test_player_impact(delta):
-			disengage_freeze()
+		if anchor and not anchor.visible:
+			anchor.visible = true
+			anchor.monitoring = true
+			anchor.monitorable = true
+
+		# IMPORTANT: Only test for impact if we are NOT currently ghosting!
+		if not should_ghost:
+			if test_player_impact(delta):
+				disengage_freeze()
 
 func stop_traveling():
 	is_traveling = false
 	velocity = Vector2.ZERO
-	
-	# If we hit a wall, we need to update our logic so we don't snap back.
-	# We update target_position to where we actually stopped.
 	target_position = global_position
+	
+	# --- NEW: GUARANTEE ANCHOR REACTIVATES ON ARRIVAL ---
+	if anchor:
+		anchor.visible = true
+		anchor.monitoring = true
+		anchor.monitorable = true
 	
 	# Optional: If you want hitting a wall to "reset" the grid math 
 	# so the next move is relative to the wall, you can uncomment this:
@@ -402,7 +442,7 @@ func launch_enemy(Player):
 	hit_cooldown = true
 	hit_timer = 1 
 	
-	var launch_x = Player.motion.x * 1.3
+	var launch_x = Player.motion.x * 1.35
 	#if abs(launch_x) < 200 and abs(launch_x) >= 25:
 		#var dir = sign(global_position.x - Player.global_position.x)
 		#if dir == 0: dir = 1
