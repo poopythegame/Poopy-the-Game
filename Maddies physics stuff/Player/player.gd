@@ -524,14 +524,9 @@ func physics_process_normal(delta):
 
 
  #(Debug) Speed Boost
-<<<<<<< HEAD
 	if Input.is_action_just_pressed("boost") and canspeedboost:
 		motion.x = 775 * Input.get_axis("left", "right")
 		canspeedboost = false
-=======
-	if Input.is_action_just_pressed("boost"):
-		motion.x += 750 * Input.get_axis("left", "right")
->>>>>>> 767c60eed7493f6817a3219f13b029fd70f3586a
 		
 #	var actionlist = ["action", "grapple", "dual"]
 #	var index = 0
@@ -571,11 +566,7 @@ func physics_process_normal(delta):
 					canstomp = false
 					isstomping = true
 					isairdashing = false
-<<<<<<< HEAD
 			elif canairdash and abs(motion.x) >= 1:
-=======
-			elif canairdash:
->>>>>>> 767c60eed7493f6817a3219f13b029fd70f3586a
 				motion.x += abs(motion.x) * 0.15 * Input.get_axis("left", "right")
 				canairdash = false
 				isairdashing = true
@@ -782,24 +773,6 @@ func animate():
 		$Sprite.flip_h = true
 	elif direction > 0 and not isskidding:
 		$Sprite.flip_h = false
-<<<<<<< HEAD
-=======
-
-	if isairdashing:
-		var airdashrot = motion.y / 750 * sign(motion.x)
-		
-		airdashrot = clamp(airdashrot, -PI/2, PI/2)
-		
-		$Sprite.rotation = lerp_angle($Sprite.rotation, airdashrot, 1)
-				
-		if sign(motion.x) > 0:
-			$Sprite.flip_h = false
-		elif sign(motion.x) < 0:
-			$Sprite.flip_h = true
-			
-		$Sprite.play("airdash")
-		$Sprite.speed_scale = 1
->>>>>>> 767c60eed7493f6817a3219f13b029fd70f3586a
 	
 	if isrolling:
 		$Sprite.play("jump")
@@ -826,7 +799,6 @@ func animate():
 			$Sprite.play("run")
 			$Sprite.speed_scale = abs(motion.x)/90
 			# Play Running Animation, quickening it even further if you escalate past your Top Speed.
-<<<<<<< HEAD
 			
 	elif not grounded:
 		
@@ -857,16 +829,6 @@ func animate():
 				$Sprite.speed_scale = abs(motion.x) / 80
 			elif abs(motion.x) >= 600:
 				$Sprite.speed_scale = 600
-=======
-	elif jumping and not isairdashing:
-		$Sprite.play("jump")
-		if abs(motion.x) <= 0:
-			$Sprite.speed_scale = 1.5
-		elif abs(motion.x) > 0 and abs(motion.x) < 700:
-			$Sprite.speed_scale = abs(motion.x) / 80
-		elif abs(motion.x) >= 600:
-			$Sprite.speed_scale = 600
->>>>>>> 767c60eed7493f6817a3219f13b029fd70f3586a
 	
 	# Idle animation
 	
