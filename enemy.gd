@@ -435,6 +435,8 @@ func test_player_impact(delta):
 func perform_bounce(Player):
 	Player.motion.y = abs(Player.motion.y) * -1
 	if "exitgrapple" in Player: Player.exitgrapple = false
+	Player.canstomp = true
+	Player.canairdash = true
 	hit_cooldown = true
 	hit_timer = 0.2 
 

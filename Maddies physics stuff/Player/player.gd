@@ -525,7 +525,7 @@ func physics_process_normal(delta):
 
  #(Debug) Speed Boost
 	if Input.is_action_just_pressed("boost") and canspeedboost:
-		motion.x = 775 * Input.get_axis("left", "right")
+		motion.x = 780 * Input.get_axis("left", "right")
 		canspeedboost = false
 		
 #	var actionlist = ["action", "grapple", "dual"]
@@ -548,7 +548,7 @@ func physics_process_normal(delta):
 		canairdash = true
 		canstomp = true
 		
-	if abs(motion.x) < 1:
+	if abs(motion.x) < 20:
 		isairdashing = false
 	
 	if not is_on_floor():
@@ -566,7 +566,7 @@ func physics_process_normal(delta):
 					canstomp = false
 					isstomping = true
 					isairdashing = false
-			elif canairdash and abs(motion.x) >= 1:
+			elif canairdash and abs(motion.x) >= 20:
 				motion.x += abs(motion.x) * 0.15 * Input.get_axis("left", "right")
 				canairdash = false
 				isairdashing = true
