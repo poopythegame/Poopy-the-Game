@@ -536,6 +536,9 @@ func physics_process_normal(delta):
 		#elif (len(actionlist) - 1) < index:
 		#	index = 0
 	
+#RESTART OPTION
+	if Input.is_action_just_pressed("restart"):
+		get_tree().reload_current_scene()
 
 #POOPY MOVESET
 	if not is_on_floor():
@@ -776,7 +779,11 @@ func animate():
 	
 	if isrolling:
 		$Sprite.play("jump")
-		$Sprite.speed_scale = abs(motion.x) / 80
+		
+		var animspeed = abs(motion.x) / 80
+		animspeed = clamp(animspeed, 1.5, 8)
+			
+		$Sprite.speed_scale = animspeed
 		
 	elif grounded:
 		if isskidding:
@@ -823,12 +830,10 @@ func animate():
 			
 		elif jumping:
 			$Sprite.play("jump")
-			if abs(motion.x) <= 0:
-				$Sprite.speed_scale = 1.5
-			elif abs(motion.x) > 0 and abs(motion.x) < 700:
-				$Sprite.speed_scale = abs(motion.x) / 80
-			elif abs(motion.x) >= 600:
-				$Sprite.speed_scale = 600
+			var animspeed = abs(motion.x) / 80
+			animspeed = clamp(animspeed, 1.5, 8)
+			
+			$Sprite.speed_scale = animspeed
 	
 	# Idle animation
 	
