@@ -593,7 +593,7 @@ func physics_process_normal(delta):
 		if direction == -(sign(motion.x)):
 			motion.x -= dec * sign(motion.x) * 1.3
 			
-	if direction and not control_lock and not isrolling: # If holding left or right, and not slipping down a slope...
+	if direction and not control_lock and not isrolling and !springing: # If holding left or right, and not slipping down a slope...
 		if abs(motion.x) < 25:
 			motion.x += acc * 3 * direction
 		if is_on_floor(): # If touching the floor...	
@@ -693,9 +693,6 @@ func physics_process_normal(delta):
 			## We wouldn't want them to awkwardly re-attatch to the wall over and over again.
 	else:
 		falloffwall = false
-	
-
-
 
 # Stoppers
 	if is_on_ceiling() and not grounded: # If you bonk your head on the ceiling...
@@ -706,8 +703,6 @@ func physics_process_normal(delta):
 	if is_on_wall() and $Collision/WallCast.is_colliding(): # If you bump into a wall...
 		motion.x = 0
 		# Stop moving.
-
-
 
 	animate()
 	#slope_failsafe()
@@ -738,7 +733,7 @@ func take_damage(amount: float) -> void:
 		die()
 
 func bounce(strength: float) -> void:
-	var dir = Vector2(-.5,-1)
+	var dir = Vector2(-.5,-1.125)
 	if $Sprite.flip_h:
 		dir.x = -dir.x
 	var force = dir * strength
