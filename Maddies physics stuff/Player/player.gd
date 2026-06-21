@@ -707,11 +707,11 @@ func physics_process_normal(delta):
 
 	animate()
 	#slope_failsafe()
-	var prev_y = global_position.y
-	if velocity.y > 300:
-		velocity.y *= 2
+	# var prev_y = global_position.y
+	# if velocity.y > 300:
+	# 	velocity.y *= 2
 	move_and_slide()
-	print("%d: dy=%d" % [Engine.get_frames_drawn(), global_position.y-prev_y])
+	# print("%d: dy=%d" % [Engine.get_frames_drawn(), global_position.y-prev_y])
 
 func _process(delta: float) -> void:
 	if health <= 0 and !dying:
