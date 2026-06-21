@@ -4,7 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/in_game_overlay.tscn" id="4_51wsq"]
 [ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://enemy.tscn" id="5_jorxo"]
 [ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/coin.tscn" id="6_kamxp"]
-[ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/dash_panel.tscn" id="6_mkcba"]
+[ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/new_dash_panel.tscn" id="6_mkcba"]
+[ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/spike.tscn" id="6_ydant"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51wsq"]
 size = Vector2(2145, 117)
@@ -44,3 +45,15 @@ position = Vector2(515, -36)
 
 [node name="CharacterBody2D" parent="." unique_id=1760042011 groups=["Enemy"] instance=ExtResource("5_jorxo")]
 position = Vector2(667, -22)
+
+[node name="Spike" parent="." unique_id=2118102836 instance=ExtResource("6_ydant")]
+position = Vector2(786, -17)
+
+[node name="Spike2" parent="." unique_id=1226462709 instance=ExtResource("6_ydant")]
+position = Vector2(819, -17)
+
+[node name="Spike3" parent="." unique_id=1436715338 instance=ExtResource("6_ydant")]
+position = Vector2(852, -17)
+
+[node name="Spike4" parent="." unique_id=1761605522 instance=ExtResource("6_ydant")]
+position = Vector2(885, -17)

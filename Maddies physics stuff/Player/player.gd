@@ -419,6 +419,8 @@ func physics_process_normal(delta):
 		# -would try to increase infinitely while you're on the ground.
 		if springing and motion.y >= 0:
 			springing = false
+		if springing:
+			print(motion.y)
 	else:
 		if abs(slopefactor) == 1: # If running up a perfectly vertical wall...
 			motion.y = 0
@@ -430,7 +432,6 @@ func physics_process_normal(delta):
 			motion.y = 50
 			# This tries to help you stick to the ground, though it's not very-
 			# -effective at high speeds.
-	
 
 
 
@@ -512,13 +513,13 @@ func physics_process_normal(delta):
 		canjump = true
 		# Let the script know you're not jumping anymore, and return your ability to jump.
 
-
-	if jumping and motion.y < -JUMP_VELOCITY / 1.625: # If your jumping motion goes beyond a certain point...
-		if not Input.is_action_pressed("jump") and not Input.is_action_pressed("action") and not exitgrapple: # ...but you're NOT pressing the jump button anymore...
-			motion.y = -JUMP_VELOCITY / 2.2
-			# Set your vertical motion to that exact point.
-			## Simply put, this lets you do high and low jumps depending on- 
-			## -how long you press the button.
+	if not springing:
+		if jumping and motion.y < -JUMP_VELOCITY / 1.625: # If your jumping motion goes beyond a certain point...
+			if not Input.is_action_pressed("jump") and not Input.is_action_pressed("action") and not exitgrapple: # ...but you're NOT pressing the jump button anymore...
+				motion.y = -JUMP_VELOCITY / 2.2
+				# Set your vertical motion to that exact point.
+				## Simply put, this lets you do high and low jumps depending on- 
+				## -how long you press the button.
 
 
 
@@ -706,7 +707,11 @@ func physics_process_normal(delta):
 
 	animate()
 	#slope_failsafe()
+	var prev_y = global_position.y
+	if velocity.y > 300:
+		velocity.y *= 2
 	move_and_slide()
+	print("%d: dy=%d" % [Engine.get_frames_drawn(), global_position.y-prev_y])
 
 func _process(delta: float) -> void:
 	if health <= 0 and !dying:
@@ -733,12 +738,13 @@ func take_damage(amount: float) -> void:
 		die()
 
 func bounce(strength: float) -> void:
-	var dir = Vector2(-.5,-1.125)
+	var dir = Vector2(-.5,-.5)
 	if $Sprite.flip_h:
 		dir.x = -dir.x
 	var force = dir * strength
 	motion = force
 	springing = true
+	jumping = true
 
 # That's the main part of the script done with.
 # Now let's move on to extra functions and timer signals.
