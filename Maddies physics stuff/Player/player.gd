@@ -419,8 +419,6 @@ func physics_process_normal(delta):
 		# -would try to increase infinitely while you're on the ground.
 		if springing and motion.y >= 0:
 			springing = false
-		if springing:
-			print(motion.y)
 	else:
 		if abs(slopefactor) == 1: # If running up a perfectly vertical wall...
 			motion.y = 0
@@ -707,11 +705,11 @@ func physics_process_normal(delta):
 
 	animate()
 	#slope_failsafe()
-	var prev_y = global_position.y
-	if velocity.y > 300:
-		velocity.y *= 2
+	# var prev_y = global_position.y
+	# if velocity.y > 300:
+	# 	velocity.y *= 2
 	move_and_slide()
-	print("%d: dy=%d" % [Engine.get_frames_drawn(), global_position.y-prev_y])
+	# print("%d: dy=%d" % [Engine.get_frames_drawn(), global_position.y-prev_y])
 
 func _process(delta: float) -> void:
 	if health <= 0 and !dying:
