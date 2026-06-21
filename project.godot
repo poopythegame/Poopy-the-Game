@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="experimental hodge podge"
+config/name="USE THIS ONE!!!!!! Latest build for Poopy the Game"
 run/main_scene="uid://dady2wku1xusy"
 config/features=PackedStringArray("4.6", "Mobile")
 run/max_fps=60
