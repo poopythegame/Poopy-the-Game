@@ -35,7 +35,7 @@ position = Vector2(25353.5, 3200)
 shape = SubResource("RectangleShape2D_0f247")
 
 [node name="Player2" parent="." unique_id=2095390806 groups=["Player"] instance=ExtResource("1_q8hoo")]
-position = Vector2(16720, 2880)
+position = Vector2(-4666, -728)
 
 [node name="AnimatableBody2D" parent="." unique_id=280326849 instance=ExtResource("3_oebfb")]
 position = Vector2(40, -72)
@@ -499,3 +499,4 @@ flip = true
 [node name="Camera2D" type="Camera2D" parent="." unique_id=765782397]
 zoom = Vector2(3.5, 3.5)
 script = ExtResource("13_ags8m")
+x_offset_time = 1.0
