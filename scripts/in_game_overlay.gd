@@ -12,7 +12,7 @@ class_name InGameOverlay
 @onready var minutes_label = $left/HBoxContainer/minutes
 @onready var seconds_label = $left/HBoxContainer/seconds
 @onready var msec_label = $left/HBoxContainer/msec
-var stopwatch_paused := false
+var stopwatch_paused := true
 @onready var money = $left/coins
 var time: float = 0.0
 var minutes: int = 0
@@ -20,7 +20,6 @@ var seconds: int = 0
 var mseconds: int = 0 
 
 func _ready():
-	stopwatch_paused = false
 	print("tonight's the night...")
 
 func _process(delta): 

@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bn8j6pteveo81" path="res://scripts/camera.gd" id="13_ags8m"]
 [ext_resource type="PackedScene" uid="uid://bf48swe3lsv8b" path="res://scenes/spring.tscn" id="13_cpsrv"]
 [ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/new_dash_panel.tscn" id="13_h0rbv"]
+[ext_resource type="PackedScene" uid="uid://8xai8tlfegl3" path="res://scenes/lvl_start.tscn" id="15_ags8m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0f247"]
 size = Vector2(109, 384)
@@ -496,7 +497,11 @@ position = Vector2(-4696, -728)
 position = Vector2(25408, 3392)
 flip = true
 
+[node name="LevelStart" parent="." unique_id=496126979 instance=ExtResource("15_ags8m")]
+position = Vector2(-4550, -794)
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=765782397]
 zoom = Vector2(3.5, 3.5)
 script = ExtResource("13_ags8m")
+enable_x_offset = false
 x_offset_time = 1.0
