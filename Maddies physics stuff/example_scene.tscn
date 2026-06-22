@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://enemy.tscn" id="8_62vkk"]
 [ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/spike.tscn" id="9_dkxqa"]
 [ext_resource type="PackedScene" uid="uid://bmfvkehjaa7fe" path="res://onewayacollisionblock.tscn" id="11_fh7tq"]
+[ext_resource type="PackedScene" uid="uid://n40asi5s347t" path="res://scenes/cam_boundary.tscn" id="13_57ty6"]
+[ext_resource type="Script" uid="uid://bn8j6pteveo81" path="res://scripts/camera.gd" id="13_ags8m"]
 [ext_resource type="PackedScene" uid="uid://bf48swe3lsv8b" path="res://scenes/spring.tscn" id="13_cpsrv"]
 [ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/new_dash_panel.tscn" id="13_h0rbv"]
 
@@ -34,10 +36,6 @@ shape = SubResource("RectangleShape2D_0f247")
 
 [node name="Player2" parent="." unique_id=2095390806 groups=["Player"] instance=ExtResource("1_q8hoo")]
 position = Vector2(-4672, -728)
-
-[node name="Camera2D" type="Camera2D" parent="Player2" unique_id=995010469]
-zoom = Vector2(3.5, 3.5)
-position_smoothing_speed = 15.0
 
 [node name="AnimatableBody2D" parent="." unique_id=280326849 instance=ExtResource("3_oebfb")]
 position = Vector2(40, -72)
@@ -490,3 +488,14 @@ position = Vector2(10832, -80)
 [node name="Spring" parent="." unique_id=52043480 instance=ExtResource("13_cpsrv")]
 position = Vector2(18976, 2160)
 force = 900.0
+
+[node name="LeftCamBound" parent="." unique_id=1310596363 instance=ExtResource("13_57ty6")]
+position = Vector2(-4696, -728)
+
+[node name="RightCamBound" parent="." unique_id=1814212982 instance=ExtResource("13_57ty6")]
+position = Vector2(25408, 3392)
+flip = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=765782397]
+zoom = Vector2(3.5, 3.5)
+script = ExtResource("13_ags8m")

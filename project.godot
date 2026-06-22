@@ -40,6 +40,7 @@ enabled=PackedStringArray()
 GrapplePoints=""
 Enemy=""
 Player=""
+cam_boundary=""
 
 [input]
 

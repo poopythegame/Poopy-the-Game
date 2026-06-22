@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://n40asi5s347t"]
+
+[ext_resource type="Script" uid="uid://camv21ylc6bgy" path="res://scripts/cam_boundary.gd" id="1_vule3"]
+
+[node name="CamBound" type="Node2D" unique_id=1310596363]
+script = ExtResource("1_vule3")
