@@ -27,7 +27,7 @@ var is_traveling := false
 var freeze_ghost_timer := 0.0
 
 const GRID_OFFSET = 100.0 
-const TRAVEL_SPEED = 1600.0 
+const TRAVEL_SPEED = 1800.0 
 const ARRIVAL_DISTANCE = 5.0 
 
 # --- HITBOX VARIABLES ---
