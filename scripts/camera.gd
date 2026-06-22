@@ -1,11 +1,14 @@
 extends Camera2D
 
-## How far the horizontal (x) offset shifts the camera to show what's in front of the player.
-@export var x_offset_amount: float = 75
-## How long it takes for the horizontal offset to shift the camera.
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var x_offset_time: float = .5
-## The easing curve for horizontal offset changes.
-@export_exp_easing var x_offset_ease: float = -2
+@export_group("Lookahead")
+## Whether to enable the camera lookahead.
+@export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var enable_lookahead := true
+## How far the lookahead shifts the camera to show what's in front of the player.
+@export var lookahead_amount: float = 75
+## How long it takes for the lookahead to shift the camera.
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var lookahead_time: float = .5
+## The easing curve for lookahead shifts.
+@export_exp_easing var lookahead_ease: float = -2
 
 var player: Player
 var left_boundary: Node2D
@@ -41,20 +44,20 @@ func _process(delta: float) -> void:
 	if should_disable():
 		next_x_offset = 0
 	elif player.velocity.x > Player.topspeed:
-		next_x_offset = x_offset_amount
+		next_x_offset = lookahead_amount
 	elif player.velocity.x < -Player.topspeed:
-		next_x_offset = -x_offset_amount
+		next_x_offset = -lookahead_amount
 	else:
 		next_x_offset = 0
-	if prev_next_offset != next_x_offset and x_offset_t > 0 and x_offset_t < x_offset_time:
+	if prev_next_offset != next_x_offset and x_offset_t > 0 and x_offset_t < lookahead_time:
 		x_offset = curr_x_offset
 		x_offset_t = 0
 	curr_x_offset = x_offset
 	if next_x_offset != x_offset:
-		var t = x_offset_t / x_offset_time
-		curr_x_offset = lerp(x_offset, next_x_offset, ease(t, x_offset_ease))
+		var t = x_offset_t / lookahead_time
+		curr_x_offset = lerp(x_offset, next_x_offset, ease(t, lookahead_ease))
 		x_offset_t += delta
-		if x_offset_t > x_offset_time:
+		if x_offset_t > lookahead_time:
 			x_offset_t = 0
 			x_offset = next_x_offset
 	global_position = Vector2(player.global_position.x + curr_x_offset, player.global_position.y)
@@ -73,4 +76,4 @@ func _process(delta: float) -> void:
 func should_disable() -> bool:
 	if player.is_grappling:
 		return true
-	return false
+	return not enable_lookahead
