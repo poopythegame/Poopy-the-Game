@@ -75,6 +75,8 @@ var slopefactor := 0.0
 
 var exitgrapple = false
 
+var isattacking = false
+
 var isskidding = false
 
 var cangrapple = false
@@ -540,6 +542,12 @@ func physics_process_normal(delta):
 		get_tree().reload_current_scene()
 
 #POOPY MOVESET
+	
+	if jumping or isrolling or isairdashing or isstomping:
+		isattacking = true
+	else:
+		isattacking = false
+	
 	if not is_on_floor():
 		if abs(motion.x) > topspeed:
 			motion.x = move_toward(motion.x, topspeed, AIRDRAG)
