@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ccmuyywpupyo0" path="res://scripts/lvl_start.gd" id="1_ut64v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8son"]
-size = Vector2(67, 67)
+size = Vector2(32, 387)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ut64v"]
 load_path = "res://.godot/imported/purple.png-e822f320524d640c7027e1ec30d56612.ctex"
@@ -12,10 +12,11 @@ load_path = "res://.godot/imported/purple.png-e822f320524d640c7027e1ec30d56612.c
 script = ExtResource("1_ut64v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1196488207]
-position = Vector2(33.5, 33.5)
+position = Vector2(16, -126.5)
 shape = SubResource("RectangleShape2D_d8son")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=846303148]
+position = Vector2(-16, 0)
 scale = Vector2(0.065, 0.065)
 texture = SubResource("CompressedTexture2D_ut64v")
 centered = false

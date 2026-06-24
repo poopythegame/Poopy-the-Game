@@ -17,6 +17,7 @@ var x_offset: float = 0
 var next_x_offset: float = 0
 var x_offset_t: float = 0
 var curr_x_offset: float = 0
+const MINSPD = 450
 
 func _ready() -> void:
 	var candidates := get_tree().get_nodes_in_group("cam_boundary")
@@ -43,9 +44,9 @@ func _process(delta: float) -> void:
 	var prev_next_offset = next_x_offset
 	if should_disable():
 		next_x_offset = 0
-	elif player.velocity.x > Player.topspeed:
+	elif player.velocity.x > MINSPD:
 		next_x_offset = lookahead_amount
-	elif player.velocity.x < -Player.topspeed:
+	elif player.velocity.x < -MINSPD:
 		next_x_offset = -lookahead_amount
 	else:
 		next_x_offset = 0
