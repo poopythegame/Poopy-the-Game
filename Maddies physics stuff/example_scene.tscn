@@ -503,5 +503,4 @@ position = Vector2(-4550, -794)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=765782397]
 zoom = Vector2(3.5, 3.5)
 script = ExtResource("13_ags8m")
-enable_x_offset = false
-x_offset_time = 1.0
+lookahead_time = 1.0

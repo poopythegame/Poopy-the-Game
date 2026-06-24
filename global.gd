@@ -5,12 +5,8 @@ var current_level := 1
 var level_coins := {}
 var level_prank := {}
 
-func _input(event):
-	if event.is_action_pressed("refresh"):
-		get_tree().reload_current_scene()
-	
-	if event.is_action_pressed("esc"):
-		get_tree().quit()
+# func _ready() -> void:
+# 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func add_coin():
 	var lvl = current_level
