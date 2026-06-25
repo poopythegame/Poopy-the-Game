@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cxqog80c2q55h"]
+
+[ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="1_jhv28"]
+
+[sub_resource type="FontVariation" id="FontVariation_h4ob3"]
+base_font = ExtResource("1_jhv28")
+variation_embolden = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_jhv28"]
+font = SubResource("FontVariation_h4ob3")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_h4ob3"]
+font = ExtResource("1_jhv28")
+font_size = 40
+
+[node name="RankDisplay" type="HBoxContainer" unique_id=1404184377]
+theme_override_constants/separation = 16
+
+[node name="RankLetter" type="Label" parent="." unique_id=897243046]
+layout_mode = 2
+text = "-"
+label_settings = SubResource("LabelSettings_jhv28")
+
+[node name="MaxTime" type="Label" parent="." unique_id=1813034322]
+layout_mode = 2
+size_flags_vertical = 8
+text = "--:--:---"
+label_settings = SubResource("LabelSettings_h4ob3")

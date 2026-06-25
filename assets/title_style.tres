@@ -1,7 +1,7 @@
 [gd_resource type="LabelSettings" format=3 uid="uid://bmtl4xmbt3fao"]
 
-[ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="1_bdfjq"]
+[ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="1_gjckx"]
 
 [resource]
-font = ExtResource("1_bdfjq")
-font_size = 52
+font = ExtResource("1_gjckx")
+font_size = 50

@@ -110,3 +110,11 @@ text = "00"
 [node name="coins" type="Label" parent="left" unique_id=791635388]
 layout_mode = 2
 text = "coins - x"
+
+[node name="Whiteout" type="ColorRect" parent="." unique_id=637235941]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

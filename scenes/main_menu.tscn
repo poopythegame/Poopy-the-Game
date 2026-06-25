@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://m7v8vgf4k5re" path="res://scripts/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://o0rbsha836tg" path="res://Maddies physics stuff/example_scene.tscn" id="2_8ln24"]
+[ext_resource type="Script" uid="uid://h46hneoomiqh" path="res://scripts/rank_def.gd" id="2_oa1go"]
 [ext_resource type="Script" uid="uid://7xfldx24oh8g" path="res://scripts/level_desc.gd" id="3_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://ck2nwkpumjf3f" path="res://assets/textures/placeholder/dark.png" id="4_oa1go"]
 [ext_resource type="LabelSettings" uid="uid://bmtl4xmbt3fao" path="res://assets/title_style.tres" id="5_rtw2f"]
@@ -12,11 +13,42 @@ script = ExtResource("3_rtw2f")
 title = "Tutorial"
 metadata/_custom_type_script = "uid://7xfldx24oh8g"
 
+[sub_resource type="Resource" id="Resource_jk1qb"]
+script = ExtResource("2_oa1go")
+letter = "P"
+time = 61.0
+metadata/_custom_type_script = "uid://h46hneoomiqh"
+
+[sub_resource type="Resource" id="Resource_5dd4i"]
+script = ExtResource("2_oa1go")
+letter = "A"
+time = 70.0
+metadata/_custom_type_script = "uid://h46hneoomiqh"
+
+[sub_resource type="Resource" id="Resource_lgwnu"]
+script = ExtResource("2_oa1go")
+letter = "B"
+time = 85.0
+metadata/_custom_type_script = "uid://h46hneoomiqh"
+
+[sub_resource type="Resource" id="Resource_flqon"]
+script = ExtResource("2_oa1go")
+letter = "C"
+time = 120.0
+metadata/_custom_type_script = "uid://h46hneoomiqh"
+
+[sub_resource type="Resource" id="Resource_rcqid"]
+script = ExtResource("2_oa1go")
+letter = "F"
+time = 150.0
+metadata/_custom_type_script = "uid://h46hneoomiqh"
+
 [sub_resource type="Resource" id="Resource_tbmy8"]
 script = ExtResource("3_rtw2f")
-scene = ExtResource("2_8ln24")
 title = "Big Farma"
 thumbnail = ExtResource("4_oa1go")
+scene = ExtResource("2_8ln24")
+rankings = Array[ExtResource("2_oa1go")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
 metadata/_custom_type_script = "uid://7xfldx24oh8g"
 
 [node name="MainMenu" type="Control" unique_id=1355966020]
@@ -29,7 +61,7 @@ grow_vertical = 2
 pivot_offset = Vector2(-69, -39)
 script = ExtResource("1_ekxnf")
 labels_slide_time = 0.25
-levels = [SubResource("Resource_rtw2f"), SubResource("Resource_tbmy8")]
+levels = Array[ExtResource("3_rtw2f")]([SubResource("Resource_rtw2f"), SubResource("Resource_tbmy8")])
 
 [node name="TitleScreen" type="MarginContainer" parent="." unique_id=204882257]
 layout_mode = 1

@@ -3,7 +3,6 @@ class_name MainMenu
 
 @export var labels_slide_time := 2.
 @export_category("Level Select")
-@export var levels: Array[LevelDesc] = []
 
 enum Screen {
 	TITLE,
@@ -22,6 +21,8 @@ enum Screen {
 
 @onready var lavel_select_screen: MarginContainer = $LevelSelect
 @onready var level_select_labels_container: Control = $LevelSelect/VBoxContainer/TitlesContainer
+
+@onready var levels := Global.levels.levels
 
 var screen := Screen.TITLE
 var main_scene: PackedScene
@@ -63,6 +64,7 @@ func _input(event: InputEvent) -> void:
 		elif event.is_action_pressed("right") and not event.is_echo():
 			level_select_switch(1)
 		elif event.is_action_pressed("ui_accept") and not event.is_echo():
+			Global.current_level = level_select_selected
 			begin(levels[level_select_selected])
 
 func menu_switch(new: int):
