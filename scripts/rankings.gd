@@ -32,4 +32,6 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action("start"):
-		get_tree().change_scene_to_packed(main_menu_scene)
+		var main_menu: MainMenu = main_menu_scene.instantiate()
+		main_menu.start_screen = MainMenu.Screen.MENU
+		get_tree().change_scene_to_node(main_menu)

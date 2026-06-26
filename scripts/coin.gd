@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var heal_amount := 5.
 var used: bool = false
 
 func _ready() -> void:
@@ -11,5 +12,7 @@ func _on_body_entered(body: Node2D):
 		# a player picked up the coin
 		hide()
 		used = true
+		if body.health < body.max_health:
+			body.health += 5
 		# This automatically adds the coin to the correct level "bucket"
 		Global.add_coin()

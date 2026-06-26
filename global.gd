@@ -2,6 +2,7 @@ extends Node
 
 var time = true
 var current_level := 0
+var coins: int = 0
 @onready var levels: LevelsDesc = load("uid://bhtmoith33eb6")
 var save_data: SaveData
 
@@ -12,10 +13,11 @@ func _input(event: InputEvent) -> void:
 func _ready() -> void:
 	var data_dir = OS.get_user_data_dir()
 	var save_path = data_dir.path_join("save.res")
-	if not FileAccess.file_exists(save_path):
-		save_data = SaveData.new()
-	else:
-		save_data = ResourceLoader.load(save_path)
+	save_data = SaveData.new()
+	# if not FileAccess.file_exists(save_path):
+	# 	save_data = SaveData.new()
+	# else:
+	# 	save_data = ResourceLoader.load(save_path)
 
 func _exit_tree() -> void:
 	var data_dir = OS.get_user_data_dir()
@@ -23,7 +25,10 @@ func _exit_tree() -> void:
 	ResourceSaver.save(save_data, save_path)
 
 func add_coin():
-	save_data.coins[current_level] += 1
+	coins += 1
+
+func reset_coins():
+	coins = 0
 
 func set_rank(rank_id: int):
 	save_data.ranks[current_level] = rank_id
@@ -46,4 +51,4 @@ func get_ranks() -> Array[RankDef]:
 	return levels.levels[current_level].rankings
 
 func get_coins() -> int:
-	return save_data.coins[current_level]
+	return coins

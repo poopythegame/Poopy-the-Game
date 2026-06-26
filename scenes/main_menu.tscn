@@ -1,55 +1,9 @@
 [gd_scene format=3 uid="uid://dady2wku1xusy"]
 
 [ext_resource type="Script" uid="uid://m7v8vgf4k5re" path="res://scripts/main_menu.gd" id="1_ekxnf"]
-[ext_resource type="PackedScene" uid="uid://o0rbsha836tg" path="res://Maddies physics stuff/example_scene.tscn" id="2_8ln24"]
-[ext_resource type="Script" uid="uid://h46hneoomiqh" path="res://scripts/rank_def.gd" id="2_oa1go"]
-[ext_resource type="Script" uid="uid://7xfldx24oh8g" path="res://scripts/level_desc.gd" id="3_rtw2f"]
-[ext_resource type="Texture2D" uid="uid://ck2nwkpumjf3f" path="res://assets/textures/placeholder/dark.png" id="4_oa1go"]
+[ext_resource type="Texture2D" uid="uid://b5w0pc7x5csx5" path="res://assets/textures/poopy_logo.png" id="2_wu84c"]
 [ext_resource type="LabelSettings" uid="uid://bmtl4xmbt3fao" path="res://assets/title_style.tres" id="5_rtw2f"]
 [ext_resource type="FontFile" uid="uid://bw8h8rlrthupg" path="res://assets/fonts/icons.ttf" id="6_rtw2f"]
-
-[sub_resource type="Resource" id="Resource_rtw2f"]
-script = ExtResource("3_rtw2f")
-title = "Tutorial"
-metadata/_custom_type_script = "uid://7xfldx24oh8g"
-
-[sub_resource type="Resource" id="Resource_jk1qb"]
-script = ExtResource("2_oa1go")
-letter = "P"
-time = 61.0
-metadata/_custom_type_script = "uid://h46hneoomiqh"
-
-[sub_resource type="Resource" id="Resource_5dd4i"]
-script = ExtResource("2_oa1go")
-letter = "A"
-time = 70.0
-metadata/_custom_type_script = "uid://h46hneoomiqh"
-
-[sub_resource type="Resource" id="Resource_lgwnu"]
-script = ExtResource("2_oa1go")
-letter = "B"
-time = 85.0
-metadata/_custom_type_script = "uid://h46hneoomiqh"
-
-[sub_resource type="Resource" id="Resource_flqon"]
-script = ExtResource("2_oa1go")
-letter = "C"
-time = 120.0
-metadata/_custom_type_script = "uid://h46hneoomiqh"
-
-[sub_resource type="Resource" id="Resource_rcqid"]
-script = ExtResource("2_oa1go")
-letter = "F"
-time = 150.0
-metadata/_custom_type_script = "uid://h46hneoomiqh"
-
-[sub_resource type="Resource" id="Resource_tbmy8"]
-script = ExtResource("3_rtw2f")
-title = "Big Farma"
-thumbnail = ExtResource("4_oa1go")
-scene = ExtResource("2_8ln24")
-rankings = Array[ExtResource("2_oa1go")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
-metadata/_custom_type_script = "uid://7xfldx24oh8g"
 
 [node name="MainMenu" type="Control" unique_id=1355966020]
 layout_mode = 3
@@ -61,7 +15,6 @@ grow_vertical = 2
 pivot_offset = Vector2(-69, -39)
 script = ExtResource("1_ekxnf")
 labels_slide_time = 0.25
-levels = Array[ExtResource("3_rtw2f")]([SubResource("Resource_rtw2f"), SubResource("Resource_tbmy8")])
 
 [node name="TitleScreen" type="MarginContainer" parent="." unique_id=204882257]
 layout_mode = 1
@@ -75,16 +28,25 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Info" type="Label" parent="TitleScreen" unique_id=1952691595]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-text = "Press Enter to begin."
-
-[node name="Title" type="Label" parent="TitleScreen" unique_id=1013389684]
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen" unique_id=1213818861]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Poopy the Game"
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="TitleScreen/VBoxContainer" unique_id=1118181643]
+custom_minimum_size = Vector2(500, 347.63)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_wu84c")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Info" type="Label" parent="TitleScreen/VBoxContainer" unique_id=1952691595]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Press Enter to begin."
 label_settings = ExtResource("5_rtw2f")
 
 [node name="Menu" type="MarginContainer" parent="." unique_id=944521765]

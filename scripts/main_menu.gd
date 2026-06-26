@@ -2,6 +2,7 @@ extends Control
 class_name MainMenu
 
 @export var labels_slide_time := 2.
+@export var start_screen := Screen.TITLE
 @export_category("Level Select")
 
 enum Screen {
@@ -43,6 +44,8 @@ func _ready() -> void:
 		label.text = level.title
 		level_select_labels.append(label)
 		level_select_labels_container.add_child(label)
+	if start_screen != Screen.TITLE:
+		change_screen(start_screen)
 
 func _input(event: InputEvent) -> void:
 	if screen == Screen.TITLE:
@@ -52,9 +55,9 @@ func _input(event: InputEvent) -> void:
 			_quit()
 	elif screen == Screen.MENU:
 		if event.is_action_pressed("left") and not event.is_echo():
-			menu_switch(menu_selected - 1)
-		elif event.is_action_pressed("right") and not event.is_echo():
 			menu_switch(menu_selected + 1)
+		elif event.is_action_pressed("right") and not event.is_echo():
+			menu_switch(menu_selected - 1)
 		elif event.is_action_pressed("ui_accept") and not event.is_echo():
 			if menu_selected == 1:
 				change_screen(Screen.LEVEL_SELECT)
@@ -172,6 +175,7 @@ func level_select_position_elements():
 			label.hide()
 
 func begin(level: LevelDesc) -> void:
+	Global.reset_coins()
 	get_tree().change_scene_to_packed(level.scene)
 
 func _quit() -> void:
