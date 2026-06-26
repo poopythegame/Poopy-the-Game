@@ -265,10 +265,10 @@ func physics_process_grapple(delta: float):
 	
 	# 5. WALL COLLISION HANDLING
 	# If we hit a wall while swinging, we need to update 'motion' or we'll stick.
-	if is_on_wall() or is_on_floor():
-		motion = get_real_velocity()
+	#if is_on_wall() or is_on_floor():
+		#motion = get_real_velocity()
 		# Optional: If you hit a floor, maybe end the grapple?
-		# stop_grapple() 
+		#stop_grapple() 
 
 	# 6. VISUALS
 	rope_line.visible = true
