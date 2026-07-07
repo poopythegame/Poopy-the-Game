@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://fieh7uoavdwx" path="res://anchor.tscn" id="6_ojq0h"]
 [ext_resource type="Script" uid="uid://ccvtjilgokcnb" path="res://Maddies physics stuff/collision_polygon_2d.gd" id="7_pvwt8"]
 [ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://enemy.tscn" id="8_62vkk"]
+[ext_resource type="Texture2D" uid="uid://dn7ok0wnn60p6" path="res://assets/textures/ground.png" id="8_ay1kk"]
 [ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/spike.tscn" id="9_dkxqa"]
 [ext_resource type="PackedScene" uid="uid://bmfvkehjaa7fe" path="res://onewayacollisionblock.tscn" id="11_fh7tq"]
 [ext_resource type="PackedScene" uid="uid://n40asi5s347t" path="res://scenes/cam_boundary.tscn" id="13_57ty6"]
@@ -96,8 +97,9 @@ polygon = PackedVector2Array(5.22121, -21.4729, 5.22121, -46.0134, 60.2256, -46.
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D/CollisionPolygon2D" unique_id=1834413715]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
+texture_repeat = 2
+texture_offset = Vector2(3.025, 0.895)
+polygon = PackedVector2Array(5.22121, -21.4729, 5.22121, -46.0134, 60.2256, -46.0134, 65.0826, -47.0359, 67.9967, -51.126, 67.9967, -62.3737, 78.8034, -62.3737, 78.8034, -78.734, 114.744, -78.734, 125.43, -80.7791, 132.229, -86.9142, 155.543, -86.9142, 155.543, -100.207, 168.65617, -100.20693, 168.65617, -70.55386, 169.62755, -66.46378, 172.5417, -63.396225, 176.42722, -62.373703, 227.91046, -62.373703, 231.79599, -63.396225, 233.73875, -66.46378, 234.71013, -70.55386, 234.71, -116.567, 265.794, -116.567, 268.709, -115.545, 271.623, -113.5, 273.565, -111.455, 318.613, -62.3737, 331.241, -62.3737, 331.241, -33.7431)
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="StaticBody2D/StaticBody2D" unique_id=964476253]
 position = Vector2(1200, -816)
@@ -109,8 +111,7 @@ polygon = PackedVector2Array(64.8397, -36.8107, 64.8397, -66.4638, 252.559, -66.
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D/StaticBody2D3/CollisionPolygon2D" unique_id=413086101]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
+polygon = PackedVector2Array(64.8397, -36.8107, 64.8397, -66.4638, 252.559, -66.4638, 252.559, -20.4504, 237.017, -20.4504, 237.01717, -53.17103, 229.24612, -53.17103, 229.24612, -50.103462, 135.872, -50.1035, 135.872, -54.1935, 92.2813, -54.1935, 88.3958, -52.1485, 84.5102, -48.0584, 83.5388, -42.9458, 83.5388, -36.8107)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="StaticBody2D" unique_id=1538274135]
 position = Vector2(800, -544)
@@ -122,8 +123,6 @@ polygon = PackedVector2Array(69.0896, -36.8107, 69.089554, -216.77417, 94.345474
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D2/CollisionPolygon2D" unique_id=228019667]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="StaticBody2D" unique_id=610691803]
 position = Vector2(800, -544)
@@ -135,8 +134,9 @@ polygon = PackedVector2Array(-17.484863, 13.292759, -17.484863, -75.66646, -12.6
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D4/CollisionPolygon2D" unique_id=1127636357]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
+texture_repeat = 2
+polygon = PackedVector2Array(-17.484863, 13.292759, -17.484863, -75.66646, -12.627991, -75.66646, -12.628, -46.0134, 38.8553, -46.0134, 38.8553, -54.1936, 50.5118, -54.1936, 50.5118, -62.3737, 67.9967, -62.3737, 77.7105, -70.5539, 87.4243, -70.5539, 99.0809, -78.734, 114.623, -78.734, 117.537, -77.7115, 134.051, -60.3287, 136.965, -59.3061, 139.879, -60.3287, 141.822, -62.3737, 143.764, -63.3962, 147.65, -63.3962, 149.593, -62.3737, 167.078, -43.9683, 169.992, -42.9458, 172.906, -43.9683, 174.849, -46.0134, 176.791, -47.0359, 180.677, -47.0359, 182.62, -46.0134, 204.962, -20.4504, 210.79, -18.4054, 333.184, -18.4054, 333.184, 6.13512)
+uv = PackedVector2Array(6.5151215, 93.292755, 6.5151215, 4.3335314, 11.371994, 4.3335314, 11.371986, 33.986588, 62.855286, 33.986588, 62.855286, 25.806389, 74.51178, 25.806389, 74.51178, 17.62629, 91.99669, 17.62629, 101.710495, 9.446088, 111.424286, 9.446088, 123.08089, 1.2659883, 138.62299, 1.2659883, 141.53699, 2.2884874, 158.05098, 19.671288, 160.96498, 20.69389, 163.87898, 19.671288, 165.82198, 17.62629, 167.76399, 16.60379, 171.64998, 16.60379, 173.59297, 17.62629, 191.07799, 36.03169, 193.99199, 37.054188, 196.90599, 36.03169, 198.84898, 33.986588, 200.79097, 32.96409, 204.67699, 32.96409, 206.61998, 33.986588, 228.96199, 59.549587, 234.79, 61.594585, 357.18396, 61.594585, 357.18396, 86.13511)
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="StaticBody2D/StaticBody2D4" unique_id=1312540453]
 position = Vector2(800, -544)
@@ -174,8 +174,7 @@ polygon = PackedVector2Array(-6.4354, -48.0584, -0.607109, -48.0584, 1.33566, -4
 script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D5/CollisionPolygon2D" unique_id=527161533]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
+polygon = PackedVector2Array(-6.4354, -48.0584, -0.607109, -48.0584, 1.33566, -49.0809, 4.2498, -52.1485, 4.73548, -54.1935, 4.73548, -65.4413, 11.0495, -65.4413, 18.8205, -65.4413, 21.7127, -64.4187, 23.6774, -63.3962, 41.252, -48.0584, 47.59771, -48.058426, 54.397377, -46.01339, 58.282906, -42.94583, 61.19706, -37.83323, 63.139824, -31.698112, 63.1398, -11.2477, 63.1398, -3.06756, 63.1398, -1.02252, 64.1112, 2.04504, 66.054, 4.09008, 68.9681, 5.1126, 86.453, 5.1126, 86.453, 33.7431, -6.79967, 18.4054)
 
 [node name="StaticBody2D7" type="StaticBody2D" parent="StaticBody2D" unique_id=1954650723]
 position = Vector2(4800, -3264)
@@ -399,6 +398,7 @@ script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D18/CollisionPolygon2D" unique_id=736710951]
 color = Color(0, 0, 0, 1)
+texture = ExtResource("8_ay1kk")
 polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 
 [node name="CharacterBody2D" parent="." unique_id=77147107 instance=ExtResource("8_62vkk")]
