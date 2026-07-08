@@ -55,7 +55,7 @@ zoom = Vector2(3.5, 3.5)
 script = ExtResource("1_mkcba")
 
 [node name="Player" parent="." unique_id=1678918478 groups=["Player"] instance=ExtResource("1_cy281")]
-position = Vector2(1849, 0)
+position = Vector2(101, -6)
 
 [node name="InGameOverlay" parent="." unique_id=1911954101 instance=ExtResource("4_51wsq")]
 
@@ -72,10 +72,7 @@ position = Vector2(442, -36)
 position = Vector2(515, -36)
 
 [node name="CharacterBody2D" parent="." unique_id=1760042011 groups=["Enemy"] instance=ExtResource("5_jorxo")]
-position = Vector2(1487, -23)
-dot_spawn_distance = 10
-aggravate_distance = 50
-charge_bounce_force = 500
+position = Vector2(667, -22)
 
 [node name="Spike" parent="." unique_id=2118102836 instance=ExtResource("6_ydant")]
 position = Vector2(786, -17)

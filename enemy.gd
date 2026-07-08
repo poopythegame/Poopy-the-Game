@@ -1,19 +1,16 @@
 extends CharacterBody2D
 class_name Enemy
 
-@export var dot_spawn_distance := 10
-@export var aggravate_distance := 50
-@export var charge_speed := 200
-@export var charge_bounce_force := 200
+@export var dot_spawn_distance = 10
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var sprite_2d: AnimatedSprite2D = $Sprite2D
+@onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var hitbox: Area2D = $Hitbox
 @onready var anchor: Area2D = $anchor
 @onready var dot_prefab: PackedScene = load("res://scenes/dot.tscn")
 
 # --- PHYSICS VARIABLES ---
-# var isfrozen = false
+var isfrozen = false
 var motion := Vector2(0, 0)
 var rot := 0.0
 var grounded := false
@@ -37,20 +34,7 @@ const ARRIVAL_DISTANCE = 5.0
 var hit_cooldown := false
 var hit_timer := 0.0
 
-enum State {
-	VULNERABLE,
-	SHOCKED,
-	PRECHARGING,
-	CHARGING,
-	IDLE,
-	FROZEN,
-	BOUNCING,
-}
-
-var state: State = State.IDLE
-var flipped := false
-var state_timeout := -1.
-var targeted_player: Player = null
+var vulnerable: bool = false
 var spawning_dots: bool = false
 var distance_since_last_dot_spawn: float = 0
 var prev_pos: Vector2
@@ -163,12 +147,6 @@ func physics_process_normal(delta):
 	
 	if grounded:
 		spawning_dots = false
-	
-	if motion.x < 0:
-		flipped = true
-	elif motion.x > 0:
-		flipped = false
-	sprite_2d.flip_h = flipped
 
 # --- 5. GRAVITY ---
 	if not is_on_floor() and rot == 0:
@@ -194,64 +172,25 @@ func physics_process_normal(delta):
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 
 func _physics_process(delta):
+	
 	# --- 1. TOGGLE FREEZE (Press Only) ---
 	# if Input.is_action_just_pressed("enemyfreeze"):
 	# 	if not isfrozen:
 	# 		engage_freeze()
 	
 	# --- 2. HANDLE REPOSITIONING INPUT (Hold Only) ---
-	if state == State.FROZEN:
-		if Input.is_action_pressed("enemyfreeze"):
-			process_grid_input()
+	if isfrozen and Input.is_action_pressed("enemyfreeze"):
+		process_grid_input()
+
+	# --- 3. FROZEN STATE LOGIC ---
+	if isfrozen:
 		process_frozen_behavior(delta)
-	elif state == State.SHOCKED:
-		if not sprite_2d.is_playing() or sprite_2d.animation != "shocked":
-			sprite_2d.play("shocked")
-		if state_timeout <= 0:
-			state = State.PRECHARGING
-			state_timeout = 2
-		else:
-			state_timeout -= delta
-	elif state == State.PRECHARGING:
-		if not sprite_2d.is_playing() or sprite_2d.animation != "precharging":
-			sprite_2d.play("precharging")
-		if state_timeout <= 0:
-			state = State.CHARGING
-			state_timeout = -1
-		else:
-			state_timeout -= delta
-	elif state == State.CHARGING:
-		process_charging()
-		physics_process_normal(delta)
-		move_and_slide()
-		var overlapping_bodies = hitbox.get_overlapping_bodies()
-		for body in overlapping_bodies:
-			if body is Player:
-				var player: Player = body
-				if (player.jumping or player.isrolling) and not player.is_grappling:
-					state = State.VULNERABLE
-				else:
-					player.take_damage(20)
-					var dir = Vector2(-1.35, -1.05)
-					if flipped:
-						dir.x = -dir.x
-					grounded = false
-					rot = 0
-					position.y -= 8 
-					$Sprite2D.rotation = 0
-					$CollisionShape2D.rotation = 0
-					spawning_dots = true
-					motion = dir * charge_bounce_force
-					position.y -= 10
-					state_timeout = -1
-					state = State.BOUNCING
-	elif state == State.VULNERABLE:
-		if not sprite_2d.is_playing() or sprite_2d.animation != "idle":
-			sprite_2d.play("idle")
+	else:
 		prev_pos = global_position
 		# check_generous_bounce()
 		physics_process_normal(delta)
 		check_player_impact(delta)
+
 		move_and_slide()
 		if spawning_dots:
 			var dist = global_position.distance_to(prev_pos)
@@ -261,48 +200,16 @@ func _physics_process(delta):
 				var dot: Node2D = dot_prefab.instantiate()
 				dot.global_position = global_position
 				dot_spawn_host.add_child(dot)
-	elif state == State.IDLE:
-		if not sprite_2d.is_playing() or sprite_2d.animation != "idle":
-				sprite_2d.play("idle")
-		var raycast_offset = aggravate_distance
-		if flipped:
-			raycast_offset = -raycast_offset
-		var query = PhysicsRayQueryParameters2D.create(global_position, Vector2(global_position.x + raycast_offset, global_position.y))
-		query.exclude = [get_rid()]
-		var hit = get_world_2d().direct_space_state.intersect_ray(query)
-		# The raycast hit...
-		if hit.has("collider"):
-			var node: Node2D = hit["collider"]
-			# ...a player, so we enter the SHOCKED state
-			if node is Player:
-				state = State.SHOCKED
-				state_timeout = 1.5
-				targeted_player = node
-		else:
-			physics_process_normal(delta)
-			move_and_slide()
-	elif state == State.BOUNCING:
-		physics_process_normal(delta)
-		move_and_slide()
-		if is_on_floor():
-			state_timeout = 2
-			state = State.PRECHARGING
-		targeted_player.bounce(charge_bounce_force * .5)
-	# slope_stuck_failsafe()
+				print("spawned dot")
 
-func process_charging() -> void:
-	var dir_to_player = targeted_player.global_position.x - global_position.x
-	if dir_to_player > 0:
-		motion.x = charge_speed
-	elif dir_to_player < 0:
-		motion.x = -charge_speed
+	# slope_stuck_failsafe()
 
 # --- NEW FROZEN LOGIC ---
 
 func engage_freeze():
-	if state != State.VULNERABLE:
+	if !vulnerable:
 		return
-	state = State.FROZEN
+	isfrozen = true
 	is_traveling = false
 	motion = Vector2.ZERO
 	velocity = Vector2.ZERO
@@ -327,7 +234,7 @@ func engage_freeze():
 	hit_timer = 0
 
 func disengage_freeze():
-	state = State.VULNERABLE
+	isfrozen = false
 	is_traveling = false
 	
 	# --- NEW: Restore default pass-through state when unfrozen ---
@@ -472,7 +379,7 @@ func check_player_impact(delta):
 					perform_bounce(Player)
 				else:
 					launch_enemy(Player)
-				state = State.VULNERABLE
+				vulnerable = true
 
 func test_player_impact(delta):
 	var overlapping_bodies = hitbox.get_overlapping_bodies()
@@ -487,11 +394,11 @@ func test_player_impact(delta):
 				else:
 					return true
 
-func perform_bounce(player):
-	player.motion.y = abs(player.motion.y) * -1
-	if "exitgrapple" in player: player.exitgrapple = false
-	player.canstomp = true
-	player.canairdash = true
+func perform_bounce(Player):
+	Player.motion.y = abs(Player.motion.y) * -1
+	if "exitgrapple" in Player: Player.exitgrapple = false
+	Player.canstomp = true
+	Player.canairdash = true
 	hit_cooldown = true
 	hit_timer = 0.2 
 

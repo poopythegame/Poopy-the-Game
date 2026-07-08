@@ -20,7 +20,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="experimental hodge podge"
 run/main_scene="uid://dady2wku1xusy"
-config/features=PackedStringArray("4.7", "Mobile")
+config/features=PackedStringArray("4.6", "Mobile")
 run/max_fps=60
 config/icon="res://Maddies physics stuff/amy icon.png"
 
@@ -34,10 +34,6 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
-
-[dotnet]
-
-project/assembly_name="experimental hodge podge"
 
 [editor_plugins]
 

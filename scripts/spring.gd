@@ -8,6 +8,7 @@ func _ready() -> void:
 	area.body_entered.connect(_contact)
 
 func _contact(body: Node2D):
+	print("contact")
 	if body is Player:
 		var player: Player = body
 		var player_pos = player.global_position
