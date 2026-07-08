@@ -24,19 +24,6 @@ color = Color(0, 0, 0, 1)
 position = Vector2(1072.5, 58.5)
 shape = SubResource("RectangleShape2D_51wsq")
 
-[node name="Ground2" type="StaticBody2D" parent="Ground2" unique_id=108416512]
-position = Vector2(1135, -57.000004)
-scale = Vector2(0.027696641, 0.49708265)
-
-[node name="ColorRect" type="ColorRect" parent="Ground2/Ground2" unique_id=1067409813]
-offset_right = 2144.0
-offset_bottom = 117.0
-color = Color(0, 0, 0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2/Ground2" unique_id=1635967469]
-position = Vector2(1072.5, 58.5)
-shape = SubResource("RectangleShape2D_51wsq")
-
 [node name="WallRight" type="StaticBody2D" parent="." unique_id=1707873065]
 position = Vector2(2136.9998, -382)
 scale = Vector2(0.037057962, 4.3035407)
@@ -86,6 +73,8 @@ position = Vector2(515, -36)
 
 [node name="CharacterBody2D" parent="." unique_id=1760042011 groups=["Enemy"] instance=ExtResource("5_jorxo")]
 position = Vector2(1487, -23)
+dot_spawn_distance = 10
+aggravate_distance = 50
 charge_bounce_force = 500
 
 [node name="Spike" parent="." unique_id=2118102836 instance=ExtResource("6_ydant")]

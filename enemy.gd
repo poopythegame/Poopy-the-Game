@@ -212,7 +212,6 @@ func _physics_process(delta):
 			state_timeout = 2
 		else:
 			state_timeout -= delta
-		check_player_impact(delta)
 	elif state == State.PRECHARGING:
 		if not sprite_2d.is_playing() or sprite_2d.animation != "precharging":
 			sprite_2d.play("precharging")
@@ -221,13 +220,11 @@ func _physics_process(delta):
 			state_timeout = -1
 		else:
 			state_timeout -= delta
-		check_player_impact(delta)
 	elif state == State.CHARGING:
 		process_charging()
 		physics_process_normal(delta)
 		move_and_slide()
 		var overlapping_bodies = hitbox.get_overlapping_bodies()
-		var should_bounce := false
 		for body in overlapping_bodies:
 			if body is Player:
 				var player: Player = body
@@ -235,31 +232,26 @@ func _physics_process(delta):
 					state = State.VULNERABLE
 				else:
 					player.take_damage(20)
-					targeted_player.bounce(charge_bounce_force * .5)
-					should_bounce = true
-			elif body is StaticBody2D:
-				should_bounce = true
-		if should_bounce:
-			var dir = Vector2(-1.35, -1.05)
-			if flipped:
-				dir.x = -dir.x
-			grounded = false
-			rot = 0
-			position.y -= 8 
-			$Sprite2D.rotation = 0
-			$CollisionShape2D.rotation = 0
-			spawning_dots = true
-			motion = dir * charge_bounce_force
-			position.y -= 10
-			state_timeout = -1
-			state = State.BOUNCING
+					var dir = Vector2(-1.35, -1.05)
+					if flipped:
+						dir.x = -dir.x
+					grounded = false
+					rot = 0
+					position.y -= 8 
+					$Sprite2D.rotation = 0
+					$CollisionShape2D.rotation = 0
+					spawning_dots = true
+					motion = dir * charge_bounce_force
+					position.y -= 10
+					state_timeout = -1
+					state = State.BOUNCING
 	elif state == State.VULNERABLE:
 		if not sprite_2d.is_playing() or sprite_2d.animation != "idle":
 			sprite_2d.play("idle")
 		prev_pos = global_position
 		# check_generous_bounce()
-		check_player_impact(delta)
 		physics_process_normal(delta)
+		check_player_impact(delta)
 		move_and_slide()
 		if spawning_dots:
 			var dist = global_position.distance_to(prev_pos)
@@ -291,11 +283,11 @@ func _physics_process(delta):
 			move_and_slide()
 	elif state == State.BOUNCING:
 		physics_process_normal(delta)
-		check_player_impact(delta)
 		move_and_slide()
 		if is_on_floor():
 			state_timeout = 2
 			state = State.PRECHARGING
+		targeted_player.bounce(charge_bounce_force * .5)
 	# slope_stuck_failsafe()
 
 func process_charging() -> void:
@@ -475,7 +467,7 @@ func check_player_impact(delta):
 		if body.name == "Player" or body.is_in_group("Player"):
 			var Player = body 
 			
-			if (Player.jumping or Player.isrolling) and (not Player.is_grappling) and not Player.springing:
+			if (Player.jumping or Player.isrolling) and (not Player.is_grappling):
 				if Player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
 					perform_bounce(Player)
 				else:
