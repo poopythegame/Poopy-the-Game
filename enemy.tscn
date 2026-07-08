@@ -43,10 +43,11 @@ animations = [{
 }]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qi2p4"]
-b = Vector2(0, 23)
+a = Vector2(0, -24)
+b = Vector2(0, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qi2p4"]
-size = Vector2(48, 46.5)
+size = Vector2(48, 40)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1921139154]
 collision_layer = 2
