@@ -86,7 +86,6 @@ position = Vector2(515, -36)
 
 [node name="CharacterBody2D" parent="." unique_id=1760042011 groups=["Enemy"] instance=ExtResource("5_jorxo")]
 position = Vector2(1487, -23)
-charge_bounce_force = 500
 
 [node name="Spike" parent="." unique_id=2118102836 instance=ExtResource("6_ydant")]
 position = Vector2(786, -17)

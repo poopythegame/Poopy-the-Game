@@ -45,6 +45,7 @@ enum State {
 	IDLE,
 	FROZEN,
 	BOUNCING,
+	VULNERABLE_BOUNCING
 }
 
 var state: State = State.IDLE
@@ -161,9 +162,6 @@ func physics_process_normal(delta):
 		else:
 			$CollisionShape2D/RayCast.target_position = Vector2(0, base_ray_length)
 	
-	if grounded:
-		spawning_dots = false
-	
 	if motion.x < 0:
 		flipped = true
 	elif motion.x > 0:
@@ -258,17 +256,9 @@ func _physics_process(delta):
 			sprite_2d.play("idle")
 		prev_pos = global_position
 		# check_generous_bounce()
-		check_player_impact(delta)
 		physics_process_normal(delta)
 		move_and_slide()
-		if spawning_dots:
-			var dist = global_position.distance_to(prev_pos)
-			distance_since_last_dot_spawn += dist
-			if distance_since_last_dot_spawn > dot_spawn_distance:
-				distance_since_last_dot_spawn = 0
-				var dot: Node2D = dot_prefab.instantiate()
-				dot.global_position = global_position
-				dot_spawn_host.add_child(dot)
+		check_player_impact(delta)
 	elif state == State.IDLE:
 		if not sprite_2d.is_playing() or sprite_2d.animation != "idle":
 				sprite_2d.play("idle")
@@ -289,13 +279,28 @@ func _physics_process(delta):
 		else:
 			physics_process_normal(delta)
 			move_and_slide()
+			check_player_impact(delta)
 	elif state == State.BOUNCING:
 		physics_process_normal(delta)
-		check_player_impact(delta)
 		move_and_slide()
+		check_player_impact(delta)
 		if is_on_floor():
 			state_timeout = 2
 			state = State.PRECHARGING
+	elif state == State.VULNERABLE_BOUNCING:
+		var dist = global_position.distance_to(prev_pos)
+		distance_since_last_dot_spawn += dist
+		if distance_since_last_dot_spawn > dot_spawn_distance:
+			distance_since_last_dot_spawn = 0
+			var dot: Node2D = dot_prefab.instantiate()
+			dot.global_position = global_position
+			dot_spawn_host.add_child(dot)
+		physics_process_normal(delta)
+		move_and_slide()
+		check_player_impact(delta)
+		if is_on_floor():
+			state_timeout = -1
+			state = State.VULNERABLE
 	# slope_stuck_failsafe()
 
 func process_charging() -> void:
@@ -476,11 +481,11 @@ func check_player_impact(delta):
 			var Player = body 
 			
 			if (Player.jumping or Player.isrolling) and (not Player.is_grappling) and not Player.springing:
+				state = State.VULNERABLE
 				if Player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
 					perform_bounce(Player)
 				else:
 					launch_enemy(Player)
-				state = State.VULNERABLE
 
 func test_player_impact(delta):
 	var overlapping_bodies = hitbox.get_overlapping_bodies()
@@ -523,7 +528,8 @@ func launch_enemy(Player):
 	position.y -= 8 
 	$Sprite2D.rotation = 0
 	$CollisionShape2D.rotation = 0
-	spawning_dots = true
+	state = State.VULNERABLE_BOUNCING
+	state_timeout = -1
 
 func slope_stuck_failsafe():
 	if is_on_floor() and abs(motion.x) > 50 and get_real_velocity().length() < 10:
