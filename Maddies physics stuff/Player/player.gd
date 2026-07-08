@@ -538,8 +538,6 @@ func physics_process_normal(delta):
 		#	index = 0
 	
 #RESTART OPTION
-	if Input.is_action_just_pressed("restart"):
-		get_tree().reload_current_scene()
 
 #POOPY MOVESET
 	
