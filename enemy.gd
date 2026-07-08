@@ -176,8 +176,8 @@ func physics_process_normal(delta):
 	else:
 		if abs(slopefactor) == 1: 
 			motion.y = 0
-		else:
-			motion.y = 50
+		# else:
+		# 	motion.y = 50
 
 
 
@@ -260,6 +260,7 @@ func _physics_process(delta):
 		# check_generous_bounce()
 		check_player_impact(delta)
 		physics_process_normal(delta)
+		print(motion.y)
 		move_and_slide()
 		if spawning_dots:
 			var dist = global_position.distance_to(prev_pos)
