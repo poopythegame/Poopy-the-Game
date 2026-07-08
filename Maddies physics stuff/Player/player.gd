@@ -734,7 +734,7 @@ func _process(delta: float) -> void:
 			if dist < min_dist:
 				choice = enemy
 				min_dist = dist
-		if choice and !choice.isfrozen:
+		if choice and !choice.state == Enemy.State.FROZEN:
 			choice.engage_freeze()
 
 
@@ -832,7 +832,6 @@ func animate():
 			$Sprite.speed_scale = 1
 			
 		elif isstomping:
-			print("heya")
 			$Sprite.play("jump")
 			
 		elif jumping:
@@ -896,7 +895,7 @@ func die():
 	death_tween.tween_property(mat, "shader_parameter/t", 1.0, 0.5)
 	death_tween.tween_interval(0.3)
 	death_tween.tween_callback(restart)
-	Global.level_coins.set(Global.current_level, 0)
+	Global.reset_coins()
 
 func restart():
 	death_tween.kill()
