@@ -34,7 +34,8 @@ func _process(delta):
 	coins_label.text = "coins: %d" % coins
 	if not stopwatch_paused:
 		time += delta
-		mseconds = fmod(time, 1) * 100
+		mseconds = fmod(time, 1) * 1000
+		print(mseconds)
 		seconds = fmod(time, 60)
 		minutes = fmod(time, 3600) / 60 
 		minutes_label.text = "%02d:" % minutes
