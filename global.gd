@@ -10,7 +10,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action("esc"):
 		get_tree().quit()
 	elif event.is_action_pressed("restart") and not event.is_echo():
-		print("reset")
 		reset_coins()
 		get_tree().reload_current_scene()
 

@@ -6,7 +6,6 @@ extends Area2D
 func _on_body_entered(body):
 	if body.name == "Player":
 		timer.start()
-		print("you suck")
 		player.deathanim()
 
 func _on_timer_timeout():

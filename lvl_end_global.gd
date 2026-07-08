@@ -8,4 +8,3 @@ func _on_body_entered(body: CharacterBody2D) -> void:
 		Global.add_time(main.time)
 		main.calculate_rank()
 		main.show_rank()
-		print("Dexter: I'm thankful for yams. \nTrinity: Yams? \nDexter: Comfort food.")

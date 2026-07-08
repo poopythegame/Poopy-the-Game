@@ -649,8 +649,6 @@ func physics_process_normal(delta):
 	
 
 # Set Velocity to the Motion variable, but rotated.
-	# if motion.y != 50:
-	# 	print(motion)
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 	
 	# Right here's where the magic happens.
@@ -715,7 +713,6 @@ func physics_process_normal(delta):
 	# if velocity.y > 300:
 	# 	velocity.y *= 2
 	move_and_slide()
-	# print("%d: dy=%d" % [Engine.get_frames_drawn(), global_position.y-prev_y])
 
 func _process(delta: float) -> void:
 	if health <= 0 and !dying:

@@ -7,7 +7,6 @@ class_name CamBoundary
 
 func _ready() -> void:
     add_to_group("cam_boundary")
-    print(get_groups())
 
 func _draw() -> void:
     if Engine.is_editor_hint():

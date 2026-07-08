@@ -13,7 +13,6 @@ func _ready() -> void:
 	var curr_rank = Global.get_ranks()[rank_id]
 	rank_letter_label.text = curr_rank.letter
 	var time := Global.get_time()
-	print(time)
 	var mseconds := fmod(time, 1) * 100
 	var seconds := fmod(time, 60)
 	var minutes := fmod(time, 3600) / 60 

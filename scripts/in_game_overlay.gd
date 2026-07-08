@@ -25,9 +25,6 @@ var minutes: int = 0
 var seconds: int = 0
 var mseconds: int = 0 
 
-func _ready():
-	print("tonight's the night...")
-
 func _process(delta): 
 	var level_index = Global.current_level
 	var coins = Global.get_coins()
@@ -35,7 +32,6 @@ func _process(delta):
 	if not stopwatch_paused:
 		time += delta
 		mseconds = fmod(time, 1) * 1000
-		print(mseconds)
 		seconds = fmod(time, 60)
 		minutes = fmod(time, 3600) / 60 
 		minutes_label.text = "%02d:" % minutes

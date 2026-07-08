@@ -20,6 +20,5 @@ func _contact(body: Node2D):
 			delta.x = 0
 		var motion = Vector2.ZERO
 		motion = delta.normalized() * force
-		print(motion)
 		player.motion += motion
 		player.springing = true

@@ -21,7 +21,6 @@ const MINSPD = 450
 
 func _ready() -> void:
 	var candidates := get_tree().get_nodes_in_group("cam_boundary")
-	print(len(candidates))
 	for node in candidates:
 		if node.flip:
 			if right_boundary:
