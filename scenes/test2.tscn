@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/coin.tscn" id="6_kamxp"]
 [ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/new_dash_panel.tscn" id="6_mkcba"]
 [ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/spike.tscn" id="6_ydant"]
-[ext_resource type="Texture2D" uid="uid://ca6fxkpqc02wn" path="res://assets/textures/parallax/sky.png" id="8_ydant"]
+[ext_resource type="PackedScene" uid="uid://dhuok84j6oiig" path="res://scenes/background.tscn" id="8_ydant"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51wsq"]
 size = Vector2(2145, 117)
@@ -87,12 +87,4 @@ position = Vector2(852, -17)
 [node name="Spike4" parent="." unique_id=1761605522 instance=ExtResource("6_ydant")]
 position = Vector2(885, -17)
 
-[node name="Background" type="Node2D" parent="." unique_id=1234148983]
-z_index = -1000
-
-[node name="Sky" type="Parallax2D" parent="Background" unique_id=975790217]
-
-[node name="Sprite2D" type="Sprite2D" parent="Background/Sky" unique_id=1469919757]
-scale = Vector2(0.095239535, 0.095239535)
-texture = ExtResource("8_ydant")
-centered = false
+[node name="Background" parent="." unique_id=1453801180 instance=ExtResource("8_ydant")]

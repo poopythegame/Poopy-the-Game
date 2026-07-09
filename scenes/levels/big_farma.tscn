@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bn8j6pteveo81" path="res://scripts/camera.gd" id="1_camera"]
 [ext_resource type="PackedScene" uid="uid://n40asi5s347t" path="res://scenes/cam_boundary.tscn" id="1_cam_boundary"]
 [ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/coin.tscn" id="1_coin"]
+[ext_resource type="PackedScene" uid="uid://dhuok84j6oiig" path="res://scenes/background.tscn" id="1_dmpy2"]
 [ext_resource type="Script" uid="uid://0lhxan4cqrc1" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="1_edge_material_metadata"]
 [ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://enemy.tscn" id="1_enemy"]
 [ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/in_game_overlay.tscn" id="1_in_game_overlay"]
@@ -6114,6 +6115,8 @@ mesh = SubResource("ArrayMesh_tlbrp")
 material = SubResource("ShaderMaterial_q1cu8")
 
 [node name="BigFarma" type="Node2D" unique_id=384951450]
+
+[node name="Background" parent="." unique_id=1453801180 instance=ExtResource("1_dmpy2")]
 
 [node name="LeftCamBound" parent="." unique_id=90388808 groups=["cam_boundary"] instance=ExtResource("1_cam_boundary")]
 position = Vector2(-4696, -728)

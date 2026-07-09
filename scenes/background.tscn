@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dhuok84j6oiig"]
+
+[ext_resource type="Texture2D" uid="uid://ca6fxkpqc02wn" path="res://assets/textures/parallax/sky.png" id="1_wax1t"]
+[ext_resource type="Texture2D" uid="uid://mob63ia6e8bj" path="res://assets/textures/parallax/sun.png" id="2_1tmhi"]
+[ext_resource type="Texture2D" uid="uid://dikvhgp53b1t0" path="res://assets/textures/parallax/clouds.png" id="3_l5f8m"]
+[ext_resource type="Texture2D" uid="uid://1q78u77qki5c" path="res://assets/textures/parallax/hills.png" id="4_6vm3t"]
+[ext_resource type="Texture2D" uid="uid://xhxjurvch1jj" path="res://assets/textures/parallax/hills2.png" id="5_8efq7"]
+[ext_resource type="Texture2D" uid="uid://4hqohkphhk80" path="res://assets/textures/parallax/hills_building.png" id="6_da6cc"]
+
+[node name="Background" type="CanvasLayer" unique_id=1453801180]
+layer = -2000
+follow_viewport_enabled = true
+follow_viewport_scale = 0.286
+
+[node name="Sky_Inf" type="Parallax2D" parent="." unique_id=1841160076]
+scroll_scale = Vector2(0, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Sky_Inf" unique_id=1438247718]
+scale = Vector2(0.33333337, 0.33333337)
+texture = ExtResource("1_wax1t")
+centered = false
+
+[node name="Sun_Inf" type="Parallax2D" parent="." unique_id=1455928734]
+scroll_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sun_Inf" unique_id=1085693618]
+z_index = 2
+scale = Vector2(0.33333337, 0.33333334)
+texture = ExtResource("2_1tmhi")
+centered = false
+
+[node name="Clouds_Inf" type="Parallax2D" parent="." unique_id=1909693612]
+scroll_scale = Vector2(0, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Clouds_Inf" unique_id=1271964847]
+z_index = 1
+scale = Vector2(0.33333337, 0.33333334)
+texture = ExtResource("3_l5f8m")
+centered = false
+
+[node name="Hills_Far" type="Parallax2D" parent="." unique_id=729209884]
+scroll_scale = Vector2(0.5, 0)
+repeat_size = Vector2(1279, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Hills_Far" unique_id=289815271]
+z_index = 1
+scale = Vector2(0.33333337, 0.33333334)
+texture = ExtResource("4_6vm3t")
+centered = false
+
+[node name="Hills_Near" type="Parallax2D" parent="." unique_id=575326099]
+scroll_scale = Vector2(0.8, 0)
+repeat_size = Vector2(1279, 0)
+repeat_times = 2
+
+[node name="Sprite2D1" type="Sprite2D" parent="Hills_Near" unique_id=604516949]
+z_index = 1
+scale = Vector2(0.33333337, 0.33333334)
+texture = ExtResource("5_8efq7")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="Hills_Near" unique_id=287262368]
+z_index = 1
+scale = Vector2(0.33333337, 0.33333334)
+texture = ExtResource("6_da6cc")
+centered = false
