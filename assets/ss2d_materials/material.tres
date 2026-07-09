@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://d218yx0d1ilsn" path="res://addons/rmsmartshape/normal_range.gd" id="4_iohn4"]
 [ext_resource type="Material" uid="uid://0n3rd7tfl2c4" path="res://assets/materials/ground_fill.tres" id="5_1dsuo"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ynwc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1cu8"]
 shader = ExtResource("2_5i7k8")
 shader_parameter/texture_scale = Vector2(68, 10.02)
 shader_parameter/texture_offset = Vector2(0, 0)
@@ -18,7 +18,7 @@ shader_parameter/texture_offset = Vector2(0, 0)
 script = ExtResource("2_1dsuo")
 textures = Array[Texture2D]([ExtResource("4_5i7k8")])
 fit_mode = 1
-material = SubResource("ShaderMaterial_1ynwc")
+material = SubResource("ShaderMaterial_q1cu8")
 metadata/_custom_type_script = "uid://d0xjijisx1woh"
 
 [sub_resource type="Resource" id="Resource_ifdye"]
