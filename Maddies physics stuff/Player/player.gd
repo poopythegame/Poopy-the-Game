@@ -729,7 +729,7 @@ func _process(delta: float) -> void:
 			if dist < min_dist:
 				choice = enemy
 				min_dist = dist
-		if choice and !choice.state == Enemy.State.FROZEN:
+		if choice and (choice.state == Enemy.State.VULNERABLE or choice.state == Enemy.State.VULNERABLE_BOUNCING):
 			choice.engage_freeze()
 
 

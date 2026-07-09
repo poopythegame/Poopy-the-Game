@@ -313,7 +313,7 @@ func process_charging() -> void:
 # --- NEW FROZEN LOGIC ---
 
 func engage_freeze():
-	if state != State.VULNERABLE:
+	if state != State.VULNERABLE and state != State.VULNERABLE_BOUNCING:
 		return
 	state = State.FROZEN
 	is_traveling = false
