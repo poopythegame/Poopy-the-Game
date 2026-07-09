@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/coin.tscn" id="6_kamxp"]
 [ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/new_dash_panel.tscn" id="6_mkcba"]
 [ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/spike.tscn" id="6_ydant"]
+[ext_resource type="Texture2D" uid="uid://ca6fxkpqc02wn" path="res://assets/textures/parallax/sky.png" id="8_ydant"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51wsq"]
 size = Vector2(2145, 117)
@@ -21,19 +22,6 @@ offset_bottom = 117.0
 color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2" unique_id=2102889036]
-position = Vector2(1072.5, 58.5)
-shape = SubResource("RectangleShape2D_51wsq")
-
-[node name="Ground2" type="StaticBody2D" parent="Ground2" unique_id=108416512]
-position = Vector2(1135, -57.000004)
-scale = Vector2(0.027696641, 0.49708265)
-
-[node name="ColorRect" type="ColorRect" parent="Ground2/Ground2" unique_id=1067409813]
-offset_right = 2144.0
-offset_bottom = 117.0
-color = Color(0, 0, 0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2/Ground2" unique_id=1635967469]
 position = Vector2(1072.5, 58.5)
 shape = SubResource("RectangleShape2D_51wsq")
 
@@ -68,7 +56,7 @@ zoom = Vector2(3.5, 3.5)
 script = ExtResource("1_mkcba")
 
 [node name="Player" parent="." unique_id=1678918478 groups=["Player"] instance=ExtResource("1_cy281")]
-position = Vector2(1849, 0)
+position = Vector2(1190, -8)
 
 [node name="InGameOverlay" parent="." unique_id=1911954101 instance=ExtResource("4_51wsq")]
 
@@ -85,7 +73,7 @@ position = Vector2(442, -36)
 position = Vector2(515, -36)
 
 [node name="CharacterBody2D" parent="." unique_id=1760042011 groups=["Enemy"] instance=ExtResource("5_jorxo")]
-position = Vector2(1487, -23)
+position = Vector2(1980, -23)
 
 [node name="Spike" parent="." unique_id=2118102836 instance=ExtResource("6_ydant")]
 position = Vector2(786, -17)
@@ -98,3 +86,13 @@ position = Vector2(852, -17)
 
 [node name="Spike4" parent="." unique_id=1761605522 instance=ExtResource("6_ydant")]
 position = Vector2(885, -17)
+
+[node name="Background" type="Node2D" parent="." unique_id=1234148983]
+z_index = -1000
+
+[node name="Sky" type="Parallax2D" parent="Background" unique_id=975790217]
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/Sky" unique_id=1469919757]
+scale = Vector2(0.095239535, 0.095239535)
+texture = ExtResource("8_ydant")
+centered = false

@@ -23,8 +23,8 @@ metadata/_custom_type_script = "uid://d0xjijisx1woh"
 
 [sub_resource type="Resource" id="Resource_ifdye"]
 script = ExtResource("4_iohn4")
-begin = 90.0
-distance = 1.0
+begin = 89.0
+distance = 2.0
 
 [sub_resource type="Resource" id="Resource_7ieng"]
 script = ExtResource("1_xmqqa")
