@@ -589,6 +589,12 @@ func physics_process_normal(delta):
 		
 
 # Movement
+	
+	if abs(motion.x) != 0:
+		# If moving right (1), point right. If moving left (-1), point left.
+		# Multiply by whatever distance your raycast needs to reach (e.g., 20 pixels)
+		$Collision/WallCast.target_position.x = 7.0 * sign(motion.x)
+
 	#braking control seen in classic sonic games
 	var direction = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
 	
