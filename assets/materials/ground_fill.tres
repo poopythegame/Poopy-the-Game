@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://0n3rd7tfl2c4"]
+
+[ext_resource type="Shader" uid="uid://cqy3l3jlbgmkb" path="res://shaders/ground_material.gdshader" id="1_t8r6v"]
+
+[resource]
+shader = ExtResource("1_t8r6v")
+shader_parameter/texture_scale = Vector2(68, 68)
+shader_parameter/texture_offset = Vector2(0, 16.5)

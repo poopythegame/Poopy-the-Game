@@ -1,8 +1,41 @@
 [gd_resource type="Resource" script_class="SS2D_Material_Shape" format=3 uid="uid://b7m2f5qfj3r7h"]
 
 [ext_resource type="Script" uid="uid://0lhxan4cqrc1" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="1_xmqqa"]
+[ext_resource type="Script" uid="uid://d0xjijisx1woh" path="res://addons/rmsmartshape/materials/edge_material.gd" id="2_1dsuo"]
+[ext_resource type="Shader" uid="uid://bgm5q57orvpth" path="res://shaders/grass_material.gdshader" id="2_5i7k8"]
 [ext_resource type="Script" uid="uid://nc5bfedvnpgm" path="res://addons/rmsmartshape/materials/shape_material.gd" id="2_j3qed"]
+[ext_resource type="Texture2D" uid="uid://bnvui3fonkkvt" path="res://assets/textures/ground/ground.png" id="2_selgf"]
+[ext_resource type="Texture2D" uid="uid://doan6skj4tk84" path="res://assets/textures/ground/ground_top_new.png" id="4_5i7k8"]
+[ext_resource type="Script" uid="uid://d218yx0d1ilsn" path="res://addons/rmsmartshape/normal_range.gd" id="4_iohn4"]
+[ext_resource type="Material" uid="uid://0n3rd7tfl2c4" path="res://assets/materials/ground_fill.tres" id="5_1dsuo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ynwc"]
+shader = ExtResource("2_5i7k8")
+shader_parameter/texture_scale = Vector2(68, 10.02)
+shader_parameter/texture_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_pcpc4"]
+script = ExtResource("2_1dsuo")
+textures = Array[Texture2D]([ExtResource("4_5i7k8")])
+fit_mode = 1
+material = SubResource("ShaderMaterial_1ynwc")
+metadata/_custom_type_script = "uid://d0xjijisx1woh"
+
+[sub_resource type="Resource" id="Resource_ifdye"]
+script = ExtResource("4_iohn4")
+begin = 90.0
+distance = 1.0
+
+[sub_resource type="Resource" id="Resource_7ieng"]
+script = ExtResource("1_xmqqa")
+edge_material = SubResource("Resource_pcpc4")
+normal_range = SubResource("Resource_ifdye")
+offset = -1.0
+metadata/_custom_type_script = "uid://0lhxan4cqrc1"
 
 [resource]
 script = ExtResource("2_j3qed")
+_edge_meta_materials = Array[ExtResource("1_xmqqa")]([SubResource("Resource_7ieng")])
+fill_textures = Array[Texture2D]([ExtResource("2_selgf")])
+fill_mesh_material = ExtResource("5_1dsuo")
 metadata/_custom_type_script = "uid://nc5bfedvnpgm"

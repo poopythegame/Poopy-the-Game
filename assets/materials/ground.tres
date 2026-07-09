@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://b3hcylb0a28ho"]
-
-[ext_resource type="Shader" uid="uid://cqy3l3jlbgmkb" path="res://shaders/worldspace.gdshader" id="1_jgrjp"]
-[ext_resource type="Texture2D" uid="uid://dn7ok0wnn60p6" path="res://assets/textures/ground.png" id="2_47y7m"]
-
-[resource]
-shader = ExtResource("1_jgrjp")
-shader_parameter/noise_tex = ExtResource("2_47y7m")
-shader_parameter/scale = 1.0

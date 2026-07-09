@@ -38,7 +38,7 @@ position = Vector2(25353.5, 3200)
 shape = SubResource("RectangleShape2D_0f247")
 
 [node name="Player2" parent="." unique_id=2095390806 groups=["Player"] instance=ExtResource("1_q8hoo")]
-position = Vector2(11222, 287)
+position = Vector2(-4528, -728)
 
 [node name="AnimatableBody2D" parent="." unique_id=280326849 instance=ExtResource("3_oebfb")]
 position = Vector2(40, -72)
@@ -442,7 +442,7 @@ position = Vector2(7416, -328)
 position = Vector2(6816, -184)
 
 [node name="CharacterBody2D2" parent="." unique_id=1758512752 groups=["Enemy"] instance=ExtResource("8_62vkk")]
-position = Vector2(11287, 262)
+position = Vector2(8960, -88)
 
 [node name="DashPanel4" parent="." unique_id=203562222 instance=ExtResource("13_h0rbv")]
 position = Vector2(16384, 3248)

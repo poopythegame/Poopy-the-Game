@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SS2D_Material_Shape" format=3 uid="uid://hyfj741s3b5u"]
+
+[ext_resource type="Script" uid="uid://0lhxan4cqrc1" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="1_1x3hc"]
+[ext_resource type="Script" uid="uid://nc5bfedvnpgm" path="res://addons/rmsmartshape/materials/shape_material.gd" id="2_j3qed"]
+
+[resource]
+script = ExtResource("2_j3qed")
+metadata/_custom_type_script = "uid://nc5bfedvnpgm"
