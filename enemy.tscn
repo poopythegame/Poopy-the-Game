@@ -1,63 +1,23 @@
 [gd_scene format=3 uid="uid://cnaop4u3ja5n"]
 
+[ext_resource type="Texture2D" uid="uid://c0wjtb64dng2k" path="res://icon.svg" id="1_7k104"]
 [ext_resource type="PackedScene" uid="uid://fieh7uoavdwx" path="res://anchor.tscn" id="2_4gyqm"]
-[ext_resource type="Texture2D" uid="uid://cgsogu7ex6wck" path="res://assets/textures/placeholder/cyan.png" id="2_epg4t"]
-[ext_resource type="Texture2D" uid="uid://dydfi8rrjroin" path="res://assets/textures/placeholder/orange.png" id="2_qi2p4"]
-[ext_resource type="Texture2D" uid="uid://cc2p1sa6nymo0" path="res://assets/textures/placeholder/gold.png" id="4_3yqyl"]
-[ext_resource type="Texture2D" uid="uid://cwx5leo1odpy6" path="res://assets/textures/placeholder/pink.png" id="4_wujgv"]
 [ext_resource type="Script" uid="uid://c4s4srij28h5u" path="res://enemy.gd" id="GDScript_0e48y"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_07orm"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_epg4t")
-}],
-"loop": 1,
-"name": &"charging",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_qi2p4")
-}],
-"loop": 1,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_wujgv")
-}],
-"loop": 1,
-"name": &"precharging",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_3yqyl")
-}],
-"loop": 1,
-"name": &"shocked",
-"speed": 5.0
-}]
-
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qi2p4"]
-a = Vector2(0, -24)
-b = Vector2(0, 24)
+b = Vector2(0, 23)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qi2p4"]
-size = Vector2(48, 46)
+size = Vector2(47, 46.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1921139154]
 collision_layer = 2
 script = ExtResource("GDScript_0e48y")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=330448566]
-position = Vector2(5.9604645e-08, 0)
-scale = Vector2(0.046875, 0.045898438)
-sprite_frames = SubResource("SpriteFrames_07orm")
-animation = &"idle"
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=976229136]
+position = Vector2(0.999996, -1.90735e-06)
+scale = Vector2(0.365039, 0.364062)
+texture = ExtResource("1_7k104")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=401968449]
 shape = SubResource("SegmentShape2D_qi2p4")
@@ -74,9 +34,15 @@ hit_from_inside = true
 [node name="Hitbox" type="Area2D" parent="." unique_id=1585816758]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=756333340]
+position = Vector2(1, -0.25)
 shape = SubResource("RectangleShape2D_qi2p4")
 
 [node name="anchor" parent="." unique_id=1680183055 instance=ExtResource("2_4gyqm")]
 visible = false
 
+[node name="PrepTimer" type="Timer" parent="." unique_id=468747841]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="PrepTimer" to="." method="_on_prep_timer_timeout"]

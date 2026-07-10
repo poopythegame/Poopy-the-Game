@@ -587,6 +587,12 @@ func physics_process_normal(delta):
 		
 
 # Movement
+	
+	if abs(motion.x) != 0:
+		# If moving right (1), point right. If moving left (-1), point left.
+		# Multiply by whatever distance your raycast needs to reach (e.g., 20 pixels)
+		$Collision/WallCast.target_position.x = 7.0 * sign(motion.x)
+
 	#braking control seen in classic sonic games
 	var direction = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
 	
@@ -649,6 +655,8 @@ func physics_process_normal(delta):
 	
 
 # Set Velocity to the Motion variable, but rotated.
+	# if motion.y != 50:
+	# 	print(motion)
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 	
 	# Right here's where the magic happens.
@@ -713,6 +721,7 @@ func physics_process_normal(delta):
 	# if velocity.y > 300:
 	# 	velocity.y *= 2
 	move_and_slide()
+	# print("%d: dy=%d" % [Engine.get_frames_drawn(), global_position.y-prev_y])
 
 func _process(delta: float) -> void:
 	if health <= 0 and !dying:
@@ -729,7 +738,7 @@ func _process(delta: float) -> void:
 			if dist < min_dist:
 				choice = enemy
 				min_dist = dist
-		if choice and (choice.state == Enemy.State.VULNERABLE or choice.state == Enemy.State.VULNERABLE_BOUNCING):
+		if choice and !choice.isfrozen:
 			choice.engage_freeze()
 
 
@@ -827,6 +836,7 @@ func animate():
 			$Sprite.speed_scale = 1
 			
 		elif isstomping:
+			print("heya")
 			$Sprite.play("jump")
 			
 		elif jumping:
