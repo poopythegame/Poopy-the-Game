@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c5oi22mpsg7se"]
+[gd_scene format=3 uid="uid://wsdj78y2lyqh"]
 
 [ext_resource type="Script" uid="uid://cr3drh4v7i2ll" path="res://scripts/dash_panel.gd" id="1_proyd"]
 [ext_resource type="Texture2D" uid="uid://poy2l887xr1d" path="res://assets/textures/placeholder/green.png" id="2_uiwi0"]
