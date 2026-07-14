@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4hqohkphhk80"
-path="res://.godot/imported/hills_building.png-9f732835648c039db38537e762003de5.ctex"
+uid="uid://cko27pxhj37ck"
+path="res://.godot/imported/hills1.png-31f16ab10d1116127211c0e4386b0b5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/parallax/hills_building.png"
-dest_files=["res://.godot/imported/hills_building.png-9f732835648c039db38537e762003de5.ctex"]
+source_file="res://assets/textures/parallax/hills1.png"
+dest_files=["res://.godot/imported/hills1.png-31f16ab10d1116127211c0e4386b0b5d.ctex"]
 
 [params]
 
