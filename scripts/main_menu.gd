@@ -13,7 +13,7 @@ enum Screen {
 	OPTIONS,
 }
 
-@onready var label_settings: LabelSettings = load("uid://bmtl4xmbt3fao")
+@onready var label_settings: LabelSettings = load("uid://o04nc50d6jgm")
 
 @onready var title_screen: MarginContainer = $TitleScreen
 
@@ -31,6 +31,7 @@ var main_scene: PackedScene
 var menu_selected := 1
 var menu_slide_tween: Tween
 var menu_labels: Array[Node]
+var menu_initial_offset: Vector2
 
 var level_select_selected := 0
 var level_select_slide_tween: Tween
@@ -44,6 +45,7 @@ func _ready() -> void:
 		label.text = level.title
 		level_select_labels.append(label)
 		level_select_labels_container.add_child(label)
+	menu_initial_offset = menu_labels_container.position
 	if start_screen != Screen.TITLE:
 		change_screen(start_screen)
 
@@ -78,10 +80,17 @@ func menu_switch(new: int):
 		menu_selected = 2
 	if menu_slide_tween:
 		menu_slide_tween.kill()
-	var width = menu_labels_container.get_rect().size.x / 2
-	var label_width = menu_labels[menu_selected].get_rect().size.x / 2
-	var index_offset = (menu_selected - 1)
-	var offset: float = index_offset * width + -sign(index_offset) * label_width
+	var label_width = menu_labels[menu_selected].size.x
+	var left_x = (menu_labels_container.size.x - label_width) / 2
+	var center_x = (1180 - menu_labels_container.size.x) / 2
+	var right_x = (0 - menu_labels_container.size.x - label_width) / 2
+	var offset: float
+	if menu_selected == 0:
+		offset = left_x
+	elif menu_selected == 1:
+		offset = center_x
+	elif menu_selected == 2:
+		offset = right_x
 	menu_slide_tween = create_tween()
 	menu_slide_tween.tween_property(menu_labels_container, "position:x", offset, labels_slide_time)
 	menu_slide_tween.set_ease(Tween.EASE_IN_OUT)
@@ -106,7 +115,7 @@ func level_select_switch(inc: int):
 		var offset_prev = 0 - label_width_half
 		var offset_curr = container_width / 2 - label_width_half
 		var offset_next = container_width - label_width_half
-		var offset_right = container_width * (3/2) - label_width_half
+		var offset_right = container_width * (3./2) - label_width_half
 		if i == level_select_selected - 1:
 			level_select_slide_tween.parallel()
 			if label.visible:
