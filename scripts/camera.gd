@@ -9,6 +9,9 @@ extends Camera2D
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var lookahead_time: float = .5
 ## The easing curve for lookahead shifts.
 @export_exp_easing var lookahead_ease: float = -2
+@export_group("Terrain Bobbing")
+@export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var enable_terrain_bobbing := false
+@export var terrain_bobbing_offset := 50
 
 var player: Player
 var left_boundary: Node2D
@@ -64,14 +67,25 @@ func _process(delta: float) -> void:
 	var rect := get_rect()
 	var left_x := rect.position.x
 	var right_x := left_x + rect.size.x
-	var shift_amount := 0.
+	var x_shift_amount := 0.
 	if left_boundary:
 		if left_boundary.global_position.x > left_x:
-			shift_amount = left_boundary.global_position.x - left_x
+			x_shift_amount = left_boundary.global_position.x - left_x
 	if right_boundary:
 		if right_boundary.global_position.x < right_x:
-			shift_amount = right_boundary.global_position.x - right_x
-	global_position.x += shift_amount
+			x_shift_amount = right_boundary.global_position.x - right_x
+	global_position.x += x_shift_amount
+	var y_shift_amount := 0.
+	if enable_terrain_bobbing:
+		var raycast_distance := rect.size.y / 2
+		var query = PhysicsRayQueryParameters2D.create(global_position, Vector2(global_position.x, global_position.y + raycast_distance))
+		query.hit_from_inside = false
+		var hit = get_world_2d().direct_space_state.intersect_ray(query)
+		if not hit.is_empty():
+			var hit_y: float = hit["position"].y
+			y_shift_amount = raycast_distance - hit_y
+	global_position.y -= y_shift_amount
+
 
 func should_disable() -> bool:
 	if player.is_grappling:
