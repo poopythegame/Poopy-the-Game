@@ -1,9 +1,29 @@
 [gd_scene format=3 uid="uid://dady2wku1xusy"]
 
 [ext_resource type="Script" uid="uid://m7v8vgf4k5re" path="res://scripts/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://d32ididyh760j" path="res://assets/textures/ui/main_menu/background.png" id="2_jk1qb"]
+[ext_resource type="Script" uid="uid://dasf3yjhaca2b" path="res://scripts/portraits_background.gd" id="2_rcqid"]
 [ext_resource type="Texture2D" uid="uid://b5w0pc7x5csx5" path="res://assets/textures/poopy_logo.png" id="2_wu84c"]
-[ext_resource type="LabelSettings" uid="uid://bmtl4xmbt3fao" path="res://assets/title_style.tres" id="5_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://csipwt7j8bu23" path="res://assets/textures/ui/main_menu/title.png" id="5_flqon"]
+[ext_resource type="Texture2D" uid="uid://bu1qqh82x47yt" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="6_flqon"]
+[ext_resource type="Texture2D" uid="uid://og0yos4h6sda" path="res://assets/textures/ui/main_menu/option_box.png" id="6_lgwnu"]
+[ext_resource type="LabelSettings" uid="uid://bmtl4xmbt3fao" path="res://assets/title_style.tres" id="6_rcqid"]
 [ext_resource type="FontFile" uid="uid://bw8h8rlrthupg" path="res://assets/fonts/icons.ttf" id="6_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://k0qmq705scns" path="res://assets/textures/ui/main_menu/option_label_credits.png" id="7_flqon"]
+[ext_resource type="Texture2D" uid="uid://euwa74x2hljj" path="res://assets/textures/ui/main_menu/option_level_select_portrait.png" id="7_rcqid"]
+[ext_resource type="Texture2D" uid="uid://bhxan4q8j23fw" path="res://assets/textures/ui/main_menu/option_label_level_select.png" id="8_rcqid"]
+[ext_resource type="Texture2D" uid="uid://dpl8egxwrkkt" path="res://assets/textures/ui/main_menu/option_label_options.png" id="9_1ajci"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0cdpu"]
+texture = ExtResource("6_lgwnu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k51th"]
+texture = ExtResource("6_flqon")
+expand_margin_left = 50.0
+expand_margin_top = 25.0
+expand_margin_right = 50.0
+expand_margin_bottom = 25.0
+region_rect = Rect2(199.02014, 189.5705, 1940.1774, 1028.7773)
 
 [node name="MainMenu" type="Control" unique_id=1355966020]
 layout_mode = 3
@@ -16,7 +36,18 @@ pivot_offset = Vector2(-69, -39)
 script = ExtResource("1_ekxnf")
 labels_slide_time = 0.25
 
+[node name="Background" type="TextureRect" parent="." unique_id=1645064994]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jk1qb")
+expand_mode = 1
+
 [node name="TitleScreen" type="MarginContainer" parent="." unique_id=204882257]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +58,10 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
+
+[node name="PortraitsBackground" type="Node2D" parent="TitleScreen" unique_id=170695451]
+script = ExtResource("2_rcqid")
+scroll_speed = 100.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen" unique_id=1213818861]
 layout_mode = 2
@@ -42,15 +77,25 @@ texture = ExtResource("2_wu84c")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Info" type="Label" parent="TitleScreen/VBoxContainer" unique_id=1952691595]
+[node name="Credits" type="PanelContainer" parent="TitleScreen/VBoxContainer" unique_id=164987405]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_0cdpu")
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/VBoxContainer/Credits" unique_id=1052865600]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Info" type="Label" parent="TitleScreen/VBoxContainer/Credits/MarginContainer" unique_id=1952691595]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "Press Enter to begin."
-label_settings = ExtResource("5_rtw2f")
+label_settings = ExtResource("6_rcqid")
 
 [node name="Menu" type="MarginContainer" parent="." unique_id=944521765]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,13 +103,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_bottom = 25
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=817773956]
 layout_mode = 2
 alignment = 1
+
+[node name="Title" type="TextureRect" parent="Menu/VBoxContainer" unique_id=143083]
+custom_minimum_size = Vector2(503.69, 62.58)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("5_flqon")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Spacer" type="Control" parent="Menu/VBoxContainer" unique_id=1293198191]
+custom_minimum_size = Vector2(0, 16.385)
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Menu/VBoxContainer" unique_id=827487153]
 layout_mode = 2
@@ -73,6 +130,7 @@ theme_override_constants/separation = 10
 alignment = 1
 
 [node name="PrevIndicator" type="PanelContainer" parent="Menu/VBoxContainer/HBoxContainer" unique_id=1312959184]
+visible = false
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -85,11 +143,23 @@ theme_override_fonts/font = ExtResource("6_rtw2f")
 theme_override_font_sizes/font_size = 48
 text = ""
 
-[node name="Temp_Placeholder" type="Panel" parent="Menu/VBoxContainer/HBoxContainer" unique_id=155450165]
+[node name="PortraitContainer" type="PanelContainer" parent="Menu/VBoxContainer/HBoxContainer" unique_id=2091073642]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_k51th")
+
+[node name="OptionPortrait" type="TextureRect" parent="Menu/VBoxContainer/HBoxContainer/PortraitContainer" unique_id=910327215]
+custom_minimum_size = Vector2(788, 491)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("7_rcqid")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="NextIndicator" type="PanelContainer" parent="Menu/VBoxContainer/HBoxContainer" unique_id=580804095]
+visible = false
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -108,36 +178,83 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="Titles" type="HBoxContainer" parent="Menu/VBoxContainer/TitlesContainer" unique_id=1462323125]
-layout_mode = 0
-offset_right = 1192.0
-offset_bottom = 72.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -790.0
+offset_top = -36.0
+offset_right = 790.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
-[node name="Credits" type="Label" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=1364484969]
+[node name="Credits" type="PanelContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=1918897986]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Credits"
-label_settings = ExtResource("5_rtw2f")
+theme_override_styles/panel = SubResource("StyleBoxTexture_0cdpu")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles/Credits" unique_id=880498440]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="Menu/VBoxContainer/TitlesContainer/Titles/Credits/MarginContainer" unique_id=1575574374]
+custom_minimum_size = Vector2(222, 0)
+layout_mode = 2
+texture = ExtResource("7_flqon")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Spacer" type="Control" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=761442546]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LevelSelect" type="Label" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=1885208298]
+[node name="LevelSelect" type="PanelContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=306732678]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Level Select"
-label_settings = ExtResource("5_rtw2f")
+theme_override_styles/panel = SubResource("StyleBoxTexture_0cdpu")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles/LevelSelect" unique_id=697737302]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="Menu/VBoxContainer/TitlesContainer/Titles/LevelSelect/MarginContainer" unique_id=1242585632]
+custom_minimum_size = Vector2(344.42, 51.405)
+layout_mode = 2
+texture = ExtResource("8_rcqid")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Spacer2" type="Control" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=1491095853]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Options" type="Label" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=963907091]
+[node name="Options" type="PanelContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=114661853]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Options"
-label_settings = ExtResource("5_rtw2f")
+theme_override_styles/panel = SubResource("StyleBoxTexture_0cdpu")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles/Options" unique_id=1125541301]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="Menu/VBoxContainer/TitlesContainer/Titles/Options/MarginContainer" unique_id=558727040]
+custom_minimum_size = Vector2(227, 0)
+layout_mode = 2
+texture = ExtResource("9_1ajci")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="LevelSelect" type="MarginContainer" parent="." unique_id=1387783519]
 visible = false
