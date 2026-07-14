@@ -46,8 +46,7 @@ func _ready() -> void:
 		level_select_labels.append(label)
 		level_select_labels_container.add_child(label)
 	menu_initial_offset = menu_labels_container.position
-	if start_screen != Screen.TITLE:
-		change_screen(start_screen)
+	change_screen(start_screen)
 
 func _input(event: InputEvent) -> void:
 	if screen == Screen.TITLE:
@@ -81,9 +80,9 @@ func menu_switch(new: int):
 	if menu_slide_tween:
 		menu_slide_tween.kill()
 	var label_width = menu_labels[menu_selected].size.x
-	var left_x = (menu_labels_container.size.x - label_width) / 2
+	var left_x = (menu_labels_container.size.x - label_width * 2) / 2
 	var center_x = (1180 - menu_labels_container.size.x) / 2
-	var right_x = (0 - menu_labels_container.size.x - label_width) / 2
+	var right_x = (0 - menu_labels_container.size.x) / 2
 	var offset: float
 	if menu_selected == 0:
 		offset = left_x
