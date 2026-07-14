@@ -26,7 +26,7 @@ config/icon="res://Maddies physics stuff/amy icon.png"
 
 [autoload]
 
-Global="*res://global.gd"
+Global="*res://scripts/global.gd"
 
 [display]
 

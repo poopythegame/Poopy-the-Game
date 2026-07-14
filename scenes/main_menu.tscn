@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://m7v8vgf4k5re" path="res://scripts/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://d32ididyh760j" path="res://assets/textures/ui/main_menu/background.png" id="2_jk1qb"]
 [ext_resource type="Script" uid="uid://dasf3yjhaca2b" path="res://scripts/portraits_background.gd" id="2_rcqid"]
-[ext_resource type="Texture2D" uid="uid://b5w0pc7x5csx5" path="res://assets/textures/poopy_logo.png" id="2_wu84c"]
+[ext_resource type="Texture2D" uid="uid://b5w0pc7x5csx5" path="res://assets/textures/ui/main_menu/poopy_logo.png" id="2_wu84c"]
 [ext_resource type="Texture2D" uid="uid://csipwt7j8bu23" path="res://assets/textures/ui/main_menu/title.png" id="5_flqon"]
 [ext_resource type="Texture2D" uid="uid://bu1qqh82x47yt" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="6_flqon"]
 [ext_resource type="Texture2D" uid="uid://og0yos4h6sda" path="res://assets/textures/ui/main_menu/option_box.png" id="6_lgwnu"]

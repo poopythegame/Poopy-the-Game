@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://8xai8tlfegl3"]
+
+[ext_resource type="Script" uid="uid://ccmuyywpupyo0" path="res://scripts/lvl_start.gd" id="1_ut64v"]
+[ext_resource type="Texture2D" uid="uid://cg0s1100a03o2" path="res://assets/textures/elements/level_start.png" id="2_tyhpm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8son"]
+size = Vector2(32, 387)
+
+[node name="LevelStart" type="Area2D" unique_id=496126979]
+script = ExtResource("1_ut64v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1196488207]
+position = Vector2(16, -126.5)
+shape = SubResource("RectangleShape2D_d8son")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=846303148]
+position = Vector2(-24, -4)
+scale = Vector2(0.065, 0.065)
+texture = ExtResource("2_tyhpm")
+centered = false
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

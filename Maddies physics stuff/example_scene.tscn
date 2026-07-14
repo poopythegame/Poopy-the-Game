@@ -1,28 +1,30 @@
 [gd_scene format=3 uid="uid://o0rbsha836tg"]
 
-[ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://Maddies physics stuff/Player/player.tscn" id="1_q8hoo"]
-[ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/in_game_overlay.tscn" id="2_62552"]
-[ext_resource type="PackedScene" uid="uid://cphck7o4au8e3" path="res://lvl_end_global.tscn" id="3_62552"]
+[ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://scenes/prefab/player.tscn" id="1_q8hoo"]
+[ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/prefab/in_game_overlay.tscn" id="2_62552"]
+[ext_resource type="PackedScene" uid="uid://cphck7o4au8e3" path="res://scenes/prefab/lvl_end.tscn" id="3_62552"]
 [ext_resource type="PackedScene" uid="uid://c38kn0vik32mt" path="res://animatable_body_2d.tscn" id="3_oebfb"]
-[ext_resource type="PackedScene" uid="uid://clqlkh7oduonp" path="res://killzone.tscn" id="5_4d4pi"]
-[ext_resource type="PackedScene" uid="uid://fieh7uoavdwx" path="res://anchor.tscn" id="6_ojq0h"]
+[ext_resource type="PackedScene" uid="uid://clqlkh7oduonp" path="res://scenes/prefab/killzone.tscn" id="5_4d4pi"]
+[ext_resource type="PackedScene" uid="uid://fieh7uoavdwx" path="res://scenes/prefab/anchor.tscn" id="6_ojq0h"]
 [ext_resource type="Script" uid="uid://ccvtjilgokcnb" path="res://Maddies physics stuff/collision_polygon_2d.gd" id="7_pvwt8"]
-[ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://enemy.tscn" id="8_62vkk"]
-[ext_resource type="Texture2D" uid="uid://dn7ok0wnn60p6" path="res://assets/textures/ground.png" id="8_ay1kk"]
-[ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/spike.tscn" id="9_dkxqa"]
-[ext_resource type="PackedScene" uid="uid://bmfvkehjaa7fe" path="res://onewayacollisionblock.tscn" id="11_fh7tq"]
-[ext_resource type="PackedScene" uid="uid://n40asi5s347t" path="res://scenes/cam_boundary.tscn" id="13_57ty6"]
+[ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://scenes/prefab/enemy.tscn" id="8_62vkk"]
+[ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/prefab/spike.tscn" id="9_dkxqa"]
+[ext_resource type="PackedScene" uid="uid://bmfvkehjaa7fe" path="res://scenes/prefab/onewayacollisionblock.tscn" id="11_fh7tq"]
+[ext_resource type="PackedScene" uid="uid://n40asi5s347t" path="res://scenes/prefab/cam_boundary.tscn" id="13_57ty6"]
 [ext_resource type="Script" uid="uid://bn8j6pteveo81" path="res://scripts/camera.gd" id="13_ags8m"]
-[ext_resource type="PackedScene" uid="uid://bf48swe3lsv8b" path="res://scenes/spring.tscn" id="13_cpsrv"]
-[ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/new_dash_panel.tscn" id="13_h0rbv"]
-[ext_resource type="PackedScene" uid="uid://8xai8tlfegl3" path="res://scenes/lvl_start.tscn" id="15_ags8m"]
-[ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/coin.tscn" id="16_57ty6"]
+[ext_resource type="PackedScene" uid="uid://bf48swe3lsv8b" path="res://scenes/prefab/spring.tscn" id="13_cpsrv"]
+[ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/prefab/dash_panel.tscn" id="13_h0rbv"]
+[ext_resource type="PackedScene" uid="uid://8xai8tlfegl3" path="res://scenes/prefab/lvl_start.tscn" id="15_ags8m"]
+[ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/prefab/coin.tscn" id="16_57ty6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0f247"]
 size = Vector2(109, 384)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ojq0h"]
 distance = 16.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_57ty6"]
+load_path = "res://.godot/imported/ground.png-1c656240c2e4e7695bb1d95ac269a933.ctex"
 
 [node name="Root" type="Node2D" unique_id=1947518857 groups=["GrapplePoints"]]
 metadata/_edit_lock_ = true
@@ -398,7 +400,7 @@ script = ExtResource("7_pvwt8")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/StaticBody2D18/CollisionPolygon2D" unique_id=736710951]
 color = Color(0, 0, 0, 1)
-texture = ExtResource("8_ay1kk")
+texture = SubResource("CompressedTexture2D_57ty6")
 polygon = PackedVector2Array(0, 0, 4.53066, 0, 4.53066, -3.87878)
 
 [node name="CharacterBody2D" parent="." unique_id=77147107 instance=ExtResource("8_62vkk")]
