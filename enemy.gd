@@ -23,8 +23,8 @@ var slopefactor := 0.0
 var spotted_player: bool = false
 var is_preparing: bool = false
 
+
 # --- POSITIONING & TRAVEL VARIABLES ---
-var player: Node2D
 var frozen_origin := Vector2.ZERO # The exact center (start of freeze)
 var grid_coords := Vector2.ZERO # Tracks grid steps (e.g. 1,0 or -1,-1)
 var next_grid_coords := Vector2.ZERO
@@ -50,7 +50,8 @@ var dot_spawn_host: Node
 # --- STATS ---
 var SLOPEMULT = 2
 var GRAVITY = 850
-var acc := 15 
+var attackacc := 15
+var acc := 3 
 var dec := 2.6
 const SLIDE_THRESHOLD = 100.0
 const BOUNCE_FORGIVENESS_X = 50.0
@@ -58,12 +59,9 @@ const AIRDRAG = 1.3
 const topspeed = 400.0
 
 func _ready():
-	
-	player = get_tree().get_first_node_in_group("Player")
-	
+	var player = get_tree().get_first_node_in_group("Player")
 	if player:
 		add_collision_exception_with(player)
-		
 	if anchor:
 		anchor.visible = false
 		anchor.monitoring = false
@@ -167,9 +165,10 @@ func physics_process_normal(delta):
 			motion.y = 0
 		else:
 			motion.y = 50
-			
-			
+
 #---- 6. Enemy attack loop
+
+	var player = get_tree().get_first_node_in_group("Player")
 
 	if abs(motion.x) != 0:
 		# If moving right (1), point right. If moving left (-1), point left.
@@ -184,7 +183,6 @@ func physics_process_normal(delta):
 					pass
 				else:
 					
-					enemy_bounceoff(650)
 					isattacking = false
 					is_preparing = true
 					prep_timer.start()
@@ -215,7 +213,7 @@ func physics_process_normal(delta):
 			if is_preparing:
 				# Keep the enemy standing still while the timer runs
 				if is_on_floor() and abs(slopefactor) < 0.25: 
-					motion.x = move_toward(motion.x, 0, acc * 2)
+					motion.x = move_toward(motion.x, 0, attackacc * 2)
 					
 			# 3. Timer is finished! Charge at the player!
 			else:
@@ -226,15 +224,14 @@ func physics_process_normal(delta):
 				
 				if direction == sign(motion.x) or motion.x == 0:
 					if abs(motion.x) <= topspeed: 
-						motion.x += acc * direction
+						motion.x += attackacc * direction
 							
 				else: 
 					if abs(slopefactor) < 0.4: 
 						motion.x += dec * direction * 2
 					else: 
-						motion.x += acc * direction
+						motion.x += attackacc * direction
 	########################################################
-
 
 # --- 7. SLOPES & MOMENTUM (THE FIXES) ---
 
@@ -243,16 +240,11 @@ func physics_process_normal(delta):
 		motion.x += (acc * SLOPEMULT) * slopefactor
 
 	# Flat Ground Friction (No Input State)
-	if vulnerable:
-		if is_on_floor() and abs(slopefactor) < 0.25: 
-			motion.x = move_toward(motion.x, 0, 2)
+	if is_on_floor() and abs(slopefactor) < 0.25: 
+		motion.x = move_toward(motion.x, 0, acc - 1)
 	
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 
-	#Wall stoppers
-	if is_on_wall() and $CollisionShape2D/WallCast.is_colliding(): # If you bump into a wall...
-		motion.x = 0
-		
 func _physics_process(delta):
 	
 	# --- 1. TOGGLE FREEZE (Press Only) ---
@@ -282,6 +274,7 @@ func _physics_process(delta):
 				var dot: Node2D = dot_prefab.instantiate()
 				dot.global_position = global_position
 				dot_spawn_host.add_child(dot)
+				print("spawned dot")
 
 	# slope_stuck_failsafe()
 
@@ -483,14 +476,6 @@ func perform_bounce(Player):
 	hit_cooldown = true
 	hit_timer = 0.2 
 
-func enemy_bounceoff(strength: float) -> void:
-	var dir = Vector2(-.5,-.5)
-	if sign(motion.x) < 0:
-		dir.x = -dir.x
-	var force = dir * strength
-	grounded = false
-	motion = force
-
 func launch_enemy(Player):
 	hit_cooldown = true
 	hit_timer = 1 
@@ -517,6 +502,6 @@ func slope_stuck_failsafe():
 	if is_on_floor() and abs(motion.x) > 50 and get_real_velocity().length() < 10:
 		position.y -= 4
 		motion.x = 0
-		
+
 func _on_prep_timer_timeout():
 	is_preparing = false # The 2 seconds are up! Ready to attack!
