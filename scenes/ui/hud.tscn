@@ -28,6 +28,7 @@ texture = ExtResource("6_3e1ei")
 
 [node name="InGameOverlay" type="CanvasLayer" unique_id=1911954101]
 script = ExtResource("1_erikh")
+whiteout_time = null
 
 [node name="Right" type="VBoxContainer" parent="." unique_id=1466593241]
 anchors_preset = 1
@@ -70,7 +71,6 @@ offset_left = 7.0000005
 offset_top = 8.0
 offset_right = 121.0
 offset_bottom = 116.0
-scale = Vector2(1.5, 1.5)
 
 [node name="SpeedTitle" type="TextureRect" parent="Left" unique_id=558774062]
 custom_minimum_size = Vector2(0, 48.42)

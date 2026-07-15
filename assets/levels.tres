@@ -3,7 +3,12 @@
 [ext_resource type="Script" uid="uid://7xfldx24oh8g" path="res://scripts/level_desc.gd" id="1_8dco6"]
 [ext_resource type="Script" uid="uid://d15sfusbreana" path="res://scripts/levels_desc.gd" id="2_iko6n"]
 [ext_resource type="Script" uid="uid://h46hneoomiqh" path="res://scripts/rank_def.gd" id="2_x5qbs"]
+[ext_resource type="Texture2D" uid="uid://ntb1cc2e45uh" path="res://assets/textures/ui/rankings/rank_p.png" id="3_4o7sf"]
+[ext_resource type="Texture2D" uid="uid://utgph76nc5m2" path="res://assets/textures/ui/rankings/rank_a.png" id="3_q8iik"]
 [ext_resource type="PackedScene" uid="uid://bigfarma" path="res://scenes/levels/big_farma.tscn" id="3_x5qbs"]
+[ext_resource type="Texture2D" uid="uid://b1qrg2wkkc7m5" path="res://assets/textures/ui/rankings/rank_b.png" id="4_dte0d"]
+[ext_resource type="Texture2D" uid="uid://cxspx6nfxldoy" path="res://assets/textures/ui/rankings/rank_c.png" id="5_4o7sf"]
+[ext_resource type="Texture2D" uid="uid://pp5c2b3i2wb2" path="res://assets/textures/ui/rankings/rank_d.png" id="7_thqn0"]
 
 [sub_resource type="Resource" id="Resource_7365d"]
 script = ExtResource("1_8dco6")
@@ -13,30 +18,35 @@ metadata/_custom_type_script = "uid://7xfldx24oh8g"
 [sub_resource type="Resource" id="Resource_jk1qb"]
 script = ExtResource("2_x5qbs")
 letter = "P"
+icon = ExtResource("3_4o7sf")
 time = 61.0
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_5dd4i"]
 script = ExtResource("2_x5qbs")
 letter = "A"
+icon = ExtResource("3_q8iik")
 time = 70.0
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_lgwnu"]
 script = ExtResource("2_x5qbs")
 letter = "B"
+icon = ExtResource("4_dte0d")
 time = 85.0
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_flqon"]
 script = ExtResource("2_x5qbs")
 letter = "C"
+icon = ExtResource("5_4o7sf")
 time = 120.0
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_rcqid"]
 script = ExtResource("2_x5qbs")
-letter = "F"
+letter = "D"
+icon = ExtResource("7_thqn0")
 time = 150.0
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 

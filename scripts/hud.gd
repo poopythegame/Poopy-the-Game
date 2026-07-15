@@ -64,5 +64,5 @@ func show_rank():
 	whiteout_tween.set_trans(Tween.TRANS_CUBIC)
 
 func _finish_show_rankings():
-	var rank_display: HBoxContainer = rankings_scene.instantiate()
+	var rank_display: RankingsScreen = rankings_scene.instantiate()
 	get_tree().change_scene_to_node(rank_display)
