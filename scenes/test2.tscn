@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://scenes/prefab/player.tscn" id="1_cy281"]
 [ext_resource type="Script" uid="uid://bn8j6pteveo81" path="res://scripts/camera.gd" id="1_mkcba"]
-[ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/prefab/in_game_overlay.tscn" id="4_51wsq"]
+[ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/prefab/hud.tscn" id="4_51wsq"]
 [ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/prefab/coin.tscn" id="6_kamxp"]
 [ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/prefab/dash_panel.tscn" id="6_mkcba"]
 [ext_resource type="PackedScene" uid="uid://dhuok84j6oiig" path="res://scenes/prefab/background.tscn" id="8_ydant"]

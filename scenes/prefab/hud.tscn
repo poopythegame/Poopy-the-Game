@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://ba1g5kyug022g"]
+
+[ext_resource type="Script" uid="uid://ctl0k7lht8h4k" path="res://scripts/hud.gd" id="1_erikh"]
+[ext_resource type="Texture2D" uid="uid://h2iq5b5gp3nk" path="res://assets/textures/ui/hud/x_speed.png" id="2_6u1a4"]
+[ext_resource type="Texture2D" uid="uid://b7fc7m24olmv" path="res://assets/textures/ui/hud/y_speed.png" id="2_f8v8u"]
+[ext_resource type="Texture2D" uid="uid://b17v6ih6a7eqs" path="res://assets/textures/ui/hud/meters_per_second.png" id="3_f8v8u"]
+[ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="3_n08jr"]
+[ext_resource type="Texture2D" uid="uid://drb13ll3bun77" path="res://assets/textures/ui/hud/time.png" id="4_n08jr"]
+[ext_resource type="Texture2D" uid="uid://die3cm5oaxfsu" path="res://assets/textures/ui/hud/coin.png" id="6_f8v8u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f8v8u"]
+font = ExtResource("3_n08jr")
+font_size = 24
+outline_size = 8
+outline_color = Color(0.42352942, 0.45882353, 0.8784314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6koj1"]
+bg_color = Color(0.9851462, 0, 0.25752294, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="InGameOverlay" type="CanvasLayer" unique_id=1911954101]
+script = ExtResource("1_erikh")
+
+[node name="Right" type="VBoxContainer" parent="." unique_id=1466593241]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_right = -60.0
+offset_bottom = 60.0
+grow_horizontal = 0
+scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="SpeedTitle" type="TextureRect" parent="Right" unique_id=50291742]
+custom_minimum_size = Vector2(0, 32.28)
+layout_mode = 2
+texture = ExtResource("2_f8v8u")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="VerticalSpeed" type="HBoxContainer" parent="Right" unique_id=1488579329]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Readout" type="Label" parent="Right/VerticalSpeed" unique_id=1525694678]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "—"
+label_settings = SubResource("LabelSettings_f8v8u")
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Unit" type="TextureRect" parent="Right/VerticalSpeed" unique_id=722810323]
+layout_mode = 2
+texture = ExtResource("3_f8v8u")
+expand_mode = 3
+
+[node name="Left" type="VBoxContainer" parent="." unique_id=1427920809]
+offset_left = 7.0000005
+offset_top = 8.0
+offset_right = 121.0
+offset_bottom = 116.0
+scale = Vector2(1.5, 1.5)
+
+[node name="SpeedTitle" type="TextureRect" parent="Left" unique_id=558774062]
+custom_minimum_size = Vector2(0, 32.28)
+layout_mode = 2
+texture = ExtResource("2_6u1a4")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="HorizontalSpeed" type="HBoxContainer" parent="Left" unique_id=643418600]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Readout" type="Label" parent="Left/HorizontalSpeed" unique_id=1218336077]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "—"
+label_settings = SubResource("LabelSettings_f8v8u")
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Unit" type="TextureRect" parent="Left/HorizontalSpeed" unique_id=1811835164]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("3_f8v8u")
+expand_mode = 3
+
+[node name="HealthBar" type="ProgressBar" parent="Left" unique_id=865238034]
+custom_minimum_size = Vector2(0, 25.265)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_6koj1")
+max_value = 1.0
+show_percentage = false
+
+[node name="HealthNumber" type="Label" parent="Left/HealthBar" unique_id=1506112805]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "—"
+horizontal_alignment = 1
+
+[node name="Time" type="HBoxContainer" parent="Left" unique_id=1598092254]
+layout_mode = 2
+
+[node name="Units" type="TextureRect" parent="Left/Time" unique_id=324986922]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+texture = ExtResource("4_n08jr")
+expand_mode = 5
+
+[node name="Readout" type="Label" parent="Left/Time" unique_id=1641025808]
+layout_mode = 2
+text = "—:—.—"
+label_settings = SubResource("LabelSettings_f8v8u")
+
+[node name="Coins" type="HBoxContainer" parent="Left" unique_id=1069749030]
+layout_mode = 2
+
+[node name="Unit" type="TextureRect" parent="Left/Coins" unique_id=1838323253]
+layout_mode = 2
+texture = ExtResource("6_f8v8u")
+expand_mode = 3
+
+[node name="Readout" type="Label" parent="Left/Coins" unique_id=791635388]
+layout_mode = 2
+text = "—"
+label_settings = SubResource("LabelSettings_f8v8u")
+
+[node name="Whiteout" type="ColorRect" parent="." unique_id=637235941]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

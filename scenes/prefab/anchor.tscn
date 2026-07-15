@@ -1,21 +1,20 @@
 [gd_scene format=3 uid="uid://fieh7uoavdwx"]
 
-[ext_resource type="Texture2D" uid="uid://c0wjtb64dng2k" path="res://icon.svg" id="1_tillw"]
 [ext_resource type="Script" uid="uid://ohgt47aq8qlg" path="res://scripts/anchor.gd" id="1_vwnqp"]
+[ext_resource type="Texture2D" uid="uid://b27wmspjlyo4u" path="res://assets/textures/elements/anchor.png" id="2_85r1h"]
 [ext_resource type="Script" uid="uid://dted7xl7gy5vr" path="res://scripts/draw_circle.gd" id="3_fr8iv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwnqp"]
 radius = 105.0
 
-[node name="anchor" type="Area2D" groups=["GrapplePoints"]]
+[node name="anchor" type="Area2D" unique_id=568556020 groups=["GrapplePoints"]]
 script = ExtResource("1_vwnqp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.125, 0.125)
-texture = ExtResource("1_tillw")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=844158186]
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("2_85r1h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=43915852]
-position = Vector2(-1, 1)
 shape = SubResource("CircleShape2D_vwnqp")
 
 [node name="DrawCircle" type="Node2D" parent="." unique_id=527813386]
