@@ -40,7 +40,7 @@ func _process(delta):
 		time_label.text = time_readout
 
 func display_speed(x, y):
-	var raw_vspeed = abs(y) - 50
+	var raw_vspeed = clamp(abs(y) - 50, 0, INF)
 	var raw_hspeed = abs(x)
 	var vspeed = raw_vspeed / 30.0 # 30 px = 1 m
 	var hspeed = raw_hspeed / 30.0
