@@ -20,6 +20,13 @@ var minutes: int = 0
 var seconds: int = 0
 var millis: int = 0 
 
+func _ready() -> void:
+	millis = fmod(time, 1) * 1000
+	seconds = fmod(time, 60)
+	minutes = fmod(time, 3600) / 60
+	var time_readout = "%02d:%02d.%03d" % [minutes, seconds, millis]
+	time_label.text = time_readout
+
 func _process(delta): 
 	var level_index = Global.current_level
 	var coins = Global.get_coins()
@@ -33,7 +40,7 @@ func _process(delta):
 		time_label.text = time_readout
 
 func display_speed(x, y):
-	var raw_vspeed = abs(y) - 50
+	var raw_vspeed = clamp(abs(y) - 50, 0, INF)
 	var raw_hspeed = abs(x)
 	var vspeed = raw_vspeed / 30.0 # 30 px = 1 m
 	var hspeed = raw_hspeed / 30.0

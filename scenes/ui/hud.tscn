@@ -28,7 +28,6 @@ texture = ExtResource("6_3e1ei")
 
 [node name="InGameOverlay" type="CanvasLayer" unique_id=1911954101]
 script = ExtResource("1_erikh")
-whiteout_time = null
 
 [node name="Right" type="VBoxContainer" parent="." unique_id=1466593241]
 anchors_preset = 1
@@ -53,7 +52,7 @@ size_flags_horizontal = 4
 alignment = 1
 
 [node name="Readout" type="Label" parent="Right/VerticalSpeed" unique_id=1525694678]
-custom_minimum_size = Vector2(30, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 text = "—"
@@ -85,7 +84,7 @@ size_flags_horizontal = 4
 alignment = 1
 
 [node name="Readout" type="Label" parent="Left/HorizontalSpeed" unique_id=1218336077]
-custom_minimum_size = Vector2(30, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "—"
@@ -107,7 +106,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_0cdpu")
 z_index = -1
 custom_minimum_size = Vector2(0, 29.865)
 layout_mode = 2
-color = Color(0.4392157, 0.4745098, 0.88235295, 1)
+color = Color(0.8669289, 0, 0.07284888, 1)
 
 [node name="Time" type="HBoxContainer" parent="Left" unique_id=1598092254]
 layout_mode = 2
