@@ -7,7 +7,7 @@ class_name Enemy
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var hitbox: Area2D = $Hitbox
 @onready var anchor: Area2D = $anchor
-@onready var dot_prefab: PackedScene = load("res://scenes/dot.tscn")
+@onready var dot_prefab: PackedScene = load("uid://cq2gsyvw602v0")
 
 # --- PHYSICS VARIABLES ---
 var isattacking = false
