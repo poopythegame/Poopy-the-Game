@@ -3,14 +3,12 @@ class_name InGameOverlay
 
 @export var whiteout_time := .5
 
-# TW: DEXTER REFRENCES/BRAINROT AHEAD!!! AKA how to know I wrote the code: fandom refrences :,(
-
 @onready var rankings_scene: PackedScene = load("uid://cpvt7jfaq7yjl")
 
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
 @onready var horizontal_speed: Label = $Left/HorizontalSpeed/Readout
 @onready var vertical_speed: Label = $Right/VerticalSpeed/Readout
-@onready var healthbar: ProgressBar = $Left/HealthBar
+@onready var health_indicator: ColorRect = $Left/HealthBar/ColorRect
 @onready var health_label: Label = $Left/HealthBar/HealthNumber
 @onready var time_label: Label = $Left/Time/Readout
 @onready var whiteout: ColorRect = $Whiteout
@@ -43,8 +41,7 @@ func display_speed(x, y):
 	vertical_speed.text = "%0.1f" % vspeed
 
 func log_health(value: float, max: float) -> void:
-	health_label.text = str(int(value))
-	healthbar.value = value / max
+	health_indicator.scale.x = clamp(value / max, 0, 1)
 
 func calculate_rank():
 	var ranks := Global.get_ranks()

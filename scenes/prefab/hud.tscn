@@ -6,20 +6,25 @@
 [ext_resource type="Texture2D" uid="uid://b17v6ih6a7eqs" path="res://assets/textures/ui/hud/meters_per_second.png" id="3_f8v8u"]
 [ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="3_n08jr"]
 [ext_resource type="Texture2D" uid="uid://drb13ll3bun77" path="res://assets/textures/ui/hud/time.png" id="4_n08jr"]
+[ext_resource type="Texture2D" uid="uid://crqpnjku14cx3" path="res://assets/textures/ui/hud/healthbar.png" id="6_3e1ei"]
 [ext_resource type="Texture2D" uid="uid://die3cm5oaxfsu" path="res://assets/textures/ui/hud/coin.png" id="6_f8v8u"]
 
+[sub_resource type="FontVariation" id="FontVariation_3e1ei"]
+base_font = ExtResource("3_n08jr")
+variation_transform = Transform2D(1, 0.175, 0, 1, 0, 0)
+
 [sub_resource type="LabelSettings" id="LabelSettings_f8v8u"]
-font = ExtResource("3_n08jr")
-font_size = 24
+font = SubResource("FontVariation_3e1ei")
+font_size = 36
 outline_size = 8
 outline_color = Color(0.42352942, 0.45882353, 0.8784314, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6koj1"]
-bg_color = Color(0.9851462, 0, 0.25752294, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0cdpu"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+texture = ExtResource("6_3e1ei")
 
 [node name="InGameOverlay" type="CanvasLayer" unique_id=1911954101]
 script = ExtResource("1_erikh")
@@ -28,16 +33,14 @@ script = ExtResource("1_erikh")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -180.0
-offset_right = -60.0
-offset_bottom = 60.0
+offset_left = -120.0
+offset_bottom = 71.0
 grow_horizontal = 0
-scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
 [node name="SpeedTitle" type="TextureRect" parent="Right" unique_id=50291742]
-custom_minimum_size = Vector2(0, 32.28)
+custom_minimum_size = Vector2(0, 48.42)
 layout_mode = 2
 texture = ExtResource("2_f8v8u")
 expand_mode = 3
@@ -70,7 +73,7 @@ offset_bottom = 116.0
 scale = Vector2(1.5, 1.5)
 
 [node name="SpeedTitle" type="TextureRect" parent="Left" unique_id=558774062]
-custom_minimum_size = Vector2(0, 32.28)
+custom_minimum_size = Vector2(0, 48.42)
 layout_mode = 2
 texture = ExtResource("2_6u1a4")
 expand_mode = 3
@@ -96,37 +99,24 @@ size_flags_horizontal = 8
 texture = ExtResource("3_f8v8u")
 expand_mode = 3
 
-[node name="HealthBar" type="ProgressBar" parent="Left" unique_id=865238034]
-custom_minimum_size = Vector2(0, 25.265)
+[node name="HealthBar" type="PanelContainer" parent="Left" unique_id=1897895172]
 layout_mode = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_6koj1")
-max_value = 1.0
-show_percentage = false
+theme_override_styles/panel = SubResource("StyleBoxTexture_0cdpu")
 
-[node name="HealthNumber" type="Label" parent="Left/HealthBar" unique_id=1506112805]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "—"
-horizontal_alignment = 1
+[node name="ColorRect" type="ColorRect" parent="Left/HealthBar" unique_id=1144128956]
+z_index = -1
+custom_minimum_size = Vector2(0, 29.865)
+layout_mode = 2
+color = Color(0.4392157, 0.4745098, 0.88235295, 1)
 
 [node name="Time" type="HBoxContainer" parent="Left" unique_id=1598092254]
 layout_mode = 2
 
 [node name="Units" type="TextureRect" parent="Left/Time" unique_id=324986922]
-custom_minimum_size = Vector2(24, 0)
+custom_minimum_size = Vector2(36, 0)
 layout_mode = 2
 texture = ExtResource("4_n08jr")
-expand_mode = 5
+expand_mode = 1
 
 [node name="Readout" type="Label" parent="Left/Time" unique_id=1641025808]
 layout_mode = 2

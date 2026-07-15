@@ -13,6 +13,7 @@
 [ext_resource type="Material" uid="uid://0n3rd7tfl2c4" path="res://assets/materials/ground_fill.tres" id="13_nkrt6"]
 [ext_resource type="Texture2D" uid="uid://bnvui3fonkkvt" path="res://assets/textures/ground/ground.png" id="14_jwfad"]
 [ext_resource type="Shader" uid="uid://bgm5q57orvpth" path="res://shaders/grass_material.gdshader" id="15_f2w6b"]
+[ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/prefab/spike.tscn" id="16_jjt6x"]
 [ext_resource type="Texture2D" uid="uid://d3y17n8h31fw5" path="res://assets/textures/ground/ground_top_new.png" id="16_sdekv"]
 [ext_resource type="Resource" uid="uid://b7m2f5qfj3r7h" path="res://assets/ss2d_materials/material.tres" id="17_n5331"]
 
@@ -64,14 +65,14 @@ _next_key = 14
 [sub_resource type="ArrayMesh" id="ArrayMesh_veb0f"]
 _surfaces = [{
 "aabb": AABB(-40.295776, -121.84003, 0, 1363.2667, 187.14667, 1e-05),
-"attribute_data": PackedByteArray("/////7X0CDyOjU24tfQIPI6NTbj/////duL4P8emXDt24vg/x6ZcO/////+jB/k/W2a9PaMH+T9bZr09/////wm5cr0wsMQ9CblyvTCwxD3/////6yrEOwx6N77rKsQ7DHo3vv////9wpWS9QDM3vnClZL1AMze+"),
+"attribute_data": PackedByteArray("/////5K3tTvpXQi4kre1O+ldCLj/////Gx2lPydiEjsbHaU/J2ISO//////FNaU/HU17PcU1pT8dTXs9/////54GIb1hfII9ngYhvWF8gj3/////9yOCOzxx8733I4I7PHHzvf/////wrxe9TBPzvfCvF71ME/O9"),
 "format": 34359742527,
 "index_count": 15,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAAAAMAAwAFAAUABQAEAAMA"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 6,
-"vertex_data": PackedByteArray("AOW1QACACL0AAAAAYkalRMCGEkAAAAAAEl+lRPCLe0IAAAAA4C4hwgCdgkIAAAAAgESCQBiu88IAAAAA3NUXwhFQ88IAAAAA/////////7//////////v/////////+//////////7//////////v/////////+/")
+"vertex_data": PackedByteArray("AOW1QACACL0AAAAAYkalRMCGEkAAAAAAEl+lRPCLe0IAAAAA4C4hwgCdgkIAAAAAgESCQBiu88IAAAAA3NUXwhFQ88IAAAAA/////////7//////////v/////////+//////////7///////v//v//////+//+/")
 }]
 
 [sub_resource type="Resource" id="Resource_nqmqf"]
@@ -81,48 +82,48 @@ mesh = SubResource("ArrayMesh_veb0f")
 material = ExtResource("13_nkrt6")
 z_index = -10
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1cu8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyljj"]
 shader = ExtResource("15_f2w6b")
-shader_parameter/texture_scale = Vector2(68, 10.02)
+shader_parameter/texture_scale = Vector2(68, 16)
 shader_parameter/texture_offset = Vector2(0, 0)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ajbfk"]
 _surfaces = [{
-"aabb": AABB(-37.958847, -121.84003, 0, 42.93855, 208.18167, 1e-05),
-"attribute_data": PackedByteArray("/////wAAAAAAAAAAAAAAAAAAAAD/////AAAAAAAAgD8AAAAAAACAP//////WHqg9AACAP9YeqD0AAIA//////9YeqD0AAAAA1h6oPQAAAAA="),
+"aabb": AABB(-37.958847, -121.84003, 0, 46.50836, 1025.1738, 1e-05),
+"attribute_data": PackedByteArray("/////wAAAAAAAAAAAAAAAAAAAAD/////AAAAAAAAgD8AAAAAAACAP//////Y9Cc9AACAP9j0Jz0AAIA//////9j0Jz0AAAAA2PQnPQAAAAA="),
 "format": 34359742527,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAAACAAMA"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 4,
-"vertex_data": PackedByteArray("3NUXwhJQ88IAAAAANjMUwuuurEIAAAAAtlmfQORQrEIAAAAAgESCQBiu88IAAAAA/3//f3D/R0D/f/9/cP9HQP9//39w/0dA/3//f3D/R0A=")
+"vertex_data": PackedByteArray("3NUXwhBQ88IAAAAAuOsFwl7VYUQAAAAA0soIQZ3JYUQAAAAAgESCQBiu88IAAAAA/3//f3D/R0D/f/9/cP9HQP9//39w/0dA/3//f3D/R0A=")
 }]
 
 [sub_resource type="Resource" id="Resource_lt3xu"]
 script = ExtResource("12_7dmr1")
 texture = ExtResource("16_sdekv")
 mesh = SubResource("ArrayMesh_ajbfk")
-material = SubResource("ShaderMaterial_q1cu8")
+material = SubResource("ShaderMaterial_uyljj")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hqajr"]
 _surfaces = [{
-"aabb": AABB(5.317219, -0.033325195, 0, 1316.8822, 210.32248, 1e-05),
-"attribute_data": PackedByteArray("/////wAAAAAAAAAAAAAAAAAAAAD/////AAAAAAAAgD8AAAAAAACAP/////+OkCRAAACAP46QJEAAAIA//////46QJEAAAAAAjpAkQAAAAAA="),
+"aabb": AABB(3.8757439, -0.033325195, 0, 1318.3237, 1027.3212, 1e-05),
+"attribute_data": PackedByteArray("/////wAAAAAAAAAAAAAAAAAAAAD/////AAAAAAAAgD8AAAAAAACAP/////91Z6Q/AACAP3VnpD8AAIA//////3VnpD8AAAAAdWekPwAAAAA="),
 "format": 34359742527,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAAACAAMA"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 4,
-"vertex_data": PackedByteArray("AOW1QACACL0AAAAAqCaqQGP3T0MAAAAApDqlRAZKUkMAAAAAYkalRMCGEkAAAAAA/3//f8X/4j//f/9/xf/iP/9//3/F/+I//3//f8X/4j8=")
+"vertex_data": PackedByteArray("AOW1QACACL0AAAAAMAx4QOIegEQAAAAAhAylRDZpgEQAAAAAYkalRACHEkAAAAAA/3//f8X/4j//f/9/xf/iP/9//3/F/+I//3//f8X/4j8=")
 }]
 
 [sub_resource type="Resource" id="Resource_ipbso"]
 script = ExtResource("12_7dmr1")
 texture = ExtResource("16_sdekv")
 mesh = SubResource("ArrayMesh_hqajr")
-material = SubResource("ShaderMaterial_q1cu8")
+material = SubResource("ShaderMaterial_uyljj")
 
 [node name="Test2" type="Node2D" unique_id=555859491]
 
@@ -131,7 +132,7 @@ zoom = Vector2(3.5, 3.5)
 script = ExtResource("1_mkcba")
 
 [node name="Player" parent="." unique_id=1678918478 groups=["Player"] instance=ExtResource("1_cy281")]
-position = Vector2(47, 14)
+position = Vector2(540, 16)
 
 [node name="InGameOverlay" parent="." unique_id=1911954101 instance=ExtResource("4_51wsq")]
 
@@ -162,3 +163,6 @@ metadata/_custom_type_script = "uid://dhdc4b8yddyej"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground" unique_id=108988746]
 polygon = PackedVector2Array(-38.958847, -105.65638, 3.0708618, -105.84003, 4.684204, 15.966675, 1321.1995, 18.289474, 1321.971, 78.88666, -41.295776, 81.30664)
+
+[node name="Spike" parent="." unique_id=2118102836 instance=ExtResource("16_jjt6x")]
+position = Vector2(630, 1)
