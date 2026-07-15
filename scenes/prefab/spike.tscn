@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bxh65cv4y62p8"]
 
 [ext_resource type="Script" uid="uid://boye0mwla1r0x" path="res://scripts/spike.gd" id="1_7a7y0"]
-[ext_resource type="Texture2D" uid="uid://dgoah8yd12yos" path="res://assets/textures/placeholder/red.png" id="2_d2mqm"]
+[ext_resource type="Texture2D" uid="uid://dbq62usmwh83i" path="res://assets/textures/elements/spike.png" id="2_b6hgo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cx2lw"]
 size = Vector2(66, 66)
@@ -17,8 +17,9 @@ script = ExtResource("1_7a7y0")
 shape = SubResource("RectangleShape2D_cx2lw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1613389291]
-scale = Vector2(0.065, 0.065)
-texture = ExtResource("2_d2mqm")
+position = Vector2(1.4305115e-06, -1.4305115e-06)
+scale = Vector2(0.088541664, 0.088541664)
+texture = ExtResource("2_b6hgo")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=836507669]
 
