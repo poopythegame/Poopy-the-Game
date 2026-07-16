@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://chivuxah6fbkc"]
+
+[ext_resource type="Script" uid="uid://dhdc4b8yddyej" path="res://addons/rmsmartshape/shapes/shape.gd" id="1_7ac3l"]
+[ext_resource type="Script" uid="uid://bo5f7qe27jfje" path="res://addons/rmsmartshape/shapes/point_array.gd" id="2_iig34"]
+[ext_resource type="Resource" uid="uid://b7m2f5qfj3r7h" path="res://assets/ss2d_materials/grass.tres" id="3_3e81p"]
+[ext_resource type="PackedScene" uid="uid://8xai8tlfegl3" path="res://scenes/prefab/lvl_start.tscn" id="4_g7bfq"]
+[ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://scenes/prefab/player.tscn" id="5_4a02d"]
+[ext_resource type="PackedScene" uid="uid://n40asi5s347t" path="res://scenes/prefab/cam_boundary.tscn" id="6_uu0hj"]
+
+[sub_resource type="Resource" id="Resource_irnc0"]
+script = ExtResource("2_iig34")
+_point_order = PackedInt32Array()
+_next_key = 3
+
+[node name="Tutorial" type="Node2D" unique_id=987998091]
+editor_description = "Welcome to the tutorial scene. It is for now a sample scene with some helpful tips. Hover over the various nodes for additional help."
+
+[node name="Body1" type="StaticBody2D" parent="." unique_id=2042129562]
+editor_description = "Tips:
+1. Duplicate this node to create another terrain segment. Remember to rename the child Terrain[n]_CollisionPolygon2D and Terrain[n] nodes with the new number and change the Collision Polygon Node Path (under the Collision category of the Terrain node) to the newly created CollisionPolygon2D
+2. Change the Material property under the Materials category of the Terrain[n] node to res://assets/ss2d_materials/wood.tres for the wood material."
+
+[node name="Terrain1_CollisionPolygon2D" type="CollisionPolygon2D" parent="Body1" unique_id=518235711]
+
+[node name="Terrain1" type="Node2D" parent="Body1" unique_id=584507454]
+script = ExtResource("1_7ac3l")
+_points = SubResource("Resource_irnc0")
+shape_material = ExtResource("3_3e81p")
+collision_polygon_node_path = NodePath("../Terrain1_CollisionPolygon2D")
+metadata/_custom_type_script = "uid://dhdc4b8yddyej"
+
+[node name="LevelStart" parent="." unique_id=496126979 instance=ExtResource("4_g7bfq")]
+
+[node name="Player" parent="." unique_id=1090100472 instance=ExtResource("5_4a02d")]
+
+[node name="LeftCamBound" parent="." unique_id=1310596363 instance=ExtResource("6_uu0hj")]
+editor_description = "Move this node to where you want the left-hand camera limit to be."
+
+[node name="RightCamBound" parent="." unique_id=497458463 instance=ExtResource("6_uu0hj")]
+editor_description = "Move this node to where you want the left-hand camera limit to be."
+flip = true

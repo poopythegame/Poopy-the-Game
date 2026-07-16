@@ -26,11 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://bndst27a07hls" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr10.png" id="21_vakqa"]
 [ext_resource type="Texture2D" uid="uid://w73fkbc7pebe" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr12.png" id="22_v4uu0"]
 [ext_resource type="Texture2D" uid="uid://0onqcrbo0uom" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr14.png" id="23_4jqr8"]
-
-[sub_resource type="Resource" id="Resource_7365d"]
-script = ExtResource("1_8dco6")
-title = "Tutorial"
-metadata/_custom_type_script = "uid://7xfldx24oh8g"
+[ext_resource type="PackedScene" uid="uid://chivuxah6fbkc" path="res://scenes/levels/tutorial.tscn" id="25_e1edl"]
 
 [sub_resource type="Resource" id="Resource_jk1qb"]
 script = ExtResource("2_x5qbs")
@@ -76,6 +72,13 @@ animation_frames = Array[Texture2D]([ExtResource("16_h2k1g"), ExtResource("17_3d
 animation_fps = 12.0
 time = 150.0
 metadata/_custom_type_script = "uid://h46hneoomiqh"
+
+[sub_resource type="Resource" id="Resource_7365d"]
+script = ExtResource("1_8dco6")
+title = "Tutorial"
+scene = ExtResource("25_e1edl")
+rankings = Array[ExtResource("2_x5qbs")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
+metadata/_custom_type_script = "uid://7xfldx24oh8g"
 
 [sub_resource type="Resource" id="Resource_q8iik"]
 script = ExtResource("1_8dco6")
