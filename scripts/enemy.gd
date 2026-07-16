@@ -4,7 +4,7 @@ class_name Enemy
 @export var dot_spawn_distance = 10
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: Area2D = $Hitbox
 @onready var anchor: Area2D = $anchor
 @onready var dot_prefab: PackedScene = load("uid://cq2gsyvw602v0")
@@ -97,7 +97,7 @@ func physics_process_normal(delta):
 
 	# --- 3. ROTATION VISUALS ---
 	$CollisionShape2D.rotation = rot
-	$Sprite2D.rotation = lerp_angle($Sprite2D.rotation, rot, 0.25)
+	sprite_2d.rotation = lerp_angle(sprite_2d.rotation, rot, 0.25)
 
 	# --- 4. MOMENTUM CONVERSION & LANDING ---
 	if is_touching_surface:
@@ -302,7 +302,7 @@ func engage_freeze():
 		anchor.monitoring = true
 		anchor.monitorable = true
 		
-	$Sprite2D.rotation = 0
+	sprite_2d.rotation = 0
 	$CollisionShape2D.rotation = 0
 	rot = 0
 	
@@ -496,7 +496,7 @@ func launch_enemy(Player):
 	grounded = false
 	rot = 0
 	position.y -= 8 
-	$Sprite2D.rotation = 0
+	sprite_2d.rotation = 0
 	$CollisionShape2D.rotation = 0
 	spawning_dots = true
 
