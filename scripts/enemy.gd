@@ -201,13 +201,15 @@ func physics_process_normal(delta):
 		var vertical_distance_from_player = abs(player.global_position.y - global_position.y)
 		
 		# 1. Player is in range and enemy is allowed to attack
-		if (distance_from_player < 500 and vertical_distance_from_player < 500) and not vulnerable:
+		if not vulnerable:
 			
 			# If this is the exact moment the enemy first spots the player, start the node!
-			if not spotted_player:
-				spotted_player = true
-				is_preparing = true
-				prep_timer.start() # Starts the 2-second countdown in the background
+			if (distance_from_player < 200 and vertical_distance_from_player < 200):
+				if not spotted_player:
+					print("spotted!")
+					spotted_player = true
+					is_preparing = true
+					prep_timer.start() # Starts the 2-second countdown in the background
 			
 			# 2. Check if we are still preparing
 			if is_preparing:
@@ -216,7 +218,7 @@ func physics_process_normal(delta):
 					motion.x = move_toward(motion.x, 0, attackacc * 2)
 					
 			# 3. Timer is finished! Charge at the player!
-			else:
+			elif (not is_preparing) and spotted_player:
 				
 				isattacking = true
 				
