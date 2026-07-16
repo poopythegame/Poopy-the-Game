@@ -5,10 +5,27 @@
 [ext_resource type="Script" uid="uid://h46hneoomiqh" path="res://scripts/rank_def.gd" id="2_x5qbs"]
 [ext_resource type="Texture2D" uid="uid://ntb1cc2e45uh" path="res://assets/textures/ui/rankings/rank_p.png" id="3_4o7sf"]
 [ext_resource type="Texture2D" uid="uid://utgph76nc5m2" path="res://assets/textures/ui/rankings/rank_a.png" id="3_q8iik"]
+[ext_resource type="Texture2D" uid="uid://c7jiyx0w5u60u" path="res://assets/textures/ui/rankings/player_animations/p_rank_fr0.png" id="3_smksl"]
 [ext_resource type="PackedScene" uid="uid://bigfarma" path="res://scenes/levels/big_farma.tscn" id="3_x5qbs"]
 [ext_resource type="Texture2D" uid="uid://b1qrg2wkkc7m5" path="res://assets/textures/ui/rankings/rank_b.png" id="4_dte0d"]
+[ext_resource type="Texture2D" uid="uid://bbxx8alakl0ld" path="res://assets/textures/ui/rankings/player_animations/p_rank_fr1.png" id="4_e1edl"]
 [ext_resource type="Texture2D" uid="uid://cxspx6nfxldoy" path="res://assets/textures/ui/rankings/rank_c.png" id="5_4o7sf"]
+[ext_resource type="Texture2D" uid="uid://c76qtc5snc638" path="res://assets/textures/ui/rankings/player_animations/a_rank_fr0.png" id="6_sav0g"]
+[ext_resource type="Texture2D" uid="uid://fyib8attxvyu" path="res://assets/textures/ui/rankings/player_animations/a_rank_fr1.png" id="7_a7loy"]
 [ext_resource type="Texture2D" uid="uid://pp5c2b3i2wb2" path="res://assets/textures/ui/rankings/rank_d.png" id="7_thqn0"]
+[ext_resource type="Texture2D" uid="uid://cm52niresotd6" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr0.png" id="9_0syye"]
+[ext_resource type="Texture2D" uid="uid://bxfj2a7kqusl0" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr1.png" id="10_nuwws"]
+[ext_resource type="Texture2D" uid="uid://behhk7f3nw1ed" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr2.png" id="11_owg44"]
+[ext_resource type="Texture2D" uid="uid://5va7pdcu1gwp" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr0.png" id="13_bidy1"]
+[ext_resource type="Texture2D" uid="uid://opyo3j6f558" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr1.png" id="14_e58h7"]
+[ext_resource type="Texture2D" uid="uid://b3gv55rshr68l" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr0.png" id="16_h2k1g"]
+[ext_resource type="Texture2D" uid="uid://dwfg0jg70yuyw" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr2.png" id="17_3dhcv"]
+[ext_resource type="Texture2D" uid="uid://dq7xceluw6c70" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr4.png" id="18_cxb4r"]
+[ext_resource type="Texture2D" uid="uid://bartbwj64ubb4" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr6.png" id="19_4cit1"]
+[ext_resource type="Texture2D" uid="uid://bnvb13c4yjry5" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr8.png" id="20_ttfwy"]
+[ext_resource type="Texture2D" uid="uid://bndst27a07hls" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr10.png" id="21_vakqa"]
+[ext_resource type="Texture2D" uid="uid://w73fkbc7pebe" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr12.png" id="22_v4uu0"]
+[ext_resource type="Texture2D" uid="uid://0onqcrbo0uom" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr14.png" id="23_4jqr8"]
 
 [sub_resource type="Resource" id="Resource_7365d"]
 script = ExtResource("1_8dco6")
@@ -19,6 +36,8 @@ metadata/_custom_type_script = "uid://7xfldx24oh8g"
 script = ExtResource("2_x5qbs")
 letter = "P"
 icon = ExtResource("3_4o7sf")
+animation_frames = Array[Texture2D]([ExtResource("3_smksl"), ExtResource("4_e1edl")])
+animation_fps = 12.0
 time = 61.0
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
@@ -26,6 +45,8 @@ metadata/_custom_type_script = "uid://h46hneoomiqh"
 script = ExtResource("2_x5qbs")
 letter = "A"
 icon = ExtResource("3_q8iik")
+animation_frames = Array[Texture2D]([ExtResource("6_sav0g"), ExtResource("7_a7loy")])
+animation_fps = 30.0
 time = 70.0
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
@@ -33,6 +54,8 @@ metadata/_custom_type_script = "uid://h46hneoomiqh"
 script = ExtResource("2_x5qbs")
 letter = "B"
 icon = ExtResource("4_dte0d")
+animation_frames = Array[Texture2D]([ExtResource("9_0syye"), ExtResource("10_nuwws"), ExtResource("11_owg44")])
+animation_fps = 12.0
 time = 85.0
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
@@ -40,6 +63,8 @@ metadata/_custom_type_script = "uid://h46hneoomiqh"
 script = ExtResource("2_x5qbs")
 letter = "C"
 icon = ExtResource("5_4o7sf")
+animation_frames = Array[Texture2D]([ExtResource("13_bidy1"), ExtResource("14_e58h7")])
+animation_fps = 12.0
 time = 120.0
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
@@ -47,6 +72,8 @@ metadata/_custom_type_script = "uid://h46hneoomiqh"
 script = ExtResource("2_x5qbs")
 letter = "D"
 icon = ExtResource("7_thqn0")
+animation_frames = Array[Texture2D]([ExtResource("16_h2k1g"), ExtResource("17_3dhcv"), ExtResource("18_cxb4r"), ExtResource("19_4cit1"), ExtResource("20_ttfwy"), ExtResource("21_vakqa"), ExtResource("22_v4uu0"), ExtResource("23_4jqr8")])
+animation_fps = 12.0
 time = 150.0
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 

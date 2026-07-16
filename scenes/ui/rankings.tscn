@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://cpvt7jfaq7yjl"]
 
 [ext_resource type="Script" uid="uid://lbaxng7aimn" path="res://scripts/rankings.gd" id="1_20hek"]
+[ext_resource type="Texture2D" uid="uid://51akneplljx4" path="res://assets/textures/ui/rankings/player_animations/idle_fr0.png" id="2_3qrqb"]
 [ext_resource type="LabelSettings" uid="uid://bmtl4xmbt3fao" path="res://assets/title_style.tres" id="2_20hek"]
 [ext_resource type="Texture2D" uid="uid://d32ididyh760j" path="res://assets/textures/ui/background.png" id="2_bh0lf"]
-[ext_resource type="Texture2D" uid="uid://bd51ngcl8nlvo" path="res://assets/textures/player/idle.png" id="3_3q0lq"]
+[ext_resource type="Texture2D" uid="uid://d02hqhai6lg5l" path="res://assets/textures/ui/rankings/player_animations/lookat_fr0.png" id="3_eb2ox"]
+[ext_resource type="Texture2D" uid="uid://bquslnqm0gatp" path="res://assets/textures/ui/rankings/player_animations/lookat_fr1.png" id="4_o3po0"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_k51th"]
 
 [node name="Rankings" type="Control" unique_id=239000932]
 layout_mode = 3
@@ -13,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_20hek")
+pre_reveal_animation_frames = Array[Texture2D]([ExtResource("2_3qrqb"), ExtResource("3_eb2ox"), ExtResource("4_o3po0")])
 
 [node name="Background" type="TextureRect" parent="." unique_id=1933854276]
 layout_mode = 1
@@ -59,6 +64,7 @@ size_flags_vertical = 3
 theme_override_constants/margin_bottom = 80
 
 [node name="RankingsContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/MarginContainer" unique_id=1121914717]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
@@ -68,11 +74,19 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="RankIcon" type="TextureRect" parent="HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=457184224]
+visible = false
+z_index = 1
 custom_minimum_size = Vector2(0, 260)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_scale = Vector2(6, 6)
 expand_mode = 3
+
+[node name="DummySpacer" type="Control" parent="HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1719204919]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
 
 [node name="TimeLabel" type="Label" parent="HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1151396509]
 layout_mode = 2
@@ -84,14 +98,15 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="Sprite" type="TextureRect" parent="HBoxContainer" unique_id=474637211]
-custom_minimum_size = Vector2(440.925, 611.71)
+texture_filter = 2
+custom_minimum_size = Vector2(418.005, 611.71)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-texture = ExtResource("3_3q0lq")
-expand_mode = 1
+offset_transform_enabled = true
+texture = SubResource("AnimatedTexture_k51th")
+expand_mode = 5
 stretch_mode = 3
-flip_h = true
 
 [node name="Spacer2" type="Control" parent="HBoxContainer" unique_id=1357150792]
 custom_minimum_size = Vector2(25, 0)
