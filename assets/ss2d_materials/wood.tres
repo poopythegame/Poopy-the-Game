@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="SS2D_Material_Shape" format=3 uid="uid://1knvyj6c4v71"]
+
+[ext_resource type="Script" uid="uid://0lhxan4cqrc1" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="1_d3mp2"]
+[ext_resource type="Script" uid="uid://d0xjijisx1woh" path="res://addons/rmsmartshape/materials/edge_material.gd" id="2_06wko"]
+[ext_resource type="Script" uid="uid://nc5bfedvnpgm" path="res://addons/rmsmartshape/materials/shape_material.gd" id="2_800tm"]
+[ext_resource type="Shader" uid="uid://bxjra7tqfuq06" path="res://shaders/retexture.gdshader" id="2_x2ja2"]
+[ext_resource type="Script" uid="uid://d218yx0d1ilsn" path="res://addons/rmsmartshape/normal_range.gd" id="4_ak4y8"]
+[ext_resource type="Texture2D" uid="uid://cerwkjbbxbhcq" path="res://assets/textures/ground/wood_edge.png" id="4_nu4s8"]
+[ext_resource type="Shader" uid="uid://cqy3l3jlbgmkb" path="res://shaders/ground_material.gdshader" id="5_nu4s8"]
+[ext_resource type="Texture2D" uid="uid://s4c4pgnq5bj7" path="res://assets/textures/ground/wood.png" id="6_eb7xt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x2ja2"]
+shader = ExtResource("2_x2ja2")
+shader_parameter/tex = ExtResource("4_nu4s8")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_eb7xt"]
+size = Vector2(48, 4)
+
+[sub_resource type="Resource" id="Resource_4lamw"]
+script = ExtResource("2_06wko")
+textures = Array[Texture2D]([SubResource("PlaceholderTexture2D_eb7xt")])
+use_corner_texture = false
+use_taper_texture = false
+fit_mode = 1
+material = SubResource("ShaderMaterial_x2ja2")
+metadata/_custom_type_script = "uid://d0xjijisx1woh"
+
+[sub_resource type="Resource" id="Resource_hytwy"]
+script = ExtResource("4_ak4y8")
+distance = 360.0
+
+[sub_resource type="Resource" id="Resource_mlk6x"]
+script = ExtResource("1_d3mp2")
+edge_material = SubResource("Resource_4lamw")
+normal_range = SubResource("Resource_hytwy")
+offset = -0.8
+metadata/_custom_type_script = "uid://0lhxan4cqrc1"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iv1mm"]
+shader = ExtResource("5_nu4s8")
+shader_parameter/texture_scale = Vector2(68, 68)
+shader_parameter/texture_offset = Vector2(0, 0)
+
+[resource]
+script = ExtResource("2_800tm")
+_edge_meta_materials = Array[ExtResource("1_d3mp2")]([SubResource("Resource_mlk6x")])
+fill_textures = Array[Texture2D]([ExtResource("6_eb7xt")])
+fill_mesh_material = SubResource("ShaderMaterial_iv1mm")
+metadata/_custom_type_script = "uid://nc5bfedvnpgm"
