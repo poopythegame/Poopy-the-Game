@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://8xai8tlfegl3" path="res://scenes/prefab/lvl_start.tscn" id="4_g7bfq"]
 [ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://scenes/prefab/player.tscn" id="5_4a02d"]
 [ext_resource type="PackedScene" uid="uid://n40asi5s347t" path="res://scenes/prefab/cam_boundary.tscn" id="6_uu0hj"]
+[ext_resource type="Script" uid="uid://bn8j6pteveo81" path="res://scripts/camera.gd" id="7_iig34"]
+[ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/ui/hud.tscn" id="8_3e81p"]
 
 [sub_resource type="Resource" id="Resource_irnc0"]
 script = ExtResource("2_iig34")
@@ -31,7 +33,7 @@ metadata/_custom_type_script = "uid://dhdc4b8yddyej"
 
 [node name="LevelStart" parent="." unique_id=496126979 instance=ExtResource("4_g7bfq")]
 
-[node name="Player" parent="." unique_id=1090100472 instance=ExtResource("5_4a02d")]
+[node name="Player" parent="." unique_id=1090100472 groups=["Player"] instance=ExtResource("5_4a02d")]
 
 [node name="LeftCamBound" parent="." unique_id=1310596363 instance=ExtResource("6_uu0hj")]
 editor_description = "Move this node to where you want the left-hand camera limit to be."
@@ -39,3 +41,8 @@ editor_description = "Move this node to where you want the left-hand camera limi
 [node name="RightCamBound" parent="." unique_id=497458463 instance=ExtResource("6_uu0hj")]
 editor_description = "Move this node to where you want the left-hand camera limit to be."
 flip = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1929185180]
+script = ExtResource("7_iig34")
+
+[node name="InGameOverlay" parent="." unique_id=1911954101 instance=ExtResource("8_3e81p")]
