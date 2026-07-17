@@ -16,6 +16,7 @@ func _on_body_entered(body: Node2D):
 		animated_sprite_2d.play("spin")
 		var tween = create_tween()
 		tween.tween_property(self, "modulate:a", 0, animation_duration)
+		tween.parallel().tween_property(self, "position:y", position.y - 50, animation_duration)
 		tween.tween_callback(hide)
 		used = true
 		if body.health < body.max_health:
