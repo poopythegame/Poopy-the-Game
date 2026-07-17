@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://duuwmaebhmabm"
-path="res://.godot/imported/rank_d.png-b3275984972243b232a64acff48702eb.ctex"
+uid="uid://uoihhdgqif1s"
+path="res://.godot/imported/rank_c_small.png-967e443c496b855c51eada02332fe67b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/rankings/rank_d.png"
-dest_files=["res://.godot/imported/rank_d.png-b3275984972243b232a64acff48702eb.ctex"]
+source_file="res://assets/textures/ui/rankings/small/rank_c_small.png"
+dest_files=["res://.godot/imported/rank_c_small.png-967e443c496b855c51eada02332fe67b.ctex"]
 
 [params]
 

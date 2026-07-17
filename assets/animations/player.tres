@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://djt6p4v3hmfuo" path="res://assets/textures/player/run/run_fr0.png" id="10_7pcqj"]
 [ext_resource type="Texture2D" uid="uid://d3pjv2uhrrehv" path="res://assets/textures/player/run/run_fr1.png" id="11_2i3hj"]
 [ext_resource type="Texture2D" uid="uid://charhu2vs8kcp" path="res://assets/textures/player/run/run_fr2.png" id="12_4k2b3"]
-[ext_resource type="Texture2D" uid="uid://ds3jvywt17isu" path="res://assets/textures/player/skid.png" id="12_etp1i"]
+[ext_resource type="Texture2D" uid="uid://dnf3givq6mo18" path="res://assets/textures/player/skid.png" id="12_etp1i"]
 [ext_resource type="Texture2D" uid="uid://dym72f4v5vpc7" path="res://assets/textures/player/run/run_fr3.png" id="13_fsgbf"]
 [ext_resource type="Texture2D" uid="uid://cxoiopasw5ijk" path="res://assets/textures/player/walk/walk_fr1.png" id="14_1m7ma"]
 [ext_resource type="Texture2D" uid="uid://n57eh3b6j5tj" path="res://assets/textures/player/walk/walk_fr2.png" id="15_rqddi"]

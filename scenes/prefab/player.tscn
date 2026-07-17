@@ -12,6 +12,7 @@ shader_parameter/t = 0.0
 b = Vector2(0, -32)
 
 [node name="Player" type="CharacterBody2D" unique_id=1090100472]
+z_index = 1
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 1.55334
@@ -21,11 +22,11 @@ script = ExtResource("1_3r5ht")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1990345513]
 material = SubResource("ShaderMaterial_jnnhn")
+position = Vector2(0, 1)
 scale = Vector2(0.0534135, 0.0534135)
 sprite_frames = ExtResource("2_mx6bk")
-animation = &"airdash"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.63465536
 offset = Vector2(0, -270.04)
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2098401984]
