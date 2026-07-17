@@ -106,8 +106,7 @@ process_mode = 3
 visible = false
 scale = Vector2(0.1, 0.1)
 sprite_frames = ExtResource("7_ayp64")
-animation = &"jump"
-frame_progress = 0.59771246
+animation = &"turn_around"
 
 [node name="JokeLogo" type="Label" parent="TitleScreen/VBoxContainer" unique_id=149390959]
 z_index = -1

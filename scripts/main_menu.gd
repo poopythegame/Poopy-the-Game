@@ -37,8 +37,6 @@ enum Screen {
 var screen := Screen.TITLE
 var main_scene: PackedScene
 
-var title_intro_finished := false
-
 var menu_selected := 1
 var menu_slide_tween: Tween
 var menu_labels: Array[Node]
@@ -62,7 +60,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if screen == Screen.TITLE:
-		if event.is_action_pressed("start") and not event.is_echo() and title_intro_finished:
+		if event.is_action_pressed("start") and not event.is_echo():
 			change_screen(Screen.MENU)
 		elif event.is_action_pressed("esc") and not event.is_echo():
 			_quit()
@@ -85,11 +83,11 @@ func _input(event: InputEvent) -> void:
 
 func title_begin_title_reveal():
 	var tween := create_tween()
-	tween.tween_interval(2)
+	tween.tween_interval(1.5)
 	tween.tween_callback(func(): title_logo.modulate.a = 1)
 	tween.parallel().tween_property(title_logo, "offset_transform_scale", Vector2(1, 1), 0.5)
 	tween.tween_method(screen_shake, 10, 5, 0.5)
-	tween.tween_interval(1)
+	tween.tween_interval(1.5)
 	tween.tween_callback(whiteout.show)
 	tween.parallel().tween_property(whiteout, "modulate:a", 1, 0.2)
 	tween.tween_callback(func():
@@ -105,15 +103,41 @@ func title_begin_title_reveal():
 	tween.tween_property(title_poopy, "position", Vector2(0, 310), 0.5)
 	tween.parallel().tween_property(title_poopy, "scale", Vector2(0.3, 0.3), 0.5)
 	tween.tween_callback(func(): title_poopy.play("idle"))
-	tween.tween_interval(4.5 - 1.70)
+	tween.tween_interval(5.15 - 1.74)
 	tween.tween_property(whiteout, "modulate:a", 1, 0.2)
 	tween.tween_callback(func():
-		title_poopy.play("armflap")
 		title_portraits_background.show()
 		title_portraits_background.process_mode = Node.PROCESS_MODE_INHERIT)
 	tween.tween_property(whiteout, "modulate:a", 0, 0.2)
-	# Set finished flag to true in order to enable the Enter key
-	tween.tween_callback(func(): title_intro_finished = true)
+	tween.tween_callback(func(): title_poopy.play("turn_around"))
+	tween.tween_interval(2./6)
+	tween.tween_callback(func(): title_poopy.play("armflap"))
+	tween.tween_interval(9.15 - 5.15)
+	tween.tween_callback(title_poopy.play.bind("dance1"))
+	tween.tween_interval(9.95 - 9.15)
+	tween.tween_callback(title_poopy.play.bind("armflap"))
+	tween.tween_interval(11.30 - 9.95)
+	tween.tween_callback(title_poopy.play.bind("dance2"))
+	tween.tween_interval(12.75 - 11.30)
+	tween.tween_callback(title_poopy.play.bind("armflap"))
+	tween.tween_interval(13.50 - 12.75)
+	tween.tween_callback(title_poopy.play.bind("dance3"))
+	tween.tween_interval(15.15 - 13.50)
+	tween.tween_callback(title_poopy.play.bind("armflap"))
+	tween.tween_interval(19.20 - 15.15)
+	tween.tween_callback(title_poopy.play.bind("dance1"))
+	tween.tween_interval(20.20 - 19.20)
+	tween.tween_callback(title_poopy.play.bind("armflap"))
+	tween.tween_interval(28.90 - 20.20)
+	tween.tween_callback(title_poopy.play.bind("dance2"))
+	tween.tween_interval(31.05 - 28.90)
+	tween.tween_callback(title_poopy.play.bind("armflap"))
+	tween.tween_interval(39.70 - 31.05)
+	tween.tween_callback(title_poopy.play.bind("dance3"))
+	tween.tween_interval(48.20 - 39.70)
+	tween.tween_callback(title_poopy.play.bind("armflap"))
+	tween.tween_interval(50.53 - 48.20)
+	tween.tween_callback(change_screen.bind(Screen.MENU))
 	tween.set_trans(Tween.TRANS_CUBIC)
 
 func screen_shake(intensity: float):
