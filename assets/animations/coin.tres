@@ -1,0 +1,50 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://ngtyun800jsy"]
+
+[ext_resource type="Texture2D" uid="uid://g53wweqm6bhc" path="res://assets/textures/elements/coin/idle_fr0.png" id="1_uy5k1"]
+[ext_resource type="Texture2D" uid="uid://cpifofdo2t4i0" path="res://assets/textures/elements/coin/spin_fr1.png" id="2_pqixi"]
+[ext_resource type="Texture2D" uid="uid://cty26jg8276db" path="res://assets/textures/elements/coin/spin_fr2.png" id="3_dxdru"]
+[ext_resource type="Texture2D" uid="uid://bg5evilsr573c" path="res://assets/textures/elements/coin/spin_fr3.png" id="4_ndxr8"]
+[ext_resource type="Texture2D" uid="uid://b6jvbpmr38n0k" path="res://assets/textures/elements/coin/spin_fr4.png" id="5_n05n2"]
+[ext_resource type="Texture2D" uid="uid://baxh2qook6sj5" path="res://assets/textures/elements/coin/spin_fr5.png" id="6_51tto"]
+[ext_resource type="Texture2D" uid="uid://ccu4unuk7pwqd" path="res://assets/textures/elements/coin/spin_fr6.png" id="7_lqnju"]
+[ext_resource type="Texture2D" uid="uid://b68hdf7l5e0yr" path="res://assets/textures/elements/coin/spin_fr7.png" id="8_ac28u"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_uy5k1")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_uy5k1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_pqixi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dxdru")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ndxr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_n05n2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_51tto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lqnju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ac28u")
+}],
+"loop": 1,
+"name": &"spin",
+"speed": 30.0
+}]

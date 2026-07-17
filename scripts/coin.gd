@@ -1,7 +1,10 @@
 extends Node2D
 
 @export var heal_amount := 5.
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var animation_duration := 1.5
 var used: bool = false
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
 	var area_2d = $Area2D
@@ -10,7 +13,10 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D):
 	if body is Player and not used:
 		# a player picked up the coin
-		hide()
+		animated_sprite_2d.play("spin")
+		var tween = create_tween()
+		tween.tween_property(self, "modulate:a", 0, animation_duration)
+		tween.tween_callback(hide)
 		used = true
 		if body.health < body.max_health:
 			body.health += 5
