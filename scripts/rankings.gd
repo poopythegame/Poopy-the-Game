@@ -19,7 +19,7 @@ var curr_rank: RankDef
 
 func _ready() -> void:
 	rank_animation_animated_texture = rank_animation_tr.texture
-	var rank_id: int = 2 # Global.get_rank()
+	var rank_id: int = Global.get_rank()
 	curr_rank = Global.get_ranks()[rank_id]
 	rank_icon.texture = curr_rank.icon
 	var time := Global.get_time()
@@ -32,7 +32,7 @@ func _ready() -> void:
 		var display: HBoxContainer = rank_display_scene.instantiate()
 		var icon: TextureRect = display.get_node("RankIcon")
 		var max_time_label: Label = display.get_node("MaxTime")
-		icon.texture = rank.icon
+		icon.texture = rank.small_icon
 		var millis2 := fmod(rank.time, 1) * 100
 		var seconds2 := fmod(rank.time, 60)
 		var minutes2 := fmod(rank.time, 3600) / 60 
@@ -50,6 +50,7 @@ func start_animation_sequence():
 	for frame in pre_reveal_animation_frames:
 		rank_animation_animated_texture.set_frame_texture(index, frame)
 		rank_animation_animated_texture.set_frame_duration(index, frame_duration)
+		print(index)
 		index += 1
 	var tween = create_tween()
 	tween.tween_callback(func():
@@ -64,7 +65,6 @@ func start_animation_sequence():
 	tween.parallel().tween_property(ranks_container, "modulate:a", 1, 2)
 	tween.parallel().tween_callback(apply_rank_animation)
 	tween.set_trans(Tween.TRANS_CUBIC)
-	# tween.set_ease(Tween.EASE_IN_OUT)
 
 func apply_rank_animation():
 	rank_animation_animated_texture.one_shot = false
