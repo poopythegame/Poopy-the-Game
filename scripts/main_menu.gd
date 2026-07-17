@@ -14,8 +14,17 @@ enum Screen {
 }
 
 @onready var label_settings: LabelSettings = load("uid://o04nc50d6jgm")
+@onready var title_logo_complete: Texture2D = load("uid://b5w0pc7x5csx5")
 
 @onready var title_screen: MarginContainer = $TitleScreen
+@onready var title_logo: TextureRect = $TitleScreen/VBoxContainer/Logo
+@onready var title_joke_logo: Label = $TitleScreen/VBoxContainer/JokeLogo
+@onready var title_info_box: PanelContainer = $TitleScreen/VBoxContainer/Info
+@onready var background: TextureRect = $Background
+@onready var whiteout: ColorRect = $Whiteout
+@onready var title_theme_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var title_poopy: AnimatedSprite2D = $TitleScreen/VBoxContainer/Logo/PoopyContainer/Poopy
+@onready var title_portraits_background: Node2D = $TitleScreen/PortraitsBackground
 
 @onready var menu_screen: MarginContainer = $Menu
 @onready var menu_labels_container: HBoxContainer = $Menu/VBoxContainer/TitlesContainer/Titles
@@ -27,6 +36,8 @@ enum Screen {
 
 var screen := Screen.TITLE
 var main_scene: PackedScene
+
+var title_intro_finished := false
 
 var menu_selected := 1
 var menu_slide_tween: Tween
@@ -46,11 +57,12 @@ func _ready() -> void:
 		level_select_labels.append(label)
 		level_select_labels_container.add_child(label)
 	menu_initial_offset = menu_labels_container.position
+	title_portraits_background.process_mode = Node.PROCESS_MODE_DISABLED
 	change_screen(start_screen)
 
 func _input(event: InputEvent) -> void:
 	if screen == Screen.TITLE:
-		if event.is_action_pressed("start") and not event.is_echo():
+		if event.is_action_pressed("start") and not event.is_echo() and title_intro_finished:
 			change_screen(Screen.MENU)
 		elif event.is_action_pressed("esc") and not event.is_echo():
 			_quit()
@@ -70,6 +82,42 @@ func _input(event: InputEvent) -> void:
 		elif event.is_action_pressed("ui_accept") and not event.is_echo():
 			Global.current_level = level_select_selected
 			begin(levels[level_select_selected])
+
+func title_begin_title_reveal():
+	var tween := create_tween()
+	tween.tween_interval(2)
+	tween.tween_callback(func(): title_logo.modulate.a = 1)
+	tween.parallel().tween_property(title_logo, "offset_transform_scale", Vector2(1, 1), 0.5)
+	tween.tween_method(screen_shake, 10, 5, 0.5)
+	tween.tween_interval(1)
+	tween.tween_callback(whiteout.show)
+	tween.parallel().tween_property(whiteout, "modulate:a", 1, 0.2)
+	tween.tween_callback(func():
+		title_logo.texture = title_logo_complete
+		title_joke_logo.hide()
+		background.show()
+		title_theme_player.play()
+		title_info_box.show()
+		title_poopy.show()
+		title_poopy.play("jump")
+		)
+	tween.tween_property(whiteout, "modulate:a", 0, 0.2)
+	tween.tween_property(title_poopy, "position", Vector2(0, 310), 0.5)
+	tween.parallel().tween_property(title_poopy, "scale", Vector2(0.3, 0.3), 0.5)
+	tween.tween_callback(func(): title_poopy.play("idle"))
+	tween.tween_interval(4.5 - 1.70)
+	tween.tween_property(whiteout, "modulate:a", 1, 0.2)
+	tween.tween_callback(func():
+		title_poopy.play("armflap")
+		title_portraits_background.show()
+		title_portraits_background.process_mode = Node.PROCESS_MODE_INHERIT)
+	tween.tween_property(whiteout, "modulate:a", 0, 0.2)
+	# Set finished flag to true in order to enable the Enter key
+	tween.tween_callback(func(): title_intro_finished = true)
+	tween.set_trans(Tween.TRANS_CUBIC)
+
+func screen_shake(intensity: float):
+	position = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * intensity
 
 func menu_switch(new: int):
 	menu_selected = new
@@ -194,6 +242,7 @@ func change_screen(new_screen: Screen):
 		title_screen.show()
 		menu_screen.hide()
 		lavel_select_screen.hide()
+		title_begin_title_reveal()
 	elif new_screen == Screen.MENU:
 		title_screen.hide()
 		menu_screen.show()

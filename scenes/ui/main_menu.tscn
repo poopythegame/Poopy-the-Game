@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://dady2wku1xusy"]
 
 [ext_resource type="Script" uid="uid://m7v8vgf4k5re" path="res://scripts/main_menu.gd" id="1_8ekit"]
+[ext_resource type="AudioStream" uid="uid://cotx67p5iwda" path="res://assets/audio/music/title.ogg" id="2_877pj"]
 [ext_resource type="Texture2D" uid="uid://d32ididyh760j" path="res://assets/textures/ui/background.png" id="2_n4uci"]
 [ext_resource type="Script" uid="uid://dasf3yjhaca2b" path="res://scripts/portraits_background.gd" id="3_877pj"]
-[ext_resource type="Texture2D" uid="uid://b5w0pc7x5csx5" path="res://assets/textures/ui/main_menu/poopy_logo.png" id="4_ayp64"]
+[ext_resource type="Texture2D" uid="uid://bjejowtmy7kpn" path="res://assets/textures/ui/main_menu/logo_incomplete.png" id="4_8ekit"]
+[ext_resource type="FontFile" uid="uid://c6lup5uhxjaq8" path="res://assets/fonts/Comic-Sans-MS.ttf" id="4_n4uci"]
 [ext_resource type="Texture2D" uid="uid://og0yos4h6sda" path="res://assets/textures/ui/main_menu/option_box.png" id="5_y2j7i"]
 [ext_resource type="LabelSettings" uid="uid://bmtl4xmbt3fao" path="res://assets/title_style.tres" id="6_y1h5l"]
+[ext_resource type="SpriteFrames" uid="uid://dvs8fhjv7ymto" path="res://assets/animations/title_player.tres" id="7_ayp64"]
 [ext_resource type="Texture2D" uid="uid://csipwt7j8bu23" path="res://assets/textures/ui/main_menu/title.png" id="7_pw24t"]
 [ext_resource type="FontFile" uid="uid://bw8h8rlrthupg" path="res://assets/fonts/icons.ttf" id="8_5dct7"]
 [ext_resource type="Texture2D" uid="uid://bu1qqh82x47yt" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="9_qilvv"]
@@ -13,6 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://k0qmq705scns" path="res://assets/textures/ui/main_menu/option_label_credits.png" id="11_e0hcc"]
 [ext_resource type="Texture2D" uid="uid://bhxan4q8j23fw" path="res://assets/textures/ui/main_menu/option_label_level_select.png" id="12_qch7b"]
 [ext_resource type="Texture2D" uid="uid://dpl8egxwrkkt" path="res://assets/textures/ui/main_menu/option_label_options.png" id="13_4ovp2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0cdpu"]
+font = ExtResource("4_n4uci")
+font_size = 53
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0cdpu"]
 texture = ExtResource("5_y2j7i")
@@ -36,7 +43,12 @@ pivot_offset = Vector2(-69, -39)
 script = ExtResource("1_8ekit")
 labels_slide_time = 0.25
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2039563538]
+stream = ExtResource("2_877pj")
+volume_db = -10.0
+
 [node name="Background" type="TextureRect" parent="." unique_id=1645064994]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,6 +71,7 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="PortraitsBackground" type="Node2D" parent="TitleScreen" unique_id=170695451]
+visible = false
 script = ExtResource("3_877pj")
 scroll_speed = 100.0
 
@@ -67,27 +80,59 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="TitleScreen/VBoxContainer" unique_id=1118181643]
-custom_minimum_size = Vector2(500, 347.63)
+[node name="Logo" type="TextureRect" parent="TitleScreen/VBoxContainer" unique_id=1118181643]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(409, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("4_ayp64")
-expand_mode = 1
+offset_transform_enabled = true
+offset_transform_scale = Vector2(6, 6)
+texture = ExtResource("4_8ekit")
+expand_mode = 5
 stretch_mode = 4
 
-[node name="Credits" type="PanelContainer" parent="TitleScreen/VBoxContainer" unique_id=164987405]
+[node name="PoopyContainer" type="Control" parent="TitleScreen/VBoxContainer/Logo" unique_id=781521764]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Poopy" type="AnimatedSprite2D" parent="TitleScreen/VBoxContainer/Logo/PoopyContainer" unique_id=74014805]
+process_mode = 3
+visible = false
+scale = Vector2(0.1, 0.1)
+sprite_frames = ExtResource("7_ayp64")
+animation = &"jump"
+frame_progress = 0.59771246
+
+[node name="JokeLogo" type="Label" parent="TitleScreen/VBoxContainer" unique_id=149390959]
+z_index = -1
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -21.585)
+text = "the game"
+label_settings = SubResource("LabelSettings_0cdpu")
+horizontal_alignment = 1
+
+[node name="Info" type="PanelContainer" parent="TitleScreen/VBoxContainer" unique_id=164987405]
+visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_0cdpu")
 
-[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/VBoxContainer/Credits" unique_id=1052865600]
+[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/VBoxContainer/Info" unique_id=1052865600]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Info" type="Label" parent="TitleScreen/VBoxContainer/Credits/MarginContainer" unique_id=1952691595]
+[node name="Label" type="Label" parent="TitleScreen/VBoxContainer/Info/MarginContainer" unique_id=1952691595]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -313,3 +358,12 @@ text = ""
 custom_minimum_size = Vector2(0, 67)
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="Whiteout" type="ColorRect" parent="." unique_id=1167688859]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
