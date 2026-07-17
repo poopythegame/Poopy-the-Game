@@ -52,24 +52,25 @@ scale = Vector2(0.33333337, 0.36894587)
 texture = ExtResource("4_6vm3t")
 centered = false
 
-[node name="Hills_Near1" type="Parallax2D" parent="." unique_id=575326099]
-scroll_scale = Vector2(0.6, 0)
+[node name="Hills_Near2" type="Parallax2D" parent="." unique_id=575326099]
+scroll_scale = Vector2(0.55, 0)
+scroll_offset = Vector2(0, 6.9930067)
 repeat_size = Vector2(1279, 0)
 repeat_times = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Hills_Near1" unique_id=604516949]
+[node name="Sprite2D" type="Sprite2D" parent="Hills_Near2" unique_id=604516949]
 z_index = 2
 position = Vector2(0, -94)
 scale = Vector2(0.333, 0.377)
 texture = ExtResource("5_8efq7")
 centered = false
 
-[node name="Hills_Near2" type="Parallax2D" parent="." unique_id=1521679808]
-scroll_scale = Vector2(0.55, 0)
+[node name="Hills_Near1" type="Parallax2D" parent="." unique_id=1521679808]
+scroll_scale = Vector2(0.6, 0)
 repeat_size = Vector2(1279, 0)
 repeat_times = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Hills_Near2" unique_id=287262368]
+[node name="Sprite2D" type="Sprite2D" parent="Hills_Near1" unique_id=287262368]
 z_index = 3
 position = Vector2(0, -94)
 scale = Vector2(0.333, 0.377)
