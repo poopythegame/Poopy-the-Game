@@ -36,6 +36,7 @@ small_icon = ExtResource("3_4o7sf")
 animation_frames = Array[Texture2D]([ExtResource("3_smksl"), ExtResource("4_e1edl")])
 animation_fps = 12.0
 time = 61.0
+show_portraits_background = 2
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_5dd4i"]
@@ -46,6 +47,7 @@ small_icon = ExtResource("3_q8iik")
 animation_frames = Array[Texture2D]([ExtResource("6_sav0g"), ExtResource("7_a7loy")])
 animation_fps = 30.0
 time = 70.0
+show_portraits_background = 1
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_lgwnu"]
@@ -64,8 +66,9 @@ letter = "C"
 icon = ExtResource("5_4o7sf")
 small_icon = ExtResource("5_4o7sf")
 animation_frames = Array[Texture2D]([ExtResource("13_bidy1"), ExtResource("14_e58h7")])
-animation_fps = 12.0
+animation_fps = 5.0
 time = 120.0
+is_animation_one_shot = true
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_rcqid"]
@@ -76,6 +79,8 @@ small_icon = ExtResource("7_thqn0")
 animation_frames = Array[Texture2D]([ExtResource("16_h2k1g"), ExtResource("17_3dhcv"), ExtResource("18_cxb4r"), ExtResource("19_4cit1"), ExtResource("20_ttfwy"), ExtResource("21_vakqa"), ExtResource("22_v4uu0"), ExtResource("23_4jqr8")])
 animation_fps = 12.0
 time = 150.0
+use_walk_off_animation = true
+flip_animation = true
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_7365d"]

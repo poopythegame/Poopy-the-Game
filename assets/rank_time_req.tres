@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://cy8xniqmjk0c1"]
+
+[ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="1_u8pyd"]
+
+[resource]
+font = ExtResource("1_u8pyd")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
