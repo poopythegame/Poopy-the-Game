@@ -1,11 +1,6 @@
-[gd_scene format=3 uid="uid://cxqog80c2q55h"]
+[gd_scene format=3 uid="uid://drw036rrtmt7"]
 
-[ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="1_jhv28"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_h4ob3"]
-font = ExtResource("1_jhv28")
-font_size = 40
-font_color = Color(0, 0, 0, 1)
+[ext_resource type="LabelSettings" uid="uid://cy8xniqmjk0c1" path="res://assets/rank_time_req.tres" id="1_hjmgq"]
 
 [node name="RankDisplay" type="HBoxContainer" unique_id=1404184377]
 theme_override_constants/separation = 16
@@ -19,4 +14,4 @@ expand_mode = 3
 layout_mode = 2
 size_flags_vertical = 8
 text = "—:—.—"
-label_settings = SubResource("LabelSettings_h4ob3")
+label_settings = ExtResource("1_hjmgq")

@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+class_name PortraitsBackground
 
 class Sprite:
 	var sprite_2d: Sprite2D

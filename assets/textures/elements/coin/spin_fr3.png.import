@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cluts3ihvcgxe"
-path="res://.godot/imported/c_rank_fr1.png-2c5dd43220f3202f65cd3173836e005f.ctex"
+uid="uid://bg5evilsr573c"
+path="res://.godot/imported/spin_fr3.png-9f0f799cfe6f1ef71b38a924565510e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/rankings/player_animations/c_rank_fr1.png"
-dest_files=["res://.godot/imported/c_rank_fr1.png-2c5dd43220f3202f65cd3173836e005f.ctex"]
+source_file="res://assets/textures/elements/coin/spin_fr3.png"
+dest_files=["res://.godot/imported/spin_fr3.png-9f0f799cfe6f1ef71b38a924565510e3.ctex"]
 
 [params]
 
