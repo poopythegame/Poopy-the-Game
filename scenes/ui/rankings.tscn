@@ -21,7 +21,7 @@ script = ExtResource("1_20hek")
 pre_reveal_animation_frames = Array[Texture2D]([ExtResource("2_3qrqb"), ExtResource("3_eb2ox"), ExtResource("4_o3po0")])
 
 [node name="Background" type="TextureRect" parent="." unique_id=1933854276]
-z_index = -2
+z_index = -3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,6 +34,7 @@ expand_mode = 1
 [node name="PortraitsBackground" type="Node2D" parent="." unique_id=1155685246]
 process_mode = 4
 visible = false
+z_index = -2
 script = ExtResource("6_eb2ox")
 scroll_speed = 100.0
 

@@ -25,6 +25,7 @@ enum Screen {
 @onready var title_theme_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var title_poopy: AnimatedSprite2D = $TitleScreen/VBoxContainer/Logo/PoopyContainer/Poopy
 @onready var title_portraits_background: Node2D = $TitleScreen/PortraitsBackground
+@onready var title_infobox: PanelContainer = $TitleScreen/VBoxContainer/Info
 
 @onready var menu_screen: MarginContainer = $Menu
 @onready var menu_labels_container: HBoxContainer = $Menu/VBoxContainer/TitlesContainer/Titles
@@ -36,6 +37,10 @@ enum Screen {
 
 var screen := Screen.TITLE
 var main_scene: PackedScene
+var screen_rect: Rect2
+
+var title_title_reveal_tween: Tween
+var title_poopy_jump_vel: float
 
 var menu_selected := 1
 var menu_slide_tween: Tween
@@ -47,6 +52,10 @@ var level_select_slide_tween: Tween
 var level_select_labels: Array[Label] = []
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		screen_rect = Rect2(0, 0, ProjectSettings.get("display/window/size/viewport_width"), ProjectSettings.get("display/window/size/viewport_height"))
+	else:
+		screen_rect = get_viewport_rect()
 	menu_labels = menu_labels_container.get_children()
 	for level in levels:
 		var label = Label.new()
@@ -61,6 +70,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if screen == Screen.TITLE:
 		if event.is_action_pressed("start") and not event.is_echo():
+			title_title_reveal_tween.stop()
+			title_theme_player.stop()
+			background.show()
 			change_screen(Screen.MENU)
 		elif event.is_action_pressed("esc") and not event.is_echo():
 			_quit()
@@ -81,13 +93,38 @@ func _input(event: InputEvent) -> void:
 			Global.current_level = level_select_selected
 			begin(levels[level_select_selected])
 
+func title_poopy_jump(t: float) -> void:
+	if t <= 0.03:
+		title_poopy_jump_vel -= 10
+	title_poopy.position.y += title_poopy_jump_vel
+	if title_poopy.position.y > 310:
+		title_poopy.position.y = 310
+	title_poopy_jump_vel += 1.25
+
+func title_poopy_run(duration: float) -> Tween:
+	title_poopy.play("dance1")
+	var tween := create_tween()
+	var orig_x := title_poopy.global_position.x
+	var segment_duration = duration / 4
+	tween.pause()
+	tween.tween_property(title_poopy, "global_position:x", screen_rect.size.x - 200, segment_duration / 2)
+	tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
+	tween.tween_property(title_poopy, "global_position:y", 0, segment_duration)
+	tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
+	tween.tween_property(title_poopy, "global_position:x", 0, segment_duration)
+	tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
+	tween.tween_property(title_poopy, "global_position:y", screen_rect.size.y - 200, segment_duration)
+	tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
+	tween.tween_property(title_poopy, "global_position:x", orig_x, segment_duration / 2)
+	return tween
+
 func title_begin_title_reveal():
 	var tween := create_tween()
-	tween.tween_interval(1.5)
+	title_title_reveal_tween = tween
+	tween.tween_interval(2)
 	tween.tween_callback(func(): title_logo.modulate.a = 1)
 	tween.parallel().tween_property(title_logo, "offset_transform_scale", Vector2(1, 1), 0.5)
-	tween.tween_method(screen_shake, 10, 5, 0.5)
-	tween.tween_interval(1.5)
+	tween.parallel().tween_method(screen_shake, 10, 5, 0.35).set_delay(0.4)
 	tween.tween_callback(whiteout.show)
 	tween.parallel().tween_property(whiteout, "modulate:a", 1, 0.2)
 	tween.tween_callback(func():
@@ -98,10 +135,17 @@ func title_begin_title_reveal():
 		title_info_box.show()
 		title_poopy.show()
 		title_poopy.play("jump")
+		var tween_drop_infobox := create_tween()
+		tween_drop_infobox.tween_callback(title_info_box.show).set_delay(19)
+		tween_drop_infobox.tween_property(title_info_box, "offset_transform_position:y", 0, 1)
+		tween_drop_infobox.tween_property(title_info_box, "offset_transform_position:y", -50, .1)
+		tween_drop_infobox.tween_interval(.05)
+		tween_drop_infobox.tween_property(title_info_box, "offset_transform_position:y", 0, .1)
+		tween_drop_infobox.set_trans(Tween.TRANS_CUBIC)
 		)
 	tween.tween_property(whiteout, "modulate:a", 0, 0.2)
-	tween.tween_property(title_poopy, "position", Vector2(0, 310), 0.5)
-	tween.parallel().tween_property(title_poopy, "scale", Vector2(0.3, 0.3), 0.5)
+	tween.tween_property(title_poopy, "scale", Vector2(0.3, 0.3), 0.5)
+	tween.parallel().tween_method(title_poopy_jump, 0., 1., .5)
 	tween.tween_callback(func(): title_poopy.play("idle"))
 	tween.tween_interval(5.15 - 1.74)
 	tween.tween_property(whiteout, "modulate:a", 1, 0.2)
@@ -117,26 +161,26 @@ func title_begin_title_reveal():
 	tween.tween_interval(9.95 - 9.15)
 	tween.tween_callback(title_poopy.play.bind("armflap"))
 	tween.tween_interval(11.30 - 9.95)
-	tween.tween_callback(title_poopy.play.bind("dance2"))
+	tween.tween_subtween(title_poopy_run(1.45))
 	tween.tween_interval(12.75 - 11.30)
 	tween.tween_callback(title_poopy.play.bind("armflap"))
-	tween.tween_interval(13.50 - 12.75)
-	tween.tween_callback(title_poopy.play.bind("dance3"))
-	tween.tween_interval(15.15 - 13.50)
-	tween.tween_callback(title_poopy.play.bind("armflap"))
-	tween.tween_interval(19.20 - 15.15)
-	tween.tween_callback(title_poopy.play.bind("dance1"))
-	tween.tween_interval(20.20 - 19.20)
-	tween.tween_callback(title_poopy.play.bind("armflap"))
-	tween.tween_interval(28.90 - 20.20)
-	tween.tween_callback(title_poopy.play.bind("dance2"))
-	tween.tween_interval(31.05 - 28.90)
-	tween.tween_callback(title_poopy.play.bind("armflap"))
-	tween.tween_interval(39.70 - 31.05)
-	tween.tween_callback(title_poopy.play.bind("dance3"))
-	tween.tween_interval(48.20 - 39.70)
-	tween.tween_callback(title_poopy.play.bind("armflap"))
-	tween.tween_interval(50.53 - 48.20)
+	# tween.tween_interval(13.50 - 12.75)
+	# tween.tween_callback(title_poopy.play.bind("dance3"))
+	# tween.tween_interval(15.15 - 13.50)
+	# tween.tween_callback(title_poopy.play.bind("armflap"))
+	# tween.tween_interval(19.20 - 15.15)
+	# tween.tween_callback(title_poopy.play.bind("dance1"))
+	# tween.tween_interval(20.20 - 19.20)
+	# tween.tween_callback(title_poopy.play.bind("armflap"))
+	# tween.tween_interval(28.90 - 20.20)
+	# tween.tween_callback(title_poopy.play.bind("dance2"))
+	# tween.tween_interval(31.05 - 28.90)
+	# tween.tween_callback(title_poopy.play.bind("armflap"))
+	# tween.tween_interval(39.70 - 31.05)
+	# tween.tween_callback(title_poopy.play.bind("dance3"))
+	# tween.tween_interval(48.20 - 39.70)
+	# tween.tween_callback(title_poopy.play.bind("armflap"))
+	tween.tween_interval(50.53 - 12.75)
 	tween.tween_callback(change_screen.bind(Screen.MENU))
 	tween.set_trans(Tween.TRANS_CUBIC)
 
@@ -268,10 +312,12 @@ func change_screen(new_screen: Screen):
 		lavel_select_screen.hide()
 		title_begin_title_reveal()
 	elif new_screen == Screen.MENU:
+		background.show()
 		title_screen.hide()
 		menu_screen.show()
 		lavel_select_screen.hide()
 	elif new_screen == Screen.LEVEL_SELECT:
+		background.show()
 		title_screen.hide()
 		menu_screen.hide()
 		lavel_select_screen.show()
