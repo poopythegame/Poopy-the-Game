@@ -41,6 +41,7 @@ var screen_rect: Rect2
 
 var title_title_reveal_tween: Tween
 var title_poopy_jump_vel: float
+var title_poopy_last_frametime := 0.
 
 var menu_selected := 1
 var menu_slide_tween: Tween
@@ -99,23 +100,25 @@ func title_poopy_jump(t: float) -> void:
 	title_poopy.position.y += title_poopy_jump_vel
 	if title_poopy.position.y > 310:
 		title_poopy.position.y = 310
-	title_poopy_jump_vel += 1.25
+	title_poopy_jump_vel += 50 * (t - title_poopy_last_frametime)
+	title_poopy_last_frametime = t
 
 func title_poopy_run(duration: float) -> Tween:
-	title_poopy.play("dance1")
 	var tween := create_tween()
-	var orig_x := title_poopy.global_position.x
-	var segment_duration = duration / 4
+	var segment_duration = duration / 8
 	tween.pause()
-	tween.tween_property(title_poopy, "global_position:x", screen_rect.size.x - 200, segment_duration / 2)
-	tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
-	tween.tween_property(title_poopy, "global_position:y", 0, segment_duration)
-	tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
-	tween.tween_property(title_poopy, "global_position:x", 0, segment_duration)
-	tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
-	tween.tween_property(title_poopy, "global_position:y", screen_rect.size.y - 200, segment_duration)
-	tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
-	tween.tween_property(title_poopy, "global_position:x", orig_x, segment_duration / 2)
+	for i in 2:
+		tween.tween_callback(func(): title_poopy.play("dance2"))
+		tween.tween_property(title_poopy, "global_position:x", screen_rect.size.x - 90, segment_duration / 2)
+		tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
+		tween.tween_property(title_poopy, "global_position:y", 90, segment_duration)
+		tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
+		tween.tween_property(title_poopy, "global_position:x", 90, segment_duration)
+		tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
+		tween.tween_property(title_poopy, "global_position:y", screen_rect.size.y - 80, segment_duration)
+		tween.tween_callback(func(): title_poopy.rotation_degrees -= 90)
+		tween.tween_property(title_poopy, "global_position:x", screen_rect.size.x / 2, segment_duration / 2)
+		tween.tween_callback(func(): title_poopy.play("armflap"))
 	return tween
 
 func title_begin_title_reveal():
@@ -156,18 +159,18 @@ func title_begin_title_reveal():
 	tween.tween_callback(func(): title_poopy.play("turn_around"))
 	tween.tween_interval(2./6)
 	tween.tween_callback(func(): title_poopy.play("armflap"))
-	tween.tween_interval(9.15 - 5.15)
+	tween.tween_interval(8.70 - 5.15)
 	tween.tween_callback(title_poopy.play.bind("dance1"))
-	tween.tween_interval(9.95 - 9.15)
+	tween.tween_interval(10.15 - 8.70)
 	tween.tween_callback(title_poopy.play.bind("armflap"))
-	tween.tween_interval(11.30 - 9.95)
-	tween.tween_subtween(title_poopy_run(1.45))
-	tween.tween_interval(12.75 - 11.30)
+	tween.tween_interval(11.30 - 10.15)
+	tween.tween_subtween(title_poopy_run(1.20))
+	# tween.tween_interval(12.50 - 10.85)
 	tween.tween_callback(title_poopy.play.bind("armflap"))
-	# tween.tween_interval(13.50 - 12.75)
-	# tween.tween_callback(title_poopy.play.bind("dance3"))
-	# tween.tween_interval(15.15 - 13.50)
-	# tween.tween_callback(title_poopy.play.bind("armflap"))
+	tween.tween_interval(13.90 - 12.50)
+	tween.tween_callback(title_poopy.play.bind("dance3"))
+	tween.tween_interval(15.05 - 13.90)
+	tween.tween_callback(title_poopy.play.bind("armflap"))
 	# tween.tween_interval(19.20 - 15.15)
 	# tween.tween_callback(title_poopy.play.bind("dance1"))
 	# tween.tween_interval(20.20 - 19.20)
@@ -180,7 +183,7 @@ func title_begin_title_reveal():
 	# tween.tween_callback(title_poopy.play.bind("dance3"))
 	# tween.tween_interval(48.20 - 39.70)
 	# tween.tween_callback(title_poopy.play.bind("armflap"))
-	tween.tween_interval(50.53 - 12.75)
+	tween.tween_interval(50.53 - 15.05)
 	tween.tween_callback(change_screen.bind(Screen.MENU))
 	tween.set_trans(Tween.TRANS_CUBIC)
 

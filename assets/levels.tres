@@ -16,8 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://cm52niresotd6" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr0.png" id="9_0syye"]
 [ext_resource type="Texture2D" uid="uid://bxfj2a7kqusl0" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr1.png" id="10_nuwws"]
 [ext_resource type="Texture2D" uid="uid://behhk7f3nw1ed" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr2.png" id="11_owg44"]
-[ext_resource type="Texture2D" uid="uid://5va7pdcu1gwp" path="res://assets/textures/ui/main_menu/player_turn_around/fr0.png" id="13_bidy1"]
-[ext_resource type="Texture2D" uid="uid://opyo3j6f558" path="res://assets/textures/ui/main_menu/player_turn_around/fr1.png" id="14_e58h7"]
+[ext_resource type="Texture2D" uid="uid://cadobt2c1luk8" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr0.png" id="13_e1edl"]
+[ext_resource type="Texture2D" uid="uid://cluts3ihvcgxe" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr1.png" id="14_sav0g"]
 [ext_resource type="Texture2D" uid="uid://b3gv55rshr68l" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr0.png" id="16_h2k1g"]
 [ext_resource type="Texture2D" uid="uid://dwfg0jg70yuyw" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr2.png" id="17_3dhcv"]
 [ext_resource type="Texture2D" uid="uid://dq7xceluw6c70" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr4.png" id="18_cxb4r"]
@@ -65,7 +65,7 @@ script = ExtResource("2_x5qbs")
 letter = "C"
 icon = ExtResource("5_4o7sf")
 small_icon = ExtResource("5_4o7sf")
-animation_frames = Array[Texture2D]([ExtResource("13_bidy1"), ExtResource("14_e58h7")])
+animation_frames = Array[Texture2D]([ExtResource("13_e1edl"), ExtResource("14_sav0g")])
 animation_fps = 5.0
 time = 120.0
 is_animation_one_shot = true

@@ -105,6 +105,10 @@ label_settings = ExtResource("2_20hek")
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
+[node name="Spacer" type="Control" parent="HBoxContainer/Spacer" unique_id=380998104]
+custom_minimum_size = Vector2(50, 0)
+anchors_preset = 0
+
 [node name="Sprite" type="TextureRect" parent="HBoxContainer" unique_id=474637211]
 z_index = -1
 texture_filter = 2
