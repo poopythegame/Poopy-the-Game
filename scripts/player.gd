@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @onready var main: InGameOverlay = get_parent().get_node("InGameOverlay")
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var collision: CollisionShape2D = $Collision
 @onready var camera_2d: Camera2D = $Camera2D
 # @onready var anchor: Area2D = $"../anchor"
@@ -11,6 +12,18 @@ class_name Player
 
 @export var death_time: float = 0.5
 @export var max_health: int = 100
+@export_group("Sounds")
+@export var airdash_sfx: Array[AudioStream]
+@export var skid_sfx: Array[AudioStream]
+@export var grapple_sfx: Array[AudioStream]
+# @export var run_sfx: Array[AudioStream]
+# @export var fast_run_sfx: Array[AudioStream]
+@export var jump_sfx: Array[AudioStream]
+@export var roll_sfx: Array[AudioStream]
+@export var stomp_sfx: Array[AudioStream]
+@export var death_sfx: Array[AudioStream]
+@export var hit_sfx: Array[AudioStream]
+@export var final_hit_sfx: Array[AudioStream]
 
 var dying: bool = false
 var springing: bool = false
@@ -166,6 +179,30 @@ var grapple_ang_vel := 0.0     # Angular Velocity
 const GRAPPLE_RANGE = 400.0 
 ### ### ### ### ### ### ### ### ### ###
 
+func play_audio(streams: Array[AudioStream]):
+	var choice = randi_range(0, len(streams) - 1)
+	# var not_playing_current_sfx := true
+	# for stream in streams:
+	# 	if stream == audio_stream_player.stream:
+	# 		not_playing_current_sfx = false
+	# if not_playing_current_sfx:
+	audio_stream_player.stream = streams[choice]
+	audio_stream_player.play()
+
+func stop_audio():
+	var stream := audio_stream_player.stream
+	if stream is AudioStreamWAV:
+		if stream.loop_mode != AudioStreamWAV.LOOP_DISABLED:
+			audio_stream_player.stop()
+	elif stream is AudioStreamOggVorbis:
+		if stream.loop:
+			audio_stream_player.stop()
+	elif stream is AudioStreamMP3:
+		if stream.loop:
+			audio_stream_player.stop()
+	if not audio_stream_player.playing:
+		audio_stream_player.stream = null
+
 func _physics_process(delta):
 	
 	if dying:
@@ -206,6 +243,7 @@ func attempt_grapple_start():
 
 	if target_anchor:
 		is_grappling = true
+		play_audio(grapple_sfx)
 		grapple_anchor_pos = target_anchor.global_position
 		
 		# Set the rope length to the current distance. 
@@ -486,6 +524,7 @@ func physics_process_normal(delta):
 	if jumpbuffered and canjump: # If your jump input is detected and you're currently able to jump...
 		motion.y = -JUMP_VELOCITY
 		jumping = true
+		play_audio(jump_sfx)
 		# Jump.
 		
 		canjump = false
@@ -567,17 +606,20 @@ func physics_process_normal(delta):
 					
 					canstomp = false
 					isstomping = true
+					play_audio(stomp_sfx)
 					isairdashing = false				
 				elif motion.y >= 450:
 					motion.y += 225
 					
 					canstomp = false
 					isstomping = true
+					play_audio(stomp_sfx)
 					isairdashing = false
 			elif canairdash and abs(motion.x) >= 20:
 				motion.x += abs(motion.x) * 0.15 * Input.get_axis("left", "right")
 				canairdash = false
 				isairdashing = true
+				play_audio(airdash_sfx)
 				isstomping = false
 	
 	#This is the speedometer
@@ -598,6 +640,7 @@ func physics_process_normal(delta):
 	
 	if direction == -(sign(motion.x)) and (abs(motion.x) >= (topspeed/1.5)) and is_on_floor():
 		isskidding = true
+		play_audio(skid_sfx)
 	if abs(motion.x) == 0 or (not is_on_floor()) or direction != -(sign(motion.x)):
 		isskidding = false
 	if isskidding:
@@ -669,6 +712,7 @@ func physics_process_normal(delta):
 #rolling
 	if Input.is_action_pressed("down") and is_on_floor() and abs(motion.x) > 25:
 		isrolling = true
+		play_audio(roll_sfx)
 	if Input.is_action_just_released("down") or not is_on_floor() or abs(motion.x) <= 25:
 		isrolling = false
 		
@@ -746,6 +790,12 @@ func take_damage(amount: float) -> void:
 	health -= amount
 	if health <= 0:
 		die()
+		var death_audio_tween := create_tween()
+		death_audio_tween.tween_callback(func(): play_audio(final_hit_sfx))
+		death_audio_tween.tween_await(audio_stream_player.finished)
+		death_audio_tween.tween_callback(func(): play_audio(death_sfx))
+	else:
+		play_audio(hit_sfx)
 
 func bounce(strength: float) -> void:
 	var dir = Vector2(-.5,-.5)
@@ -806,16 +856,19 @@ func animate():
 		
 		if abs(motion.x) < 1 and not isskidding: # If you're standing still, or at least EXTREMELY CLOSE to standing still...
 			$Sprite.speed_scale = 1
+			stop_audio()
 			# Reset the Speed Scale.
 			
 		elif abs(motion.x) < topspeed - 10 and not isskidding: # If you're moving, but not at your Top Speed yet...
 			$Sprite.play("walk")
 			$Sprite.speed_scale = 0.5 + (abs(motion.x) / 350)
+			stop_audio()
 			# Play Walking Animation at half speed, quickening it as you move faster and faster.
 			
 		elif abs(motion.x) >= topspeed and not isskidding: # If you've reached, or are at least close enough to your Top Speed...
 			$Sprite.play("run")
 			$Sprite.speed_scale = abs(motion.x)/90
+			stop_audio()
 			# Play Running Animation, quickening it even further if you escalate past your Top Speed.
 			
 	elif not grounded:
@@ -836,7 +889,6 @@ func animate():
 			$Sprite.speed_scale = 1
 			
 		elif isstomping:
-			print("heya")
 			$Sprite.play("jump")
 			
 		elif jumping:
@@ -855,9 +907,10 @@ func animate():
 	
 	if idle:
 		if idleset:
+			stop_audio()
 			$Sprite.play("idle")
 			idleset = false
-		
+
 		if $IdleTimer.is_stopped():
 			$IdleTimer.start()
 	else:

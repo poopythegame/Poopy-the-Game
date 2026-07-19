@@ -2,6 +2,11 @@ extends CharacterBody2D
 class_name Enemy
 
 @export var dot_spawn_distance = 10
+@export_group("Sounds")
+@export var charge_sfx: Array[AudioStream]
+@export var hit_sfx: Array[AudioStream]
+@export var hurt_sfx: Array[AudioStream]
+@export var shock_sfx: Array[AudioStream]
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -57,6 +62,32 @@ const SLIDE_THRESHOLD = 100.0
 const BOUNCE_FORGIVENESS_X = 50.0
 const AIRDRAG = 1.3
 const topspeed = 400.0
+
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
+func play_audio(streams: Array[AudioStream]):
+	var choice = randi_range(0, len(streams) - 1)
+	# var not_playing_current_sfx := true
+	# for stream in streams:
+	# 	if stream == audio_stream_player.stream:
+	# 		not_playing_current_sfx = false
+	# if not_playing_current_sfx:
+	audio_stream_player.stream = streams[choice]
+	audio_stream_player.play()
+
+func stop_audio():
+	var stream := audio_stream_player.stream
+	if stream is AudioStreamWAV:
+		if stream.loop_mode != AudioStreamWAV.LOOP_DISABLED:
+			audio_stream_player.stop()
+	elif stream is AudioStreamOggVorbis:
+		if stream.loop:
+			audio_stream_player.stop()
+	elif stream is AudioStreamMP3:
+		if stream.loop:
+			audio_stream_player.stop()
+	if not audio_stream_player.playing:
+		audio_stream_player.stream = null
 
 func _ready():
 	var player = get_tree().get_first_node_in_group("Player")
@@ -189,6 +220,7 @@ func physics_process_normal(delta):
 					
 					player.take_damage(20)
 					player.bounce(650)
+					play_audio(hit_sfx)
 					
 	if vulnerable:
 		isattacking = false
@@ -209,6 +241,7 @@ func physics_process_normal(delta):
 					print("spotted!")
 					spotted_player = true
 					is_preparing = true
+					play_audio(shock_sfx)
 					prep_timer.start() # Starts the 2-second countdown in the background
 			
 			# 2. Check if we are still preparing
@@ -220,6 +253,8 @@ func physics_process_normal(delta):
 			# 3. Timer is finished! Charge at the player!
 			elif (not is_preparing) and spotted_player:
 				
+				if not isattacking:
+					play_audio(charge_sfx)
 				isattacking = true
 				
 				var direction = sign(player.global_position.x - global_position.x)
@@ -455,6 +490,8 @@ func check_player_impact(delta):
 					perform_bounce(Player)
 				else:
 					launch_enemy(Player)
+				if not vulnerable:
+					play_audio(hurt_sfx)
 				vulnerable = true
 
 func test_player_impact(delta):

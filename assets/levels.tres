@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://w73fkbc7pebe" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr12.png" id="22_v4uu0"]
 [ext_resource type="Texture2D" uid="uid://0onqcrbo0uom" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr14.png" id="23_4jqr8"]
 [ext_resource type="PackedScene" uid="uid://chivuxah6fbkc" path="res://scenes/levels/tutorial.tscn" id="25_e1edl"]
+[ext_resource type="AudioStream" uid="uid://dlv4a7pps2hcb" path="res://assets/audio/music/big_farma.ogg" id="26_sav0g"]
 
 [sub_resource type="Resource" id="Resource_jk1qb"]
 script = ExtResource("2_x5qbs")
@@ -93,6 +94,7 @@ metadata/_custom_type_script = "uid://7xfldx24oh8g"
 [sub_resource type="Resource" id="Resource_q8iik"]
 script = ExtResource("1_8dco6")
 title = "Big Farma"
+music = ExtResource("26_sav0g")
 scene = ExtResource("3_x5qbs")
 rankings = Array[ExtResource("2_x5qbs")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
 metadata/_custom_type_script = "uid://7xfldx24oh8g"
