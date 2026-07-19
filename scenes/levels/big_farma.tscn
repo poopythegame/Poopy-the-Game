@@ -5953,7 +5953,7 @@ position = Vector2(-17, -119)
 shape = SubResource("RectangleShape2D_0cdpu")
 
 [node name="Player" parent="." unique_id=1621195173 groups=["Player"] instance=ExtResource("1_player")]
-position = Vector2(24922, 3389)
+position = Vector2(-4603, -728)
 
 [node name="AnimatableBody2D_1" parent="." unique_id=704751793 instance=ExtResource("1_animatable_body_2d")]
 position = Vector2(18432, 1632)
@@ -6416,6 +6416,3 @@ _points = SubResource("SS2D_Point_Array_645")
 _meshes = Array[ExtResource("20_d2tka")]([SubResource("Resource_mn5d3"), SubResource("Resource_nk0kf")])
 shape_material = ExtResource("32_24aq3")
 collision_polygon_node_path = NodePath("../Terrain25_CollisionPolygon")
-
-[node name="LevelStart2" parent="." unique_id=496126979 instance=ExtResource("1_lvl_start")]
-position = Vector2(25188, 3324)
