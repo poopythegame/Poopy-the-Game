@@ -10,19 +10,25 @@
 [ext_resource type="Texture2D" uid="uid://b1qrg2wkkc7m5" path="res://assets/textures/ui/rankings/rank_b.png" id="4_dte0d"]
 [ext_resource type="Texture2D" uid="uid://bbxx8alakl0ld" path="res://assets/textures/ui/rankings/player_animations/p_rank_fr1.png" id="4_e1edl"]
 [ext_resource type="Texture2D" uid="uid://cxspx6nfxldoy" path="res://assets/textures/ui/rankings/rank_c.png" id="5_4o7sf"]
+[ext_resource type="AudioStream" uid="uid://cx0ma0pgladu5" path="res://assets/audio/music/ranking_funk_p.ogg" id="6_e58h7"]
 [ext_resource type="Texture2D" uid="uid://c76qtc5snc638" path="res://assets/textures/ui/rankings/player_animations/a_rank_fr0.png" id="6_sav0g"]
 [ext_resource type="Texture2D" uid="uid://fyib8attxvyu" path="res://assets/textures/ui/rankings/player_animations/a_rank_fr1.png" id="7_a7loy"]
+[ext_resource type="AudioStream" uid="uid://c8027nxqek3ip" path="res://assets/audio/music/p_rank.ogg" id="7_h2k1g"]
 [ext_resource type="Texture2D" uid="uid://duuwmaebhmabm" path="res://assets/textures/ui/rankings/rank_d.png" id="7_thqn0"]
 [ext_resource type="Texture2D" uid="uid://cm52niresotd6" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr0.png" id="9_0syye"]
 [ext_resource type="Texture2D" uid="uid://bxfj2a7kqusl0" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr1.png" id="10_nuwws"]
+[ext_resource type="AudioStream" uid="uid://dmudigh1dtlb1" path="res://assets/audio/music/ranking_funk_a.ogg" id="11_3dhcv"]
 [ext_resource type="Texture2D" uid="uid://behhk7f3nw1ed" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr2.png" id="11_owg44"]
+[ext_resource type="AudioStream" uid="uid://drjb7op0m0ri5" path="res://assets/audio/music/a_rank.ogg" id="12_cxb4r"]
 [ext_resource type="Texture2D" uid="uid://cadobt2c1luk8" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr0.png" id="13_e1edl"]
 [ext_resource type="Texture2D" uid="uid://cluts3ihvcgxe" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr1.png" id="14_sav0g"]
 [ext_resource type="Texture2D" uid="uid://b3gv55rshr68l" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr0.png" id="16_h2k1g"]
 [ext_resource type="Texture2D" uid="uid://dwfg0jg70yuyw" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr2.png" id="17_3dhcv"]
+[ext_resource type="AudioStream" uid="uid://djbpkmmoaiser" path="res://assets/audio/music/ranking_funk_b.ogg" id="17_4cit1"]
 [ext_resource type="Texture2D" uid="uid://dq7xceluw6c70" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr4.png" id="18_cxb4r"]
 [ext_resource type="Texture2D" uid="uid://bartbwj64ubb4" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr6.png" id="19_4cit1"]
 [ext_resource type="Texture2D" uid="uid://bnvb13c4yjry5" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr8.png" id="20_ttfwy"]
+[ext_resource type="AudioStream" uid="uid://64nhvswoqd3g" path="res://assets/audio/music/ranking_funk_c.ogg" id="21_ttfwy"]
 [ext_resource type="Texture2D" uid="uid://bndst27a07hls" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr10.png" id="21_vakqa"]
 [ext_resource type="Texture2D" uid="uid://w73fkbc7pebe" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr12.png" id="22_v4uu0"]
 [ext_resource type="Texture2D" uid="uid://0onqcrbo0uom" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr14.png" id="23_4jqr8"]
@@ -37,6 +43,8 @@ small_icon = ExtResource("3_4o7sf")
 animation_frames = Array[Texture2D]([ExtResource("3_smksl"), ExtResource("4_e1edl")])
 animation_fps = 12.0
 time = 61.0
+music_track_1 = ExtResource("6_e58h7")
+music_track_2 = ExtResource("7_h2k1g")
 show_portraits_background = 2
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
@@ -48,6 +56,8 @@ small_icon = ExtResource("3_q8iik")
 animation_frames = Array[Texture2D]([ExtResource("6_sav0g"), ExtResource("7_a7loy")])
 animation_fps = 30.0
 time = 70.0
+music_track_1 = ExtResource("11_3dhcv")
+music_track_2 = ExtResource("12_cxb4r")
 show_portraits_background = 1
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
@@ -59,6 +69,7 @@ small_icon = ExtResource("4_dte0d")
 animation_frames = Array[Texture2D]([ExtResource("9_0syye"), ExtResource("10_nuwws"), ExtResource("11_owg44")])
 animation_fps = 12.0
 time = 85.0
+music_track_1 = ExtResource("17_4cit1")
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_flqon"]
@@ -69,6 +80,7 @@ small_icon = ExtResource("5_4o7sf")
 animation_frames = Array[Texture2D]([ExtResource("13_e1edl"), ExtResource("14_sav0g")])
 animation_fps = 5.0
 time = 120.0
+music_track_1 = ExtResource("21_ttfwy")
 is_animation_one_shot = true
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 

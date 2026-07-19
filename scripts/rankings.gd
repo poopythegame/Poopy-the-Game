@@ -3,6 +3,8 @@ class_name RankingsScreen
 
 @export var pre_reveal_animation_frames: Array[Texture2D]
 @export_custom(PROPERTY_HINT_NONE, "suffix:fps") var pre_reveal_animation_fps: float = 12.
+@export_group("Sounds")
+@export var drumroll_sound: AudioStream
 
 @onready var rankings := Global.get_ranks()
 @onready var rank_time_req: LabelSettings = load("uid://cy8xniqmjk0c1")
@@ -16,13 +18,14 @@ class_name RankingsScreen
 @onready var rank_animation_tr: TextureRect = $HBoxContainer/Sprite
 @onready var whiteout: ColorRect = $Whiteout
 @onready var portraits_background: PortraitsBackground = $PortraitsBackground
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var rank_animation_animated_texture: AnimatedTexture
 var curr_rank: RankDef
 
 func _ready() -> void:
 	rank_animation_animated_texture = rank_animation_tr.texture
-	var rank_id: int = Global.get_rank()
+	var rank_id: int = 1 # Global.get_rank()
 	curr_rank = Global.get_ranks()[rank_id]
 	rank_icon.texture = curr_rank.icon
 	var time := Global.get_time()
@@ -59,13 +62,26 @@ func start_animation_sequence():
 		index += 1
 	var tween = create_tween()
 	tween.tween_callback(func():
+		audio_stream_player.stream = drumroll_sound
+		audio_stream_player.play()
 		rank_animation_animated_texture.pause = false
-		pass).set_delay(2)
-	tween.tween_interval(2)
-	tween.tween_callback(func():
-		rank_icon_dummy_spacer.hide()
-		rank_icon.show())
-	tween.tween_property(rank_icon, "offset_transform_scale", Vector2(1, 1), 0.5)
+		pass)
+	tween.tween_await(audio_stream_player.finished)
+	if curr_rank.music_track_1 != null:
+		tween.tween_callback(func():
+			audio_stream_player.stream = curr_rank.music_track_1
+			audio_stream_player.play())
+		tween.tween_callback(func():
+			rank_icon_dummy_spacer.hide()
+			rank_icon.show()).set_delay(1)
+		tween.tween_property(rank_icon, "offset_transform_scale", Vector2(1, 1), 0.5)
+	else:
+		tween.tween_property(rank_icon, "offset_transform_scale", Vector2(1, 1), 0.5)
+	if curr_rank.music_track_2 != null:
+		tween.tween_await(audio_stream_player.finished)
+		tween.tween_callback(func():
+			audio_stream_player.stream = curr_rank.music_track_2
+			audio_stream_player.play())
 	if curr_rank.show_portraits_background != 0:
 		if curr_rank.show_portraits_background == 2:
 			portraits_background.scroll_speed = 200

@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d32ididyh760j" path="res://assets/textures/ui/background.png" id="2_bh0lf"]
 [ext_resource type="Texture2D" uid="uid://d02hqhai6lg5l" path="res://assets/textures/ui/rankings/player_animations/lookat_fr0.png" id="3_eb2ox"]
 [ext_resource type="Texture2D" uid="uid://bquslnqm0gatp" path="res://assets/textures/ui/rankings/player_animations/lookat_fr1.png" id="4_o3po0"]
+[ext_resource type="AudioStream" uid="uid://dr8rbqur57di" path="res://assets/audio/effects/drumroll.ogg" id="5_o3po0"]
 [ext_resource type="Script" uid="uid://dasf3yjhaca2b" path="res://scripts/portraits_background.gd" id="6_eb2ox"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_k51th"]
@@ -19,6 +20,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_20hek")
 pre_reveal_animation_frames = Array[Texture2D]([ExtResource("2_3qrqb"), ExtResource("3_eb2ox"), ExtResource("4_o3po0")])
+drumroll_sound = ExtResource("5_o3po0")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1663095947]
 
 [node name="Background" type="TextureRect" parent="." unique_id=1933854276]
 z_index = -3
@@ -128,6 +132,7 @@ layout_mode = 2
 [node name="Whiteout" type="ColorRect" parent="." unique_id=970893396]
 visible = false
 modulate = Color(1, 1, 1, 0)
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

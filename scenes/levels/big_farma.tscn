@@ -5953,7 +5953,10 @@ position = Vector2(-17, -119)
 shape = SubResource("RectangleShape2D_0cdpu")
 
 [node name="Player" parent="." unique_id=1621195173 groups=["Player"] instance=ExtResource("1_player")]
-position = Vector2(-4603, -728)
+position = Vector2(25167, 3388)
+
+[node name="LevelStart" parent="." unique_id=474957435 instance=ExtResource("1_lvl_start")]
+position = Vector2(25218, 3325)
 
 [node name="AnimatableBody2D_1" parent="." unique_id=704751793 instance=ExtResource("1_animatable_body_2d")]
 position = Vector2(18432, 1632)
@@ -6070,9 +6073,6 @@ position = Vector2(10832, -80)
 [node name="Spring" parent="." unique_id=901425689 instance=ExtResource("1_spring")]
 position = Vector2(18896, 2160)
 force = 900.0
-
-[node name="LevelStart" parent="." unique_id=474957435 instance=ExtResource("1_lvl_start")]
-position = Vector2(-4512, -792)
 
 [node name="Coin" parent="." unique_id=327263241 instance=ExtResource("1_coin")]
 position = Vector2(7672, -464)
