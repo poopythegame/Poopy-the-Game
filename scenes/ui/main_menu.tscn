@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dady2wku1xusy"]
 
 [ext_resource type="Script" uid="uid://m7v8vgf4k5re" path="res://scripts/main_menu.gd" id="1_8ekit"]
-[ext_resource type="AudioStream" uid="uid://cotx67p5iwda" path="res://assets/audio/music/title.ogg" id="2_877pj"]
 [ext_resource type="Texture2D" uid="uid://d32ididyh760j" path="res://assets/textures/ui/background.png" id="2_n4uci"]
 [ext_resource type="Script" uid="uid://dasf3yjhaca2b" path="res://scripts/portraits_background.gd" id="3_877pj"]
 [ext_resource type="Texture2D" uid="uid://bjejowtmy7kpn" path="res://assets/textures/ui/main_menu/logo_incomplete.png" id="4_8ekit"]
@@ -48,7 +47,6 @@ script = ExtResource("1_8ekit")
 labels_slide_time = 0.25
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2039563538]
-stream = ExtResource("2_877pj")
 volume_db = -10.0
 
 [node name="Background" type="TextureRect" parent="." unique_id=1645064994]

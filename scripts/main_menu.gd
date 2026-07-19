@@ -15,6 +15,10 @@ enum Screen {
 
 @onready var label_settings: LabelSettings = load("uid://o04nc50d6jgm")
 @onready var title_logo_complete: Texture2D = load("uid://b5w0pc7x5csx5")
+@onready var title_audio_stream: AudioStreamOggVorbis = load("uid://cotx67p5iwda")
+@onready var menu_audio_stream: AudioStreamOggVorbis = load("uid://b26trx8dyw833")
+
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 @onready var title_screen: MarginContainer = $TitleScreen
 @onready var title_logo: TextureRect = $TitleScreen/VBoxContainer/Logo
@@ -22,7 +26,6 @@ enum Screen {
 @onready var title_info_box: PanelContainer = $TitleScreen/VBoxContainer/Info
 @onready var background: TextureRect = $Background
 @onready var whiteout: ColorRect = $Whiteout
-@onready var title_theme_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var title_poopy: AnimatedSprite2D = $TitleScreen/VBoxContainer/Logo/PoopyContainer/Poopy
 @onready var title_portraits_background: Node2D = $TitleScreen/PortraitsBackground
 @onready var title_infobox: PanelContainer = $TitleScreen/VBoxContainer/Info
@@ -72,7 +75,7 @@ func _input(event: InputEvent) -> void:
 	if screen == Screen.TITLE:
 		if event.is_action_pressed("start") and not event.is_echo():
 			title_title_reveal_tween.stop()
-			title_theme_player.stop()
+			audio_stream_player.stop()
 			background.show()
 			change_screen(Screen.MENU)
 		elif event.is_action_pressed("esc") and not event.is_echo():
@@ -138,7 +141,7 @@ func title_begin_title_reveal():
 		title_logo.texture = title_logo_complete
 		title_joke_logo.hide()
 		background.show()
-		title_theme_player.play()
+		audio_stream_player.play()
 		title_info_box.show()
 		title_poopy.show()
 		title_poopy.play("jump")
@@ -317,16 +320,25 @@ func change_screen(new_screen: Screen):
 		title_screen.show()
 		menu_screen.hide()
 		lavel_select_screen.hide()
+		audio_stream_player.stop()
+		audio_stream_player.stream = title_audio_stream
 		title_begin_title_reveal()
 	elif new_screen == Screen.MENU:
 		background.show()
 		title_screen.hide()
 		menu_screen.show()
+		audio_stream_player.stream = menu_audio_stream
+		audio_stream_player.play()
 		lavel_select_screen.hide()
 	elif new_screen == Screen.LEVEL_SELECT:
 		background.show()
 		title_screen.hide()
 		menu_screen.hide()
+		if not audio_stream_player.stream == menu_audio_stream:
+			audio_stream_player.stream = menu_audio_stream
+			audio_stream_player.play()
+		elif not audio_stream_player.playing:
+			audio_stream_player.play()
 		lavel_select_screen.show()
 		level_select_position_elements()
 	screen = new_screen
