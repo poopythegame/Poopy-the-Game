@@ -8,7 +8,6 @@ class_name RankingsScreen
 
 @onready var rankings := Global.get_ranks()
 @onready var rank_time_req: LabelSettings = load("uid://cy8xniqmjk0c1")
-# @onready var rank_display_scene: PackedScene = load("uid://cxqog80c2q55h")
 @onready var main_menu_scene: PackedScene = load("uid://dady2wku1xusy")
 
 @onready var rank_icon: TextureRect = $HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RankIcon
@@ -25,7 +24,7 @@ var curr_rank: RankDef
 
 func _ready() -> void:
 	rank_animation_animated_texture = rank_animation_tr.texture
-	var rank_id: int = 1 # Global.get_rank()
+	var rank_id: int = Global.get_rank()
 	curr_rank = Global.get_ranks()[rank_id]
 	rank_icon.texture = curr_rank.icon
 	var time := Global.get_time()

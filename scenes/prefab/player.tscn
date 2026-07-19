@@ -5,8 +5,10 @@
 [ext_resource type="SpriteFrames" uid="uid://cxxlgiysiu6jf" path="res://assets/animations/player.tres" id="2_mx6bk"]
 [ext_resource type="AudioStream" uid="uid://dbwku6gblnxkn" path="res://assets/audio/effects/airdash1.ogg" id="2_ob2so"]
 [ext_resource type="AudioStream" uid="uid://cw31c8fmybvyj" path="res://assets/audio/effects/airdash2.ogg" id="3_l8smq"]
+[ext_resource type="AudioStream" uid="uid://cbnujwkd4ai1m" path="res://assets/audio/effects/screw_dive1.ogg" id="4_37wxj"]
 [ext_resource type="AudioStream" uid="uid://bl8djkkg5iwbr" path="res://assets/audio/effects/brake_skid.ogg" id="4_psnur"]
 [ext_resource type="AudioStream" uid="uid://o7aom6ckhliv" path="res://assets/audio/effects/grapple1.ogg" id="5_gumar"]
+[ext_resource type="AudioStream" uid="uid://bwccju81byha0" path="res://assets/audio/effects/screw_dive2.ogg" id="5_isfnt"]
 [ext_resource type="AudioStream" uid="uid://dpqd3cyqpiyjm" path="res://assets/audio/effects/grapple2.ogg" id="6_2v2me"]
 [ext_resource type="AudioStream" uid="uid://8a3pls25jtt4" path="res://assets/audio/effects/jump1.ogg" id="7_5q2mw"]
 [ext_resource type="AudioStream" uid="uid://6hc85k3qxtc8" path="res://assets/audio/effects/jump2.ogg" id="8_vg2fa"]
@@ -35,6 +37,7 @@ floor_snap_length = 12.0
 safe_margin = 0.16
 script = ExtResource("1_3r5ht")
 airdash_sfx = Array[AudioStream]([ExtResource("2_ob2so"), ExtResource("3_l8smq")])
+screwdive_sfx = Array[AudioStream]([ExtResource("4_37wxj"), ExtResource("5_isfnt")])
 skid_sfx = Array[AudioStream]([ExtResource("4_psnur")])
 grapple_sfx = Array[AudioStream]([ExtResource("5_gumar"), ExtResource("6_2v2me")])
 jump_sfx = Array[AudioStream]([ExtResource("7_5q2mw"), ExtResource("8_vg2fa")])

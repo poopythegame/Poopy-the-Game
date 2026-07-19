@@ -1,7 +1,7 @@
 extends Node
 
 var time := true
-var current_level := 0
+var current_level := -1
 var coins: int = 0
 var is_quitting := false
 @onready var levels: LevelsDesc = load("uid://bhtmoith33eb6")
@@ -61,15 +61,25 @@ func _exit_tree() -> void:
 	ResourceSaver.save(save_data, save_path)
 
 func begin_level(index: int) -> void:
+	if index < 0:
+		return
 	var level := levels.levels[index]
+	var scene_tree := get_tree()
 	reset_coins()
-	var level_music_player := AudioStreamPlayer.new()
-	level_music_player.stream = level.music
-	level_music_player.autoplay = true
-	level_music_player.volume_db = -10
+	var level_music_player: AudioStreamPlayer
+	if index != current_level:
+		level_music_player = AudioStreamPlayer.new()
+		level_music_player.stream = level.music
+		level_music_player.name = "MusicPlayer"
+		level_music_player.autoplay = true
+		level_music_player.volume_db = -5
+	else:
+		level_music_player = scene_tree.current_scene.get_node("MusicPlayer")
+		level_music_player.autoplay = false
+		scene_tree.current_scene.remove_child(level_music_player)
 	var level_node := level.scene.instantiate()
 	level_node.add_child(level_music_player)
-	var scene_tree := get_tree()
+	current_level = index
 	scene_tree.change_scene_to_node(level_node)
 
 func add_coin():

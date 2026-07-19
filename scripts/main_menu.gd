@@ -129,7 +129,7 @@ func _input(event: InputEvent) -> void:
 			level_select_switch(1)
 			play_audio(right_sfx)
 		elif event.is_action_pressed("ui_accept") and not event.is_echo():
-			Global.current_level = level_select_selected
+			# Global.current_level = level_select_selected
 			play_audio(select_sfx)
 			# await music_player.finished
 			Global.begin_level(level_select_selected)

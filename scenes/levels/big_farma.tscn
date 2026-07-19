@@ -5953,10 +5953,10 @@ position = Vector2(-17, -119)
 shape = SubResource("RectangleShape2D_0cdpu")
 
 [node name="Player" parent="." unique_id=1621195173 groups=["Player"] instance=ExtResource("1_player")]
-position = Vector2(25167, 3388)
+position = Vector2(-4556, -733)
 
 [node name="LevelStart" parent="." unique_id=474957435 instance=ExtResource("1_lvl_start")]
-position = Vector2(25218, 3325)
+position = Vector2(-4505, -796)
 
 [node name="AnimatableBody2D_1" parent="." unique_id=704751793 instance=ExtResource("1_animatable_body_2d")]
 position = Vector2(18432, 1632)

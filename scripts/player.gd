@@ -4,7 +4,6 @@ class_name Player
 @onready var main: InGameOverlay = get_parent().get_node("InGameOverlay")
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var collision: CollisionShape2D = $Collision
-@onready var camera_2d: Camera2D = $Camera2D
 # @onready var anchor: Area2D = $"../anchor"
 @onready var rope_line: Line2D = $Line2D # Make sure the name matches your node
 @onready var floor_cast: RayCast2D = $Collision/Raycast
@@ -14,6 +13,7 @@ class_name Player
 @export var max_health: int = 100
 @export_group("Sounds")
 @export var airdash_sfx: Array[AudioStream]
+@export var screwdive_sfx: Array[AudioStream]
 @export var skid_sfx: Array[AudioStream]
 @export var grapple_sfx: Array[AudioStream]
 # @export var run_sfx: Array[AudioStream]
@@ -189,6 +189,27 @@ func play_audio(streams: Array[AudioStream]):
 	audio_stream_player.stream = streams[choice]
 	audio_stream_player.play()
 
+func play_all_audio(streams: Array[AudioStream]):
+	var polystream := AudioStreamPolyphonic.new()
+	audio_stream_player.stream = polystream
+	audio_stream_player.play()
+	var playback: AudioStreamPlaybackPolyphonic = audio_stream_player.get_stream_playback()
+	for stream in streams:
+		playback.play_stream(stream)
+
+# mutlistreams: Array[Array[AudioStream]]
+func play_all_audio_multiselect(multistreams: Array[Array]):
+	var streams: Array[AudioStream] = []
+	for multistream: Array[AudioStream] in multistreams:
+		var choice = randi_range(0, len(multistream) - 1)
+		streams.append(multistream[choice])
+	var polystream := AudioStreamPolyphonic.new()
+	audio_stream_player.stream = polystream
+	audio_stream_player.play()
+	var playback: AudioStreamPlaybackPolyphonic = audio_stream_player.get_stream_playback()
+	for stream in streams:
+		playback.play_stream(stream)
+
 func stop_audio():
 	var stream := audio_stream_player.stream
 	if stream is AudioStreamWAV:
@@ -243,7 +264,7 @@ func attempt_grapple_start():
 
 	if target_anchor:
 		is_grappling = true
-		play_audio(grapple_sfx)
+		play_all_audio(grapple_sfx)
 		grapple_anchor_pos = target_anchor.global_position
 		
 		# Set the rope length to the current distance. 
@@ -606,20 +627,20 @@ func physics_process_normal(delta):
 					
 					canstomp = false
 					isstomping = true
-					play_audio(stomp_sfx)
+					play_all_audio_multiselect([stomp_sfx, screwdive_sfx])
 					isairdashing = false				
 				elif motion.y >= 450:
 					motion.y += 225
 					
 					canstomp = false
 					isstomping = true
-					play_audio(stomp_sfx)
+					play_all_audio_multiselect([stomp_sfx, screwdive_sfx])
 					isairdashing = false
 			elif canairdash and abs(motion.x) >= 20:
 				motion.x += abs(motion.x) * 0.15 * Input.get_axis("left", "right")
 				canairdash = false
 				isairdashing = true
-				play_audio(airdash_sfx)
+				play_all_audio_multiselect([airdash_sfx, screwdive_sfx])
 				isstomping = false
 	
 	#This is the speedometer
@@ -639,8 +660,9 @@ func physics_process_normal(delta):
 	var direction = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
 	
 	if direction == -(sign(motion.x)) and (abs(motion.x) >= (topspeed/1.5)) and is_on_floor():
+		if not isskidding:
+			play_audio(skid_sfx)
 		isskidding = true
-		play_audio(skid_sfx)
 	if abs(motion.x) == 0 or (not is_on_floor()) or direction != -(sign(motion.x)):
 		isskidding = false
 	if isskidding:
@@ -711,8 +733,9 @@ func physics_process_normal(delta):
 
 #rolling
 	if Input.is_action_pressed("down") and is_on_floor() and abs(motion.x) > 25:
+		if not isrolling:
+			play_audio(roll_sfx)
 		isrolling = true
-		play_audio(roll_sfx)
 	if Input.is_action_just_released("down") or not is_on_floor() or abs(motion.x) <= 25:
 		isrolling = false
 		
@@ -790,10 +813,6 @@ func take_damage(amount: float) -> void:
 	health -= amount
 	if health <= 0:
 		die()
-		var death_audio_tween := create_tween()
-		death_audio_tween.tween_callback(func(): play_audio(final_hit_sfx))
-		death_audio_tween.tween_await(audio_stream_player.finished)
-		death_audio_tween.tween_callback(func(): play_audio(death_sfx))
 	else:
 		play_audio(hit_sfx)
 
@@ -950,16 +969,20 @@ func die():
 	var mat: ShaderMaterial = sprite.material
 	death_tween.set_ease(Tween.EASE_IN)
 	death_tween.set_trans(Tween.TRANS_CUBIC)
-	death_tween.tween_property(mat, "shader_parameter/t", 1.0, 0.5)
-	death_tween.tween_interval(0.3)
+	death_tween.tween_callback(func():
+		play_audio(final_hit_sfx))
+	death_tween.tween_await(audio_stream_player.finished)
+	death_tween.tween_callback(func():
+		play_audio(death_sfx))
+	death_tween.tween_await(audio_stream_player.finished)
+	death_tween.parallel().tween_property(mat, "shader_parameter/t", 1.0, audio_stream_player.stream.get_length())
 	death_tween.tween_callback(restart)
-	Global.reset_coins()
 
 func restart():
 	death_tween.kill()
 	var mat: ShaderMaterial = $Sprite.material
 	mat.set_shader_parameter("t", 0.0)
-	get_tree().reload_current_scene()
+	Global.begin_level(Global.current_level)
 
 #Fairer Cemera
 

@@ -77,6 +77,7 @@ size_flags_vertical = 3
 theme_override_constants/margin_bottom = 80
 
 [node name="RanksContainer" type="GridContainer" parent="HBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/MarginContainer" unique_id=1186523355]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_vertical = 8
 columns = 2
