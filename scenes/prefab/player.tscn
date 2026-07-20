@@ -52,7 +52,7 @@ material = SubResource("ShaderMaterial_jnnhn")
 position = Vector2(0, 1)
 scale = Vector2(0.0534135, 0.0534135)
 sprite_frames = ExtResource("2_mx6bk")
-animation = &"idle"
+animation = &"airdash"
 autoplay = "idle"
 offset = Vector2(0, -270.04)
 
