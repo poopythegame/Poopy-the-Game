@@ -891,7 +891,7 @@ func animate():
 			
 		elif abs(motion.x) >= topspeed and not isskidding: # If you've reached, or are at least close enough to your Top Speed...
 			$Sprite.play("run")
-			$Sprite.speed_scale = abs(motion.x)/90
+			$Sprite.speed_scale = clamp(abs(motion.x)/90, 1.5, 8)
 			stop_audio()
 			# Play Running Animation, quickening it even further if you escalate past your Top Speed.
 			
