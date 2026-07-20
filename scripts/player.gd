@@ -33,7 +33,7 @@ var health: float = max_health:
 		if main.is_node_ready():
 			main.log_health(health, max_health)
 var has_initialized_health = false
-
+ 
 ### ### Maddie's Ultra-Simple Sonic Physics!! ### ###
 ## The absolute bare minimum needed to make a Sonic fangame.
 

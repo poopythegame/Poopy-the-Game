@@ -55,7 +55,7 @@ right_sfx = Array[AudioStream]([ExtResource("4_5dct7")])
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=453858802]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=2039563538]
-volume_db = -10.0
+volume_db = -5.0
 
 [node name="Background" type="TextureRect" parent="." unique_id=1645064994]
 visible = false
