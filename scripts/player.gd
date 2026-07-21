@@ -980,9 +980,12 @@ func die():
 		play_audio(final_hit_sfx))
 	death_tween.tween_await(audio_stream_player.finished)
 	death_tween.tween_callback(func():
-		play_audio(death_sfx))
+		play_audio(death_sfx)
+		var tween2 := create_tween()
+		tween2.tween_interval(audio_stream_player.stream.get_length() / 4 * 3)
+		tween2.tween_property(mat, "shader_parameter/t", 1.0, audio_stream_player.stream.get_length() / 4)
+		tween2.play())
 	death_tween.tween_await(audio_stream_player.finished)
-	death_tween.parallel().tween_property(mat, "shader_parameter/t", 1.0, audio_stream_player.stream.get_length())
 	death_tween.tween_callback(restart)
 
 func restart():
