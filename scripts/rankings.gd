@@ -34,18 +34,19 @@ func _ready() -> void:
 	time_label.text = "Your time: %02d:%02d.%03d" % [minutes, seconds, millis]
 	var ranks := Global.get_ranks()
 	for rank in ranks:
-		var icon: TextureRect = TextureRect.new()
-		icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-		var max_time_label: Label = Label.new()
-		max_time_label.label_settings = rank_time_req
-		icon.texture = rank.small_icon
-		var millis2 := fmod(rank.time, 1) * 100
-		var seconds2 := fmod(rank.time, 60)
-		var minutes2 := fmod(rank.time, 3600) / 60 
-		max_time_label.text = "%02d:%02d.%03d" % [minutes2, seconds2, millis2]
-		ranks_container.add_child(icon)
-		ranks_container.add_child(max_time_label)
+		if rank.use_time:
+			var icon: TextureRect = TextureRect.new()
+			icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			var max_time_label: Label = Label.new()
+			max_time_label.label_settings = rank_time_req
+			icon.texture = rank.small_icon
+			var millis2 := fmod(rank.time, 1) * 100
+			var seconds2 := fmod(rank.time, 60)
+			var minutes2 := fmod(rank.time, 3600) / 60 
+			max_time_label.text = "%02d:%02d.%03d" % [minutes2, seconds2, millis2]
+			ranks_container.add_child(icon)
+			ranks_container.add_child(max_time_label)
 	start_animation_sequence()
 
 func start_animation_sequence():

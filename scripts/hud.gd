@@ -56,7 +56,7 @@ func calculate_rank():
 	var best_rank_time := INF
 	for i in len(ranks):
 		var rank_def := ranks[i]
-		if time <= rank_def.time and rank_def.time < best_rank_time:
+		if (time <= rank_def.time or not rank_def.use_time) and rank_def.time < best_rank_time:
 			rank = i
 			best_rank_time = rank_def.time
 	Global.set_rank(rank)
