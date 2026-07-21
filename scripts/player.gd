@@ -324,8 +324,10 @@ func physics_process_grapple(delta: float):
 	
 	# 5. WALL COLLISION HANDLING
 	# If we hit a wall while swinging, we need to update 'motion' or we'll stick.
-	#if is_on_wall() or is_on_floor():
-		#motion = get_real_velocity()
+	if $Collision/WallCast.is_colliding() and is_on_wall():
+		motion.x = 0
+	if $Collision/Raycast.is_colliding and is_on_floor():
+		motion.y = 0
 		# Optional: If you hit a floor, maybe end the grapple?
 		#stop_grapple() 
 
@@ -597,7 +599,6 @@ func physics_process_normal(delta):
 		#elif (len(actionlist) - 1) < index:
 		#	index = 0
 	
-#RESTART OPTION
 
 #POOPY MOVESET
 	
@@ -779,7 +780,11 @@ func physics_process_normal(delta):
 			# Get sent right back down.
 
 	if is_on_wall() and $Collision/WallCast.is_colliding(): # If you bump into a wall...
-		motion.x = 0
+		if not grounded:
+			motion.x = 0
+		elif grounded:
+			if abs(slopeangle) <= 0.25:
+				motion.x = 0
 		# Stop moving.
 
 	animate()
@@ -886,7 +891,7 @@ func animate():
 			
 		elif abs(motion.x) >= topspeed and not isskidding: # If you've reached, or are at least close enough to your Top Speed...
 			$Sprite.play("run")
-			$Sprite.speed_scale = abs(motion.x)/90
+			$Sprite.speed_scale = clamp(abs(motion.x)/90, 1.5, 8)
 			stop_audio()
 			# Play Running Animation, quickening it even further if you escalate past your Top Speed.
 			
