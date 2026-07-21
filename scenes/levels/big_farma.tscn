@@ -5818,7 +5818,7 @@ position = Vector2(533.9997, -287.9999)
 
 [sub_resource type="Resource" id="SS2D_Point_630"]
 script = ExtResource("1_point")
-position = Vector2(536, -520)
+position = Vector2(533.9997, -520.0001)
 
 [sub_resource type="Resource" id="SS2D_Point_631"]
 script = ExtResource("1_point")
@@ -5826,7 +5826,7 @@ position = Vector2(2079.9976, -520.0001)
 
 [sub_resource type="Resource" id="SS2D_Point_632"]
 script = ExtResource("1_point")
-position = Vector2(2080, -160)
+position = Vector2(2079.9976, -160.00005)
 
 [sub_resource type="Resource" id="SS2D_Point_633"]
 script = ExtResource("1_point")
