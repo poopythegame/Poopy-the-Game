@@ -33,7 +33,7 @@ var health: float = max_health:
 		if main.is_node_ready():
 			main.log_health(health, max_health)
 var has_initialized_health = false
- 
+
 ### ### Maddie's Ultra-Simple Sonic Physics!! ### ###
 ## The absolute bare minimum needed to make a Sonic fangame.
 
@@ -221,6 +221,8 @@ func stop_audio():
 	elif stream is AudioStreamMP3:
 		if stream.loop:
 			audio_stream_player.stop()
+	elif stream is AudioStreamPolyphonic:
+		audio_stream_player.stop()
 	if not audio_stream_player.playing:
 		audio_stream_player.stream = null
 
@@ -978,9 +980,12 @@ func die():
 		play_audio(final_hit_sfx))
 	death_tween.tween_await(audio_stream_player.finished)
 	death_tween.tween_callback(func():
-		play_audio(death_sfx))
+		play_audio(death_sfx)
+		var tween2 := create_tween()
+		tween2.tween_interval(audio_stream_player.stream.get_length() / 4 * 3)
+		tween2.tween_property(mat, "shader_parameter/t", 1.0, audio_stream_player.stream.get_length() / 4)
+		tween2.play())
 	death_tween.tween_await(audio_stream_player.finished)
-	death_tween.parallel().tween_property(mat, "shader_parameter/t", 1.0, audio_stream_player.stream.get_length())
 	death_tween.tween_callback(restart)
 
 func restart():
