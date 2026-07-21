@@ -1,8 +1,15 @@
 [gd_scene format=3 uid="uid://cnaop4u3ja5n"]
 
 [ext_resource type="PackedScene" uid="uid://fieh7uoavdwx" path="res://scenes/prefab/anchor.tscn" id="2_4gyqm"]
+[ext_resource type="AudioStream" uid="uid://bpffugbcboabh" path="res://assets/audio/effects/enemy_charge1.ogg" id="2_cj1wi"]
 [ext_resource type="Texture2D" uid="uid://dw17ue47e803s" path="res://assets/textures/elements/enemy/enemy_idle.png" id="2_hamy6"]
 [ext_resource type="Texture2D" uid="uid://baunvs2jksywf" path="res://assets/textures/elements/enemy/enemy_vulnerable.png" id="3_eb0v4"]
+[ext_resource type="AudioStream" uid="uid://cmf02cuknokyf" path="res://assets/audio/effects/enemy_hit1.ogg" id="3_i8esi"]
+[ext_resource type="AudioStream" uid="uid://dn6jhuvugym72" path="res://assets/audio/effects/enemy_hit2.ogg" id="4_6pt4c"]
+[ext_resource type="AudioStream" uid="uid://cqcexwbrbft7t" path="res://assets/audio/effects/enemy_hurt1.ogg" id="5_4bbuc"]
+[ext_resource type="AudioStream" uid="uid://cqiyq35b5vfua" path="res://assets/audio/effects/enemy_hurt2.ogg" id="6_fc4qb"]
+[ext_resource type="AudioStream" uid="uid://yhi5tfgii1s8" path="res://assets/audio/effects/enemy_shock1.ogg" id="7_4lg2v"]
+[ext_resource type="AudioStream" uid="uid://bk2bbci4odq42" path="res://assets/audio/effects/enemy_shock2.ogg" id="8_wihsh"]
 [ext_resource type="Script" uid="uid://c4s4srij28h5u" path="res://scripts/enemy.gd" id="GDScript_0e48y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0cdpu"]
@@ -30,9 +37,15 @@ b = Vector2(0, 23)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qi2p4"]
 size = Vector2(47, 46.5)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1921139154]
+[node name="Enemy" type="CharacterBody2D" unique_id=1921139154]
 collision_layer = 2
 script = ExtResource("GDScript_0e48y")
+charge_sfx = Array[AudioStream]([ExtResource("2_cj1wi")])
+hit_sfx = Array[AudioStream]([ExtResource("3_i8esi"), ExtResource("4_6pt4c")])
+hurt_sfx = Array[AudioStream]([ExtResource("5_4bbuc"), ExtResource("6_fc4qb")])
+shock_sfx = Array[AudioStream]([ExtResource("7_4lg2v"), ExtResource("8_wihsh")])
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=525685523]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1435156332]
 position = Vector2(1.0000005, -0.49999893)

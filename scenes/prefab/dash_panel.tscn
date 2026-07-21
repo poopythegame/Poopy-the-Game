@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c5oi22mpsg7se"]
 
 [ext_resource type="Script" uid="uid://cr3drh4v7i2ll" path="res://scripts/dash_panel.gd" id="1_proyd"]
+[ext_resource type="AudioStream" uid="uid://dhjqda2lyu4gx" path="res://assets/audio/effects/use_dash_panel.ogg" id="2_ufoi8"]
 [ext_resource type="Texture2D" uid="uid://poy2l887xr1d" path="res://assets/textures/placeholder/green.png" id="2_uiwi0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2g2j0"]
@@ -9,6 +10,7 @@ size = Vector2(68, 34)
 [node name="DashPanel" type="Node2D" unique_id=203562222]
 z_index = -1001
 script = ExtResource("1_proyd")
+use_sfx = Array[AudioStream]([ExtResource("2_ufoi8")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=849902879]
 scale = Vector2(0.065, 0.065)
@@ -20,3 +22,5 @@ region_rect = Rect2(0, 0, 1024, 509.0204)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=256236214]
 shape = SubResource("RectangleShape2D_2g2j0")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1912343754]

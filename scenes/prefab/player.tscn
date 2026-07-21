@@ -3,6 +3,23 @@
 [ext_resource type="Script" uid="uid://bkxp05jsmh5cy" path="res://scripts/player.gd" id="1_3r5ht"]
 [ext_resource type="Shader" uid="uid://jl2epyexbnke" path="res://shaders/destroy.gdshader" id="2_3wf3c"]
 [ext_resource type="SpriteFrames" uid="uid://cxxlgiysiu6jf" path="res://assets/animations/player.tres" id="2_mx6bk"]
+[ext_resource type="AudioStream" uid="uid://dbwku6gblnxkn" path="res://assets/audio/effects/airdash1.ogg" id="2_ob2so"]
+[ext_resource type="AudioStream" uid="uid://cw31c8fmybvyj" path="res://assets/audio/effects/airdash2.ogg" id="3_l8smq"]
+[ext_resource type="AudioStream" uid="uid://cbnujwkd4ai1m" path="res://assets/audio/effects/screw_dive1.ogg" id="4_37wxj"]
+[ext_resource type="AudioStream" uid="uid://bl8djkkg5iwbr" path="res://assets/audio/effects/brake_skid.ogg" id="4_psnur"]
+[ext_resource type="AudioStream" uid="uid://o7aom6ckhliv" path="res://assets/audio/effects/grapple1.ogg" id="5_gumar"]
+[ext_resource type="AudioStream" uid="uid://bwccju81byha0" path="res://assets/audio/effects/screw_dive2.ogg" id="5_isfnt"]
+[ext_resource type="AudioStream" uid="uid://dpqd3cyqpiyjm" path="res://assets/audio/effects/grapple2.ogg" id="6_2v2me"]
+[ext_resource type="AudioStream" uid="uid://8a3pls25jtt4" path="res://assets/audio/effects/jump1.ogg" id="7_5q2mw"]
+[ext_resource type="AudioStream" uid="uid://6hc85k3qxtc8" path="res://assets/audio/effects/jump2.ogg" id="8_vg2fa"]
+[ext_resource type="AudioStream" uid="uid://dbpltt6yp6cli" path="res://assets/audio/effects/roll.ogg" id="9_oq628"]
+[ext_resource type="AudioStream" uid="uid://bx83xl6vvsx38" path="res://assets/audio/effects/stomp_fall.ogg" id="10_37wxj"]
+[ext_resource type="AudioStream" uid="uid://bdn6jkrwclumg" path="res://assets/audio/effects/poopy_dead1.ogg" id="11_vg2fa"]
+[ext_resource type="AudioStream" uid="uid://ba17x1dn3jchl" path="res://assets/audio/effects/poopy_dead2.ogg" id="12_oq628"]
+[ext_resource type="AudioStream" uid="uid://b0nufg1nkflq0" path="res://assets/audio/effects/poopy_hurt2.ogg" id="13_37wxj"]
+[ext_resource type="AudioStream" uid="uid://bm5nmcn81vxmu" path="res://assets/audio/effects/poopy_hurt.ogg" id="14_isfnt"]
+[ext_resource type="AudioStream" uid="uid://dr1g6ao3afdws" path="res://assets/audio/effects/poopy_final_hit1.ogg" id="15_rp2o6"]
+[ext_resource type="AudioStream" uid="uid://bsn8omalnpl1d" path="res://assets/audio/effects/poopy_final_hit2.ogg" id="16_vc3vx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jnnhn"]
 shader = ExtResource("2_3wf3c")
@@ -19,6 +36,16 @@ floor_max_angle = 1.55334
 floor_snap_length = 12.0
 safe_margin = 0.16
 script = ExtResource("1_3r5ht")
+airdash_sfx = Array[AudioStream]([ExtResource("2_ob2so"), ExtResource("3_l8smq")])
+screwdive_sfx = Array[AudioStream]([ExtResource("4_37wxj"), ExtResource("5_isfnt")])
+skid_sfx = Array[AudioStream]([ExtResource("4_psnur")])
+grapple_sfx = Array[AudioStream]([ExtResource("5_gumar"), ExtResource("6_2v2me")])
+jump_sfx = Array[AudioStream]([ExtResource("7_5q2mw"), ExtResource("8_vg2fa")])
+roll_sfx = Array[AudioStream]([ExtResource("9_oq628")])
+stomp_sfx = Array[AudioStream]([ExtResource("10_37wxj")])
+death_sfx = Array[AudioStream]([ExtResource("11_vg2fa"), ExtResource("12_oq628")])
+hit_sfx = Array[AudioStream]([ExtResource("13_37wxj"), ExtResource("14_isfnt")])
+final_hit_sfx = Array[AudioStream]([ExtResource("15_rp2o6"), ExtResource("16_vc3vx")])
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1990345513]
 material = SubResource("ShaderMaterial_jnnhn")
@@ -57,10 +84,13 @@ one_shot = true
 
 [node name="Line2D" type="Line2D" parent="." unique_id=2085839944]
 visible = false
+z_index = -2
 position = Vector2(0, -20)
 points = PackedVector2Array(0, 0)
 width = 3.0
 default_color = Color(0.18359, 0.18359, 0.18359, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1465423261]
 
 [connection signal="timeout" from="ControlLockTimer" to="." method="_on_control_lock_timer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]

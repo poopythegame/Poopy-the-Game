@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://dady2wku1xusy"]
 
 [ext_resource type="Script" uid="uid://m7v8vgf4k5re" path="res://scripts/main_menu.gd" id="1_8ekit"]
-[ext_resource type="AudioStream" uid="uid://cotx67p5iwda" path="res://assets/audio/music/title.ogg" id="2_877pj"]
 [ext_resource type="Texture2D" uid="uid://d32ididyh760j" path="res://assets/textures/ui/background.png" id="2_n4uci"]
+[ext_resource type="AudioStream" uid="uid://lnvvw3422kgq" path="res://assets/audio/effects/menu_left.ogg" id="2_y1h5l"]
 [ext_resource type="Script" uid="uid://dasf3yjhaca2b" path="res://scripts/portraits_background.gd" id="3_877pj"]
+[ext_resource type="AudioStream" uid="uid://cuehpn8m2fakd" path="res://assets/audio/effects/menu_press.ogg" id="3_pw24t"]
+[ext_resource type="AudioStream" uid="uid://da8y4i2qvk454" path="res://assets/audio/effects/menu_right.ogg" id="4_5dct7"]
 [ext_resource type="Texture2D" uid="uid://bjejowtmy7kpn" path="res://assets/textures/ui/main_menu/logo_incomplete.png" id="4_8ekit"]
 [ext_resource type="FontFile" uid="uid://c6lup5uhxjaq8" path="res://assets/fonts/Comic-Sans-MS.ttf" id="4_n4uci"]
 [ext_resource type="Texture2D" uid="uid://og0yos4h6sda" path="res://assets/textures/ui/main_menu/option_box.png" id="5_y2j7i"]
@@ -46,10 +48,14 @@ grow_vertical = 2
 pivot_offset = Vector2(-69, -39)
 script = ExtResource("1_8ekit")
 labels_slide_time = 0.25
+left_sfx = Array[AudioStream]([ExtResource("2_y1h5l")])
+select_sfx = Array[AudioStream]([ExtResource("3_pw24t")])
+right_sfx = Array[AudioStream]([ExtResource("4_5dct7")])
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2039563538]
-stream = ExtResource("2_877pj")
-volume_db = -10.0
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=453858802]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=2039563538]
+volume_db = -5.0
 
 [node name="Background" type="TextureRect" parent="." unique_id=1645064994]
 visible = false

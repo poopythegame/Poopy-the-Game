@@ -3,7 +3,10 @@ class_name MainMenu
 
 @export var labels_slide_time := 2.
 @export var start_screen := Screen.TITLE
-@export_category("Level Select")
+@export_group("Sounds")
+@export var left_sfx: Array[AudioStream]
+@export var select_sfx: Array[AudioStream]
+@export var right_sfx: Array[AudioStream]
 
 enum Screen {
 	TITLE,
@@ -15,6 +18,11 @@ enum Screen {
 
 @onready var label_settings: LabelSettings = load("uid://o04nc50d6jgm")
 @onready var title_logo_complete: Texture2D = load("uid://b5w0pc7x5csx5")
+@onready var title_audio_stream: AudioStreamOggVorbis = load("uid://cotx67p5iwda")
+@onready var menu_audio_stream: AudioStreamOggVorbis = load("uid://b26trx8dyw833")
+
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
+
 
 @onready var title_screen: MarginContainer = $TitleScreen
 @onready var title_logo: TextureRect = $TitleScreen/VBoxContainer/Logo
@@ -22,7 +30,6 @@ enum Screen {
 @onready var title_info_box: PanelContainer = $TitleScreen/VBoxContainer/Info
 @onready var background: TextureRect = $Background
 @onready var whiteout: ColorRect = $Whiteout
-@onready var title_theme_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var title_poopy: AnimatedSprite2D = $TitleScreen/VBoxContainer/Logo/PoopyContainer/Poopy
 @onready var title_portraits_background: Node2D = $TitleScreen/PortraitsBackground
 @onready var title_infobox: PanelContainer = $TitleScreen/VBoxContainer/Info
@@ -52,6 +59,31 @@ var level_select_selected := 0
 var level_select_slide_tween: Tween
 var level_select_labels: Array[Label] = []
 
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+func play_audio(streams: Array[AudioStream]):
+	var choice = randi_range(0, len(streams) - 1)
+	# var not_playing_current_sfx := true
+	# for stream in streams:
+	# 	if stream == music_player.stream:
+	# 		not_playing_current_sfx = false
+	# if not_playing_current_sfx:
+	audio_stream_player.stream = streams[choice]
+	audio_stream_player.play()
+
+func stop_audio():
+	var stream := audio_stream_player.stream
+	if stream is AudioStreamWAV:
+		if stream.loop_mode != AudioStreamWAV.LOOP_DISABLED:
+			audio_stream_player.stop()
+	elif stream is AudioStreamOggVorbis:
+		if stream.loop:
+			audio_stream_player.stop()
+	elif stream is AudioStreamMP3:
+		if stream.loop:
+			audio_stream_player.stop()
+	if not audio_stream_player.playing:
+		audio_stream_player.stream = null
+
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		screen_rect = Rect2(0, 0, ProjectSettings.get("display/window/size/viewport_width"), ProjectSettings.get("display/window/size/viewport_height"))
@@ -72,27 +104,35 @@ func _input(event: InputEvent) -> void:
 	if screen == Screen.TITLE:
 		if event.is_action_pressed("start") and not event.is_echo():
 			title_title_reveal_tween.stop()
-			title_theme_player.stop()
+			music_player.stop()
 			background.show()
+			play_audio(select_sfx)
 			change_screen(Screen.MENU)
-		elif event.is_action_pressed("esc") and not event.is_echo():
-			_quit()
+		# elif event.is_action_pressed("esc") and not event.is_echo():
+		# 	_quit()
 	elif screen == Screen.MENU:
 		if event.is_action_pressed("left") and not event.is_echo():
-			menu_switch(menu_selected + 1)
-		elif event.is_action_pressed("right") and not event.is_echo():
 			menu_switch(menu_selected - 1)
+			play_audio(left_sfx)
+		elif event.is_action_pressed("right") and not event.is_echo():
+			menu_switch(menu_selected + 1)
+			play_audio(right_sfx)
 		elif event.is_action_pressed("ui_accept") and not event.is_echo():
 			if menu_selected == 1:
 				change_screen(Screen.LEVEL_SELECT)
+			play_audio(select_sfx)
 	elif screen == Screen.LEVEL_SELECT:
 		if event.is_action_pressed("left") and not event.is_echo():
 			level_select_switch(-1)
+			play_audio(left_sfx)
 		elif event.is_action_pressed("right") and not event.is_echo():
 			level_select_switch(1)
+			play_audio(right_sfx)
 		elif event.is_action_pressed("ui_accept") and not event.is_echo():
-			Global.current_level = level_select_selected
-			begin(levels[level_select_selected])
+			# Global.current_level = level_select_selected
+			play_audio(select_sfx)
+			# await music_player.finished
+			Global.begin_level(level_select_selected)
 
 func title_poopy_jump(t: float) -> void:
 	if t <= 0.03:
@@ -100,7 +140,6 @@ func title_poopy_jump(t: float) -> void:
 	title_poopy.position.y += title_poopy_jump_vel
 	if title_poopy.position.y > 330:
 		title_poopy.position.y = 330
-	print(title_poopy.position.y)
 	title_poopy_jump_vel += 50 * (t - title_poopy_last_frametime)
 	title_poopy_last_frametime = t
 
@@ -138,7 +177,7 @@ func title_begin_title_reveal():
 		title_logo.texture = title_logo_complete
 		title_joke_logo.hide()
 		background.show()
-		title_theme_player.play()
+		music_player.play()
 		title_info_box.show()
 		title_poopy.show()
 		title_poopy.play("jump")
@@ -157,17 +196,18 @@ func title_begin_title_reveal():
 	tween.tween_interval(3.50 - 1.20)
 	tween.tween_callback(func(): title_poopy.play("turn_around"))
 	tween.tween_interval(2./6)
+	tween.tween_callback(func(): title_poopy.play("armflap"))
+	tween.tween_interval(4.98 - 3.50)
 	tween.tween_property(whiteout, "modulate:a", 1, 0.2)
 	tween.tween_callback(func():
 		title_portraits_background.show()
 		title_portraits_background.process_mode = Node.PROCESS_MODE_INHERIT)
 	tween.tween_property(whiteout, "modulate:a", 0, 0.2)
-	tween.tween_callback(func(): title_poopy.play("armflap"))
-	tween.tween_interval(8.70 - 3.50)
+	tween.tween_interval(8.80 - 5.18)
 	tween.tween_callback(title_poopy.play.bind("dance1"))
-	tween.tween_interval(9.85 - 8.70)
+	tween.tween_interval(10.05 - 8.80)
 	tween.tween_callback(title_poopy.play.bind("armflap"))
-	tween.tween_interval(11.30 - 9.85)
+	tween.tween_interval(11.30 - 10.05)
 	tween.tween_subtween(title_poopy_run(1.10))
 	# tween.tween_interval(12.40 - 10.85)
 	tween.tween_callback(title_poopy.play.bind("armflap"))
@@ -187,7 +227,8 @@ func title_begin_title_reveal():
 	# tween.tween_callback(title_poopy.play.bind("dance3"))
 	# tween.tween_interval(48.20 - 39.70)
 	# tween.tween_callback(title_poopy.play.bind("armflap"))
-	tween.tween_interval(50.53 - 15.05)
+	tween.tween_interval(50.28 - 15.05)
+	tween.tween_property(audio_stream_player, "volume_linear", 0, .25)
 	tween.tween_callback(change_screen.bind(Screen.MENU))
 	tween.set_trans(Tween.TRANS_CUBIC)
 
@@ -305,10 +346,6 @@ func level_select_position_elements():
 		else:
 			label.hide()
 
-func begin(level: LevelDesc) -> void:
-	Global.reset_coins()
-	get_tree().change_scene_to_packed(level.scene)
-
 func _quit() -> void:
 	get_tree().quit()
 
@@ -317,16 +354,27 @@ func change_screen(new_screen: Screen):
 		title_screen.show()
 		menu_screen.hide()
 		lavel_select_screen.hide()
+		music_player.stop()
+		music_player.stream = title_audio_stream
 		title_begin_title_reveal()
 	elif new_screen == Screen.MENU:
+		whiteout.hide()
 		background.show()
 		title_screen.hide()
 		menu_screen.show()
+		music_player.stream = menu_audio_stream
+		music_player.play()
 		lavel_select_screen.hide()
 	elif new_screen == Screen.LEVEL_SELECT:
+		whiteout.hide()
 		background.show()
 		title_screen.hide()
 		menu_screen.hide()
+		if not music_player.stream == menu_audio_stream:
+			music_player.stream = menu_audio_stream
+			music_player.play()
+		elif not music_player.playing:
+			music_player.play()
 		lavel_select_screen.show()
 		level_select_position_elements()
 	screen = new_screen

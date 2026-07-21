@@ -5,20 +5,20 @@
 [ext_resource type="Shader" uid="uid://bgm5q57orvpth" path="res://shaders/grass_material.gdshader" id="2_5i7k8"]
 [ext_resource type="Script" uid="uid://nc5bfedvnpgm" path="res://addons/rmsmartshape/materials/shape_material.gd" id="2_j3qed"]
 [ext_resource type="Texture2D" uid="uid://bnvui3fonkkvt" path="res://assets/textures/ground/ground.png" id="2_selgf"]
-[ext_resource type="Texture2D" uid="uid://d3y17n8h31fw5" path="res://assets/textures/ground/ground_top_new.png" id="4_5i7k8"]
+[ext_resource type="Texture2D" uid="uid://5gkevggjymjk" path="res://assets/textures/ground/grass.png" id="4_a02j0"]
 [ext_resource type="Script" uid="uid://d218yx0d1ilsn" path="res://addons/rmsmartshape/normal_range.gd" id="4_iohn4"]
 [ext_resource type="Material" uid="uid://0n3rd7tfl2c4" path="res://assets/materials/ground_fill.tres" id="5_1dsuo"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyljj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wp5th"]
 shader = ExtResource("2_5i7k8")
 shader_parameter/texture_scale = Vector2(68, 16)
 shader_parameter/texture_offset = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_pcpc4"]
 script = ExtResource("2_1dsuo")
-textures = Array[Texture2D]([ExtResource("4_5i7k8")])
+textures = Array[Texture2D]([ExtResource("4_a02j0")])
 fit_mode = 1
-material = SubResource("ShaderMaterial_uyljj")
+material = SubResource("ShaderMaterial_wp5th")
 metadata/_custom_type_script = "uid://d0xjijisx1woh"
 
 [sub_resource type="Resource" id="Resource_ifdye"]
