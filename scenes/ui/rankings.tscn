@@ -23,6 +23,7 @@ pre_reveal_animation_frames = Array[Texture2D]([ExtResource("2_3qrqb"), ExtResou
 drumroll_sound = ExtResource("5_o3po0")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1663095947]
+volume_db = -5.0
 
 [node name="Background" type="TextureRect" parent="." unique_id=1933854276]
 z_index = -3

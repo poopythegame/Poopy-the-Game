@@ -67,7 +67,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"dance1",
-"speed": 12.0
+"speed": 24.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -96,7 +96,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"dance2",
-"speed": 40.0
+"speed": 80.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -233,7 +233,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"dance3",
-"speed": 60.0
+"speed": 120.0
 }, {
 "frames": [{
 "duration": 1.0,

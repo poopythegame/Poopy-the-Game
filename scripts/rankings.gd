@@ -72,15 +72,12 @@ func start_animation_sequence():
 			audio_stream_player.play())
 		tween.tween_callback(func():
 			rank_icon_dummy_spacer.hide()
-			rank_icon.show()).set_delay(1)
+			rank_icon.show()).set_delay(1.44)
 		tween.tween_property(rank_icon, "offset_transform_scale", Vector2(1, 1), 0.5)
 	else:
 		tween.tween_property(rank_icon, "offset_transform_scale", Vector2(1, 1), 0.5)
-	if curr_rank.music_track_2 != null:
-		tween.tween_await(audio_stream_player.finished)
-		tween.tween_callback(func():
-			audio_stream_player.stream = curr_rank.music_track_2
-			audio_stream_player.play())
+	tween.tween_method(screen_shake, 10, 5, 0.5)
+	tween.tween_callback(apply_rank_animation)
 	if curr_rank.show_portraits_background != 0:
 		if curr_rank.show_portraits_background == 2:
 			portraits_background.scroll_speed = 200
@@ -91,9 +88,12 @@ func start_animation_sequence():
 			portraits_background.process_mode = Node.PROCESS_MODE_INHERIT)
 		tween.tween_property(whiteout, "modulate:a", 0, 0.2)
 		tween.tween_callback(whiteout.hide)
-	tween.tween_method(screen_shake, 10, 5, 0.5)
-	tween.parallel().tween_property(ranks_container, "modulate:a", 1, 2)
-	tween.parallel().tween_callback(apply_rank_animation)
+	tween.tween_await(audio_stream_player.finished)
+	if curr_rank.music_track_2 != null:
+		tween.tween_callback(func():
+			audio_stream_player.stream = curr_rank.music_track_2
+			audio_stream_player.play())
+	tween.tween_property(ranks_container, "modulate:a", 1, 2)
 	if curr_rank.use_walk_off_animation:
 		tween.parallel().tween_property(rank_animation_tr, "offset_transform_position:x", -2800, 3)
 	tween.set_trans(Tween.TRANS_CUBIC)

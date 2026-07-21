@@ -140,7 +140,6 @@ func title_poopy_jump(t: float) -> void:
 	title_poopy.position.y += title_poopy_jump_vel
 	if title_poopy.position.y > 330:
 		title_poopy.position.y = 330
-	print(title_poopy.position.y)
 	title_poopy_jump_vel += 50 * (t - title_poopy_last_frametime)
 	title_poopy_last_frametime = t
 
@@ -197,17 +196,18 @@ func title_begin_title_reveal():
 	tween.tween_interval(3.50 - 1.20)
 	tween.tween_callback(func(): title_poopy.play("turn_around"))
 	tween.tween_interval(2./6)
+	tween.tween_callback(func(): title_poopy.play("armflap"))
+	tween.tween_interval(4.98 - 3.50)
 	tween.tween_property(whiteout, "modulate:a", 1, 0.2)
 	tween.tween_callback(func():
 		title_portraits_background.show()
 		title_portraits_background.process_mode = Node.PROCESS_MODE_INHERIT)
 	tween.tween_property(whiteout, "modulate:a", 0, 0.2)
-	tween.tween_callback(func(): title_poopy.play("armflap"))
-	tween.tween_interval(8.70 - 3.50)
+	tween.tween_interval(8.80 - 5.18)
 	tween.tween_callback(title_poopy.play.bind("dance1"))
-	tween.tween_interval(9.85 - 8.70)
+	tween.tween_interval(10.05 - 8.80)
 	tween.tween_callback(title_poopy.play.bind("armflap"))
-	tween.tween_interval(11.30 - 9.85)
+	tween.tween_interval(11.30 - 10.05)
 	tween.tween_subtween(title_poopy_run(1.10))
 	# tween.tween_interval(12.40 - 10.85)
 	tween.tween_callback(title_poopy.play.bind("armflap"))
@@ -227,7 +227,8 @@ func title_begin_title_reveal():
 	# tween.tween_callback(title_poopy.play.bind("dance3"))
 	# tween.tween_interval(48.20 - 39.70)
 	# tween.tween_callback(title_poopy.play.bind("armflap"))
-	tween.tween_interval(50.53 - 15.05)
+	tween.tween_interval(50.28 - 15.05)
+	tween.tween_property(audio_stream_player, "volume_linear", 0, .25)
 	tween.tween_callback(change_screen.bind(Screen.MENU))
 	tween.set_trans(Tween.TRANS_CUBIC)
 

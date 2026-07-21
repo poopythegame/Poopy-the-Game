@@ -9,7 +9,7 @@ class Sprite:
 		self.sprite_2d = sprite_2d
 		self.origin = origin
 
-@export_dir var sprites_dir = "res://assets/textures/characters"
+@export_dir var sprites_dir = "res://assets/textures/characters/contour"
 @export var margin := 100.
 @export var scroll_speed := 5.
 
