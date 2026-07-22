@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/ui/hud.tscn" id="4_51wsq"]
 [ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/prefab/coin.tscn" id="6_kamxp"]
 [ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/prefab/dash_panel.tscn" id="6_mkcba"]
-[ext_resource type="Texture2D" uid="uid://cjc815nypvhjg" path="res://assets/textures/ground/wood_border.png" id="8_clb5c"]
 [ext_resource type="PackedScene" uid="uid://dhuok84j6oiig" path="res://scenes/prefab/background.tscn" id="8_ydant"]
 [ext_resource type="Script" uid="uid://dhdc4b8yddyej" path="res://addons/rmsmartshape/shapes/shape.gd" id="9_clb5c"]
 [ext_resource type="Script" uid="uid://bwcf4pjgprn0k" path="res://addons/rmsmartshape/shapes/point.gd" id="10_qu4m5"]
@@ -14,6 +13,7 @@
 [ext_resource type="Script" uid="uid://llobjh5hvry" path="res://addons/rmsmartshape/shapes/mesh.gd" id="12_7dmr1"]
 [ext_resource type="Texture2D" uid="uid://s4c4pgnq5bj7" path="res://assets/textures/ground/wood.png" id="12_clb5c"]
 [ext_resource type="Shader" uid="uid://bxjra7tqfuq06" path="res://shaders/retexture.gdshader" id="13_clb5c"]
+[ext_resource type="Texture2D" uid="uid://cerwkjbbxbhcq" path="res://assets/textures/ground/wood_edge.png" id="14_qu4m5"]
 [ext_resource type="Resource" uid="uid://1knvyj6c4v71" path="res://assets/ss2d_materials/wood.tres" id="14_tftgv"]
 [ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/prefab/spike.tscn" id="16_jjt6x"]
 [ext_resource type="PackedScene" uid="uid://fieh7uoavdwx" path="res://scenes/prefab/anchor.tscn" id="18_qu4m5"]
@@ -90,23 +90,23 @@ z_index = -10
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q40wm"]
 shader = ExtResource("13_clb5c")
-shader_parameter/tex = ExtResource("8_clb5c")
+shader_parameter/tex = ExtResource("14_qu4m5")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_qu4m5"]
 _surfaces = [{
-"aabb": AABB(-41.588837, -122.58884, 0, 1437.1879, 197.20242, 1e-05),
-"attribute_data": PackedByteArray("/////wAAAAAAAAAAAAAAAAAAAAD/////AAAAAAAAgD8AAAAAAACAP/////8BALA+AACAPwEAsD4AAIA//////wEAsD4AAAAAAQCwPgAAAAD/////AADsPwAAgD8AAOw/AACAP/////8AAOw/AAAAAAAA7D8AAAAA/////zPzmUEAAIA/M/OZQQAAgD//////M/OZQQAAAAAz85lBAAAAAP////9n5p9BAACAP2fmn0EAAIA//////2fmn0EAAAAAZ+afQQAAAAD/////F+0WQgAAgD8X7RZCAACAP/////8X7RZCAAAAABftFkIAAAAA/////0uAH0IAAIA/S4AfQgAAgD//////S4AfQgAAAABLgB9CAAAAAA=="),
+"aabb": AABB(-39.414215, -120.414215, 0, 1432.8301, 192.8324, 1e-05),
+"attribute_data": PackedByteArray("/////wAAAAAAAAAAAAAAAAAAAAD/////AAAAAAAAgD8AAAAAAACAP/////+/vj4/AACAP7++Pj8AAIA//////7++Pj8AAAAAv74+PwAAAAD/////RkZGQAAAgD9GRkZAAACAP/////9GRkZAAAAAAEZGRkAAAAAA/////yMj80EAAIA/IyPzQQAAgD//////IyPzQQAAAAAjI/NBAAAAAP////8eHv5BAACAPx4e/kEAAIA//////x4e/kEAAAAAHh7+QQAAAAD/////qjdvQgAAgD+qN29CAACAP/////+qN29CAAAAAKo3b0IAAAAA//////F9fUIAAIA/8X19QgAAgD//////8X19QgAAAADxfX1CAAAAAA=="),
 "format": 34359742527,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAAACAAMAAwACAAQAAwAEAAUABQAEAAYABQAGAAcABwAGAAgABwAIAAkACQAIAAoACQAKAAsACwAKAAwACwAMAA0A"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 14,
-"vertex_data": PackedByteArray("+Fomwnwt9cIAAAAAEUq/wYTS0cIAAAAA3mthwYTS0cIAAAAAeK9lQHwt9cIAAAAA3mthwd5rcUEAAAAAeK9lQHivJcAAAAAAKD2sRN5rcUEAAAAA2HKuRHivJcAAAAAAET+sROOLY0IAAAAAK3OuRCk6lUIAAAAAEtC+wXS+Q0IAAAAAdVAmwuAghUIAAAAAEUq/wYTS0cIAAAAA+Fomwnwt9cIAAAAA/3//f////z//f/9/////P/9//3//v/8f/3//f/+//x//f/9//7//H/9//3//v/8f/3//fw/ACCD/f/9/BcADIP9//3/YPxMg/3//f9E/FyD/f/9/KUAUYP9//38rQBVg/3//f/1//n//f/9//X/+fw==")
+"vertex_data": PackedByteArray("KKgdwhTU8MIAAAAA2FcSwuwr68IAAAAA8wS1v+wr68IAAAAA8wS1PxTU8MIAAAAA9AS1v3qCGkAAAAAA9AS1P9AT1L4AAAAAv9KtRHqCGkAAAAAAQS2uRMwT1L4AAAAADdOtROcpi0IAAAAATy2uRB3WkEIAAAAAFU4SwuhbdkIAAAAAe6YdwhDSgEIAAAAA2FcSwuwr68IAAAAAKKgdwhTU8MIAAAAA/3//f////z//f/9/////P/9//3//v/8f/3//f/+//x//f/9//7//H/9//3//v/8f/3//fwDAACD/f/9/AMAAIP9//3/SPxYg/3//f9E/FiD/f/9/LEAWYP9//38tQBZg/3//f/9//n//f/9//3/+fw==")
 }]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wp5th"]
-size = Vector2(80, 25)
+size = Vector2(51, 4)
 
 [sub_resource type="Resource" id="Resource_tftgv"]
 script = ExtResource("12_7dmr1")
@@ -136,8 +136,9 @@ polygon = PackedVector2Array(-40, -104, 0, -104, 0, 16, 1392, 16, 1392, 88, -40,
 zoom = Vector2(3.5, 3.5)
 script = ExtResource("1_mkcba")
 
-[node name="Player" parent="." unique_id=1678918478 groups=["Player"] instance=ExtResource("1_cy281")]
+[node name="Player" parent="." unique_id=1678918478 node_paths=PackedStringArray("camera") groups=["Player"] instance=ExtResource("1_cy281")]
 position = Vector2(25, 15)
+camera = NodePath("../Camera2D")
 
 [node name="InGameOverlay" parent="." unique_id=1911954101 instance=ExtResource("4_51wsq")]
 
