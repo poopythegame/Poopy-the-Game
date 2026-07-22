@@ -11,7 +11,7 @@
 [ext_resource type="Shader" uid="uid://bxjra7tqfuq06" path="res://shaders/retexture.gdshader" id="6_qp18x"]
 [ext_resource type="Texture2D" uid="uid://fdna5q8d4lat" path="res://assets/textures/ground/ground_border.png" id="7_xn3bo"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kpyan"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mn5d3"]
 shader = ExtResource("2_5i7k8")
 shader_parameter/texture_scale = Vector2(68, 16)
 shader_parameter/texture_offset = Vector2(0, 0)
@@ -20,7 +20,7 @@ shader_parameter/texture_offset = Vector2(0, 0)
 script = ExtResource("2_1dsuo")
 textures = Array[Texture2D]([ExtResource("4_a02j0")])
 fit_mode = 1
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_mn5d3")
 metadata/_custom_type_script = "uid://d0xjijisx1woh"
 
 [sub_resource type="Resource" id="Resource_ifdye"]
@@ -35,18 +35,18 @@ normal_range = SubResource("Resource_ifdye")
 offset = -1.0
 metadata/_custom_type_script = "uid://0lhxan4cqrc1"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wp5th"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0tpbb"]
 shader = ExtResource("6_qp18x")
 shader_parameter/tex = ExtResource("7_xn3bo")
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_q40wm"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nk0kf"]
 size = Vector2(102, 8)
 
 [sub_resource type="Resource" id="Resource_8cmmm"]
 script = ExtResource("2_1dsuo")
-textures = Array[Texture2D]([SubResource("PlaceholderTexture2D_q40wm")])
+textures = Array[Texture2D]([SubResource("PlaceholderTexture2D_nk0kf")])
 fit_mode = 1
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0tpbb")
 metadata/_custom_type_script = "uid://d0xjijisx1woh"
 
 [sub_resource type="Resource" id="Resource_mag4y"]
