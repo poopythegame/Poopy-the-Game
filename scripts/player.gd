@@ -343,6 +343,10 @@ func physics_process_grapple(delta: float):
 	rope_line.add_point(Vector2.ZERO) 
 	rope_line.add_point(rope_line.to_local(grapple_anchor_pos))
 	
+	#Grapple animation
+	$Sprite.play("jump")
+	$Sprite.speed_scale = 4
+	
 	# Rotate sprite to face velocity
 	#if motion.length() > 10:
 		#var look_angle = motion.angle()
@@ -789,7 +793,8 @@ func physics_process_normal(delta):
 		if not grounded:
 			motion.x = 0
 		elif grounded:
-			if abs(slopeangle) <= 0.25:
+			var tempslopeangle = abs(slopeangle)
+			if (tempslopeangle >= 0 and tempslopeangle <= 0.25):
 				motion.x = 0
 		# Stop moving.
 
