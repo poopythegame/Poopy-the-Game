@@ -7,9 +7,10 @@ class_name Player
 # @onready var anchor: Area2D = $"../anchor"
 @onready var rope_line: Line2D = $Line2D # Make sure the name matches your node
 @onready var floor_cast: RayCast2D = $Collision/Raycast
-@onready var death_tween = get_tree().create_tween()
+@onready var death_tween := get_tree().create_tween()
 
 @export var death_time: float = 0.5
+@export var camera: Camera
 @export var max_health: int = 100
 @export_group("Sounds")
 @export var airdash_sfx: Array[AudioStream]
@@ -33,6 +34,9 @@ var health: float = max_health:
 		if main.is_node_ready():
 			main.log_health(health, max_health)
 var has_initialized_health = false
+var death_launch_velocity := Vector2.ZERO
+var death_animation_last_t := 0
+var death_animation_camera_origin: Vector2
 
 ### ### Maddie's Ultra-Simple Sonic Physics!! ### ###
 ## The absolute bare minimum needed to make a Sonic fangame.
@@ -969,11 +973,11 @@ func die():
 	if death_tween.is_running():
 		death_tween.kill()
 		death_tween = get_tree().create_tween()
+	death_animation_camera_origin = camera.global_position
 	motion = Vector2.ZERO
 	dying = true
 	var sprite = $Sprite
 	sprite.play("idle")
-	var mat: ShaderMaterial = sprite.material
 	death_tween.set_ease(Tween.EASE_IN)
 	death_tween.set_trans(Tween.TRANS_CUBIC)
 	death_tween.tween_callback(func():
@@ -981,18 +985,34 @@ func die():
 	death_tween.tween_await(audio_stream_player.finished)
 	death_tween.tween_callback(func():
 		play_audio(death_sfx)
-		var tween2 := create_tween()
-		tween2.tween_interval(audio_stream_player.stream.get_length() / 4 * 3)
-		tween2.tween_property(mat, "shader_parameter/t", 1.0, audio_stream_player.stream.get_length() / 4)
-		tween2.play())
-	death_tween.tween_await(audio_stream_player.finished)
+		camera.frozen = true)
+	death_tween.tween_interval(1)
+	death_tween.tween_method(death_launch, 0., 1., 2)
+	var end_angle = -90
+	if $Sprite.flip_h:
+		end_angle = 90
+	death_tween.parallel().tween_property(self, "global_rotation_degrees", end_angle, .25)
+	death_tween.parallel().tween_await(audio_stream_player.finished)
+	death_tween.parallel().tween_method(screen_shake, 5, 5, .25)
 	death_tween.tween_callback(restart)
+
+func screen_shake(intensity: float):
+	camera.global_position = death_animation_camera_origin + Vector2(randf_range(-1, 1), randf_range(-1, 1)) * intensity
+
+func death_launch(t: float):
+	var delta := t - death_animation_last_t
+	print(t)
+	if t < 0.03:
+		var h_comp = Vector2.LEFT
+		if $Sprite.flip_h:
+			h_comp = Vector2.RIGHT
+		death_launch_velocity += (Vector2.UP * 1.25 + h_comp) * 1000
+	global_position += death_launch_velocity * delta
+	death_launch_velocity.y += 1700000 * delta
 
 func restart():
 	death_tween.kill()
-	var mat: ShaderMaterial = $Sprite.material
-	mat.set_shader_parameter("t", 0.0)
-	Global.begin_level(Global.current_level)
+	Global.begin_level_crossfade(Global.current_level)
 
 #Fairer Cemera
 

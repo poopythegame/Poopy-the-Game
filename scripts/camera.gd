@@ -1,4 +1,5 @@
 extends Camera2D
+class_name Camera
 
 @export_group("Lookahead")
 ## Whether to enable the camera lookahead.
@@ -13,6 +14,7 @@ extends Camera2D
 @export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var enable_terrain_bobbing := false
 @export var terrain_bobbing_offset := 50
 
+var frozen := false
 var player: Player
 var left_boundary: Node2D
 var right_boundary: Node2D
@@ -43,8 +45,10 @@ func get_rect() -> Rect2:
 	return Rect2(top_left, world_size)
 
 func _process(delta: float) -> void:
+	if frozen:
+		return
 	var prev_next_offset = next_x_offset
-	if should_disable():
+	if should_disable_lookahead():
 		next_x_offset = 0
 	elif player.velocity.x > MINSPD:
 		next_x_offset = lookahead_amount
@@ -86,8 +90,7 @@ func _process(delta: float) -> void:
 			y_shift_amount = raycast_distance - hit_y
 	global_position.y -= y_shift_amount
 
-
-func should_disable() -> bool:
+func should_disable_lookahead() -> bool:
 	if player.is_grappling:
 		return true
 	return not enable_lookahead

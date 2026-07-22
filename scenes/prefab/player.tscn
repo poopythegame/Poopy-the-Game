@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bea558noe02pm"]
 
 [ext_resource type="Script" uid="uid://bkxp05jsmh5cy" path="res://scripts/player.gd" id="1_3r5ht"]
-[ext_resource type="Shader" uid="uid://jl2epyexbnke" path="res://shaders/destroy.gdshader" id="2_3wf3c"]
 [ext_resource type="SpriteFrames" uid="uid://cxxlgiysiu6jf" path="res://assets/animations/player.tres" id="2_mx6bk"]
 [ext_resource type="AudioStream" uid="uid://dbwku6gblnxkn" path="res://assets/audio/effects/airdash1.ogg" id="2_ob2so"]
 [ext_resource type="AudioStream" uid="uid://cw31c8fmybvyj" path="res://assets/audio/effects/airdash2.ogg" id="3_l8smq"]
@@ -20,10 +19,6 @@
 [ext_resource type="AudioStream" uid="uid://bm5nmcn81vxmu" path="res://assets/audio/effects/poopy_hurt.ogg" id="14_isfnt"]
 [ext_resource type="AudioStream" uid="uid://dr1g6ao3afdws" path="res://assets/audio/effects/poopy_final_hit1.ogg" id="15_rp2o6"]
 [ext_resource type="AudioStream" uid="uid://bsn8omalnpl1d" path="res://assets/audio/effects/poopy_final_hit2.ogg" id="16_vc3vx"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jnnhn"]
-shader = ExtResource("2_3wf3c")
-shader_parameter/t = 0.0
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0s3b8"]
 b = Vector2(0, -32)
@@ -48,7 +43,6 @@ hit_sfx = Array[AudioStream]([ExtResource("13_37wxj"), ExtResource("14_isfnt")])
 final_hit_sfx = Array[AudioStream]([ExtResource("15_rp2o6"), ExtResource("16_vc3vx")])
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1990345513]
-material = SubResource("ShaderMaterial_jnnhn")
 position = Vector2(0, 1)
 scale = Vector2(0.0534135, 0.0534135)
 sprite_frames = ExtResource("2_mx6bk")
