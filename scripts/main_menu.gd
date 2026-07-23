@@ -39,6 +39,8 @@ enum Screen {
 
 @onready var level_select_screen: LevelSelect = $LevelSelect
 
+@onready var characters_screen: MultiselectScreen = $Characters
+
 @onready var levels := Global.levels.levels
 
 var screen := Screen.TITLE
@@ -198,6 +200,8 @@ func change_screen(new_screen: Screen):
 		menu_screen.process_mode = Node.PROCESS_MODE_DISABLED
 		level_select_screen.hide()
 		level_select_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		characters_screen.hide()
+		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
 		music_player.stop()
 		music_player.stream = title_audio_stream
 		title_begin_title_reveal()
@@ -207,6 +211,8 @@ func change_screen(new_screen: Screen):
 		title_screen.hide()
 		menu_screen.show()
 		menu_screen.process_mode = Node.PROCESS_MODE_INHERIT
+		characters_screen.hide()
+		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
 		music_player.stream = menu_audio_stream
 		music_player.play()
 		level_select_screen.hide()
@@ -217,6 +223,8 @@ func change_screen(new_screen: Screen):
 		title_screen.hide()
 		menu_screen.hide()
 		menu_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		characters_screen.hide()
+		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
 		if not music_player.stream == menu_audio_stream:
 			music_player.stream = menu_audio_stream
 			music_player.play()
@@ -224,4 +232,14 @@ func change_screen(new_screen: Screen):
 			music_player.play()
 		level_select_screen.show()
 		level_select_screen.process_mode = Node.PROCESS_MODE_INHERIT
+	elif new_screen == Screen.CHARACTERS:
+		whiteout.hide()
+		background.show()
+		title_screen.hide()
+		menu_screen.hide()
+		menu_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		level_select_screen.hide()
+		level_select_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		characters_screen.show()
+		characters_screen.process_mode = Node.PROCESS_MODE_INHERIT
 	screen = new_screen

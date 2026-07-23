@@ -14,6 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://nqpeaq2b7udk" path="res://scenes/prefab/ui/main_menu_screen.tscn" id="12_8ekit"]
 [ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="13_n4uci"]
 [ext_resource type="Script" uid="uid://c3f38pxpyhfbt" path="res://scripts/level_select.gd" id="14_877pj"]
+[ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="15_pw24t"]
+[ext_resource type="Texture2D" uid="uid://bxlxmdu2juey5" path="res://assets/textures/characters/color/poopy.png" id="16_5dct7"]
+[ext_resource type="Texture2D" uid="uid://khv13jwuvvgf" path="res://assets/textures/characters/color/john_person.png" id="17_qilvv"]
+[ext_resource type="Texture2D" uid="uid://bpnq0w3a1p1c2" path="res://assets/textures/characters/color/chud_squad.png" id="18_jbte4"]
+[ext_resource type="Texture2D" uid="uid://b0sju53qqk14b" path="res://assets/textures/characters/color/pop_i.png" id="19_e0hcc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0cdpu"]
 font = ExtResource("4_n4uci")
@@ -25,6 +30,30 @@ texture = ExtResource("5_y2j7i")
 [sub_resource type="LabelSettings" id="LabelSettings_y2j7i"]
 font = ExtResource("9_ayp64")
 font_size = 35
+
+[sub_resource type="Resource" id="Resource_0cdpu"]
+script = ExtResource("15_pw24t")
+title = "Poopy the Game"
+portrait = ExtResource("16_5dct7")
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
+[sub_resource type="Resource" id="Resource_k51th"]
+script = ExtResource("15_pw24t")
+title = "Joh Person"
+portrait = ExtResource("17_qilvv")
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
+[sub_resource type="Resource" id="Resource_mfq2s"]
+script = ExtResource("15_pw24t")
+title = "Pop-I's Munching March"
+portrait = ExtResource("19_e0hcc")
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
+[sub_resource type="Resource" id="Resource_7a0y4"]
+script = ExtResource("15_pw24t")
+title = "Chud Squad"
+portrait = ExtResource("18_jbte4")
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [node name="MainMenu" type="Control" unique_id=1355966020]
 layout_mode = 3
@@ -153,6 +182,11 @@ process_mode = 4
 visible = false
 layout_mode = 1
 script = ExtResource("14_877pj")
+
+[node name="Characters" parent="." unique_id=42329872 instance=ExtResource("13_n4uci")]
+visible = false
+layout_mode = 1
+options = Array[ExtResource("15_pw24t")]([SubResource("Resource_0cdpu"), SubResource("Resource_k51th"), SubResource("Resource_mfq2s"), SubResource("Resource_7a0y4")])
 
 [node name="Whiteout" type="ColorRect" parent="." unique_id=1167688859]
 visible = false
