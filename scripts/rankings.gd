@@ -28,7 +28,7 @@ func _ready() -> void:
 	curr_rank = Global.get_ranks()[rank_id]
 	rank_icon.texture = curr_rank.icon
 	var time := Global.get_time()
-	var millis := fmod(time, 1) * 100
+	var millis := fmod(time, 1) * 1000
 	var seconds := fmod(time, 60)
 	var minutes := fmod(time, 3600) / 60 
 	time_label.text = "Your time: %02d:%02d.%03d" % [minutes, seconds, millis]
@@ -41,7 +41,7 @@ func _ready() -> void:
 			var max_time_label: Label = Label.new()
 			max_time_label.label_settings = rank_time_req
 			icon.texture = rank.small_icon
-			var millis2 := fmod(rank.time, 1) * 100
+			var millis2 := fmod(rank.time, 1) * 1000
 			var seconds2 := fmod(rank.time, 60)
 			var minutes2 := fmod(rank.time, 3600) / 60 
 			max_time_label.text = "%02d:%02d.%03d" % [minutes2, seconds2, millis2]
@@ -54,6 +54,7 @@ func start_animation_sequence():
 	rank_animation_animated_texture.one_shot = true
 	rank_animation_animated_texture.pause = true
 	rank_animation_animated_texture.frames = len(pre_reveal_animation_frames)
+	rank_animation_animated_texture.current_frame = 0
 	var frame_duration := 1. / pre_reveal_animation_fps
 	var index := 0
 	for frame in pre_reveal_animation_frames:
@@ -64,9 +65,9 @@ func start_animation_sequence():
 	tween.tween_callback(func():
 		audio_stream_player.stream = drumroll_sound
 		audio_stream_player.play()
-		rank_animation_animated_texture.pause = false
 		pass)
 	tween.tween_await(audio_stream_player.finished)
+	tween.tween_callback(func(): rank_animation_animated_texture.pause = false)
 	if curr_rank.music_track_1 != null:
 		tween.tween_callback(func():
 			audio_stream_player.stream = curr_rank.music_track_1
@@ -76,6 +77,9 @@ func start_animation_sequence():
 			rank_icon.show()).set_delay(1.44)
 		tween.tween_property(rank_icon, "offset_transform_scale", Vector2(1, 1), 0.5)
 	else:
+		tween.tween_callback(func():
+			rank_icon_dummy_spacer.hide()
+			rank_icon.show())
 		tween.tween_property(rank_icon, "offset_transform_scale", Vector2(1, 1), 0.5)
 	tween.tween_method(screen_shake, 10, 5, 0.5)
 	tween.tween_callback(apply_rank_animation)
@@ -89,7 +93,8 @@ func start_animation_sequence():
 			portraits_background.process_mode = Node.PROCESS_MODE_INHERIT)
 		tween.tween_property(whiteout, "modulate:a", 0, 0.2)
 		tween.tween_callback(whiteout.hide)
-	tween.tween_await(audio_stream_player.finished)
+	if curr_rank.music_track_1 != null:
+		tween.tween_await(audio_stream_player.finished)
 	if curr_rank.music_track_2 != null:
 		tween.tween_callback(func():
 			audio_stream_player.stream = curr_rank.music_track_2
