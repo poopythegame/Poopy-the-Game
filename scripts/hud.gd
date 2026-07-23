@@ -4,6 +4,7 @@ class_name InGameOverlay
 @export var whiteout_time := .5
 
 @onready var rankings_scene: PackedScene = load("uid://cpvt7jfaq7yjl")
+@onready var main_menu_prefab: PackedScene = load("uid://dady2wku1xusy")
 
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
 @onready var horizontal_speed: Label = $Left/HorizontalSpeed/Readout
@@ -12,6 +13,10 @@ class_name InGameOverlay
 @onready var health_label: Label = $Left/HealthBar/HealthNumber
 @onready var time_label: Label = $Left/Time/Readout
 @onready var whiteout: ColorRect = $Whiteout
+@onready var pause_menu_container: Control = $PauseMenuContainer
+@onready var pause_menu: MultiselectScreen = $PauseMenuContainer/PauseMenu
+@onready var pause_menu_audio_stream_player: AudioStreamPlayer = $PauseMenuContainer/PauseMenu/AudioStreamPlayer
+@onready var pause_menu_music_player: AudioStreamPlayer = $PauseMenuContainer/PauseMenu/MusicPlayer
 
 var stopwatch_paused := true
 @onready var coins_label: Label = $Left/Coins/Readout
@@ -19,6 +24,7 @@ var time: float = 0.0
 var minutes: int = 0
 var seconds: int = 0
 var millis: int = 0 
+var quitting := false
 
 func _ready() -> void:
 	millis = fmod(time, 1) * 1000
@@ -26,6 +32,37 @@ func _ready() -> void:
 	minutes = fmod(time, 3600) / 60
 	var time_readout = "%02d:%02d.%03d" % [minutes, seconds, millis]
 	time_label.text = time_readout
+	pause_menu.option_selected.connect(_on_pause_menu_option_selected)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action("esc"):
+		show_pause_menu()
+
+func show_pause_menu() -> void:
+	pause_menu_container.show()
+	pause_menu_music_player.play()
+	get_tree().paused = true
+
+func _on_pause_menu_option_selected(option: int) -> void:
+	if quitting:
+		return
+	pause_menu_music_player.stop()
+	if option == 0:
+		get_tree().paused = false
+		var main_menu: MainMenu = main_menu_prefab.instantiate()
+		Global.current_level = -1
+		main_menu.start_screen = MainMenu.Screen.MENU
+		get_tree().change_scene_to_node(main_menu)
+	elif option == 1:
+		quitting = true
+		await pause_menu_audio_stream_player.finished
+		get_tree().quit()
+	elif option == 2:
+		get_tree().paused = false
+		pause_menu_container.hide()
+	elif option == 3:
+		get_tree().paused = false
+		Global.begin_level_crossfade(Global.current_level)
 
 func _process(delta): 
 	var level_index = Global.current_level

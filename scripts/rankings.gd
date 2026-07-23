@@ -127,5 +127,6 @@ func screen_shake(intensity: float):
 func _input(event: InputEvent) -> void:
 	if event.is_action("start"):
 		var main_menu: MainMenu = main_menu_scene.instantiate()
+		Global.current_level = -1
 		main_menu.start_screen = MainMenu.Screen.MENU
 		get_tree().change_scene_to_node(main_menu)
