@@ -6679,11 +6679,11 @@ position = Vector2(-17, -119)
 shape = SubResource("RectangleShape2D_0cdpu")
 
 [node name="Player" parent="." unique_id=1621195173 node_paths=PackedStringArray("camera") groups=["Player"] instance=ExtResource("1_player")]
-position = Vector2(25098, 3392)
+position = Vector2(-4493, -727)
 camera = NodePath("../Camera2D")
 
 [node name="LevelStart" parent="." unique_id=474957435 instance=ExtResource("1_lvl_start")]
-position = Vector2(25146, 3324)
+position = Vector2(-4445, -795)
 
 [node name="AnimatableBody2D_1" parent="." unique_id=704751793 instance=ExtResource("1_animatable_body_2d")]
 position = Vector2(18432, 1632)
