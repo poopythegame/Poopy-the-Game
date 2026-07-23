@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://nqpeaq2b7udk"]
+
+[ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="1_epp4d"]
+[ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="2_6l6qt"]
+[ext_resource type="Texture2D" uid="uid://csipwt7j8bu23" path="res://assets/textures/ui/main_menu/title.png" id="2_dwr1o"]
+[ext_resource type="Texture2D" uid="uid://k0qmq705scns" path="res://assets/textures/ui/main_menu/option_label_credits.png" id="3_wibf0"]
+[ext_resource type="Texture2D" uid="uid://bhxan4q8j23fw" path="res://assets/textures/ui/main_menu/option_label_level_select.png" id="4_j0dn2"]
+[ext_resource type="Texture2D" uid="uid://dpl8egxwrkkt" path="res://assets/textures/ui/main_menu/option_label_options.png" id="5_vpns8"]
+
+[sub_resource type="Resource" id="Resource_6l6qt"]
+script = ExtResource("2_6l6qt")
+title = "Credits"
+label_icon = ExtResource("3_wibf0")
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
+[sub_resource type="Resource" id="Resource_ydpsd"]
+script = ExtResource("2_6l6qt")
+title = "Level Select"
+label_icon = ExtResource("4_j0dn2")
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
+[sub_resource type="Resource" id="Resource_50wf3"]
+script = ExtResource("2_6l6qt")
+title = "Options"
+label_icon = ExtResource("5_vpns8")
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
+[sub_resource type="Resource" id="Resource_vggm2"]
+script = ExtResource("2_6l6qt")
+title = "Characters"
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
+[node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_epp4d")]
+options = Array[ExtResource("2_6l6qt")]([SubResource("Resource_6l6qt"), SubResource("Resource_ydpsd"), SubResource("Resource_50wf3"), SubResource("Resource_vggm2")])
+selected = 1
+
+[node name="Title" type="TextureRect" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="0" unique_id=991393468]
+custom_minimum_size = Vector2(503.69, 62.58)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_dwr1o")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Spacer2" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="1" unique_id=399737110]
+custom_minimum_size = Vector2(0, 18)
+
+[node name="TitlesContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="4" unique_id=890400313]
+offset_transform_position = Vector2(90, 0)

@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dndgonbb4w5ex"]
+
+[ext_resource type="Script" uid="uid://d1sk5ecjtxwb" path="res://scripts/multiselect_screen.gd" id="1_p4jrt"]
+[ext_resource type="Texture2D" uid="uid://bu1qqh82x47yt" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="2_lgjot"]
+[ext_resource type="AudioStream" uid="uid://lnvvw3422kgq" path="res://assets/audio/effects/menu_left.ogg" id="2_ryp7i"]
+[ext_resource type="AudioStream" uid="uid://cuehpn8m2fakd" path="res://assets/audio/effects/menu_press.ogg" id="3_e0yf4"]
+[ext_resource type="AudioStream" uid="uid://da8y4i2qvk454" path="res://assets/audio/effects/menu_right.ogg" id="4_01fnu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hddne"]
+texture = ExtResource("2_lgjot")
+expand_margin_left = 50.0
+expand_margin_top = 25.0
+expand_margin_right = 50.0
+expand_margin_bottom = 25.0
+region_rect = Rect2(199.02014, 189.5705, 1940.1774, 1028.7773)
+
+[node name="MultiselectScreen" type="MarginContainer" unique_id=1181466732]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("1_p4jrt")
+left_sfx = Array[AudioStream]([ExtResource("2_ryp7i")])
+select_sfx = Array[AudioStream]([ExtResource("3_e0yf4")])
+right_sfx = Array[AudioStream]([ExtResource("4_01fnu")])
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=167130769]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=346008450]
+layout_mode = 2
+alignment = 1
+
+[node name="Spacer2" type="Control" parent="VBoxContainer" unique_id=399737110]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PortraitContainer" type="PanelContainer" parent="VBoxContainer" unique_id=541114955]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_hddne")
+
+[node name="OptionPortrait" type="TextureRect" parent="VBoxContainer/PortraitContainer" unique_id=1390561315]
+custom_minimum_size = Vector2(788, 491)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Spacer" type="Control" parent="VBoxContainer" unique_id=729717884]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TitlesContainer" type="Control" parent="VBoxContainer" unique_id=890400313]
+custom_minimum_size = Vector2(0, 67)
+layout_mode = 2
+size_flags_vertical = 8
+offset_transform_enabled = true

@@ -10,14 +10,10 @@
 [ext_resource type="FontFile" uid="uid://c6lup5uhxjaq8" path="res://assets/fonts/Comic-Sans-MS.ttf" id="4_n4uci"]
 [ext_resource type="Texture2D" uid="uid://og0yos4h6sda" path="res://assets/textures/ui/main_menu/option_box.png" id="5_y2j7i"]
 [ext_resource type="SpriteFrames" uid="uid://dvs8fhjv7ymto" path="res://assets/animations/title_player.tres" id="7_ayp64"]
-[ext_resource type="Texture2D" uid="uid://csipwt7j8bu23" path="res://assets/textures/ui/main_menu/title.png" id="7_pw24t"]
-[ext_resource type="FontFile" uid="uid://bw8h8rlrthupg" path="res://assets/fonts/icons.ttf" id="8_5dct7"]
 [ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="9_ayp64"]
-[ext_resource type="Texture2D" uid="uid://bu1qqh82x47yt" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="9_qilvv"]
-[ext_resource type="Texture2D" uid="uid://euwa74x2hljj" path="res://assets/textures/ui/main_menu/option_level_select_portrait.png" id="10_jbte4"]
-[ext_resource type="Texture2D" uid="uid://k0qmq705scns" path="res://assets/textures/ui/main_menu/option_label_credits.png" id="11_e0hcc"]
-[ext_resource type="Texture2D" uid="uid://bhxan4q8j23fw" path="res://assets/textures/ui/main_menu/option_label_level_select.png" id="12_qch7b"]
-[ext_resource type="Texture2D" uid="uid://dpl8egxwrkkt" path="res://assets/textures/ui/main_menu/option_label_options.png" id="13_4ovp2"]
+[ext_resource type="PackedScene" uid="uid://nqpeaq2b7udk" path="res://scenes/prefab/ui/main_menu_screen.tscn" id="12_8ekit"]
+[ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="13_n4uci"]
+[ext_resource type="Script" uid="uid://c3f38pxpyhfbt" path="res://scripts/level_select.gd" id="14_877pj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0cdpu"]
 font = ExtResource("4_n4uci")
@@ -29,14 +25,6 @@ texture = ExtResource("5_y2j7i")
 [sub_resource type="LabelSettings" id="LabelSettings_y2j7i"]
 font = ExtResource("9_ayp64")
 font_size = 35
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k51th"]
-texture = ExtResource("9_qilvv")
-expand_margin_left = 50.0
-expand_margin_top = 25.0
-expand_margin_right = 50.0
-expand_margin_bottom = 25.0
-region_rect = Rect2(199.02014, 189.5705, 1940.1774, 1028.7773)
 
 [node name="MainMenu" type="Control" unique_id=1355966020]
 layout_mode = 3
@@ -153,225 +141,18 @@ size_flags_vertical = 0
 text = "Press Enter to begin."
 label_settings = SubResource("LabelSettings_y2j7i")
 
-[node name="Menu" type="MarginContainer" parent="." unique_id=944521765]
+[node name="Menu" parent="." unique_id=1181466732 instance=ExtResource("12_8ekit")]
+process_mode = 4
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 25
+grow_horizontal = 1
+grow_vertical = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=817773956]
-layout_mode = 2
-alignment = 1
-
-[node name="Title" type="TextureRect" parent="Menu/VBoxContainer" unique_id=143083]
-custom_minimum_size = Vector2(503.69, 62.58)
-layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("7_pw24t")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Spacer" type="Control" parent="Menu/VBoxContainer" unique_id=1293198191]
-custom_minimum_size = Vector2(0, 16.385)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/VBoxContainer" unique_id=827487153]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="PrevIndicator" type="PanelContainer" parent="Menu/VBoxContainer/HBoxContainer" unique_id=1312959184]
-visible = false
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-
-[node name="Label" type="Label" parent="Menu/VBoxContainer/HBoxContainer/PrevIndicator" unique_id=643793276]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("8_5dct7")
-theme_override_font_sizes/font_size = 48
-text = ""
-
-[node name="PortraitContainer" type="PanelContainer" parent="Menu/VBoxContainer/HBoxContainer" unique_id=2091073642]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxTexture_k51th")
-
-[node name="OptionPortrait" type="TextureRect" parent="Menu/VBoxContainer/HBoxContainer/PortraitContainer" unique_id=910327215]
-custom_minimum_size = Vector2(788, 491)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-texture = ExtResource("10_jbte4")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="NextIndicator" type="PanelContainer" parent="Menu/VBoxContainer/HBoxContainer" unique_id=580804095]
-visible = false
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-
-[node name="Label" type="Label" parent="Menu/VBoxContainer/HBoxContainer/NextIndicator" unique_id=34548623]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("8_5dct7")
-theme_override_font_sizes/font_size = 48
-text = ""
-
-[node name="TitlesContainer" type="Control" parent="Menu/VBoxContainer" unique_id=621277745]
-custom_minimum_size = Vector2(0, 67)
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="Titles" type="HBoxContainer" parent="Menu/VBoxContainer/TitlesContainer" unique_id=1462323125]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -790.0
-offset_top = -36.0
-offset_right = 790.0
-offset_bottom = 36.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Credits" type="PanelContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=1918897986]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_0cdpu")
-
-[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles/Credits" unique_id=880498440]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="TextureRect" type="TextureRect" parent="Menu/VBoxContainer/TitlesContainer/Titles/Credits/MarginContainer" unique_id=1575574374]
-custom_minimum_size = Vector2(222, 0)
-layout_mode = 2
-texture = ExtResource("11_e0hcc")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Spacer" type="Control" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=761442546]
-custom_minimum_size = Vector2(350, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="LevelSelect" type="PanelContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=306732678]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_0cdpu")
-
-[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles/LevelSelect" unique_id=697737302]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="TextureRect" type="TextureRect" parent="Menu/VBoxContainer/TitlesContainer/Titles/LevelSelect/MarginContainer" unique_id=1242585632]
-custom_minimum_size = Vector2(344.42, 51.405)
-layout_mode = 2
-texture = ExtResource("12_qch7b")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="Spacer2" type="Control" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=1491095853]
-custom_minimum_size = Vector2(350, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Options" type="PanelContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles" unique_id=114661853]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_0cdpu")
-
-[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer/TitlesContainer/Titles/Options" unique_id=1125541301]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="TextureRect" type="TextureRect" parent="Menu/VBoxContainer/TitlesContainer/Titles/Options/MarginContainer" unique_id=558727040]
-custom_minimum_size = Vector2(227, 0)
-layout_mode = 2
-texture = ExtResource("13_4ovp2")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="LevelSelect" type="MarginContainer" parent="." unique_id=1387783519]
+[node name="LevelSelect" parent="." unique_id=14696676 instance=ExtResource("13_n4uci")]
+process_mode = 4
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelect" unique_id=237462571]
-layout_mode = 2
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="LevelSelect/VBoxContainer" unique_id=1085757808]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="PrevIndicator" type="PanelContainer" parent="LevelSelect/VBoxContainer/HBoxContainer" unique_id=161729570]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-
-[node name="Label" type="Label" parent="LevelSelect/VBoxContainer/HBoxContainer/PrevIndicator" unique_id=1689338403]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("8_5dct7")
-theme_override_font_sizes/font_size = 48
-text = ""
-
-[node name="Temp_Placeholder" type="Panel" parent="LevelSelect/VBoxContainer/HBoxContainer" unique_id=1677998727]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="NextIndicator" type="PanelContainer" parent="LevelSelect/VBoxContainer/HBoxContainer" unique_id=62626471]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-
-[node name="Label" type="Label" parent="LevelSelect/VBoxContainer/HBoxContainer/NextIndicator" unique_id=2062957365]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("8_5dct7")
-theme_override_font_sizes/font_size = 48
-text = ""
-
-[node name="TitlesContainer" type="Control" parent="LevelSelect/VBoxContainer" unique_id=1735166669]
-custom_minimum_size = Vector2(0, 67)
-layout_mode = 2
-size_flags_vertical = 8
+script = ExtResource("14_877pj")
 
 [node name="Whiteout" type="ColorRect" parent="." unique_id=1167688859]
 visible = false
