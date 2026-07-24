@@ -96,10 +96,10 @@ func _create_boxes():
 func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint():
 		return
-	if event.is_action_pressed("ui_right"):
+	if event.is_action_pressed("ui_right") and not event.is_echo():
 		switch(selected + 1)
 		play_audio(right_sfx)
-	elif event.is_action_pressed("ui_left"):
+	elif event.is_action_pressed("ui_left") and not event.is_echo():
 		switch(selected - 1)
 		play_audio(left_sfx)
 	elif event.is_action_pressed("ui_accept"):
@@ -119,7 +119,7 @@ func switch(index: int) -> void:
 		index = len(options) - 1
 	if move_tween and move_tween.is_running():
 		move_tween.kill()
-		portrait_display.modulate.a = 1
+		portrait_display.modulate.a = 0
 	move_tween = create_tween()
 	var option_box := option_boxes[index]
 	var option := options[index]
