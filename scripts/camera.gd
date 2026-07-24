@@ -1,9 +1,8 @@
 extends Camera2D
 class_name Camera
 
+## Note: lookahead cannot be manually disabled or enabled. It's now a user setting.
 @export_group("Lookahead")
-## Whether to enable the camera lookahead.
-@export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var enable_lookahead := true
 ## How far the lookahead shifts the camera to show what's in front of the player.
 @export var lookahead_amount: float = 75
 ## How long it takes for the lookahead to shift the camera.
@@ -93,4 +92,4 @@ func _process(delta: float) -> void:
 func should_disable_lookahead() -> bool:
 	if player.is_grappling:
 		return true
-	return not enable_lookahead
+	return not UserSettingsInstance.enable_camera_lookahead
