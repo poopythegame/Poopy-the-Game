@@ -46,6 +46,7 @@ enum Screen {
 var screen := Screen.TITLE
 var main_scene: PackedScene
 var screen_rect: Rect2
+var undo_queue: Array[Screen] = []
 
 var title_title_reveal_tween: Tween
 var title_poopy_jump_vel: float
@@ -95,7 +96,11 @@ func _on_menu_option_selected(index: int):
 		change_screen(Screen.CHARACTERS)
 
 func _input(event: InputEvent) -> void:
-	if screen == Screen.TITLE:
+	if event.is_action_pressed("back"):
+		var screen = undo_queue.pop_back()
+		if screen != null and screen != Screen.TITLE:
+			change_screen(screen, false)
+	elif screen == Screen.TITLE:
 		if event.is_action_pressed("start") and not event.is_echo():
 			title_title_reveal_tween.stop()
 			music_player.stop()
@@ -193,7 +198,7 @@ func title_begin_title_reveal():
 func screen_shake(intensity: float):
 	position = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * intensity
 
-func change_screen(new_screen: Screen):
+func change_screen(new_screen: Screen, record_undo: bool = true):
 	if new_screen == Screen.TITLE:
 		title_screen.show()
 		menu_screen.hide()
@@ -213,8 +218,11 @@ func change_screen(new_screen: Screen):
 		menu_screen.process_mode = Node.PROCESS_MODE_INHERIT
 		characters_screen.hide()
 		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		music_player.stream = menu_audio_stream
-		music_player.play()
+		if not music_player.stream == menu_audio_stream:
+			music_player.stream = menu_audio_stream
+			music_player.play()
+		elif not music_player.playing:
+			music_player.play()
 		level_select_screen.hide()
 		level_select_screen.process_mode = Node.PROCESS_MODE_DISABLED
 	elif new_screen == Screen.LEVEL_SELECT:
@@ -242,4 +250,6 @@ func change_screen(new_screen: Screen):
 		level_select_screen.process_mode = Node.PROCESS_MODE_DISABLED
 		characters_screen.show()
 		characters_screen.process_mode = Node.PROCESS_MODE_INHERIT
+	if record_undo:
+		undo_queue.append(screen)
 	screen = new_screen

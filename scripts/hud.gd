@@ -25,7 +25,7 @@ func _ready() -> void:
 	millis = fmod(time, 1) * 1000
 	seconds = fmod(time, 60)
 	minutes = fmod(time, 3600) / 60
-	var time_readout = "%02d:%02d.%03d" % [minutes, seconds, millis]
+	var time_readout: String = "%02d:%02d.%03d" % [minutes, seconds, millis]
 	time_label.text = time_readout
 	pause_menu.hud = self
 

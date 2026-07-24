@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://da8y4i2qvk454" path="res://assets/audio/effects/menu_right.ogg" id="4_5dct7"]
 [ext_resource type="Texture2D" uid="uid://bjejowtmy7kpn" path="res://assets/textures/ui/main_menu/logo_incomplete.png" id="4_8ekit"]
 [ext_resource type="FontFile" uid="uid://c6lup5uhxjaq8" path="res://assets/fonts/Comic-Sans-MS.ttf" id="4_n4uci"]
-[ext_resource type="Texture2D" uid="uid://og0yos4h6sda" path="res://assets/textures/ui/main_menu/option_box.png" id="5_y2j7i"]
+[ext_resource type="Texture2D" uid="uid://og0yos4h6sda" path="res://assets/textures/ui/option_box.png" id="5_y2j7i"]
 [ext_resource type="SpriteFrames" uid="uid://dvs8fhjv7ymto" path="res://assets/animations/title_player.tres" id="7_ayp64"]
 [ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="9_ayp64"]
 [ext_resource type="PackedScene" uid="uid://nqpeaq2b7udk" path="res://scenes/prefab/ui/main_menu_screen.tscn" id="12_8ekit"]
@@ -39,7 +39,7 @@ metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [sub_resource type="Resource" id="Resource_k51th"]
 script = ExtResource("15_pw24t")
-title = "Joh Person"
+title = "John Person"
 portrait = ExtResource("17_qilvv")
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
@@ -184,6 +184,7 @@ layout_mode = 1
 script = ExtResource("14_877pj")
 
 [node name="Characters" parent="." unique_id=42329872 instance=ExtResource("13_n4uci")]
+process_mode = 4
 visible = false
 layout_mode = 1
 options = Array[ExtResource("15_pw24t")]([SubResource("Resource_0cdpu"), SubResource("Resource_k51th"), SubResource("Resource_mfq2s"), SubResource("Resource_7a0y4")])
