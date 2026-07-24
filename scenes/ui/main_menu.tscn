@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://khv13jwuvvgf" path="res://assets/textures/characters/color/john_person.png" id="17_qilvv"]
 [ext_resource type="Texture2D" uid="uid://bpnq0w3a1p1c2" path="res://assets/textures/characters/color/chud_squad.png" id="18_jbte4"]
 [ext_resource type="Texture2D" uid="uid://b0sju53qqk14b" path="res://assets/textures/characters/color/pop_i.png" id="19_e0hcc"]
+[ext_resource type="Script" uid="uid://c4xgkd1lsc5ph" path="res://scripts/options_menu.gd" id="21_qilvv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0cdpu"]
 font = ExtResource("4_n4uci")
@@ -72,9 +73,11 @@ right_sfx = Array[AudioStream]([ExtResource("4_5dct7")])
 back_sfx = Array[AudioStream]([ExtResource("5_5dct7")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=453858802]
+bus = &"SFX"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=2039563538]
 volume_db = -5.0
+bus = &"Music"
 
 [node name="Background" type="TextureRect" parent="." unique_id=1645064994]
 visible = false
@@ -191,6 +194,21 @@ process_mode = 4
 visible = false
 layout_mode = 1
 options = Array[ExtResource("15_pw24t")]([SubResource("Resource_0cdpu"), SubResource("Resource_k51th"), SubResource("Resource_mfq2s"), SubResource("Resource_7a0y4")])
+
+[node name="OptionsMenu" type="CenterContainer" parent="." unique_id=1089117973]
+process_mode = 4
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("21_qilvv")
+
+[node name="OptionsContainer" type="GridContainer" parent="OptionsMenu" unique_id=1701702621]
+layout_mode = 2
+columns = 2
 
 [node name="Whiteout" type="ColorRect" parent="." unique_id=1167688859]
 visible = false

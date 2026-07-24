@@ -63,5 +63,7 @@ text = "Quit"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1137803304]
 stream = ExtResource("6_vs5x1")
+bus = &"Music"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1148824572]
+bus = &"SFX"

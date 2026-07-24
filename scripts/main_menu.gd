@@ -42,6 +42,8 @@ enum Screen {
 
 @onready var characters_screen: MultiselectScreen = $Characters
 
+@onready var options_screen: OptionsMenu = $OptionsMenu
+
 @onready var levels := Global.levels.levels
 
 var screen := Screen.TITLE
@@ -92,7 +94,7 @@ func _on_menu_option_selected(index: int):
 	elif index == 1:
 		change_screen(Screen.LEVEL_SELECT)
 	elif index == 2:
-		pass
+		change_screen(Screen.OPTIONS)
 	elif index == 3:
 		change_screen(Screen.CHARACTERS)
 
@@ -209,6 +211,8 @@ func change_screen(new_screen: Screen, record_undo: bool = true):
 		level_select_screen.process_mode = Node.PROCESS_MODE_DISABLED
 		characters_screen.hide()
 		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		options_screen.hide()
+		options_screen.process_mode = Node.PROCESS_MODE_DISABLED
 		music_player.stop()
 		music_player.stream = title_audio_stream
 		title_begin_title_reveal()
@@ -220,6 +224,8 @@ func change_screen(new_screen: Screen, record_undo: bool = true):
 		menu_screen.process_mode = Node.PROCESS_MODE_INHERIT
 		characters_screen.hide()
 		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		options_screen.hide()
+		options_screen.process_mode = Node.PROCESS_MODE_DISABLED
 		if not music_player.stream == menu_audio_stream:
 			music_player.stream = menu_audio_stream
 			music_player.play()
@@ -235,6 +241,8 @@ func change_screen(new_screen: Screen, record_undo: bool = true):
 		menu_screen.process_mode = Node.PROCESS_MODE_DISABLED
 		characters_screen.hide()
 		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		options_screen.hide()
+		options_screen.process_mode = Node.PROCESS_MODE_DISABLED
 		if not music_player.stream == menu_audio_stream:
 			music_player.stream = menu_audio_stream
 			music_player.play()
@@ -252,6 +260,21 @@ func change_screen(new_screen: Screen, record_undo: bool = true):
 		level_select_screen.process_mode = Node.PROCESS_MODE_DISABLED
 		characters_screen.show()
 		characters_screen.process_mode = Node.PROCESS_MODE_INHERIT
+		options_screen.hide()
+		options_screen.process_mode = Node.PROCESS_MODE_DISABLED
+	elif new_screen == Screen.OPTIONS:
+		whiteout.hide()
+		background.show()
+		title_screen.hide()
+		menu_screen.hide()
+		menu_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		level_select_screen.hide()
+		level_select_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		characters_screen.hide()
+		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		options_screen.show()
+		options_screen.process_mode = Node.PROCESS_MODE_INHERIT
+		options_screen._on_enter()
 	if record_undo:
 		undo_queue.append(screen)
 	screen = new_screen
