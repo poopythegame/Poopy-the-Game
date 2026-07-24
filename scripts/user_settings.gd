@@ -1,9 +1,9 @@
 extends Node
 class_name UserSettings
 
-signal setting_changed(id: String, value: Variant)
+signal setting_changed(id: StringName, value: Variant)
 
-var settings: Dictionary[String, Variant]
+var settings: Dictionary[StringName, Variant]
 
 class Setting:
 	var name: String
@@ -11,12 +11,12 @@ class Setting:
 	var type: Variant.Type
 	var value: Variant
 
-func _get_default_settings() -> Dictionary[String, Variant]:
+func _get_default_settings() -> Dictionary[StringName, Variant]:
 	return {
-		"enable_camera_lookahead": true,
-		"master_volume": 1.,
-		"music_volume": 1.,
-		"sound_volume": 1.,
+		&"enable_camera_lookahead": true,
+		&"master_volume": 1.,
+		&"music_volume": 1.,
+		&"sound_volume": 1.,
 	}
 
 func _enter_tree() -> void:
@@ -36,6 +36,14 @@ func _enter_tree() -> void:
 
 	if should_use_defaults:
 		settings = _get_default_settings()
+	
+	# Trigger an update for all setting values after all nodes are ready
+	_update_all_settings.call_deferred()
+
+func _update_all_settings() -> void:
+	for setting_id in settings.keys():
+		var value: Variant = settings[setting_id]
+		setting_changed.emit(setting_id, value)
 
 func list_settings() -> Array[Setting]:
 	var results: Array[Setting] = []

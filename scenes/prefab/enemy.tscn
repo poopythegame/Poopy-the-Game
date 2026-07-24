@@ -46,6 +46,7 @@ hurt_sfx = Array[AudioStream]([ExtResource("5_4bbuc"), ExtResource("6_fc4qb")])
 shock_sfx = Array[AudioStream]([ExtResource("7_4lg2v"), ExtResource("8_wihsh")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=525685523]
+bus = &"SFX"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1435156332]
 position = Vector2(1.0000005, -0.49999893)

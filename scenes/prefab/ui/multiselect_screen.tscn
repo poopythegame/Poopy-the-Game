@@ -31,6 +31,7 @@ select_sfx = Array[AudioStream]([ExtResource("3_e0yf4")])
 right_sfx = Array[AudioStream]([ExtResource("4_01fnu")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=167130769]
+bus = &"SFX"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=346008450]
 layout_mode = 2

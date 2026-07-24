@@ -67,6 +67,7 @@ func begin_level(index: int) -> void:
 		level_music_player = AudioStreamPlayer.new()
 		level_music_player.stream = level.music
 		level_music_player.name = "MusicPlayer"
+		level_music_player.bus = &"Music"
 		level_music_player.autoplay = true
 		level_music_player.volume_db = -5
 	else:

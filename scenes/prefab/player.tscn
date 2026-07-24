@@ -85,6 +85,7 @@ width = 3.0
 default_color = Color(0.18359, 0.18359, 0.18359, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1465423261]
+bus = &"SFX"
 
 [connection signal="timeout" from="ControlLockTimer" to="." method="_on_control_lock_timer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
