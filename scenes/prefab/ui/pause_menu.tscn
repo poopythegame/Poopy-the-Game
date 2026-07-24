@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://c21lk22qvbrvh"]
+
+[ext_resource type="Script" uid="uid://cpw47d06h0o4t" path="res://scripts/pause_menu.gd" id="1_tnvnl"]
+[ext_resource type="Texture2D" uid="uid://d32ididyh760j" path="res://assets/textures/ui/background.png" id="2_c4jjc"]
+[ext_resource type="AudioStream" uid="uid://r70xvcj5gdrx" path="res://assets/audio/music/pause.ogg" id="6_vs5x1"]
+
+[node name="PauseMenu" type="Control" unique_id=267256142]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tnvnl")
+
+[node name="Background" type="TextureRect" parent="." unique_id=772759907]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_c4jjc")
+expand_mode = 1
+
+[node name="OptionsContainer" type="VBoxContainer" parent="." unique_id=1362642203]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContinueButton" type="Button" parent="OptionsContainer" unique_id=1927993808]
+layout_mode = 2
+text = "Continue"
+
+[node name="RestartButton" type="Button" parent="OptionsContainer" unique_id=665844066]
+layout_mode = 2
+text = "Restart"
+
+[node name="ReturnToMenuButton" type="Button" parent="OptionsContainer" unique_id=82250424]
+layout_mode = 2
+text = "Return To Menu"
+
+[node name="QuitButton" type="Button" parent="OptionsContainer" unique_id=172603494]
+layout_mode = 2
+text = "Quit"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1137803304]
+stream = ExtResource("6_vs5x1")

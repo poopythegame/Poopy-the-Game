@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://og0yos4h6sda"
-path="res://.godot/imported/option_box.png-cb587e0f89ab27bdf6654da406e67d99.ctex"
+uid="uid://bn80ws0ferclg"
+path="res://.godot/imported/focus_halo.png-2b0930fc4e8ade610ee0abb8e3a779af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/main_menu/option_box.png"
-dest_files=["res://.godot/imported/option_box.png-cb587e0f89ab27bdf6654da406e67d99.ctex"]
+source_file="res://assets/textures/ui/focus_halo.png"
+dest_files=["res://.godot/imported/focus_halo.png-2b0930fc4e8ade610ee0abb8e3a779af.ctex"]
 
 [params]
 

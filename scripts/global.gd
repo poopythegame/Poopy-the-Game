@@ -7,6 +7,7 @@ var is_quitting := false
 var fullscreen_colorrect: ColorRect
 @onready var levels: LevelsDesc = load("uid://bhtmoith33eb6")
 var save_data: SaveData
+var is_switching_levels := false
 
 @onready var quit_sfx: Array[AudioStream] = [load("uid://rtq3b4h4llvf")]
 
@@ -91,10 +92,12 @@ func begin_level_crossfade(index: int) -> void:
 	fullscreen_colorrect.color = Color.BLACK
 	fullscreen_colorrect.show()
 	fullscreen_colorrect.modulate.a = 0
+	is_switching_levels = true
 	tween.tween_property(fullscreen_colorrect, "modulate:a", 1, .5)
 	tween.tween_callback(func(): begin_level(index))
 	tween.tween_property(fullscreen_colorrect, "modulate:a", 0, .5)
 	tween.tween_callback(fullscreen_colorrect.hide)
+	tween.tween_callback(func(): is_switching_levels = false)
 
 func add_coin():
 	coins += 1
@@ -113,7 +116,7 @@ func get_time() -> float:
 	return times[len(times) - 1]
 
 func get_rank():
-	var rank = save_data.ranks[current_level]
+	var rank: int = save_data.ranks[current_level]
 	if rank == -1:
 		return null
 	else:

@@ -1,21 +1,14 @@
 [gd_scene format=3 uid="uid://cy14air0s7d4u"]
 
-[ext_resource type="Texture2D" uid="uid://og0yos4h6sda" path="res://assets/textures/ui/main_menu/option_box.png" id="1_winx7"]
+[ext_resource type="StyleBox" uid="uid://dhyyd7ecxkqi" path="res://assets/style_boxes/blue_box.tres" id="1_winx7"]
 [ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="2_winx7"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jxvb7"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-texture = ExtResource("1_winx7")
 
 [sub_resource type="LabelSettings" id="LabelSettings_baklv"]
 font = ExtResource("2_winx7")
 font_size = 35
 
 [node name="MultiselectOptionBox" type="PanelContainer" unique_id=555554100]
-theme_override_styles/panel = SubResource("StyleBoxTexture_jxvb7")
+theme_override_styles/panel = ExtResource("1_winx7")
 
 [node name="Label" type="Label" parent="." unique_id=484143346]
 layout_mode = 2

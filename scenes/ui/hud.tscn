@@ -8,10 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://drb13ll3bun77" path="res://assets/textures/ui/hud/time.png" id="4_n08jr"]
 [ext_resource type="Texture2D" uid="uid://crqpnjku14cx3" path="res://assets/textures/ui/hud/healthbar.png" id="6_3e1ei"]
 [ext_resource type="Texture2D" uid="uid://die3cm5oaxfsu" path="res://assets/textures/ui/hud/coin.png" id="6_f8v8u"]
-[ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="9_kicr4"]
-[ext_resource type="Texture2D" uid="uid://d32ididyh760j" path="res://assets/textures/ui/background.png" id="9_mj13f"]
-[ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="10_mj13f"]
-[ext_resource type="AudioStream" uid="uid://r70xvcj5gdrx" path="res://assets/audio/music/pause.ogg" id="12_0h1do"]
+[ext_resource type="PackedScene" uid="uid://c21lk22qvbrvh" path="res://scenes/prefab/ui/pause_menu.tscn" id="9_4jqwt"]
 
 [sub_resource type="FontVariation" id="FontVariation_3e1ei"]
 base_font = ExtResource("3_n08jr")
@@ -29,26 +26,6 @@ content_margin_top = 3.0
 content_margin_right = 6.0
 content_margin_bottom = 3.0
 texture = ExtResource("6_3e1ei")
-
-[sub_resource type="Resource" id="Resource_0cdpu"]
-script = ExtResource("10_mj13f")
-title = "Return to Menu"
-metadata/_custom_type_script = "uid://co0g5pmxbg578"
-
-[sub_resource type="Resource" id="Resource_0h1do"]
-script = ExtResource("10_mj13f")
-title = "Quit"
-metadata/_custom_type_script = "uid://co0g5pmxbg578"
-
-[sub_resource type="Resource" id="Resource_kicr4"]
-script = ExtResource("10_mj13f")
-title = "Resume"
-metadata/_custom_type_script = "uid://co0g5pmxbg578"
-
-[sub_resource type="Resource" id="Resource_k51th"]
-script = ExtResource("10_mj13f")
-title = "Restart Level"
-metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [node name="InGameOverlay" type="CanvasLayer" unique_id=1911954101]
 script = ExtResource("1_erikh")
@@ -159,32 +136,8 @@ layout_mode = 2
 text = "—"
 label_settings = SubResource("LabelSettings_f8v8u")
 
-[node name="PauseMenuContainer" type="Control" parent="." unique_id=854082830]
+[node name="PauseMenu" parent="." unique_id=267256142 instance=ExtResource("9_4jqwt")]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="TextureRect" parent="PauseMenuContainer" unique_id=1442788060]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("9_mj13f")
-expand_mode = 1
-
-[node name="PauseMenu" parent="PauseMenuContainer" unique_id=1181466732 instance=ExtResource("9_kicr4")]
-process_mode = 2
-layout_mode = 1
-options = Array[ExtResource("10_mj13f")]([SubResource("Resource_0cdpu"), SubResource("Resource_0h1do"), SubResource("Resource_kicr4"), SubResource("Resource_k51th")])
-
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="PauseMenuContainer/PauseMenu" unique_id=942817175]
-stream = ExtResource("12_0h1do")
 
 [node name="Whiteout" type="ColorRect" parent="." unique_id=637235941]
 visible = false
