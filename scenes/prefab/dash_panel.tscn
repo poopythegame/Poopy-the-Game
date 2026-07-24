@@ -24,3 +24,4 @@ region_rect = Rect2(0, 0, 1024, 509.0204)
 shape = SubResource("RectangleShape2D_2g2j0")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1912343754]
+bus = &"SFX"

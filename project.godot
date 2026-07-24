@@ -32,6 +32,7 @@ buses/default_bus_layout="uid://b83hcldu70xad"
 
 Global="*res://scripts/global.gd"
 UserSettingsInstance="*uid://dvb22fhd6b76y"
+AudioManager="uid://bj6gqlll6sgrr"
 
 [display]
 
