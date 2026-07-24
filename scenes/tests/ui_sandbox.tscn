@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dadj7hlpqdfhb"]
+
+[ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="1_yacfi"]
+[ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="2_cx7fc"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vis0k"]
+size = Vector2(500, 500)
+
+[sub_resource type="Resource" id="Resource_ty1id"]
+script = ExtResource("2_cx7fc")
+title = "Option 1"
+portrait = SubResource("PlaceholderTexture2D_vis0k")
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uf0gf"]
+size = Vector2(500, 500)
+
+[sub_resource type="Resource" id="Resource_cj482"]
+script = ExtResource("2_cx7fc")
+title = "Option 2"
+portrait = SubResource("PlaceholderTexture2D_uf0gf")
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_76ry3"]
+size = Vector2(500, 500)
+
+[sub_resource type="Resource" id="Resource_jpxae"]
+script = ExtResource("2_cx7fc")
+title = "Option 3"
+portrait = SubResource("PlaceholderTexture2D_76ry3")
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
+[node name="UISandbox" type="Control" unique_id=470848444]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MultiselectScreen" parent="." unique_id=1181466732 instance=ExtResource("1_yacfi")]
+layout_mode = 1
+options = Array[ExtResource("2_cx7fc")]([SubResource("Resource_ty1id"), SubResource("Resource_cj482"), SubResource("Resource_jpxae")])
+selected = 1

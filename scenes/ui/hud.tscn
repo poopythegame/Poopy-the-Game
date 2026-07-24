@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://drb13ll3bun77" path="res://assets/textures/ui/hud/time.png" id="4_n08jr"]
 [ext_resource type="Texture2D" uid="uid://crqpnjku14cx3" path="res://assets/textures/ui/hud/healthbar.png" id="6_3e1ei"]
 [ext_resource type="Texture2D" uid="uid://die3cm5oaxfsu" path="res://assets/textures/ui/hud/coin.png" id="6_f8v8u"]
+[ext_resource type="PackedScene" uid="uid://c21lk22qvbrvh" path="res://scenes/prefab/ui/pause_menu.tscn" id="9_4jqwt"]
 
 [sub_resource type="FontVariation" id="FontVariation_3e1ei"]
 base_font = ExtResource("3_n08jr")
@@ -134,6 +135,9 @@ expand_mode = 3
 layout_mode = 2
 text = "—"
 label_settings = SubResource("LabelSettings_f8v8u")
+
+[node name="PauseMenu" parent="." unique_id=267256142 instance=ExtResource("9_4jqwt")]
+visible = false
 
 [node name="Whiteout" type="ColorRect" parent="." unique_id=637235941]
 visible = false

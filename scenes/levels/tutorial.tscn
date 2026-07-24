@@ -1,18 +1,127 @@
-[gd_scene format=3 uid="uid://chivuxah6fbkc"]
+[gd_scene format=4 uid="uid://chivuxah6fbkc"]
 
 [ext_resource type="Script" uid="uid://dhdc4b8yddyej" path="res://addons/rmsmartshape/shapes/shape.gd" id="1_7ac3l"]
 [ext_resource type="Script" uid="uid://bo5f7qe27jfje" path="res://addons/rmsmartshape/shapes/point_array.gd" id="2_iig34"]
+[ext_resource type="Script" uid="uid://bwcf4pjgprn0k" path="res://addons/rmsmartshape/shapes/point.gd" id="2_uy53l"]
 [ext_resource type="Resource" uid="uid://b7m2f5qfj3r7h" path="res://assets/ss2d_materials/grass.tres" id="3_3e81p"]
 [ext_resource type="PackedScene" uid="uid://8xai8tlfegl3" path="res://scenes/prefab/lvl_start.tscn" id="4_g7bfq"]
+[ext_resource type="Script" uid="uid://llobjh5hvry" path="res://addons/rmsmartshape/shapes/mesh.gd" id="4_l8ohl"]
 [ext_resource type="PackedScene" uid="uid://bea558noe02pm" path="res://scenes/prefab/player.tscn" id="5_4a02d"]
+[ext_resource type="Material" uid="uid://0n3rd7tfl2c4" path="res://assets/materials/ground_fill.tres" id="5_wr5d5"]
+[ext_resource type="Texture2D" uid="uid://bnvui3fonkkvt" path="res://assets/textures/ground/ground.png" id="6_q462l"]
 [ext_resource type="PackedScene" uid="uid://n40asi5s347t" path="res://scenes/prefab/cam_boundary.tscn" id="6_uu0hj"]
+[ext_resource type="Shader" uid="uid://bgm5q57orvpth" path="res://shaders/grass_material.gdshader" id="7_cyy7t"]
 [ext_resource type="Script" uid="uid://bn8j6pteveo81" path="res://scripts/camera.gd" id="7_iig34"]
+[ext_resource type="Texture2D" uid="uid://5gkevggjymjk" path="res://assets/textures/ground/grass.png" id="8_1x4hw"]
 [ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/ui/hud.tscn" id="8_3e81p"]
+[ext_resource type="Shader" uid="uid://bxjra7tqfuq06" path="res://shaders/retexture.gdshader" id="9_hux2q"]
+[ext_resource type="Texture2D" uid="uid://fdna5q8d4lat" path="res://assets/textures/ground/ground_border.png" id="10_n1gr0"]
+
+[sub_resource type="Resource" id="Resource_gwe3r"]
+script = ExtResource("2_uy53l")
+position = Vector2(-224, -111)
+
+[sub_resource type="Resource" id="Resource_f1d85"]
+script = ExtResource("2_uy53l")
+position = Vector2(560, -111)
+
+[sub_resource type="Resource" id="Resource_4rqrb"]
+script = ExtResource("2_uy53l")
+position = Vector2(384, 144)
+
+[sub_resource type="Resource" id="Resource_x7mr2"]
+script = ExtResource("2_uy53l")
+position = Vector2(0, 152)
+
+[sub_resource type="Resource" id="Resource_giya0"]
+script = ExtResource("2_uy53l")
+position = Vector2(-224, -111)
 
 [sub_resource type="Resource" id="Resource_irnc0"]
 script = ExtResource("2_iig34")
-_point_order = PackedInt32Array()
-_next_key = 3
+_points = {
+0: SubResource("Resource_giya0"),
+3: SubResource("Resource_gwe3r"),
+6: SubResource("Resource_f1d85"),
+7: SubResource("Resource_4rqrb"),
+8: SubResource("Resource_x7mr2")
+}
+_point_order = PackedInt32Array(3, 6, 7, 8, 0)
+_constraints = {
+Vector2i(3, 0): 15
+}
+_next_key = 9
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_arvqe"]
+_surfaces = [{
+"aabb": AABB(-224, -111, 0, 784, 263, 1e-05),
+"attribute_data": PackedByteArray("/////wndCz+OyN29Cd0LP47I3b3/////DNC/PgncDz4M0L8+CdwPPv////8AAAAACtoXPgAAAAAK2hc+/////w7IX76OyN29Dshfvo7I3b0="),
+"format": 34359742527,
+"index_count": 9,
+"index_data": PackedByteArray("AAABAAIAAgADAAMAAwAAAAIA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAMRAAA3sIAAAAAAADAQwAAEEMAAAAAAAAAAAAAGEMAAAAAAABgwwAA3sIAAAAA/////////7//////////v/////////+//////////78=")
+}]
+
+[sub_resource type="Resource" id="Resource_4n5tw"]
+script = ExtResource("4_l8ohl")
+texture = ExtResource("6_q462l")
+mesh = SubResource("ArrayMesh_arvqe")
+material = ExtResource("5_wr5d5")
+z_index = -10
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mn5d3"]
+shader = ExtResource("7_cyy7t")
+shader_parameter/texture_scale = Vector2(68, 16)
+shader_parameter/texture_offset = Vector2(0, 0)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_p4ft5"]
+_surfaces = [{
+"aabb": AABB(-224, -111, 0, 784, 640, 1e-05),
+"attribute_data": PackedByteArray("/////wAAAAAAAAAAAAAAAAAAAAD/////AAAAAAAAgD8AAAAAAACAP/////8Mz0M/AACAPwzPQz8AAIA//////wzPQz8AAAAADM9DPwAAAAA="),
+"format": 34359742527,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAACAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AABgwwAA3sIAAAAAAABgwwBABEQAAAAAAAAMRABABEQAAAAAAAAMRAAA3sIAAAAA/3//f////z//f/9/////P/9//3////8//3//f////z8=")
+}]
+
+[sub_resource type="Resource" id="Resource_rixlv"]
+script = ExtResource("4_l8ohl")
+texture = ExtResource("8_1x4hw")
+mesh = SubResource("ArrayMesh_p4ft5")
+material = SubResource("ShaderMaterial_mn5d3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0tpbb"]
+shader = ExtResource("9_hux2q")
+shader_parameter/tex = ExtResource("10_n1gr0")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_uy53l"]
+_surfaces = [{
+"aabb": AABB(-224.30452, -115.92788, 0, 784.63367, 268.60983, 1e-05),
+"attribute_data": PackedByteArray("/////wAAAAAAAAAAAAAAAAAAAAD/////AAAAAAAAgD8AAAAAAACAP/////+SfkFAAACAP5J+QUAAAIA//////5J+QUAAAAAAkn5BQAAAAAD/////OFnYQAAAgD84WdhAAACAP/////84WdhAAAAAADhZ2EAAAAAA/////2ElIkEAAIA/YSUiQQAAgD//////YSUiQQAAAABhJSJBAAAAAA=="),
+"format": 34359742527,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAAACAAMAAwACAAQAAwAEAAUABQAEAAYABQAGAAcA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("ERUMRKqL3cIAAAAAsW8KRFai5sIAAAAA7Uq+Q9ynCUMAAAAAOzDAQz6zEEMAAAAANDY+QHRiEUMAAAAAUN2cvpSuGEMAAAAA0zZawxPb58IAAAAA9U1gwzV73cIAAAAA/3//f/tLARr/f/9//EsBGv9//3/XLJQp/3//f8ssmin/f/9/0ifpU/9//3/HJ+NT/3//fy1FlmL/f/9/LEWWYg==")
+}]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nk0kf"]
+size = Vector2(102, 8)
+
+[sub_resource type="Resource" id="Resource_l8ohl"]
+script = ExtResource("4_l8ohl")
+texture = SubResource("PlaceholderTexture2D_nk0kf")
+mesh = SubResource("ArrayMesh_uy53l")
+material = SubResource("ShaderMaterial_0tpbb")
+z_index = -1
 
 [node name="Tutorial" type="Node2D" unique_id=987998091]
 editor_description = "Welcome to the tutorial scene. It is for now a sample scene with some helpful tips. Hover over the various nodes for additional help."
@@ -23,26 +132,35 @@ editor_description = "Tips:
 2. Change the Material property under the Materials category of the Terrain[n] node to res://assets/ss2d_materials/wood.tres for the wood material."
 
 [node name="Terrain1_CollisionPolygon2D" type="CollisionPolygon2D" parent="Body1" unique_id=518235711]
+polygon = PackedVector2Array(-456, 0, 328, 0, 152, 255, -232, 263)
 
 [node name="Terrain1" type="Node2D" parent="Body1" unique_id=584507454]
+position = Vector2(-232, 111)
 script = ExtResource("1_7ac3l")
 _points = SubResource("Resource_irnc0")
+_meshes = Array[ExtResource("4_l8ohl")]([SubResource("Resource_4n5tw"), SubResource("Resource_rixlv"), SubResource("Resource_l8ohl")])
 shape_material = ExtResource("3_3e81p")
 collision_polygon_node_path = NodePath("../Terrain1_CollisionPolygon2D")
 metadata/_custom_type_script = "uid://dhdc4b8yddyej"
 
 [node name="LevelStart" parent="." unique_id=496126979 instance=ExtResource("4_g7bfq")]
+position = Vector2(47, -64)
 
 [node name="Player" parent="." unique_id=1090100472 groups=["Player"] instance=ExtResource("5_4a02d")]
+position = Vector2(-26, 0)
 
 [node name="LeftCamBound" parent="." unique_id=1310596363 instance=ExtResource("6_uu0hj")]
 editor_description = "Move this node to where you want the left-hand camera limit to be."
+position = Vector2(-448, 0)
 
 [node name="RightCamBound" parent="." unique_id=497458463 instance=ExtResource("6_uu0hj")]
 editor_description = "Move this node to where you want the left-hand camera limit to be."
+position = Vector2(128, 0)
 flip = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1929185180]
+position = Vector2(84, 408)
+zoom = Vector2(3.5, 3.5)
 script = ExtResource("7_iig34")
 
 [node name="InGameOverlay" parent="." unique_id=1911954101 instance=ExtResource("8_3e81p")]

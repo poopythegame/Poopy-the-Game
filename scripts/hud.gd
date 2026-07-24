@@ -12,6 +12,7 @@ class_name InGameOverlay
 @onready var health_label: Label = $Left/HealthBar/HealthNumber
 @onready var time_label: Label = $Left/Time/Readout
 @onready var whiteout: ColorRect = $Whiteout
+@onready var pause_menu: PauseMenu = $PauseMenu
 
 var stopwatch_paused := true
 @onready var coins_label: Label = $Left/Coins/Readout
@@ -24,12 +25,30 @@ func _ready() -> void:
 	millis = fmod(time, 1) * 1000
 	seconds = fmod(time, 60)
 	minutes = fmod(time, 3600) / 60
-	var time_readout = "%02d:%02d.%03d" % [minutes, seconds, millis]
+	var time_readout: String = "%02d:%02d.%03d" % [minutes, seconds, millis]
 	time_label.text = time_readout
+	pause_menu.hud = self
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("esc"):
+		show_pause_menu()
+	elif event.is_action_pressed("restart"):
+		Global.begin_level_crossfade(Global.current_level)
+
+func show_pause_menu() -> void:
+	if Global.is_switching_levels:
+		# Don't pause the game while Global is animating a level switch.
+		return
+	pause_menu.show()
+	get_tree().paused = true
+	pause_menu._on_show()
+
+func hide_pause_menu() -> void:
+	get_tree().paused = false
+	pause_menu.hide()
 
 func _process(delta): 
-	var level_index = Global.current_level
-	var coins = Global.get_coins()
+	var coins: int = Global.get_coins()
 	coins_label.text = "%d" % coins
 	if not stopwatch_paused:
 		time += delta
@@ -39,7 +58,7 @@ func _process(delta):
 		var time_readout = "%02d:%02d.%03d" % [minutes, seconds, millis]
 		time_label.text = time_readout
 
-func display_speed(x, y):
+func display_speed(x: float, y: float):
 	var raw_vspeed = clamp(abs(y) - 50, 0, INF)
 	var raw_hspeed = abs(x)
 	var vspeed = raw_vspeed / 30.0 # 30 px = 1 m

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cy14air0s7d4u"]
+
+[ext_resource type="StyleBox" uid="uid://dhyyd7ecxkqi" path="res://assets/style_boxes/blue_box.tres" id="1_winx7"]
+[ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="2_winx7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_baklv"]
+font = ExtResource("2_winx7")
+font_size = 35
+
+[node name="MultiselectOptionBox" type="PanelContainer" unique_id=555554100]
+theme_override_styles/panel = ExtResource("1_winx7")
+
+[node name="Label" type="Label" parent="." unique_id=484143346]
+layout_mode = 2
+text = "—"
+label_settings = SubResource("LabelSettings_baklv")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=359445861]
+visible = false
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 4
