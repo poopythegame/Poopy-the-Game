@@ -25,6 +25,7 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 script = ExtResource("1_p4jrt")
+slide_time = 1.0
 left_sfx = Array[AudioStream]([ExtResource("2_ryp7i")])
 select_sfx = Array[AudioStream]([ExtResource("3_e0yf4")])
 right_sfx = Array[AudioStream]([ExtResource("4_01fnu")])

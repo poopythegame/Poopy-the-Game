@@ -110,7 +110,7 @@ func _arrange_boxes() -> void:
 	var x := 0.
 	for box in option_boxes:
 		box.position.x = x
-		x += 500 + box.get_rect().size.x
+		x += 475 + box.get_rect().size.x
 
 func switch(index: int) -> void:
 	if index < 0:
