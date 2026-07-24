@@ -7,6 +7,7 @@ class_name MainMenu
 @export var left_sfx: Array[AudioStream]
 @export var select_sfx: Array[AudioStream]
 @export var right_sfx: Array[AudioStream]
+@export var back_sfx: Array[AudioStream]
 
 enum Screen {
 	TITLE,
@@ -100,6 +101,7 @@ func _input(event: InputEvent) -> void:
 		var screen = undo_queue.pop_back()
 		if screen != null and screen != Screen.TITLE:
 			change_screen(screen, false)
+			play_audio(back_sfx)
 	elif screen == Screen.TITLE:
 		if event.is_action_pressed("start") and not event.is_echo():
 			title_title_reveal_tween.stop()
@@ -119,7 +121,7 @@ func title_poopy_jump(t: float) -> void:
 
 func title_poopy_run(duration: float) -> Tween:
 	var tween := create_tween()
-	var segment_duration = duration / 8
+	var segment_duration: float = duration / 8
 	tween.pause()
 	for i in 2:
 		tween.tween_callback(func(): title_poopy.play("dance2"))
