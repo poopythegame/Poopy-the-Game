@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cpw47d06h0o4t" path="res://scripts/pause_menu.gd" id="1_tnvnl"]
 [ext_resource type="Texture2D" uid="uid://d32ididyh760j" path="res://assets/textures/ui/background.png" id="2_c4jjc"]
+[ext_resource type="AudioStream" uid="uid://10s272bmgc5a" path="res://assets/audio/effects/pause.ogg" id="2_tnvnl"]
+[ext_resource type="AudioStream" uid="uid://cuehpn8m2fakd" path="res://assets/audio/effects/menu_press.ogg" id="2_yb6sw"]
+[ext_resource type="AudioStream" uid="uid://b2wet5emug0y7" path="res://assets/audio/effects/unpause.ogg" id="4_c4jjc"]
 [ext_resource type="AudioStream" uid="uid://r70xvcj5gdrx" path="res://assets/audio/music/pause.ogg" id="6_vs5x1"]
 
 [node name="PauseMenu" type="Control" unique_id=267256142]
@@ -13,6 +16,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tnvnl")
+enter_sfx = Array[AudioStream]([ExtResource("2_tnvnl")])
+select_sfx = Array[AudioStream]([ExtResource("2_yb6sw")])
+exit_sfx = Array[AudioStream]([ExtResource("4_c4jjc")])
 
 [node name="Background" type="TextureRect" parent="." unique_id=772759907]
 layout_mode = 1
@@ -57,3 +63,5 @@ text = "Quit"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1137803304]
 stream = ExtResource("6_vs5x1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1148824572]

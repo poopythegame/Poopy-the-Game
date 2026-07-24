@@ -38,7 +38,7 @@ var half_width: float
 var move_tween: Tween
 
 func play_audio(streams: Array[AudioStream]):
-	var choice = randi_range(0, len(streams) - 1)
+	var choice: int = randi_range(0, len(streams) - 1)
 	audio_stream_player.stream = streams[choice]
 	audio_stream_player.play()
 

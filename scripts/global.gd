@@ -32,15 +32,6 @@ func stop_audio():
 	if not audio_stream_player.playing:
 		audio_stream_player.stream = null
 
-# func _input(event: InputEvent) -> void:
-# 	if event.is_action("esc") and not is_quitting:
-# 		is_quitting = true
-# 		play_audio(quit_sfx)
-# 		await audio_stream_player.finished
-# 		get_tree().quit()
-# 	elif event.is_action_pressed("restart") and not event.is_echo():
-# 		begin_level(current_level)
-
 func _ready() -> void:
 	var canvas_layer = CanvasLayer.new()
 	fullscreen_colorrect = ColorRect.new()
