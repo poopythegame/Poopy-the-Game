@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://bpnq0w3a1p1c2" path="res://assets/textures/characters/color/chud_squad.png" id="18_jbte4"]
 [ext_resource type="Texture2D" uid="uid://b0sju53qqk14b" path="res://assets/textures/characters/color/pop_i.png" id="19_e0hcc"]
 [ext_resource type="PackedScene" uid="uid://ceg8x1m3frt2q" path="res://scenes/prefab/ui/options_menu.tscn" id="22_jbte4"]
+[ext_resource type="Texture2D" uid="uid://drk7x2pb2mqpb" path="res://assets/textures/ui/main_menu/john_person/john_person_fr0.png" id="23_qch7b"]
+[ext_resource type="Texture2D" uid="uid://dpvsha2a5eit4" path="res://assets/textures/ui/main_menu/john_person/john_person_fr1.png" id="24_4ovp2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbte4"]
 shader = ExtResource("7_jbte4")
@@ -78,6 +80,13 @@ metadata/_custom_type_script = "uid://co0g5pmxbg578"
 shader = ExtResource("7_jbte4")
 shader_parameter/progress = 1.0
 
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_0cdpu"]
+frames = 2
+frame_0/texture = ExtResource("23_qch7b")
+frame_0/duration = 0.08
+frame_1/texture = ExtResource("24_4ovp2")
+frame_1/duration = 0.08
+
 [node name="MainMenu" type="Control" unique_id=1355966020]
 layout_mode = 3
 anchors_preset = 15
@@ -101,6 +110,7 @@ volume_db = -5.0
 bus = &"Music"
 
 [node name="TitleScreenCanvasGroup" type="CanvasGroup" parent="." unique_id=146876582]
+visible = false
 material = SubResource("ShaderMaterial_jbte4")
 
 [node name="Background" type="TextureRect" parent="TitleScreenCanvasGroup" unique_id=517563952]
@@ -281,3 +291,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="JohnPerson" type="TextureRect" parent="." unique_id=1699193025]
+process_mode = 4
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-100, 0)
+texture = SubResource("AnimatedTexture_0cdpu")
+expand_mode = 1
+stretch_mode = 4

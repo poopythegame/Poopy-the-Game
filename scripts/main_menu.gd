@@ -23,6 +23,8 @@ enum Screen {
 @onready var title_audio_stream: AudioStreamOggVorbis = load("uid://cotx67p5iwda")
 @onready var menu_audio_stream: AudioStreamOggVorbis = load("uid://b26trx8dyw833")
 
+@onready var john_person: TextureRect = $JohnPerson
+@onready var whiteout: ColorRect = $Whiteout
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 
 @onready var title_screen_cg: CanvasGroup = $TitleScreenCanvasGroup
@@ -36,7 +38,6 @@ enum Screen {
 @onready var level_select_background: TextureRect = $LevelSelectCanvasGroup/Background
 @onready var options_background: TextureRect = $OptionsMenuCanvasGroup/Background
 @onready var characters_background: TextureRect = $CharactersCanvasGroup/Background
-@onready var whiteout: ColorRect = $Whiteout
 @onready var title_poopy: AnimatedSprite2D = $TitleScreenCanvasGroup/Screen/VBoxContainer/Logo/PoopyContainer/Poopy
 @onready var title_portraits_background: Node2D = $TitleScreenCanvasGroup/Screen/PortraitsBackground
 @onready var title_infobox: PanelContainer = $TitleScreenCanvasGroup/Screen/VBoxContainer/Info
@@ -58,6 +59,7 @@ enum Screen {
 @onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, characters_screen_cg]
 
 var screen := Screen.TITLE
+var current_screen_cg: CanvasGroup
 var main_scene: PackedScene
 var screen_rect: Rect2
 var undo_queue: Array[Screen] = []
@@ -104,7 +106,7 @@ func _ready() -> void:
 	level_select_background.size = window_size
 	options_background.size = window_size
 	characters_background.size = window_size
-	change_screen(start_screen)
+	change_screen(start_screen, false, false)
 
 func _on_menu_option_selected(index: int):
 	if index == 0:
@@ -223,20 +225,46 @@ func screen_shake(intensity: float):
 func reveal_screen_cg(screen_cg: CanvasGroup):
 	screen_cg.show()
 	screen_cg.get_node("Screen").process_mode = Node.PROCESS_MODE_INHERIT
+	current_screen_cg = screen_cg
 
-func change_screen(new_screen: Screen, record_undo: bool = true):
+func reveal_screen_cg_transition(screen_cg: CanvasGroup):
+	current_screen_cg.show()
+	# A very high z-order
+	john_person.z_index = 3002
+	john_person.position.x = 0
+	john_person.show()
+	(current_screen_cg.material as ShaderMaterial).set_shader_parameter("progress", 1.)
+	screen_cg.show()
+	(screen_cg.material as ShaderMaterial).set_shader_parameter("progress", 0.)
+	# A very-high-yet-slightly-lower z-order
+	var next_screen_prev_z_index := screen_cg.z_index
+	screen_cg.z_index = 3001
+	var screen_change_tween := create_tween()
+	screen_change_tween.tween_property(screen_cg, "material:shader_parameter/progress", 1.0, 0.5)
+	screen_change_tween.parallel().tween_property(john_person, "position:x", screen_rect.size.x, 0.5)
+	screen_change_tween.tween_callback(func():
+		# Clean up
+		john_person.hide()
+		current_screen_cg.hide()
+		screen_cg.z_index = next_screen_prev_z_index
+		screen_cg.get_node("Screen").process_mode = Node.PROCESS_MODE_INHERIT
+		current_screen_cg = screen_cg
+	)
+
+func change_screen(new_screen: Screen, record_undo: bool = true, show_transition: bool = false):
 	for s in screen_cgs:
 		s.hide()
 		s.get_node("Screen").process_mode = Node.PROCESS_MODE_DISABLED
+	var screen_cg: CanvasGroup
 	if new_screen == Screen.TITLE:
-		reveal_screen_cg(title_screen_cg)
+		screen_cg = title_screen_cg
 		music_player.stop()
 		music_player.stream = title_audio_stream
 		title_begin_title_reveal()
 	elif new_screen == Screen.MENU:
 		whiteout.hide()
 		menu_background.show()
-		reveal_screen_cg(menu_screen_cg)
+		screen_cg = menu_screen_cg
 		if not music_player.stream == menu_audio_stream:
 			music_player.stream = menu_audio_stream
 			music_player.play()
@@ -250,16 +278,20 @@ func change_screen(new_screen: Screen, record_undo: bool = true):
 			music_player.play()
 		elif not music_player.playing:
 			music_player.play()
-		reveal_screen_cg(level_select_cg)
+		screen_cg = level_select_cg
 	elif new_screen == Screen.CHARACTERS:
 		whiteout.hide()
 		characters_background.show()
-		reveal_screen_cg(characters_screen_cg)
+		screen_cg = characters_screen_cg
 	elif new_screen == Screen.OPTIONS:
 		whiteout.hide()
 		options_background.show()
-		reveal_screen_cg(options_screen_cg)
+		screen_cg = options_screen_cg
 		options_screen._on_enter()
 	if record_undo:
 		undo_queue.append(screen)
+	if show_transition:
+		reveal_screen_cg_transition(screen_cg)
+	else:
+		reveal_screen_cg(screen_cg)
 	screen = new_screen
