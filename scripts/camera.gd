@@ -10,10 +10,10 @@ class_name Camera
 ## The easing curve for lookahead shifts.
 @export_exp_easing var lookahead_ease: float = -2
 @export_group("Terrain Bobbing")
-@export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var enable_terrain_bobbing := false
-@export var terrain_bobbing_offset := 50
+@export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var enable_terrain_bobbing: bool = false
+@export var terrain_bobbing_offset: float = 50
 
-var frozen := false
+var frozen: bool = false
 var player: Player
 var left_boundary: Node2D
 var right_boundary: Node2D
@@ -21,7 +21,7 @@ var x_offset: float = 0
 var next_x_offset: float = 0
 var x_offset_t: float = 0
 var curr_x_offset: float = 0
-const MINSPD = 450
+const MINSPD: int = 450
 
 func _ready() -> void:
 	var candidates := get_tree().get_nodes_in_group("cam_boundary")

@@ -17,12 +17,13 @@ class_name RankingsScreen
 @onready var rank_animation_tr: TextureRect = $HBoxContainer/Sprite
 @onready var whiteout: ColorRect = $Whiteout
 @onready var portraits_background: PortraitsBackground = $PortraitsBackground
-@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var audio_stream_player: AudioStreamPlayer = $MusicPlayer
 
 var rank_animation_animated_texture: AnimatedTexture
 var curr_rank: RankDef
+var main_menu: MainMenu
 
-func _ready() -> void:
+func _on_enter() -> void:
 	rank_animation_animated_texture = rank_animation_tr.texture
 	var rank_id: int = Global.get_rank()
 	curr_rank = Global.get_ranks()[rank_id]
@@ -30,7 +31,7 @@ func _ready() -> void:
 	var time := Global.get_time()
 	var millis := fmod(time, 1) * 1000
 	var seconds := fmod(time, 60)
-	var minutes := fmod(time, 3600) / 60 
+	var minutes := fmod(time, 3600) / 60
 	time_label.text = "Your time: %02d:%02d.%03d" % [minutes, seconds, millis]
 	var ranks := Global.get_ranks()
 	for rank in ranks:
@@ -43,7 +44,7 @@ func _ready() -> void:
 			icon.texture = rank.small_icon
 			var millis2 := fmod(rank.time, 1) * 1000
 			var seconds2 := fmod(rank.time, 60)
-			var minutes2 := fmod(rank.time, 3600) / 60 
+			var minutes2 := fmod(rank.time, 3600) / 60
 			max_time_label.text = "%02d:%02d.%03d" % [minutes2, seconds2, millis2]
 			ranks_container.add_child(icon)
 			ranks_container.add_child(max_time_label)
@@ -82,7 +83,11 @@ func start_animation_sequence():
 			rank_icon.show())
 		tween.tween_property(rank_icon, "offset_transform_scale", Vector2(1, 1), 0.5)
 	tween.tween_method(screen_shake, 10, 5, 0.5)
-	tween.tween_callback(apply_rank_animation)
+	tween.tween_callback(func():
+		apply_rank_animation()
+		# Just sticking this in here
+		main_menu.position = Vector2.ZERO
+	)
 	if curr_rank.show_portraits_background != 0:
 		if curr_rank.show_portraits_background == 2:
 			portraits_background.scroll_speed = 200
@@ -122,11 +127,14 @@ func apply_rank_animation():
 		rank_animation_tr.flip_h = true
 
 func screen_shake(intensity: float):
-	position = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * intensity
+	main_menu.position = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * intensity
 
 func _input(event: InputEvent) -> void:
 	if event.is_action("start"):
-		var main_menu: MainMenu = main_menu_scene.instantiate()
-		Global.current_level = -1
-		main_menu.start_screen = MainMenu.Screen.MENU
-		get_tree().change_scene_to_node(main_menu)
+		if main_menu:
+			main_menu.change_screen(MainMenu.Screen.MENU, false, MainMenu.Transition.WIPE)
+		else:
+			var main_menu_instance: MainMenu = main_menu_scene.instantiate()
+			Global.current_level = -1
+			main_menu_instance.start_screen = MainMenu.Screen.MENU
+			get_tree().change_scene_to_node(main_menu_instance)

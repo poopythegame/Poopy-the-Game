@@ -197,7 +197,7 @@ Vector2i(1, 31): 15
 }
 _next_key = 32
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_24aq3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1eg7"]
 shader = ExtResource("29_453de")
 shader_parameter/texture_scale = Vector2(68, 68)
 shader_parameter/texture_offset = Vector2(0, 0)
@@ -219,10 +219,10 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_c50m6")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q40wm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_seyp1"]
 shader = ExtResource("22_kpyan")
 shader_parameter/tex = ExtResource("9_kpyan")
 
@@ -239,14 +239,14 @@ _surfaces = [{
 "vertex_data": PackedByteArray("o00qQlyPJ8MAAAAAvWk1QkJwKsMAAAAAbqg1Qv7KssMAAAAAHlgqQgg1tMMAAAAAPjL4Q78DssMAAAAAzP/3Q0EBtMMAAAAAAoQGRBtdtsMAAAAAgvsFREEOuMMAAAAAn+wMRENix8MAAAAAwfkLRC0EyMMAAAAAf5oMRPrK8sMAAAAAeeULRAQ19MMAAAAAidoiRPrK8sMAAAAAgyUiRAQ19MMAAAAAidoiRHtlGcQAAAAAgyUiRIEaGsQAAAAAsFZsRIoBGcQAAAAAtD9sRIIAGsQAAAAAJFaBROMcHcQAAAAAIB+BRAkEHsQAAAAA8EqIRF8XKcQAAAAAiB6IRHkHKsQAAAAAYW2gRIFlKcQAAAAA3xKgRIUaKsQAAAAAYW2gRIdlQ8QAAAAA3xKgRIsaRMQAAAAAvlKtRH5lQ8QAAAAAQK2tRIIaRMQAAAAAbyGtRNfgCcQAAAAAeaCtRB0ACsQAAAAAojKuRCiEAcQAAAAABKKuREoCAsQAAAAAFGKxRItK9sMAAAAAJKGxRBcI+MMAAAAAapC1RL0F8sMAAAAADqC1ROcB9MMAAAAAlK/qRL0F8sMAAAAA8J/qROcB9MMAAAAAQOfuRJFr9sMAAAAAhJ3uRBUO+MMAAAAAMhTxRDOZAcQAAAAAIp/wRMEAAsQAAAAAjx7yRNfgCcQAAAAAhZ/xRB0ACsQAAAAAN+3xRF5lY8QAAAAAtZLxRGIaZMQAAAAAxsUIRc8EY8QAAAAABtAIRYEBZMQAAAAAEzQKRS4bYcQAAAAAMVAKRSYBYsQAAAAAkacLRa46XcQAAAAAJdALRaQAXsQAAAAATaIMRb9MWcQAAAAA888MRS0AWsQAAAAA9ucjRWc78sMAAAAA9gAkRbcS9MMAAAAAWFkqRfrK8sMAAAAAmoYqRQQ19MMAAAAAX1gqRaIxhcMAAAAAbYYqRRrOg8MAAAAAvWk1QkJwKsMAAAAAo00qQlyPJ8MAAAAA/3//fwqA+n//f/9/CoD6f/9//38pwOpf/3//fxHA9l//f/9/FfT0Rf9//38S9PVF/3//f4nOulj/f/9/eM7DWP9//3+TnzVw/3//f2qfSXD/f/9/rL8oYP9//38HwPtf/3//f/+//1//f/9//7//X/9//389wOBf/3//fxvA8V//f/9/XfVQRf9//39h9U5F/3//f6XWrFT/f/9/nNaxVP9//38Y3XNR/3//fzDdZ1H/f/9/M8DlX/9//3/tvwhg/3//f/+//1//f/9//7//X/9//3+wv9gf/3//f9u/7R//f/9/Mo4ZB/9//38ujhcH/3//f02uJhf/f/9/Vq4rF/9//3+X0cso/3//f43Rxij/f/9/4/HxOP9//3/f8fA4/3//f3/xP0f/f/9/dfFER/9//39Hy1ta/3//f0jLWlr/f/9/ZKdMbP9//39vp0ds/3//f9iNE3n/f/9/040Vef9//38swOhf/3//fyLA7l//f/9/++3+Nv9//38H7gM3/3//f+rV9Sr/f/9/7NX2Kv9//39FxiIj/3//f0jGJCP/f/9/c7+5H/9//390v7of/3//fx3aDy3/f/9/TNomLf9//384wBwg/3//f/a/+x//f/9/JEFtH/9//38kQW0f/3//f2sEyj3/f/9/awTKPQ==")
 }]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wp5th"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_22l3d"]
 size = Vector2(51, 4)
 
 [sub_resource type="Resource" id="Resource_dmpy2"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_q1cu8")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -361,7 +361,7 @@ mesh = SubResource("ArrayMesh_0jsbf")
 material = ExtResource("21_pcpc4")
 z_index = -10
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kpyan"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5hw7"]
 shader = ExtResource("23_fakio")
 shader_parameter/texture_scale = Vector2(68, 16)
 shader_parameter/texture_offset = Vector2(0, 0)
@@ -383,9 +383,9 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_8cmmm")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wp5th"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0jsbf"]
 shader = ExtResource("22_kpyan")
 shader_parameter/tex = ExtResource("17_24aq3")
 
@@ -402,14 +402,14 @@ _surfaces = [{
 "vertex_data": PackedByteArray("XAYCRQIAAsQAAAAAXIYBRQIAAsQAAAAAXIYBRZ2ZJ8MAAAAAXAYCRZ2ZJ8MAAAAA/3//f/9/AAD/f/9//38AAP9//3//fwAA/3//f/9/AAA=")
 }]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_q40wm"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_453de"]
 size = Vector2(102, 8)
 
 [sub_resource type="Resource" id="Resource_tlbrp"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_wp5th")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_qe653"]
@@ -427,9 +427,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_827mw"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_qe653")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_r7xja"]
@@ -447,9 +447,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_bmy12"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_r7xja")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_y2qsb"]
@@ -467,9 +467,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_raicr"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_y2qsb")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yf5lg"]
@@ -487,9 +487,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_oewew"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_yf5lg")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_seyp1"]
@@ -507,9 +507,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_22l3d"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_seyp1")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8as47"]
@@ -527,9 +527,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_yhgbk"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_8as47")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ae6a2"]
@@ -547,9 +547,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_miqne"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_ae6a2")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_15vga"]
@@ -567,9 +567,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_03o44"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_15vga")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_m1gcq"]
@@ -587,9 +587,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_7fqdy"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_m1gcq")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="Resource" id="SS2D_Point_50"]
@@ -654,7 +654,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_8a5fe")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_x8p5s"]
@@ -672,9 +672,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_7d2ck"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_x8p5s")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -893,7 +893,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_131jf")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_k8yb2"]
 _surfaces = [{
@@ -910,9 +910,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_fsnsc"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_k8yb2")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wd5lm"]
@@ -932,7 +932,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_wd5lm")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_j630o"]
 _surfaces = [{
@@ -949,9 +949,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_8mhrs"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_j630o")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jjwj8"]
@@ -971,7 +971,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_jjwj8")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ncsig"]
 _surfaces = [{
@@ -988,9 +988,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_wn6kv"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_ncsig")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_h6bqv"]
@@ -1010,7 +1010,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_h6bqv")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bv6ex"]
 _surfaces = [{
@@ -1027,9 +1027,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_06fqo"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_bv6ex")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_kpyan"]
@@ -1049,7 +1049,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_kpyan")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_q40wm"]
 _surfaces = [{
@@ -1066,9 +1066,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_wp5th"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_q40wm")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_mn5d3"]
@@ -1088,7 +1088,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_mn5d3")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_nk0kf"]
 _surfaces = [{
@@ -1105,9 +1105,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_8a5fe"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_nk0kf")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7d2ck"]
@@ -1127,7 +1127,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_7d2ck")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_827mw"]
 _surfaces = [{
@@ -1144,9 +1144,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_r7xja"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_827mw")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6ilb3"]
@@ -1166,7 +1166,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_6ilb3")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fsnsc"]
 _surfaces = [{
@@ -1183,9 +1183,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_wd5lm"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_fsnsc")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ba32g"]
@@ -1205,7 +1205,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_ba32g")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_dqxxt"]
 _surfaces = [{
@@ -1222,9 +1222,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_ncsig"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_dqxxt")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wn6kv"]
@@ -1242,9 +1242,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_h6bqv"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_wn6kv")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_e4uh0"]
@@ -1262,9 +1262,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_bv6ex"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_e4uh0")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="Resource" id="SS2D_Point_92"]
@@ -1404,7 +1404,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_whaus")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pkj83"]
 _surfaces = [{
@@ -1421,9 +1421,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_2svfq"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_pkj83")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5yp4m"]
@@ -1443,7 +1443,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_5yp4m")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_06fqo"]
 _surfaces = [{
@@ -1460,9 +1460,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_y2qsb"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_06fqo")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_raicr"]
@@ -1482,7 +1482,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_raicr")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_c8f8g"]
 _surfaces = [{
@@ -1499,9 +1499,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_pkj83"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_c8f8g")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2svfq"]
@@ -1519,9 +1519,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_5yp4m"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_2svfq")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_g2a3r"]
@@ -1539,9 +1539,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_lmx0n"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_g2a3r")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="Resource" id="SS2D_Point_111"]
@@ -1691,7 +1691,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_8mhrs")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_711w1"]
@@ -1709,9 +1709,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_g2a3r"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_711w1")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -1873,7 +1873,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_tf4pc")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jmas1"]
@@ -1891,9 +1891,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_yghkd"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_jmas1")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -2074,7 +2074,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_ytd8g")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_eue5s"]
 _surfaces = [{
@@ -2091,9 +2091,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_t67od"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_eue5s")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_w5hw7"]
@@ -2113,7 +2113,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_w5hw7")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_t67od"]
 _surfaces = [{
@@ -2130,9 +2130,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_8as47"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_t67od")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yhgbk"]
@@ -2152,7 +2152,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_yhgbk")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jvnjo"]
 _surfaces = [{
@@ -2169,9 +2169,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_8m0ov"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_jvnjo")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="Resource" id="SS2D_Point_190"]
@@ -2254,9 +2254,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_suo4s"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_8awnn")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_axhrq"]
@@ -2274,9 +2274,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_jvnjo"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_axhrq")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yqyxr"]
@@ -2294,9 +2294,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_3drvd"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_yqyxr")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_x73fv"]
@@ -2316,7 +2316,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_x73fv")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jiosl"]
 _surfaces = [{
@@ -2333,9 +2333,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_g7lb0"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_jiosl")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jw1dm"]
@@ -2355,7 +2355,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_jw1dm")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="Resource" id="SS2D_Point_198"]
 script = ExtResource("1_point")
@@ -2529,7 +2529,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_8m0ov")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lrtk2"]
 _surfaces = [{
@@ -2546,9 +2546,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_yqyxr"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_lrtk2")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_3drvd"]
@@ -2568,7 +2568,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_3drvd")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_igmuj"]
 _surfaces = [{
@@ -2585,9 +2585,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_eewtl"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_igmuj")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_qejo2"]
@@ -2605,9 +2605,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_1fl21"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_qejo2")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2jku2"]
@@ -2625,9 +2625,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_ae6a2"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_2jku2")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_miqne"]
@@ -2647,7 +2647,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_miqne")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_03o44"]
 _surfaces = [{
@@ -2664,9 +2664,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_m1gcq"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_03o44")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="Resource" id="SS2D_Point_224"]
@@ -2821,7 +2821,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_r464e")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_g7lb0"]
 _surfaces = [{
@@ -2838,9 +2838,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_j8c2t"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_g7lb0")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7fqdy"]
@@ -2858,9 +2858,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_b7t0v"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_7fqdy")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_u8a7w"]
@@ -2878,9 +2878,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_41ghp"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_u8a7w")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_re4xp"]
@@ -2900,7 +2900,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_re4xp")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_kbm1d"]
 _surfaces = [{
@@ -2917,9 +2917,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_lhvtx"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_kbm1d")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="Resource" id="SS2D_Point_246"]
@@ -3029,7 +3029,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_xfi0j")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hxfis"]
 _surfaces = [{
@@ -3046,9 +3046,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_igmuj"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_hxfis")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_eewtl"]
@@ -3068,7 +3068,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_eewtl")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_eyxeg"]
 _surfaces = [{
@@ -3085,9 +3085,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_ngu2u"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_eyxeg")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_o6q2j"]
@@ -3105,9 +3105,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_i1bgh"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_o6q2j")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_n5u1f"]
@@ -3125,9 +3125,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_hi1bt"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_n5u1f")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ytct6"]
@@ -3147,7 +3147,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_ytct6")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_arbqb"]
 _surfaces = [{
@@ -3164,9 +3164,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_pc425"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_arbqb")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="Resource" id="SS2D_Point_259"]
@@ -3381,7 +3381,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_j8c2t")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_1fl21"]
@@ -3399,9 +3399,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_2jku2"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_1fl21")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -3492,7 +3492,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_3pao8")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ngu2u"]
 _surfaces = [{
@@ -3509,9 +3509,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_o6q2j"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_ngu2u")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_kndm0"]
@@ -3531,7 +3531,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_kndm0")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_mhw1p"]
 _surfaces = [{
@@ -3548,9 +3548,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_kjmde"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_mhw1p")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hbhrr"]
@@ -3568,9 +3568,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_7ey14"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_hbhrr")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_sokhy"]
@@ -3588,9 +3588,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_yftun"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_sokhy")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="Resource" id="SS2D_Point_306"]
@@ -3710,7 +3710,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_anuwt")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_i1bgh"]
@@ -3728,9 +3728,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_n5u1f"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_i1bgh")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -4116,7 +4116,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_xv55p")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_v30tp"]
@@ -4134,9 +4134,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_arbqb"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_v30tp")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -4347,7 +4347,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_be5io")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_b662o"]
@@ -4365,9 +4365,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_3wn0c"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_b662o")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -4508,7 +4508,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_bubvp")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cwggu"]
@@ -4526,9 +4526,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_jybvs"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_cwggu")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -4714,7 +4714,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_7ey14")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7584v"]
 _surfaces = [{
@@ -4731,9 +4731,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_sokhy"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_7584v")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yftun"]
@@ -4753,7 +4753,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_yftun")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pagbg"]
 _surfaces = [{
@@ -4770,9 +4770,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_amw20"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_pagbg")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_1qyvp"]
@@ -4792,7 +4792,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_1qyvp")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6c73v"]
 _surfaces = [{
@@ -4809,9 +4809,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_7w4wl"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_6c73v")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ncho5"]
@@ -4829,9 +4829,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_clihw"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_ncho5")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_2j0st"]
@@ -4849,9 +4849,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_2hgr2"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_2j0st")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_nwx78"]
@@ -4871,7 +4871,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_nwx78")
-material = SubResource("ShaderMaterial_kpyan")
+material = SubResource("ShaderMaterial_w5hw7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_21ero"]
 _surfaces = [{
@@ -4888,9 +4888,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_nnbks"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_q40wm")
+texture = SubResource("PlaceholderTexture2D_453de")
 mesh = SubResource("ArrayMesh_21ero")
-material = SubResource("ShaderMaterial_wp5th")
+material = SubResource("ShaderMaterial_0jsbf")
 z_index = -1
 
 [sub_resource type="Resource" id="SS2D_Point_485"]
@@ -4970,7 +4970,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_63cxj")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_b7t0v"]
@@ -4988,9 +4988,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_u8a7w"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_b7t0v")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -5238,7 +5238,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_gld6c")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hw54w"]
@@ -5256,9 +5256,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_ylta1"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_hw54w")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -5500,7 +5500,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_1dtpu")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pkd7j"]
@@ -5518,9 +5518,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_ollmh"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_pkd7j")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -5616,7 +5616,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_ameyr")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_b87ra"]
@@ -5634,9 +5634,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_03kij"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_b87ra")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
@@ -5826,11 +5826,6 @@ mesh = SubResource("ArrayMesh_qlfdt")
 material = ExtResource("21_pcpc4")
 z_index = -10
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5hw7"]
-shader = ExtResource("23_fakio")
-shader_parameter/texture_scale = Vector2(68, 16)
-shader_parameter/texture_offset = Vector2(0, 0)
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_c3eij"]
 _surfaces = [{
 "aabb": AABB(743.9907, -800, 0, 1344, 640.0002, 1e-05),
@@ -5850,10 +5845,6 @@ texture = ExtResource("17_8cmmm")
 mesh = SubResource("ArrayMesh_c3eij")
 material = SubResource("ShaderMaterial_w5hw7")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0jsbf"]
-shader = ExtResource("22_kpyan")
-shader_parameter/tex = ExtResource("17_24aq3")
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_bh53e"]
 _surfaces = [{
 "aabb": AABB(2087.8936, -992.00006, 0, 71.69678, 199.37329, 1e-05),
@@ -5866,9 +5857,6 @@ _surfaces = [{
 "vertex_count": 10,
 "vertex_data": PackedByteArray("TH4CRdMYSMQAAAAAWJ0CRR0oRsQAAAAAu7oERQFgSMQAAAAAqXsERYsdSsQAAAAA32cGRXkUT8QAAAAAe/gFRbsQUMQAAAAAG/gGRcvEV8QAAAAAEXkGRVcDWMQAAAAAcvkGRQEAeMQAAAAAcnkGRQEAeMQAAAAA/3//f3/lP03/f/9/Z+VLTf9//3+k0S1X/3//f5fRM1f/f/9/gq69aP9//3+Prrdo/3//fzSO5Xj/f/9/NI7keP9//38GgPx//3//fwWA/H8=")
 }]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_453de"]
-size = Vector2(102, 8)
 
 [sub_resource type="Resource" id="Resource_xrk2p"]
 script = ExtResource("20_d2tka")
@@ -6298,7 +6286,7 @@ _surfaces = [{
 script = ExtResource("20_d2tka")
 texture = ExtResource("30_kpyan")
 mesh = SubResource("ArrayMesh_tlbrp")
-material = SubResource("ShaderMaterial_24aq3")
+material = SubResource("ShaderMaterial_q1eg7")
 z_index = -10
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_0tpbb"]
@@ -6316,9 +6304,9 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_nk0kf"]
 script = ExtResource("20_d2tka")
-texture = SubResource("PlaceholderTexture2D_wp5th")
+texture = SubResource("PlaceholderTexture2D_22l3d")
 mesh = SubResource("ArrayMesh_0tpbb")
-material = SubResource("ShaderMaterial_q40wm")
+material = SubResource("ShaderMaterial_seyp1")
 z_index = -3
 z_as_relative = false
 
