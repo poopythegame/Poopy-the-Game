@@ -219,7 +219,8 @@ func title_begin_title_reveal():
 	tween.tween_property(whiteout, "modulate:a", 1, 0.2)
 	tween.tween_callback(func():
 		title_portraits_background.show()
-		title_portraits_background.process_mode = Node.PROCESS_MODE_INHERIT)
+		title_portraits_background.process_mode = Node.PROCESS_MODE_INHERIT
+	)
 	tween.tween_property(whiteout, "modulate:a", 0, 0.2)
 	tween.tween_interval(8.80 - 5.18)
 	tween.tween_callback(title_poopy.play.bind("dance1"))
