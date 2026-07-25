@@ -25,26 +25,37 @@ enum Screen {
 
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 
-
-@onready var title_screen: MarginContainer = $TitleScreen
-@onready var title_logo: TextureRect = $TitleScreen/VBoxContainer/Logo
-@onready var title_joke_logo: Label = $TitleScreen/VBoxContainer/JokeLogo
-@onready var title_info_box: PanelContainer = $TitleScreen/VBoxContainer/Info
-@onready var background: TextureRect = $Background
+@onready var title_screen_cg: CanvasGroup = $TitleScreenCanvasGroup
+@onready var title_screen: MarginContainer = $TitleScreenCanvasGroup/Screen
+@onready var title_logo: TextureRect = $TitleScreenCanvasGroup/Screen/VBoxContainer/Logo
+@onready var title_joke_logo: Label = $TitleScreenCanvasGroup/Screen/VBoxContainer/JokeLogo
+@onready var title_info_box: PanelContainer = $TitleScreenCanvasGroup/Screen/VBoxContainer/Info
+@onready var title_background: TextureRect = $TitleScreenCanvasGroup/Background
+@onready var title_screen_background: TextureRect = $TitleScreenCanvasGroup/Background
+@onready var menu_background: TextureRect = $MenuCanvasGroup/Background
+@onready var level_select_background: TextureRect = $LevelSelectCanvasGroup/Background
+@onready var options_background: TextureRect = $OptionsMenuCanvasGroup/Background
+@onready var characters_background: TextureRect = $CharactersCanvasGroup/Background
 @onready var whiteout: ColorRect = $Whiteout
-@onready var title_poopy: AnimatedSprite2D = $TitleScreen/VBoxContainer/Logo/PoopyContainer/Poopy
-@onready var title_portraits_background: Node2D = $TitleScreen/PortraitsBackground
-@onready var title_infobox: PanelContainer = $TitleScreen/VBoxContainer/Info
+@onready var title_poopy: AnimatedSprite2D = $TitleScreenCanvasGroup/Screen/VBoxContainer/Logo/PoopyContainer/Poopy
+@onready var title_portraits_background: Node2D = $TitleScreenCanvasGroup/Screen/PortraitsBackground
+@onready var title_infobox: PanelContainer = $TitleScreenCanvasGroup/Screen/VBoxContainer/Info
 
-@onready var menu_screen: MultiselectScreen = $Menu
+@onready var menu_screen_cg: CanvasGroup = $MenuCanvasGroup
+@onready var menu_screen: MultiselectScreen = $MenuCanvasGroup/Screen
 
-@onready var level_select_screen: LevelSelect = $LevelSelect
+@onready var level_select_cg: CanvasGroup = $LevelSelectCanvasGroup
+@onready var level_select_screen: LevelSelect = $LevelSelectCanvasGroup/Screen
 
-@onready var characters_screen: MultiselectScreen = $Characters
+@onready var options_screen_cg: CanvasGroup = $OptionsMenuCanvasGroup
+@onready var options_screen: OptionsMenu = $OptionsMenuCanvasGroup/Screen
 
-@onready var options_screen: OptionsMenu = $OptionsMenu
+@onready var characters_screen_cg: CanvasGroup = $CharactersCanvasGroup
+@onready var characters_screen: MultiselectScreen = $CharactersCanvasGroup/Screen
 
 @onready var levels := Global.levels.levels
+
+@onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, characters_screen_cg]
 
 var screen := Screen.TITLE
 var main_scene: PackedScene
@@ -86,6 +97,13 @@ func _ready() -> void:
 		screen_rect = get_viewport_rect()
 		menu_screen.option_selected.connect(_on_menu_option_selected)
 	title_portraits_background.process_mode = Node.PROCESS_MODE_DISABLED
+	var window_size := Vector2(ProjectSettings.get("display/window/size/viewport_width"), ProjectSettings.get("display/window/size/viewport_height"))
+	title_background.size = window_size
+	title_screen_background.size = window_size
+	menu_background.size = window_size
+	level_select_background.size = window_size
+	options_background.size = window_size
+	characters_background.size = window_size
 	change_screen(start_screen)
 
 func _on_menu_option_selected(index: int):
@@ -108,7 +126,7 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("start") and not event.is_echo():
 			title_title_reveal_tween.stop()
 			music_player.stop()
-			background.show()
+			title_background.show()
 			play_audio(select_sfx)
 			change_screen(Screen.MENU)
 
@@ -154,7 +172,7 @@ func title_begin_title_reveal():
 	tween.tween_callback(func():
 		title_logo.texture = title_logo_complete
 		title_joke_logo.hide()
-		background.show()
+		title_background.show()
 		music_player.play()
 		title_info_box.show()
 		title_poopy.show()
@@ -202,78 +220,45 @@ func title_begin_title_reveal():
 func screen_shake(intensity: float):
 	position = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * intensity
 
+func reveal_screen_cg(screen_cg: CanvasGroup):
+	screen_cg.show()
+	screen_cg.get_node("Screen").process_mode = Node.PROCESS_MODE_INHERIT
+
 func change_screen(new_screen: Screen, record_undo: bool = true):
+	for s in screen_cgs:
+		s.hide()
+		s.get_node("Screen").process_mode = Node.PROCESS_MODE_DISABLED
 	if new_screen == Screen.TITLE:
-		title_screen.show()
-		menu_screen.hide()
-		menu_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		level_select_screen.hide()
-		level_select_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		characters_screen.hide()
-		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		options_screen.hide()
-		options_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		reveal_screen_cg(title_screen_cg)
 		music_player.stop()
 		music_player.stream = title_audio_stream
 		title_begin_title_reveal()
 	elif new_screen == Screen.MENU:
 		whiteout.hide()
-		background.show()
-		title_screen.hide()
-		menu_screen.show()
-		menu_screen.process_mode = Node.PROCESS_MODE_INHERIT
-		characters_screen.hide()
-		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		options_screen.hide()
-		options_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		menu_background.show()
+		reveal_screen_cg(menu_screen_cg)
 		if not music_player.stream == menu_audio_stream:
 			music_player.stream = menu_audio_stream
 			music_player.play()
 		elif not music_player.playing:
 			music_player.play()
-		level_select_screen.hide()
-		level_select_screen.process_mode = Node.PROCESS_MODE_DISABLED
 	elif new_screen == Screen.LEVEL_SELECT:
 		whiteout.hide()
-		background.show()
-		title_screen.hide()
-		menu_screen.hide()
-		menu_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		characters_screen.hide()
-		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		options_screen.hide()
-		options_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		level_select_background.show()
 		if not music_player.stream == menu_audio_stream:
 			music_player.stream = menu_audio_stream
 			music_player.play()
 		elif not music_player.playing:
 			music_player.play()
-		level_select_screen.show()
-		level_select_screen.process_mode = Node.PROCESS_MODE_INHERIT
+		reveal_screen_cg(level_select_cg)
 	elif new_screen == Screen.CHARACTERS:
 		whiteout.hide()
-		background.show()
-		title_screen.hide()
-		menu_screen.hide()
-		menu_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		level_select_screen.hide()
-		level_select_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		characters_screen.show()
-		characters_screen.process_mode = Node.PROCESS_MODE_INHERIT
-		options_screen.hide()
-		options_screen.process_mode = Node.PROCESS_MODE_DISABLED
+		characters_background.show()
+		reveal_screen_cg(characters_screen_cg)
 	elif new_screen == Screen.OPTIONS:
 		whiteout.hide()
-		background.show()
-		title_screen.hide()
-		menu_screen.hide()
-		menu_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		level_select_screen.hide()
-		level_select_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		characters_screen.hide()
-		characters_screen.process_mode = Node.PROCESS_MODE_DISABLED
-		options_screen.show()
-		options_screen.process_mode = Node.PROCESS_MODE_INHERIT
+		options_background.show()
+		reveal_screen_cg(options_screen_cg)
 		options_screen._on_enter()
 	if record_undo:
 		undo_queue.append(screen)

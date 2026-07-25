@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ceg8x1m3frt2q"]
+
+[ext_resource type="Script" uid="uid://c4xgkd1lsc5ph" path="res://scripts/options_menu.gd" id="1_sm0gs"]
+
+[node name="Screen" type="CenterContainer" unique_id=1122078735]
+process_mode = 4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sm0gs")
+
+[node name="OptionsContainer" type="GridContainer" parent="." unique_id=974011938]
+layout_mode = 2
+columns = 2
