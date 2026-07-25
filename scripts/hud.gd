@@ -3,7 +3,7 @@ class_name InGameOverlay
 
 @export var whiteout_time := .5
 
-@onready var rankings_scene: PackedScene = load("uid://cpvt7jfaq7yjl")
+@onready var main_menu_scene: PackedScene = load("uid://dady2wku1xusy")
 
 @onready var player: CharacterBody2D = get_parent().get_node("Player")
 @onready var horizontal_speed: Label = $Left/HorizontalSpeed/Readout
@@ -90,5 +90,6 @@ func show_rank():
 	whiteout_tween.set_trans(Tween.TRANS_CUBIC)
 
 func _finish_show_rankings():
-	var rank_display: RankingsScreen = rankings_scene.instantiate()
-	get_tree().change_scene_to_node(rank_display)
+	var main_menu: MainMenu = main_menu_scene.instantiate()
+	main_menu.start_screen = MainMenu.Screen.RANKINGS
+	get_tree().change_scene_to_node(main_menu)

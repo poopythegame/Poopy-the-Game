@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://ceg8x1m3frt2q" path="res://scenes/prefab/ui/options_menu.tscn" id="22_jbte4"]
 [ext_resource type="Texture2D" uid="uid://drk7x2pb2mqpb" path="res://assets/textures/ui/main_menu/john_person/john_person_fr0.png" id="23_qch7b"]
 [ext_resource type="Texture2D" uid="uid://dpvsha2a5eit4" path="res://assets/textures/ui/main_menu/john_person/john_person_fr1.png" id="24_4ovp2"]
+[ext_resource type="PackedScene" uid="uid://cpvt7jfaq7yjl" path="res://scenes/ui/rankings.tscn" id="25_4ovp2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbte4"]
 shader = ExtResource("7_jbte4")
@@ -77,6 +78,10 @@ portrait = ExtResource("18_jbte4")
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qilvv"]
+shader = ExtResource("7_jbte4")
+shader_parameter/progress = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1mexh"]
 shader = ExtResource("7_jbte4")
 shader_parameter/progress = 1.0
 
@@ -283,6 +288,24 @@ expand_mode = 1
 offset_right = 1290.0
 offset_bottom = 720.0
 
+[node name="RankingsCanvasGroup" type="CanvasGroup" parent="." unique_id=1369653347]
+material = SubResource("ShaderMaterial_1mexh")
+
+[node name="Background" type="TextureRect" parent="RankingsCanvasGroup" unique_id=1976052789]
+z_index = -1001
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_n4uci")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Screen" parent="RankingsCanvasGroup" unique_id=222648667 instance=ExtResource("25_4ovp2")]
+offset_right = 1280.0
+offset_bottom = 720.0
+
 [node name="Whiteout" type="ColorRect" parent="." unique_id=1167688859]
 visible = false
 layout_mode = 1
@@ -293,9 +316,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="JohnPerson" type="TextureRect" parent="." unique_id=1699193025]
-process_mode = 4
 visible = false
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(1000, 1000)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -305,7 +327,17 @@ offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
 offset_transform_enabled = true
-offset_transform_position = Vector2(-100, 0)
+offset_transform_position = Vector2(-810, 0)
 texture = SubResource("AnimatedTexture_0cdpu")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Blackout" type="ColorRect" parent="." unique_id=1014277550]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

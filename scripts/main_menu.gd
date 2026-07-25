@@ -9,6 +9,12 @@ class_name MainMenu
 @export var right_sfx: Array[AudioStream]
 @export var back_sfx: Array[AudioStream]
 
+enum Transition {
+	NONE,
+	WIPE,
+	CROSSFADE,
+}
+
 enum Screen {
 	TITLE,
 	MENU,
@@ -16,6 +22,7 @@ enum Screen {
 	LEVEL_SELECT,
 	OPTIONS,
 	CHARACTERS,
+	RANKINGS,
 }
 
 @onready var label_settings: LabelSettings = load("uid://o04nc50d6jgm")
@@ -26,6 +33,8 @@ enum Screen {
 @onready var john_person: TextureRect = $JohnPerson
 @onready var whiteout: ColorRect = $Whiteout
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
+@onready var blackout: ColorRect = $Blackout
+
 
 @onready var title_screen_cg: CanvasGroup = $TitleScreenCanvasGroup
 @onready var title_screen: MarginContainer = $TitleScreenCanvasGroup/Screen
@@ -54,9 +63,13 @@ enum Screen {
 @onready var characters_screen_cg: CanvasGroup = $CharactersCanvasGroup
 @onready var characters_screen: MultiselectScreen = $CharactersCanvasGroup/Screen
 
+@onready var rankings_screen_cg: CanvasGroup = $RankingsCanvasGroup
+@onready var rankings_screen: RankingsScreen = $RankingsCanvasGroup/Screen
+@onready var rankings_background: TextureRect = $RankingsCanvasGroup/Background
+
 @onready var levels := Global.levels.levels
 
-@onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, characters_screen_cg]
+@onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, characters_screen_cg, rankings_screen_cg]
 
 var screen := Screen.TITLE
 var current_screen_cg: CanvasGroup
@@ -106,31 +119,33 @@ func _ready() -> void:
 	level_select_background.size = window_size
 	options_background.size = window_size
 	characters_background.size = window_size
-	change_screen(start_screen, false, false)
+	rankings_background.size = window_size
+	rankings_screen.main_menu = self
+	change_screen(start_screen, false, Transition.NONE)
 
 func _on_menu_option_selected(index: int):
 	if index == 0:
 		pass
 	elif index == 1:
-		change_screen(Screen.LEVEL_SELECT)
+		change_screen(Screen.LEVEL_SELECT, true, Transition.CROSSFADE)
 	elif index == 2:
-		change_screen(Screen.OPTIONS)
+		change_screen(Screen.OPTIONS, true, Transition.CROSSFADE)
 	elif index == 3:
-		change_screen(Screen.CHARACTERS)
+		change_screen(Screen.CHARACTERS, true, Transition.CROSSFADE)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("back"):
 		var screen = undo_queue.pop_back()
-		if screen != null and screen != Screen.TITLE:
-			change_screen(screen, false)
+		if screen != null:
+			change_screen(screen, false, Transition.NONE)
 			play_audio(back_sfx)
 	elif screen == Screen.TITLE:
 		if event.is_action_pressed("start") and not event.is_echo():
 			title_title_reveal_tween.stop()
 			music_player.stop()
-			title_background.show()
+			# title_background.show()
 			play_audio(select_sfx)
-			change_screen(Screen.MENU)
+			change_screen(Screen.MENU, false, Transition.WIPE)
 
 func title_poopy_jump(t: float) -> void:
 	if t <= 0.03:
@@ -166,7 +181,11 @@ func title_begin_title_reveal():
 	tween.tween_callback(func(): title_logo.modulate.a = 1)
 	tween.parallel().tween_property(title_logo, "offset_transform_scale", Vector2(1, 1), 0.5)
 	tween.parallel().tween_method(screen_shake, 10, 5, 0.35).set_delay(0.4)
-	tween.tween_callback(func(): title_logo.modulate.a = 0)
+	tween.tween_callback(func():
+		title_logo.modulate.a = 0
+		# Just sticking this in here
+		position = Vector2.ZERO
+	)
 	tween.tween_callback(func(): title_logo.modulate.a = 1).set_delay(.05)
 	tween.tween_interval(.05)
 	tween.tween_callback(whiteout.show)
@@ -216,7 +235,7 @@ func title_begin_title_reveal():
 	tween.tween_callback(title_poopy.play.bind("armflap"))
 	tween.tween_interval(50.28 - 15.05)
 	tween.tween_property(audio_stream_player, "volume_linear", 0, .25)
-	tween.tween_callback(change_screen.bind(Screen.MENU))
+	tween.tween_callback(change_screen.bind(Screen.MENU, false, Transition.WIPE))
 	tween.set_trans(Tween.TRANS_CUBIC)
 
 func screen_shake(intensity: float):
@@ -227,7 +246,7 @@ func reveal_screen_cg(screen_cg: CanvasGroup):
 	screen_cg.get_node("Screen").process_mode = Node.PROCESS_MODE_INHERIT
 	current_screen_cg = screen_cg
 
-func reveal_screen_cg_transition(screen_cg: CanvasGroup):
+func reveal_screen_cg_wipe(screen_cg: CanvasGroup):
 	current_screen_cg.show()
 	# A very high z-order
 	john_person.z_index = 3002
@@ -240,8 +259,11 @@ func reveal_screen_cg_transition(screen_cg: CanvasGroup):
 	var next_screen_prev_z_index := screen_cg.z_index
 	screen_cg.z_index = 3001
 	var screen_change_tween := create_tween()
-	screen_change_tween.tween_property(screen_cg, "material:shader_parameter/progress", 1.0, 0.5)
-	screen_change_tween.parallel().tween_property(john_person, "position:x", screen_rect.size.x, 0.5)
+	screen_change_tween.tween_property(screen_cg, "material:shader_parameter/progress", 1.0, 2)
+	var orig_size := screen_rect.size.x
+	var augmented_size := orig_size + john_person.get_rect().size.x
+	var ratio = augmented_size / orig_size
+	screen_change_tween.parallel().tween_property(john_person, "position:x", augmented_size, 2 * ratio)
 	screen_change_tween.tween_callback(func():
 		# Clean up
 		john_person.hide()
@@ -251,7 +273,25 @@ func reveal_screen_cg_transition(screen_cg: CanvasGroup):
 		current_screen_cg = screen_cg
 	)
 
-func change_screen(new_screen: Screen, record_undo: bool = true, show_transition: bool = false):
+func reveal_screen_cg_crossfade(screen_cg: CanvasGroup):
+	var screen_change_tween := create_tween()
+	blackout.show()
+	current_screen_cg.show()
+	blackout.modulate.a = 0
+	screen_change_tween.tween_property(blackout, "modulate:a", 1, 1)
+	screen_change_tween.tween_callback(func():
+		current_screen_cg.hide()
+		screen_cg.show()
+	)
+	screen_change_tween.tween_property(blackout, "modulate:a", 0, 1)
+	screen_change_tween.tween_callback(func():
+		# Clean up
+		blackout.hide()
+		screen_cg.get_node("Screen").process_mode = Node.PROCESS_MODE_INHERIT
+		current_screen_cg = screen_cg
+	)
+
+func change_screen(new_screen: Screen, record_undo: bool = true, transition_type: Transition = Transition.NONE):
 	for s in screen_cgs:
 		s.hide()
 		s.get_node("Screen").process_mode = Node.PROCESS_MODE_DISABLED
@@ -288,10 +328,18 @@ func change_screen(new_screen: Screen, record_undo: bool = true, show_transition
 		options_background.show()
 		screen_cg = options_screen_cg
 		options_screen._on_enter()
+	elif new_screen == Screen.RANKINGS:
+		whiteout.hide()
+		rankings_background.show()
+		screen_cg = rankings_screen_cg
+		rankings_screen._on_enter()
 	if record_undo:
 		undo_queue.append(screen)
-	if show_transition:
-		reveal_screen_cg_transition(screen_cg)
-	else:
-		reveal_screen_cg(screen_cg)
+	match transition_type:
+		Transition.NONE:
+			reveal_screen_cg(screen_cg)
+		Transition.WIPE:
+			reveal_screen_cg_wipe(screen_cg)
+		Transition.CROSSFADE:
+			reveal_screen_cg_crossfade(screen_cg)
 	screen = new_screen
