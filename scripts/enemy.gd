@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Enemy
 
 @export var dot_spawn_distance = 10
+@export var explosion_effect_sprite_frames: SpriteFrames
 @export_group("Sounds")
 @export var charge_sfx: Array[AudioStream]
 @export var hit_sfx: Array[AudioStream]
@@ -50,7 +51,7 @@ var vulnerable: bool = false
 var spawning_dots: bool = false
 var distance_since_last_dot_spawn: float = 0
 var prev_pos: Vector2
-var dot_spawn_host: Node
+var node_spawn_host: Node
 
 # --- STATS ---
 var SLOPEMULT = 2
@@ -97,7 +98,7 @@ func _ready():
 		anchor.visible = false
 		anchor.monitoring = false
 		anchor.monitorable = false
-	dot_spawn_host = get_tree().current_scene
+	node_spawn_host = get_tree().current_scene
 
 func physics_process_normal(delta):
 # --- 1. SURFACE DETECTION ---
@@ -310,7 +311,7 @@ func _physics_process(delta):
 				distance_since_last_dot_spawn = 0
 				var dot: Node2D = dot_prefab.instantiate()
 				dot.global_position = global_position
-				dot_spawn_host.add_child(dot)
+				node_spawn_host.add_child(dot)
 				print("spawned dot")
 
 	# slope_stuck_failsafe()
@@ -517,7 +518,7 @@ func perform_bounce(Player):
 
 func launch_enemy(Player):
 	hit_cooldown = true
-	hit_timer = 1 
+	hit_timer = 1
 	
 	var launch_x = Player.motion.x * 1.35
 	#if abs(launch_x) < 200 and abs(launch_x) >= 25:
@@ -536,11 +537,14 @@ func launch_enemy(Player):
 	sprite_2d.rotation = 0
 	$CollisionShape2D.rotation = 0
 	spawning_dots = true
-
-func slope_stuck_failsafe():
-	if is_on_floor() and abs(motion.x) > 50 and get_real_velocity().length() < 10:
-		position.y -= 4
-		motion.x = 0
+	var expl_pos: Vector2 = (Player.global_position + global_position) / 2
+	var animated_sprite := AnimatedSprite2D.new()
+	animated_sprite.position = expl_pos
+	animated_sprite.scale = Vector2(.1, .1)
+	animated_sprite.sprite_frames = explosion_effect_sprite_frames
+	animated_sprite.animation_finished.connect(animated_sprite.queue_free)
+	animated_sprite.play("explode")
+	node_spawn_host.add_child(animated_sprite)
 
 func _on_prep_timer_timeout():
 	is_preparing = false # The 2 seconds are up! Ready to attack!
