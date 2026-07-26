@@ -21,12 +21,6 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_4lg2v")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_wihsh")
-}, {
-"duration": 1.0,
 "texture": ExtResource("4_4n2nw")
 }, {
 "duration": 1.0,
@@ -34,6 +28,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_03cf6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4lg2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wihsh")
 }],
 "loop": 0,
 "name": &"explode",

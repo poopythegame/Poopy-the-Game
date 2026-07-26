@@ -537,10 +537,10 @@ func launch_enemy(Player):
 	sprite_2d.rotation = 0
 	$CollisionShape2D.rotation = 0
 	spawning_dots = true
-	var expl_pos: Vector2 = (Player.global_position + global_position) / 2
+	var expl_pos: Vector2 = global_position
 	var animated_sprite := AnimatedSprite2D.new()
 	animated_sprite.position = expl_pos
-	animated_sprite.scale = Vector2(.1, .1)
+	animated_sprite.scale = Vector2(.15, .15)
 	animated_sprite.sprite_frames = explosion_effect_sprite_frames
 	animated_sprite.animation_finished.connect(animated_sprite.queue_free)
 	animated_sprite.play("explode")
