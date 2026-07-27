@@ -5,8 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://csipwt7j8bu23" path="res://assets/textures/ui/main_menu/title.png" id="2_dwr1o"]
 [ext_resource type="Texture2D" uid="uid://k0qmq705scns" path="res://assets/textures/ui/main_menu/option_label_credits.png" id="3_wibf0"]
 [ext_resource type="Texture2D" uid="uid://bhxan4q8j23fw" path="res://assets/textures/ui/main_menu/option_label_level_select.png" id="4_j0dn2"]
-[ext_resource type="Texture2D" uid="uid://euwa74x2hljj" path="res://assets/textures/ui/main_menu/option_level_select_portrait.png" id="5_j0dn2"]
+[ext_resource type="Texture2D" uid="uid://euwa74x2hljj" path="res://assets/textures/ui/main_menu/option_portraits/level_select.png" id="5_j0dn2"]
 [ext_resource type="Texture2D" uid="uid://dpl8egxwrkkt" path="res://assets/textures/ui/main_menu/option_label_options.png" id="5_vpns8"]
+[ext_resource type="Texture2D" uid="uid://mn2urhasbeh3" path="res://assets/textures/ui/main_menu/option_portraits/options.png" id="7_vpns8"]
+[ext_resource type="Texture2D" uid="uid://cbs1hmlegx2e6" path="res://assets/textures/ui/main_menu/option_portraits/characters.png" id="8_fwm00"]
 
 [sub_resource type="Resource" id="Resource_6l6qt"]
 script = ExtResource("2_6l6qt")
@@ -24,12 +26,14 @@ metadata/_custom_type_script = "uid://co0g5pmxbg578"
 [sub_resource type="Resource" id="Resource_50wf3"]
 script = ExtResource("2_6l6qt")
 title = "Options"
+portrait = ExtResource("7_vpns8")
 label_icon = ExtResource("5_vpns8")
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [sub_resource type="Resource" id="Resource_vggm2"]
 script = ExtResource("2_6l6qt")
 title = "Characters"
+portrait = ExtResource("8_fwm00")
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_epp4d")]

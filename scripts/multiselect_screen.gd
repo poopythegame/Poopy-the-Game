@@ -21,6 +21,7 @@ signal option_selected(index: int)
 		if Engine.is_editor_hint():
 			instant_switch(new_value, true)
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var slide_time := 2.
+@export var disable_selection := false
 @export_group("Sounds")
 @export var left_sfx: Array[AudioStream]
 @export var select_sfx: Array[AudioStream]
@@ -29,13 +30,15 @@ signal option_selected(index: int)
 @onready var option_prefab: PackedScene = load("uid://cy14air0s7d4u")
 
 @onready var options_container: Control = $VBoxContainer/TitlesContainer
-@onready var portrait_display: TextureRect = $VBoxContainer/PortraitContainer/OptionPortrait
+@onready var option_display_container: PanelContainer = $VBoxContainer/PortraitContainer
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var viewport_rect: Rect2
+var option_display: Control
 var option_boxes: Array[PanelContainer]
 var half_width: float
 var move_tween: Tween
+var select_tween: Tween
 
 func play_audio(streams: Array[AudioStream]):
 	var choice: int = randi_range(0, len(streams) - 1)
@@ -93,18 +96,33 @@ func _create_boxes():
 		options_container.add_child(option_box)
 		option_boxes.append(option_box)
 
+func _preview_option(option: OptionDef) -> Control:
+	var texture_rect := TextureRect.new()
+	texture_rect.texture = option.portrait
+	texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	return texture_rect
+
+func preview_option(option: OptionDef) -> Control:
+	var control := _preview_option(option)
+	control.custom_minimum_size = Vector2(788, 491)
+	control.custom_maximum_size = Vector2(788, 491)
+	return control
+
 func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint():
 		return
-	if event.is_action_pressed("ui_right") and not event.is_echo():
-		switch(selected + 1)
-		play_audio(right_sfx)
-	elif event.is_action_pressed("ui_left") and not event.is_echo():
-		switch(selected - 1)
-		play_audio(left_sfx)
-	elif event.is_action_pressed("ui_accept"):
-		option_selected.emit(selected)
+	if not select_tween or not select_tween.is_running():
+		if event.is_action_pressed("ui_right") and not event.is_echo():
+			switch(selected + 1)
+		elif event.is_action_pressed("ui_left") and not event.is_echo():
+			switch(selected - 1)
+	if event.is_action_pressed("ui_accept") and not disable_selection:
 		play_audio(select_sfx)
+		select_tween = create_tween()
+		option_boxes[selected].hide()
+		select_tween.tween_callback(option_boxes[selected].show).set_delay(.05)
+		select_tween.tween_callback(option_selected.emit.bind(selected)).set_delay(.05)
 
 func _arrange_boxes() -> void:
 	var x := 0.
@@ -117,17 +135,28 @@ func switch(index: int) -> void:
 		index = 0
 	elif index >= len(options):
 		index = len(options) - 1
+	if index == selected:
+		return
+	elif index < selected:
+		play_audio(left_sfx)
+	elif index > selected:
+		play_audio(right_sfx)
 	if move_tween and move_tween.is_running():
 		move_tween.kill()
-		portrait_display.modulate.a = 0
+		option_display.modulate.a = 0
 	move_tween = create_tween()
 	var option_box := option_boxes[index]
 	var option := options[index]
 	var final_x := -option_box.position.x - option_box.get_rect().size.x / 2 + half_width
+	var new_option_display = preview_option(option)
+	new_option_display.modulate.a = 0
 	move_tween.tween_property(options_container, "offset_transform_position:x", final_x, .5)
-	move_tween.tween_property(portrait_display, "modulate:a", 0, .25)
-	move_tween.tween_callback(func(): portrait_display.texture = option.portrait)
-	move_tween.tween_property(portrait_display, "modulate:a", 1, .25)
+	move_tween.tween_property(option_display, "modulate:a", 0, .25)
+	move_tween.tween_callback(func():
+		option_display.queue_free()
+		option_display = new_option_display
+		option_display_container.add_child(option_display))
+	move_tween.tween_property(new_option_display, "modulate:a", 1, .25)
 	selected = index
 
 func instant_switch(index: int, visual_only: bool = false) -> void:
@@ -141,7 +170,10 @@ func instant_switch(index: int, visual_only: bool = false) -> void:
 	var option := options[index]
 	var final_x := -option_box.position.x - option_box.get_rect().size.x / 2 + half_width
 	options_container.offset_transform_position.x = final_x
-	portrait_display.texture = option.portrait
-	portrait_display.modulate.a = 1
+	if option_display:
+		option_display.queue_free()
+	option_display = preview_option(option)
+	option_display_container.add_child(option_display)
+	option_display.modulate.a = 1
 	if not visual_only:
 		selected = index
