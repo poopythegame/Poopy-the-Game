@@ -10,8 +10,10 @@
 [ext_resource type="FontFile" uid="uid://c6lup5uhxjaq8" path="res://assets/fonts/Comic-Sans-MS.ttf" id="4_n4uci"]
 [ext_resource type="AudioStream" uid="uid://rtq3b4h4llvf" path="res://assets/audio/effects/menu_cancel.ogg" id="5_5dct7"]
 [ext_resource type="Texture2D" uid="uid://og0yos4h6sda" path="res://assets/textures/ui/option_box.png" id="5_y2j7i"]
+[ext_resource type="AudioStream" uid="uid://hbnc74cpcejm" path="res://assets/audio/effects/trumpet_1.ogg" id="6_ktljq"]
 [ext_resource type="SpriteFrames" uid="uid://dvs8fhjv7ymto" path="res://assets/animations/title_player.tres" id="7_ayp64"]
 [ext_resource type="Shader" uid="uid://bvel1g671w7v4" path="res://shaders/wipe.gdshader" id="7_jbte4"]
+[ext_resource type="AudioStream" uid="uid://htwxh8abjq8e" path="res://assets/audio/effects/trumpet_2.ogg" id="7_rbask"]
 [ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="9_ayp64"]
 [ext_resource type="PackedScene" uid="uid://nqpeaq2b7udk" path="res://scenes/prefab/ui/main_menu_screen.tscn" id="12_8ekit"]
 [ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="13_n4uci"]
@@ -112,6 +114,7 @@ left_sfx = Array[AudioStream]([ExtResource("2_y1h5l")])
 select_sfx = Array[AudioStream]([ExtResource("3_pw24t")])
 right_sfx = Array[AudioStream]([ExtResource("4_5dct7")])
 back_sfx = Array[AudioStream]([ExtResource("5_5dct7")])
+trumpet_sfx = Array[AudioStream]([ExtResource("6_ktljq"), ExtResource("7_rbask")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=453858802]
 bus = &"SFX"
@@ -269,6 +272,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_n4uci")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Screen" parent="CharactersCanvasGroup" unique_id=42329872 instance=ExtResource("13_n4uci")]
 process_mode = 4

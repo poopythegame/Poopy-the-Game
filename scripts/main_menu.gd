@@ -8,6 +8,7 @@ class_name MainMenu
 @export var select_sfx: Array[AudioStream]
 @export var right_sfx: Array[AudioStream]
 @export var back_sfx: Array[AudioStream]
+@export var trumpet_sfx: Array[AudioStream]
 
 enum Transition {
 	NONE,
@@ -16,6 +17,7 @@ enum Transition {
 }
 
 enum Screen {
+	UNDEFINED,
 	TITLE,
 	MENU,
 	CREDITS,
@@ -71,7 +73,7 @@ enum Screen {
 
 @onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, characters_screen_cg, rankings_screen_cg]
 
-var screen := Screen.TITLE
+var screen := Screen.UNDEFINED
 var current_screen_cg: CanvasGroup
 var main_scene: PackedScene
 var screen_rect: Rect2
@@ -177,6 +179,7 @@ func title_poopy_run(duration: float) -> Tween:
 func title_begin_title_reveal():
 	var tween := create_tween()
 	title_title_reveal_tween = tween
+	tween.tween_callback(play_audio.bind(trumpet_sfx))
 	tween.tween_interval(4)
 	tween.tween_callback(func(): title_logo.modulate.a = 1)
 	tween.parallel().tween_property(title_logo, "offset_transform_scale", Vector2(1, 1), 0.5)
@@ -248,7 +251,7 @@ func reveal_screen_cg(screen_cg: CanvasGroup):
 	current_screen_cg = screen_cg
 
 func reveal_screen_cg_wipe(screen_cg: CanvasGroup):
-	current_screen_cg.show()
+	current_screen_cg.show()		
 	# A very high z-order
 	john_person.z_index = 3002
 	john_person.position.x = 0
@@ -260,11 +263,11 @@ func reveal_screen_cg_wipe(screen_cg: CanvasGroup):
 	var next_screen_prev_z_index := screen_cg.z_index
 	screen_cg.z_index = 3001
 	var screen_change_tween := create_tween()
-	screen_change_tween.tween_property(screen_cg, "material:shader_parameter/progress", 1.0, 2)
+	screen_change_tween.tween_property(screen_cg, "material:shader_parameter/progress", 1.0, 1)
 	var orig_size := screen_rect.size.x
 	var augmented_size := orig_size + john_person.get_rect().size.x
 	var ratio = augmented_size / orig_size
-	screen_change_tween.parallel().tween_property(john_person, "position:x", augmented_size, 2 * ratio)
+	screen_change_tween.parallel().tween_property(john_person, "position:x", augmented_size, 1 * ratio)
 	screen_change_tween.tween_callback(func():
 		# Clean up
 		john_person.hide()
@@ -279,12 +282,12 @@ func reveal_screen_cg_crossfade(screen_cg: CanvasGroup):
 	blackout.show()
 	current_screen_cg.show()
 	blackout.modulate.a = 0
-	screen_change_tween.tween_property(blackout, "modulate:a", 1, 1)
+	screen_change_tween.tween_property(blackout, "modulate:a", 1, .5)
 	screen_change_tween.tween_callback(func():
 		current_screen_cg.hide()
 		screen_cg.show()
 	)
-	screen_change_tween.tween_property(blackout, "modulate:a", 0, 1)
+	screen_change_tween.tween_property(blackout, "modulate:a", 0, .5)
 	screen_change_tween.tween_callback(func():
 		# Clean up
 		blackout.hide()
@@ -296,6 +299,8 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 	for s in screen_cgs:
 		s.hide()
 		s.get_node("Screen").process_mode = Node.PROCESS_MODE_DISABLED
+	if new_screen == screen:
+		return
 	var screen_cg: CanvasGroup
 	if new_screen == Screen.TITLE:
 		screen_cg = title_screen_cg
