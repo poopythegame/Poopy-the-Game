@@ -966,14 +966,6 @@ func _on_coyote_timer_timeout():
 	canjump = false
 	# If you've been in the air for too long, your ability to jump is revoked.
 
-#death animation
-func deathanim():
-	$Collision.set_deferred("disabled", true)
-	control_lock = true
-	$Sprite.play("idle")
-	motion.y = -500
-	motion.x = 0
-
 func die():
 	if death_tween.is_running():
 		death_tween.kill()
@@ -987,11 +979,10 @@ func die():
 	death_tween.set_trans(Tween.TRANS_CUBIC)
 	death_tween.tween_callback(func():
 		play_audio(final_hit_sfx))
-	death_tween.tween_await(audio_stream_player.finished)
+	death_tween.tween_interval(1)
 	death_tween.tween_callback(func():
 		play_audio(death_sfx)
 		camera.frozen = true)
-	death_tween.tween_interval(1)
 	death_tween.tween_method(death_launch, 0., 1., 2)
 	var end_angle = -90
 	if $Sprite.flip_h:
