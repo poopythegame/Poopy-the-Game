@@ -806,7 +806,7 @@ func physics_process_normal(delta):
 	move_and_slide()
 	# print("%d: dy=%d" % [Engine.get_frames_drawn(), global_position.y-prev_y])
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if health <= 0 and !dying:
 		die()
 	if !has_initialized_health and main.is_node_ready():

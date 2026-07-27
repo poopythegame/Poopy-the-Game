@@ -136,9 +136,9 @@ func _on_menu_option_selected(index: int):
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("back"):
-		var screen = undo_queue.pop_back()
-		if screen != null:
-			change_screen(screen, false, Transition.NONE)
+		var prev_screen = undo_queue.pop_back()
+		if prev_screen != null:
+			change_screen(prev_screen, false, Transition.NONE)
 			play_audio(back_sfx)
 	elif screen == Screen.TITLE:
 		if event.is_action_pressed("start") and not event.is_echo():

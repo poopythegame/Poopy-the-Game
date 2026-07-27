@@ -22,18 +22,18 @@ var sprite_size: float
 var offset := Vector2.ZERO
 
 func get_textures() -> Array[Texture2D]:
-	var filenames = ResourceLoader.list_directory(sprites_dir)
-	var textures: Array[Texture2D] = []
+	var filenames: PackedStringArray = ResourceLoader.list_directory(sprites_dir)
+	var result: Array[Texture2D] = []
 	for filename in filenames:
-		var path = sprites_dir.path_join(filename)
+		var path: String = sprites_dir.path_join(filename)
 		if ResourceLoader.exists(path):
-			var asset = ResourceLoader.load(path)
+			var asset: Resource = ResourceLoader.load(path)
 			if asset is Texture2D:
-				textures.append(asset)
-	return textures
+				result.append(asset)
+	return result
 
 func create_sprites():
-	var vp_size = screen_rect.size
+	var vp_size: Vector2 = screen_rect.size
 	var x := screen_margin
 	var should_carriage_return_on_next := false
 	var shift_hor := false

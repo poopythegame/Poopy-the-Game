@@ -22,9 +22,9 @@ var seconds: int = 0
 var millis: int = 0 
 
 func _ready() -> void:
-	millis = fmod(time, 1) * 1000
-	seconds = fmod(time, 60)
-	minutes = fmod(time, 3600) / 60
+	millis = fmod(time, 1) * 1000 as int
+	seconds = fmod(time, 60) as int
+	minutes = fmod(time, 3600) / 60 as int
 	var time_readout: String = "%02d:%02d.%03d" % [minutes, seconds, millis]
 	time_label.text = time_readout
 	pause_menu.hud = self
@@ -52,10 +52,10 @@ func _process(delta):
 	coins_label.text = "%d" % coins
 	if not stopwatch_paused:
 		time += delta
-		millis = fmod(time, 1) * 1000
-		seconds = fmod(time, 60)
-		minutes = fmod(time, 3600) / 60
-		var time_readout = "%02d:%02d.%03d" % [minutes, seconds, millis]
+		millis = fmod(time, 1) * 1000 as int
+		seconds = fmod(time, 60) as int
+		minutes = fmod(time, 3600) / 60 as int
+		var time_readout: String = "%02d:%02d.%03d" % [minutes, seconds, millis]
 		time_label.text = time_readout
 
 func display_speed(x: float, y: float):
@@ -66,8 +66,8 @@ func display_speed(x: float, y: float):
 	horizontal_speed.text = "%0.1f" % hspeed
 	vertical_speed.text = "%0.1f" % vspeed
 
-func log_health(value: float, max: float) -> void:
-	health_indicator.scale.x = clamp(value / max, 0, 1)
+func log_health(value: float, max_health: float) -> void:
+	health_indicator.scale.x = clamp(value / max_health, 0, 1)
 
 func calculate_rank():
 	var ranks := Global.get_ranks()
