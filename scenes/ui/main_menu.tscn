@@ -281,6 +281,7 @@ offset_bottom = 720.0
 script = ExtResource("17_qilvv")
 options = Array[ExtResource("15_pw24t")]([SubResource("Resource_5dct7"), SubResource("Resource_qch7b"), SubResource("Resource_1mexh"), SubResource("Resource_6ud2m")])
 slide_time = 2.0
+disable_selection = true
 
 [node name="OptionsMenuCanvasGroup" type="CanvasGroup" parent="." unique_id=221585019]
 visible = false

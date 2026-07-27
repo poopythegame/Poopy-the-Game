@@ -21,6 +21,7 @@ signal option_selected(index: int)
 		if Engine.is_editor_hint():
 			instant_switch(new_value, true)
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var slide_time := 2.
+@export var disable_selection := false
 @export_group("Sounds")
 @export var left_sfx: Array[AudioStream]
 @export var select_sfx: Array[AudioStream]
@@ -112,11 +113,9 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("ui_right") and not event.is_echo():
 		switch(selected + 1)
-		play_audio(right_sfx)
 	elif event.is_action_pressed("ui_left") and not event.is_echo():
 		switch(selected - 1)
-		play_audio(left_sfx)
-	elif event.is_action_pressed("ui_accept"):
+	elif event.is_action_pressed("ui_accept") and not disable_selection:
 		option_selected.emit(selected)
 		play_audio(select_sfx)
 
@@ -131,6 +130,12 @@ func switch(index: int) -> void:
 		index = 0
 	elif index >= len(options):
 		index = len(options) - 1
+	if index == selected:
+		return
+	elif index < selected:
+		play_audio(left_sfx)
+	elif index > selected:
+		play_audio(right_sfx)
 	if move_tween and move_tween.is_running():
 		move_tween.kill()
 		option_display.modulate.a = 0
