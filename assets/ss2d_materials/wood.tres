@@ -3,26 +3,26 @@
 [ext_resource type="Script" uid="uid://0lhxan4cqrc1" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="1_d3mp2"]
 [ext_resource type="Script" uid="uid://d0xjijisx1woh" path="res://addons/rmsmartshape/materials/edge_material.gd" id="2_06wko"]
 [ext_resource type="Script" uid="uid://nc5bfedvnpgm" path="res://addons/rmsmartshape/materials/shape_material.gd" id="2_800tm"]
-[ext_resource type="Shader" uid="uid://bxjra7tqfuq06" path="res://shaders/retexture.gdshader" id="2_x2ja2"]
-[ext_resource type="Texture2D" uid="uid://cerwkjbbxbhcq" path="res://assets/textures/ground/wood_edge.png" id="3_x2ja2"]
+[ext_resource type="Shader" uid="uid://bgm5q57orvpth" path="res://shaders/grass_material.gdshader" id="2_x2ja2"]
 [ext_resource type="Script" uid="uid://d218yx0d1ilsn" path="res://addons/rmsmartshape/normal_range.gd" id="4_ak4y8"]
 [ext_resource type="Shader" uid="uid://cqy3l3jlbgmkb" path="res://shaders/ground_material.gdshader" id="5_nu4s8"]
 [ext_resource type="Texture2D" uid="uid://s4c4pgnq5bj7" path="res://assets/textures/ground/wood.png" id="6_eb7xt"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_seyp1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5hw7"]
 shader = ExtResource("2_x2ja2")
-shader_parameter/tex = ExtResource("3_x2ja2")
+shader_parameter/texture_scale = Vector2(68, 16)
+shader_parameter/texture_offset = Vector2(0, 0)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_22l3d"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0jsbf"]
 size = Vector2(51, 4)
 
 [sub_resource type="Resource" id="Resource_4lamw"]
 script = ExtResource("2_06wko")
-textures = Array[Texture2D]([SubResource("PlaceholderTexture2D_22l3d")])
+textures = Array[Texture2D]([SubResource("PlaceholderTexture2D_0jsbf")])
 use_corner_texture = false
 use_taper_texture = false
 fit_mode = 1
-material = SubResource("ShaderMaterial_seyp1")
+material = SubResource("ShaderMaterial_w5hw7")
 metadata/_custom_type_script = "uid://d0xjijisx1woh"
 
 [sub_resource type="Resource" id="Resource_hytwy"]
@@ -38,7 +38,7 @@ z_as_relative = false
 offset = -1.0
 metadata/_custom_type_script = "uid://0lhxan4cqrc1"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1eg7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyljj"]
 shader = ExtResource("5_nu4s8")
 shader_parameter/texture_scale = Vector2(68, 68)
 shader_parameter/texture_offset = Vector2(0, 0)
@@ -47,5 +47,5 @@ shader_parameter/texture_offset = Vector2(0, 0)
 script = ExtResource("2_800tm")
 _edge_meta_materials = Array[ExtResource("1_d3mp2")]([SubResource("Resource_mlk6x")])
 fill_textures = Array[Texture2D]([ExtResource("6_eb7xt")])
-fill_mesh_material = SubResource("ShaderMaterial_q1eg7")
+fill_mesh_material = SubResource("ShaderMaterial_uyljj")
 metadata/_custom_type_script = "uid://nc5bfedvnpgm"
