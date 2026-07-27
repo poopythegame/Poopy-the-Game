@@ -38,6 +38,7 @@ var option_display: Control
 var option_boxes: Array[PanelContainer]
 var half_width: float
 var move_tween: Tween
+var select_tween: Tween
 
 func play_audio(streams: Array[AudioStream]):
 	var choice: int = randi_range(0, len(streams) - 1)
@@ -111,13 +112,17 @@ func preview_option(option: OptionDef) -> Control:
 func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint():
 		return
-	if event.is_action_pressed("ui_right") and not event.is_echo():
-		switch(selected + 1)
-	elif event.is_action_pressed("ui_left") and not event.is_echo():
-		switch(selected - 1)
-	elif event.is_action_pressed("ui_accept") and not disable_selection:
-		option_selected.emit(selected)
+	if not select_tween:
+		if event.is_action_pressed("ui_right") and not event.is_echo():
+			switch(selected + 1)
+		elif event.is_action_pressed("ui_left") and not event.is_echo():
+			switch(selected - 1)
+	if event.is_action_pressed("ui_accept") and not disable_selection:
 		play_audio(select_sfx)
+		select_tween = create_tween()
+		option_boxes[selected].hide()
+		select_tween.tween_callback(option_boxes[selected].show).set_delay(.05)
+		select_tween.tween_callback(option_selected.emit.bind(selected)).set_delay(.05)
 
 func _arrange_boxes() -> void:
 	var x := 0.

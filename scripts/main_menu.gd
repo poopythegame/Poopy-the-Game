@@ -27,7 +27,6 @@ enum Screen {
 	RANKINGS,
 }
 
-@onready var label_settings: LabelSettings = load("uid://o04nc50d6jgm")
 @onready var title_logo_complete: Texture2D = load("uid://b5w0pc7x5csx5")
 @onready var title_audio_stream: AudioStreamOggVorbis = load("uid://cotx67p5iwda")
 @onready var menu_audio_stream: AudioStreamOggVorbis = load("uid://b26trx8dyw833")
