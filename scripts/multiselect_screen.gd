@@ -29,10 +29,11 @@ signal option_selected(index: int)
 @onready var option_prefab: PackedScene = load("uid://cy14air0s7d4u")
 
 @onready var options_container: Control = $VBoxContainer/TitlesContainer
-@onready var portrait_display: TextureRect = $VBoxContainer/PortraitContainer/OptionPortrait
+@onready var option_display_container: PanelContainer = $VBoxContainer/PortraitContainer
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var viewport_rect: Rect2
+var option_display: Control
 var option_boxes: Array[PanelContainer]
 var half_width: float
 var move_tween: Tween
@@ -93,6 +94,19 @@ func _create_boxes():
 		options_container.add_child(option_box)
 		option_boxes.append(option_box)
 
+func _preview_option(option: OptionDef) -> Control:
+	var texture_rect := TextureRect.new()
+	texture_rect.texture = option.portrait
+	texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	return texture_rect
+
+func preview_option(option: OptionDef) -> Control:
+	var control := _preview_option(option)
+	control.custom_minimum_size = Vector2(788, 491)
+	control.custom_maximum_size = Vector2(788, 491)
+	return control
+
 func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint():
 		return
@@ -119,15 +133,20 @@ func switch(index: int) -> void:
 		index = len(options) - 1
 	if move_tween and move_tween.is_running():
 		move_tween.kill()
-		portrait_display.modulate.a = 0
+		option_display.modulate.a = 0
 	move_tween = create_tween()
 	var option_box := option_boxes[index]
 	var option := options[index]
 	var final_x := -option_box.position.x - option_box.get_rect().size.x / 2 + half_width
+	var new_option_display = preview_option(option)
+	new_option_display.modulate.a = 0
 	move_tween.tween_property(options_container, "offset_transform_position:x", final_x, .5)
-	move_tween.tween_property(portrait_display, "modulate:a", 0, .25)
-	move_tween.tween_callback(func(): portrait_display.texture = option.portrait)
-	move_tween.tween_property(portrait_display, "modulate:a", 1, .25)
+	move_tween.tween_property(option_display, "modulate:a", 0, .25)
+	move_tween.tween_callback(func():
+		option_display.queue_free()
+		option_display = new_option_display
+		option_display_container.add_child(option_display))
+	move_tween.tween_property(new_option_display, "modulate:a", 1, .25)
 	selected = index
 
 func instant_switch(index: int, visual_only: bool = false) -> void:
@@ -141,7 +160,10 @@ func instant_switch(index: int, visual_only: bool = false) -> void:
 	var option := options[index]
 	var final_x := -option_box.position.x - option_box.get_rect().size.x / 2 + half_width
 	options_container.offset_transform_position.x = final_x
-	portrait_display.texture = option.portrait
-	portrait_display.modulate.a = 1
+	if option_display:
+		option_display.queue_free()
+	option_display = preview_option(option)
+	option_display_container.add_child(option_display)
+	option_display.modulate.a = 1
 	if not visual_only:
 		selected = index
