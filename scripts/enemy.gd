@@ -9,6 +9,8 @@ class_name Enemy
 @export var hurt_sfx: Array[AudioStream]
 @export var shock_sfx: Array[AudioStream]
 @export var impact_sfx: Array[AudioStream]
+@export var shift_begin_sfx: Array[AudioStream]
+@export var shift_end_sfx: Array[AudioStream]
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -76,6 +78,19 @@ func play_audio(streams: Array[AudioStream]):
 	# if not_playing_current_sfx:
 	audio_stream_player.stream = streams[choice]
 	audio_stream_player.play()
+
+# mutlistreams: Array[Array[AudioStream]]
+func play_all_audio_multiselect(multistreams: Array[Array]):
+	var streams: Array[AudioStream] = []
+	for multistream: Array[AudioStream] in multistreams:
+		var choice = randi_range(0, len(multistream) - 1)
+		streams.append(multistream[choice])
+	var polystream := AudioStreamPolyphonic.new()
+	audio_stream_player.stream = polystream
+	audio_stream_player.play()
+	var playback: AudioStreamPlaybackPolyphonic = audio_stream_player.get_stream_playback()
+	for stream in streams:
+		playback.play_stream(stream)
 
 func stop_audio():
 	var stream := audio_stream_player.stream
@@ -215,7 +230,6 @@ func physics_process_normal(delta):
 				if (player.jumping or player.isrolling) and not player.is_grappling:
 					pass
 				else:
-					play_audio(impact_sfx)
 					isattacking = false
 					is_preparing = true
 					prep_timer.start()
@@ -371,11 +385,25 @@ func process_grid_input():
 		return # Deny input entirely if player is attached
 
 	var input_vector = Vector2.ZERO
-	if Input.is_action_pressed("ui_up"): input_vector.y -= 1
-	if Input.is_action_pressed("ui_down"): input_vector.y += 1
-	if Input.is_action_pressed("ui_left"): input_vector.x -= 1
-	if Input.is_action_pressed("ui_right"): input_vector.x += 1
+	var sound = 0
+	if Input.is_action_pressed("ui_up"):
+		input_vector.y -= 1
+		sound = 1
+	if Input.is_action_pressed("ui_down"):
+		input_vector.y += 1
+		sound = 2
+	if Input.is_action_pressed("ui_left"):
+		input_vector.x -= 1
+		sound = 1
+	if Input.is_action_pressed("ui_right"): 
+		input_vector.x += 1
+		sound = 2
 	
+	if sound == 1:
+		play_audio(shift_begin_sfx)
+	elif sound == 2:
+		play_audio(shift_end_sfx)
+
 	if input_vector != Vector2.ZERO:
 		var dx = clamp(input_vector.x, -1, 1)
 		var dy = clamp(input_vector.y, -1, 1)
@@ -492,9 +520,7 @@ func check_player_impact(delta):
 					perform_bounce(player)
 				else:
 					launch_enemy(player)
-				if not vulnerable:
-					play_audio(hurt_sfx)
-				vulnerable = true
+					vulnerable = true
 
 func test_player_impact(_delta: float):
 	var overlapping_bodies: Array[Node2D] = hitbox.get_overlapping_bodies()
@@ -545,6 +571,10 @@ func launch_enemy(player):
 	animated_sprite.sprite_frames = explosion_effect_sprite_frames
 	animated_sprite.animation_finished.connect(animated_sprite.queue_free)
 	animated_sprite.play("explode")
+	if not vulnerable:
+		play_all_audio_multiselect([hurt_sfx, impact_sfx])
+	else:
+		play_audio(impact_sfx)
 	node_spawn_host.add_child(animated_sprite)
 
 func _on_prep_timer_timeout():
