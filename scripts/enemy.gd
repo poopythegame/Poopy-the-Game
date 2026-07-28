@@ -11,6 +11,7 @@ class_name Enemy
 @export var impact_sfx: Array[AudioStream]
 @export var shift_begin_sfx: Array[AudioStream]
 @export var shift_end_sfx: Array[AudioStream]
+@export var freeze_sfx: Array[AudioStream]
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -359,6 +360,7 @@ func engage_freeze():
 	
 	$CollisionShape2D.disabled = false
 	hit_timer = 0
+	play_audio(freeze_sfx)
 
 func disengage_freeze():
 	isfrozen = false
