@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://byj23nwvndjop"]
+
+[ext_resource type="Texture2D" uid="uid://bgnx2vw01h861" path="res://assets/textures/elements/setdressing/billboard/dinoland.png" id="1_3477a"]
+
+[node name="Billboard" type="Sprite2D" unique_id=1715537770]
+texture = ExtResource("1_3477a")
