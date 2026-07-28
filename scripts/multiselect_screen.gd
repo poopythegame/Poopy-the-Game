@@ -120,9 +120,12 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") and not disable_selection:
 		play_audio(select_sfx)
 		select_tween = create_tween()
-		option_boxes[selected].hide()
-		select_tween.tween_callback(option_boxes[selected].show).set_delay(.05)
-		select_tween.tween_callback(option_selected.emit.bind(selected)).set_delay(.05)
+		select_tween.tween_method(_flicker_option_box, 0, 0, select_sfx[0].get_length())
+		select_tween.tween_callback(option_selected.emit.bind(selected))
+
+func _flicker_option_box(_dummy: int) -> void:
+	var option_box := option_boxes[selected]
+	option_box.visible = not option_box.visible
 
 func _arrange_boxes() -> void:
 	var x := 0.

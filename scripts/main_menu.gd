@@ -9,6 +9,8 @@ class_name MainMenu
 @export var right_sfx: Array[AudioStream]
 @export var back_sfx: Array[AudioStream]
 @export var trumpet_sfx: Array[AudioStream]
+@export var falling_sfx: Array[AudioStream]
+@export var crash_sfx: Array[AudioStream]
 
 enum Transition {
 	NONE,
@@ -41,7 +43,7 @@ enum Screen {
 @onready var title_screen: MarginContainer = $TitleScreenCanvasGroup/Screen
 @onready var title_logo: TextureRect = $TitleScreenCanvasGroup/Screen/VBoxContainer/Logo
 @onready var title_joke_logo: Label = $TitleScreenCanvasGroup/Screen/VBoxContainer/JokeLogo
-@onready var title_info_box: PanelContainer = $TitleScreenCanvasGroup/Screen/VBoxContainer/Info
+@onready var title_info_box: TextureRect = $TitleScreenCanvasGroup/Screen/VBoxContainer/Info
 @onready var title_background: TextureRect = $TitleScreenCanvasGroup/Background
 @onready var title_screen_background: TextureRect = $TitleScreenCanvasGroup/Background
 @onready var menu_background: TextureRect = $MenuCanvasGroup/Background
@@ -50,7 +52,7 @@ enum Screen {
 @onready var characters_background: TextureRect = $CharactersCanvasGroup/Background
 @onready var title_poopy: AnimatedSprite2D = $TitleScreenCanvasGroup/Screen/VBoxContainer/Logo/PoopyContainer/Poopy
 @onready var title_portraits_background: Node2D = $TitleScreenCanvasGroup/Screen/PortraitsBackground
-@onready var title_infobox: PanelContainer = $TitleScreenCanvasGroup/Screen/VBoxContainer/Info
+@onready var title_infobox: TextureRect = $TitleScreenCanvasGroup/Screen/VBoxContainer/Info
 
 @onready var menu_screen_cg: CanvasGroup = $MenuCanvasGroup
 @onready var menu_screen: MultiselectScreen = $MenuCanvasGroup/Screen
@@ -88,7 +90,7 @@ var level_select_labels: Array[Label] = []
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 func play_audio(streams: Array[AudioStream]):
-	var choice = randi_range(0, len(streams) - 1)
+	var choice: int = randi_range(0, len(streams) - 1)
 	audio_stream_player.stream = streams[choice]
 	audio_stream_player.play()
 
@@ -143,6 +145,14 @@ func _input(event: InputEvent) -> void:
 	elif screen == Screen.TITLE:
 		if event.is_action_pressed("start") and not event.is_echo():
 			title_title_reveal_tween.stop()
+			var flicker_tween := create_tween()
+			flicker_tween.tween_callback(func(): title_info_box.modulate.a = 0)
+			flicker_tween.tween_callback(func(): title_info_box.modulate.a = 1).set_delay(.016)
+			flicker_tween.tween_callback(func(): title_info_box.modulate.a = 0).set_delay(.016)
+			flicker_tween.tween_callback(func(): title_info_box.modulate.a = 1).set_delay(.016)
+			flicker_tween.tween_callback(func(): title_info_box.modulate.a = 0).set_delay(.016)
+			flicker_tween.tween_callback(func(): title_info_box.modulate.a = 1).set_delay(.016)
+			flicker_tween.tween_callback(func(): title_info_box.modulate.a = 0).set_delay(.016)
 			music_player.stop()
 			# title_background.show()
 			play_audio(select_sfx)
@@ -180,16 +190,21 @@ func title_begin_title_reveal():
 	title_title_reveal_tween = tween
 	tween.tween_callback(play_audio.bind(trumpet_sfx))
 	tween.tween_interval(4)
+	tween.tween_callback(func():
+		play_audio(falling_sfx)
+	)
+	tween.tween_interval(2)
 	tween.tween_callback(func(): title_logo.modulate.a = 1)
-	tween.parallel().tween_property(title_logo, "offset_transform_scale", Vector2(1, 1), 0.5)
-	tween.parallel().tween_method(screen_shake, 10, 5, 0.35).set_delay(0.4)
+	tween.parallel().tween_property(title_logo, "offset_transform_scale", Vector2(1, 1), .5)
+	tween.parallel().tween_method(screen_shake, 10, 5, 0.35).set_delay(.4)
+	tween.parallel().tween_callback(play_audio.bind(crash_sfx)).set_delay(.4)
 	tween.tween_callback(func():
 		title_logo.modulate.a = 0
-		# Just sticking this in here
+		# Just sticking these in here
 		position = Vector2.ZERO
 	)
 	tween.tween_callback(func(): title_logo.modulate.a = 1).set_delay(.05)
-	tween.tween_interval(.05)
+	tween.tween_await(audio_stream_player.finished)
 	tween.tween_callback(whiteout.show)
 	tween.parallel().tween_property(whiteout, "modulate:a", 1, 0.2)
 	tween.tween_callback(func():
@@ -254,7 +269,6 @@ func reveal_screen_cg_wipe(screen_cg: CanvasGroup):
 	# A very high z-order
 	john_person.z_index = 3002
 	john_person.position.x = 0
-	john_person.show()
 	(current_screen_cg.material as ShaderMaterial).set_shader_parameter("progress", 1.)
 	screen_cg.show()
 	(screen_cg.material as ShaderMaterial).set_shader_parameter("progress", 0.)
@@ -262,10 +276,12 @@ func reveal_screen_cg_wipe(screen_cg: CanvasGroup):
 	var next_screen_prev_z_index := screen_cg.z_index
 	screen_cg.z_index = 3001
 	var screen_change_tween := create_tween()
+	screen_change_tween.tween_interval(1)
+	screen_change_tween.tween_callback(john_person.show)
 	screen_change_tween.tween_property(screen_cg, "material:shader_parameter/progress", 1.0, 1)
 	var orig_size := screen_rect.size.x
 	var augmented_size := orig_size + john_person.get_rect().size.x
-	var ratio = augmented_size / orig_size
+	var ratio: float = augmented_size / orig_size
 	screen_change_tween.parallel().tween_property(john_person, "position:x", augmented_size, 1 * ratio)
 	screen_change_tween.tween_callback(func():
 		# Clean up

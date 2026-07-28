@@ -84,11 +84,15 @@ func begin_level_crossfade(index: int) -> void:
 	fullscreen_colorrect.show()
 	fullscreen_colorrect.modulate.a = 0
 	is_switching_levels = true
+	get_tree().current_scene.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	tween.tween_property(fullscreen_colorrect, "modulate:a", 1, .5)
 	tween.tween_callback(func(): begin_level(index))
 	tween.tween_property(fullscreen_colorrect, "modulate:a", 0, .5)
 	tween.tween_callback(fullscreen_colorrect.hide)
-	tween.tween_callback(func(): is_switching_levels = false)
+	tween.tween_callback(func():
+		is_switching_levels = false
+		get_tree().current_scene.process_mode = ProcessMode.PROCESS_MODE_INHERIT
+	)
 
 func add_coin():
 	coins += 1

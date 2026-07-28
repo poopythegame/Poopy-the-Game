@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://02el0u63pl20"]
+
+[ext_resource type="Texture2D" uid="uid://4ps2awev6xeq" path="res://assets/textures/elements/setdressing/billboard/hot_dogs.png" id="1_cx48o"]
+
+[node name="Billboard" type="Sprite2D" unique_id=582853644]
+texture = ExtResource("1_cx48o")
