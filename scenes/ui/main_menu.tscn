@@ -9,17 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://bjejowtmy7kpn" path="res://assets/textures/ui/main_menu/logo_incomplete.png" id="4_8ekit"]
 [ext_resource type="FontFile" uid="uid://c6lup5uhxjaq8" path="res://assets/fonts/Comic-Sans-MS.ttf" id="4_n4uci"]
 [ext_resource type="AudioStream" uid="uid://rtq3b4h4llvf" path="res://assets/audio/effects/menu_cancel.ogg" id="5_5dct7"]
-[ext_resource type="Texture2D" uid="uid://og0yos4h6sda" path="res://assets/textures/ui/option_box.png" id="5_y2j7i"]
 [ext_resource type="AudioStream" uid="uid://hbnc74cpcejm" path="res://assets/audio/effects/trumpet_1.ogg" id="6_ktljq"]
 [ext_resource type="SpriteFrames" uid="uid://dvs8fhjv7ymto" path="res://assets/animations/title_player.tres" id="7_ayp64"]
 [ext_resource type="Shader" uid="uid://bvel1g671w7v4" path="res://shaders/wipe.gdshader" id="7_jbte4"]
-[ext_resource type="AudioStream" uid="uid://htwxh8abjq8e" path="res://assets/audio/effects/trumpet_2.ogg" id="7_rbask"]
-[ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="9_ayp64"]
+[ext_resource type="AudioStream" uid="uid://811p4ayls6kk" path="res://assets/audio/effects/far_fall.ogg" id="8_rbask"]
+[ext_resource type="AudioStream" uid="uid://57s8jt5h5uil" path="res://assets/audio/effects/crash.ogg" id="9_e6a60"]
 [ext_resource type="PackedScene" uid="uid://nqpeaq2b7udk" path="res://scenes/prefab/ui/main_menu_screen.tscn" id="12_8ekit"]
 [ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="13_n4uci"]
 [ext_resource type="Script" uid="uid://c3f38pxpyhfbt" path="res://scripts/level_select.gd" id="14_877pj"]
 [ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="15_pw24t"]
 [ext_resource type="Texture2D" uid="uid://bxlxmdu2juey5" path="res://assets/textures/characters/color/poopy.png" id="16_5dct7"]
+[ext_resource type="Texture2D" uid="uid://dh44qpr2m3ppx" path="res://assets/textures/ui/main_menu/press_enter.png" id="16_rbask"]
 [ext_resource type="Script" uid="uid://0j7m4i65so5p" path="res://scripts/characters_screen.gd" id="17_qilvv"]
 [ext_resource type="Texture2D" uid="uid://bpnq0w3a1p1c2" path="res://assets/textures/characters/color/chud_squad.png" id="18_jbte4"]
 [ext_resource type="Script" uid="uid://8kv681icjouq" path="res://scripts/character_def.gd" id="19_e0hcc"]
@@ -37,13 +37,6 @@ shader_parameter/progress = 1.0
 [sub_resource type="LabelSettings" id="LabelSettings_0cdpu"]
 font = ExtResource("4_n4uci")
 font_size = 53
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0cdpu"]
-texture = ExtResource("5_y2j7i")
-
-[sub_resource type="LabelSettings" id="LabelSettings_y2j7i"]
-font = ExtResource("9_ayp64")
-font_size = 35
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e0hcc"]
 shader = ExtResource("7_jbte4")
@@ -114,7 +107,9 @@ left_sfx = Array[AudioStream]([ExtResource("2_y1h5l")])
 select_sfx = Array[AudioStream]([ExtResource("3_pw24t")])
 right_sfx = Array[AudioStream]([ExtResource("4_5dct7")])
 back_sfx = Array[AudioStream]([ExtResource("5_5dct7")])
-trumpet_sfx = Array[AudioStream]([ExtResource("6_ktljq"), ExtResource("7_rbask")])
+trumpet_sfx = Array[AudioStream]([ExtResource("6_ktljq")])
+falling_sfx = Array[AudioStream]([ExtResource("8_rbask")])
+crash_sfx = Array[AudioStream]([ExtResource("9_e6a60")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=453858802]
 bus = &"SFX"
@@ -183,7 +178,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Poopy" type="AnimatedSprite2D" parent="TitleScreenCanvasGroup/Screen/VBoxContainer/Logo/PoopyContainer" unique_id=74014805]
-process_mode = 3
 visible = false
 scale = Vector2(0.075, 0.075)
 sprite_frames = ExtResource("7_ayp64")
@@ -201,27 +195,15 @@ text = "the game"
 label_settings = SubResource("LabelSettings_0cdpu")
 horizontal_alignment = 1
 
-[node name="Info" type="PanelContainer" parent="TitleScreenCanvasGroup/Screen/VBoxContainer" unique_id=164987405]
+[node name="Info" type="TextureRect" parent="TitleScreenCanvasGroup/Screen/VBoxContainer" unique_id=1335298615]
 visible = false
+custom_maximum_size = Vector2(297, -1)
 layout_mode = 2
 size_flags_horizontal = 4
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -1550)
-theme_override_styles/panel = SubResource("StyleBoxTexture_0cdpu")
-
-[node name="MarginContainer" type="MarginContainer" parent="TitleScreenCanvasGroup/Screen/VBoxContainer/Info" unique_id=1052865600]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Label" type="Label" parent="TitleScreenCanvasGroup/Screen/VBoxContainer/Info/MarginContainer" unique_id=1952691595]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "Press Enter to begin."
-label_settings = SubResource("LabelSettings_y2j7i")
+texture = ExtResource("16_rbask")
+stretch_mode = 4
 
 [node name="MenuCanvasGroup" type="CanvasGroup" parent="." unique_id=157187082]
 visible = false
@@ -262,6 +244,7 @@ offset_bottom = 720.0
 script = ExtResource("14_877pj")
 
 [node name="CharactersCanvasGroup" type="CanvasGroup" parent="." unique_id=645091776]
+visible = false
 material = SubResource("ShaderMaterial_4ovp2")
 
 [node name="Background" type="TextureRect" parent="CharactersCanvasGroup" unique_id=1902345679]
