@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://10s272bmgc5a" path="res://assets/audio/effects/pause.ogg" id="2_tnvnl"]
 [ext_resource type="AudioStream" uid="uid://cuehpn8m2fakd" path="res://assets/audio/effects/menu_press.ogg" id="2_yb6sw"]
 [ext_resource type="AudioStream" uid="uid://b2wet5emug0y7" path="res://assets/audio/effects/unpause.ogg" id="4_c4jjc"]
+[ext_resource type="Script" uid="uid://b3tnttc10cw51" path="res://scripts/flicker_button.gd" id="6_c4jjc"]
 [ext_resource type="AudioStream" uid="uid://r70xvcj5gdrx" path="res://assets/audio/music/pause.ogg" id="6_vs5x1"]
 
 [node name="PauseMenu" type="Control" unique_id=267256142]
@@ -48,18 +49,22 @@ grow_vertical = 2
 [node name="ContinueButton" type="Button" parent="OptionsContainer" unique_id=1927993808]
 layout_mode = 2
 text = "Continue"
+script = ExtResource("6_c4jjc")
 
 [node name="RestartButton" type="Button" parent="OptionsContainer" unique_id=665844066]
 layout_mode = 2
 text = "Restart"
+script = ExtResource("6_c4jjc")
 
 [node name="ReturnToMenuButton" type="Button" parent="OptionsContainer" unique_id=82250424]
 layout_mode = 2
 text = "Return To Menu"
+script = ExtResource("6_c4jjc")
 
 [node name="QuitButton" type="Button" parent="OptionsContainer" unique_id=172603494]
 layout_mode = 2
 text = "Quit"
+script = ExtResource("6_c4jjc")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1137803304]
 stream = ExtResource("6_vs5x1")
