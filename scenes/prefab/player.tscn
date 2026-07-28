@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://dbpltt6yp6cli" path="res://assets/audio/effects/roll.ogg" id="9_oq628"]
 [ext_resource type="AudioStream" uid="uid://bx83xl6vvsx38" path="res://assets/audio/effects/stomp_fall.ogg" id="10_37wxj"]
 [ext_resource type="AudioStream" uid="uid://bdn6jkrwclumg" path="res://assets/audio/effects/poopy_dead1.ogg" id="11_vg2fa"]
+[ext_resource type="AudioStream" uid="uid://uf2vlttmq37u" path="res://assets/audio/effects/player_boost.ogg" id="12_37wxj"]
 [ext_resource type="AudioStream" uid="uid://ba17x1dn3jchl" path="res://assets/audio/effects/poopy_dead2.ogg" id="12_oq628"]
 [ext_resource type="AudioStream" uid="uid://b0nufg1nkflq0" path="res://assets/audio/effects/poopy_hurt2.ogg" id="13_37wxj"]
 [ext_resource type="AudioStream" uid="uid://bm5nmcn81vxmu" path="res://assets/audio/effects/poopy_hurt.ogg" id="14_isfnt"]
@@ -37,6 +38,7 @@ grapple_sfx = Array[AudioStream]([ExtResource("5_gumar"), ExtResource("6_2v2me")
 jump_sfx = Array[AudioStream]([ExtResource("7_5q2mw")])
 roll_sfx = Array[AudioStream]([ExtResource("9_oq628")])
 stomp_sfx = Array[AudioStream]([ExtResource("10_37wxj")])
+boost_sfx = Array[AudioStream]([ExtResource("12_37wxj")])
 death_sfx = Array[AudioStream]([ExtResource("11_vg2fa"), ExtResource("12_oq628")])
 hit_sfx = Array[AudioStream]([ExtResource("13_37wxj"), ExtResource("14_isfnt")])
 final_hit_sfx = Array[AudioStream]([ExtResource("15_rp2o6"), ExtResource("16_vc3vx")])
