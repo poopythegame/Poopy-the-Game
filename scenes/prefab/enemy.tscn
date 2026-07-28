@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://cqiyq35b5vfua" path="res://assets/audio/effects/enemy_hurt2.ogg" id="6_fc4qb"]
 [ext_resource type="AudioStream" uid="uid://yhi5tfgii1s8" path="res://assets/audio/effects/enemy_shock1.ogg" id="7_4lg2v"]
 [ext_resource type="AudioStream" uid="uid://bk2bbci4odq42" path="res://assets/audio/effects/enemy_shock2.ogg" id="8_wihsh"]
+[ext_resource type="AudioStream" uid="uid://csbqvloiepm01" path="res://assets/audio/effects/enemy_impact.ogg" id="14_wihsh"]
 [ext_resource type="Script" uid="uid://c4s4srij28h5u" path="res://scripts/enemy.gd" id="GDScript_0e48y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fwm00"]
@@ -73,6 +74,7 @@ charge_sfx = Array[AudioStream]([ExtResource("2_cj1wi")])
 hit_sfx = Array[AudioStream]([ExtResource("3_i8esi"), ExtResource("4_6pt4c")])
 hurt_sfx = Array[AudioStream]([ExtResource("5_4bbuc"), ExtResource("6_fc4qb")])
 shock_sfx = Array[AudioStream]([ExtResource("7_4lg2v"), ExtResource("8_wihsh")])
+impact_sfx = Array[AudioStream]([ExtResource("14_wihsh")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=525685523]
 bus = &"SFX"

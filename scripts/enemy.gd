@@ -8,6 +8,7 @@ class_name Enemy
 @export var hit_sfx: Array[AudioStream]
 @export var hurt_sfx: Array[AudioStream]
 @export var shock_sfx: Array[AudioStream]
+@export var impact_sfx: Array[AudioStream]
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -214,7 +215,7 @@ func physics_process_normal(delta):
 				if (player.jumping or player.isrolling) and not player.is_grappling:
 					pass
 				else:
-					
+					play_audio(impact_sfx)
 					isattacking = false
 					is_preparing = true
 					prep_timer.start()
