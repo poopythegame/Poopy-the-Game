@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://du0pm6qwno35f"]
+
+[ext_resource type="Texture2D" uid="uid://b84708iiyh8b5" path="res://assets/textures/elements/setdressing/billboard/john_person.png" id="1_jqqfp"]
+
+[node name="Billboard" type="Sprite2D" unique_id=1615245005]
+texture = ExtResource("1_jqqfp")

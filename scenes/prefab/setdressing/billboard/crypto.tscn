@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://t4crihuo76ke"]
+
+[ext_resource type="Texture2D" uid="uid://bdw1vegwllgaf" path="res://assets/textures/elements/setdressing/billboard/crypto.png" id="1_j3q6x"]
+
+[node name="Billboard" type="Sprite2D" unique_id=374766916]
+texture = ExtResource("1_j3q6x")
