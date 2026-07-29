@@ -11,6 +11,9 @@ class_name MainMenu
 @export var trumpet_sfx: Array[AudioStream]
 @export var falling_sfx: Array[AudioStream]
 @export var crash_sfx: Array[AudioStream]
+@export var crossfade_in_sound: AudioStream
+@export var crossfade_out_sound: AudioStream
+@export var evil_laugh_sound: AudioStream
 
 enum Transition {
 	NONE,
@@ -46,7 +49,7 @@ enum Screen {
 @onready var title_info_box: TextureRect = $TitleScreenCanvasGroup/Screen/VBoxContainer/Info
 @onready var title_background: TextureRect = $TitleScreenCanvasGroup/Background
 @onready var title_screen_background: TextureRect = $TitleScreenCanvasGroup/Background
-@onready var menu_background: TextureRect = $MenuCanvasGroup/Background
+@onready var menu_background: Control = $MenuCanvasGroup/Background
 @onready var level_select_background: TextureRect = $LevelSelectCanvasGroup/Background
 @onready var options_background: TextureRect = $OptionsMenuCanvasGroup/Background
 @onready var characters_background: TextureRect = $CharactersCanvasGroup/Background
@@ -118,7 +121,7 @@ func _ready() -> void:
 	var window_size := Vector2(ProjectSettings.get("display/window/size/viewport_width"), ProjectSettings.get("display/window/size/viewport_height"))
 	title_background.size = window_size
 	title_screen_background.size = window_size
-	menu_background.size = window_size
+	# menu_background.size = window_size
 	level_select_background.size = window_size
 	options_background.size = window_size
 	characters_background.size = window_size
@@ -277,7 +280,11 @@ func reveal_screen_cg_wipe(screen_cg: CanvasGroup):
 	screen_cg.z_index = 3001
 	var screen_change_tween := create_tween()
 	screen_change_tween.tween_interval(1)
-	screen_change_tween.tween_callback(john_person.show)
+	screen_change_tween.tween_callback(func():
+		john_person.show()
+		audio_stream_player.stream = evil_laugh_sound
+		audio_stream_player.play()
+	)
 	screen_change_tween.tween_property(screen_cg, "material:shader_parameter/progress", 1.0, 1)
 	var orig_size := screen_rect.size.x
 	var augmented_size := orig_size + john_person.get_rect().size.x
@@ -297,12 +304,20 @@ func reveal_screen_cg_crossfade(screen_cg: CanvasGroup):
 	blackout.show()
 	current_screen_cg.show()
 	blackout.modulate.a = 0
-	screen_change_tween.tween_property(blackout, "modulate:a", 1, .5)
+	screen_change_tween.tween_property(blackout, "modulate:a", 1, crossfade_in_sound.get_length())
+	screen_change_tween.parallel().tween_callback(func():
+		audio_stream_player.stream = crossfade_in_sound
+		audio_stream_player.play()
+	)
 	screen_change_tween.tween_callback(func():
 		current_screen_cg.hide()
 		screen_cg.show()
 	)
-	screen_change_tween.tween_property(blackout, "modulate:a", 0, .5)
+	screen_change_tween.tween_property(blackout, "modulate:a", 0, crossfade_out_sound.get_length())
+	screen_change_tween.parallel().tween_callback(func():
+		audio_stream_player.stream = crossfade_out_sound
+		audio_stream_player.play()
+	)
 	screen_change_tween.tween_callback(func():
 		# Clean up
 		blackout.hide()
@@ -328,17 +343,40 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 		screen_cg = menu_screen_cg
 		if not music_player.stream == menu_audio_stream:
 			music_player.stream = menu_audio_stream
-			music_player.play()
+			var music_switch_tween := create_tween()
+			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
+			music_switch_tween.tween_callback(func():
+				music_player.stream = menu_audio_stream
+				music_player.play()
+			)
+			music_switch_tween.tween_property(music_player, "volume_linear", 1., 0.5)
 		elif not music_player.playing:
-			music_player.play()
+			var music_switch_tween := create_tween()
+			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
+			music_switch_tween.tween_callback(func():
+				music_player.stream = menu_audio_stream
+				music_player.play()
+			)
+			music_switch_tween.tween_property(music_player, "volume_linear", 1., 0.5)
 	elif new_screen == Screen.LEVEL_SELECT:
 		whiteout.hide()
 		level_select_background.show()
 		if not music_player.stream == menu_audio_stream:
-			music_player.stream = menu_audio_stream
-			music_player.play()
-		elif not music_player.playing:
-			music_player.play()
+			var music_switch_tween := create_tween()
+			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
+			music_switch_tween.tween_callback(func():
+				music_player.stream = menu_audio_stream
+				music_player.play()
+			)
+			music_switch_tween.tween_property(music_player, "volume_linear", 1., 0.5)
+		if not music_player.playing:
+			var music_switch_tween := create_tween()
+			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
+			music_switch_tween.tween_callback(func():
+				music_player.stream = menu_audio_stream
+				music_player.play()
+			)
+			music_switch_tween.tween_property(music_player, "volume_linear", 1., 0.5)
 		screen_cg = level_select_cg
 	elif new_screen == Screen.CHARACTERS:
 		whiteout.hide()

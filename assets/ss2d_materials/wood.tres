@@ -3,15 +3,13 @@
 [ext_resource type="Script" uid="uid://0lhxan4cqrc1" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="1_d3mp2"]
 [ext_resource type="Script" uid="uid://d0xjijisx1woh" path="res://addons/rmsmartshape/materials/edge_material.gd" id="2_06wko"]
 [ext_resource type="Script" uid="uid://nc5bfedvnpgm" path="res://addons/rmsmartshape/materials/shape_material.gd" id="2_800tm"]
-[ext_resource type="Shader" uid="uid://bgm5q57orvpth" path="res://shaders/grass_material.gdshader" id="2_x2ja2"]
+[ext_resource type="Shader" uid="uid://bxjra7tqfuq06" path="res://shaders/retexture.gdshader" id="2_x2ja2"]
 [ext_resource type="Script" uid="uid://d218yx0d1ilsn" path="res://addons/rmsmartshape/normal_range.gd" id="4_ak4y8"]
 [ext_resource type="Shader" uid="uid://cqy3l3jlbgmkb" path="res://shaders/ground_material.gdshader" id="5_nu4s8"]
 [ext_resource type="Texture2D" uid="uid://s4c4pgnq5bj7" path="res://assets/textures/ground/wood.png" id="6_eb7xt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w5hw7"]
 shader = ExtResource("2_x2ja2")
-shader_parameter/texture_scale = Vector2(68, 16)
-shader_parameter/texture_offset = Vector2(0, 0)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0jsbf"]
 size = Vector2(51, 4)

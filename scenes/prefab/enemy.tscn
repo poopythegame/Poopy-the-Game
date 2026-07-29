@@ -15,6 +15,10 @@
 [ext_resource type="AudioStream" uid="uid://cqiyq35b5vfua" path="res://assets/audio/effects/enemy_hurt2.ogg" id="6_fc4qb"]
 [ext_resource type="AudioStream" uid="uid://yhi5tfgii1s8" path="res://assets/audio/effects/enemy_shock1.ogg" id="7_4lg2v"]
 [ext_resource type="AudioStream" uid="uid://bk2bbci4odq42" path="res://assets/audio/effects/enemy_shock2.ogg" id="8_wihsh"]
+[ext_resource type="AudioStream" uid="uid://csbqvloiepm01" path="res://assets/audio/effects/enemy_impact.ogg" id="14_wihsh"]
+[ext_resource type="AudioStream" uid="uid://dnun44j5dkljb" path="res://addons/grid_move_left.ogg" id="15_4n2nw"]
+[ext_resource type="AudioStream" uid="uid://bp1ij7r5o1a3s" path="res://addons/grid_move_right.ogg" id="16_p86yi"]
+[ext_resource type="AudioStream" uid="uid://0hvn6rkpw024" path="res://assets/audio/effects/freeze.ogg" id="17_03cf6"]
 [ext_resource type="Texture2D" uid="uid://ds73di4acf87n" path="res://assets/textures/elements/enemy/enemyrun1.png" id="15_wvuay"]
 [ext_resource type="Texture2D" uid="uid://dmjay8bhvi63i" path="res://assets/textures/elements/enemy/enemyrun2.png" id="16_ncm7u"]
 [ext_resource type="Texture2D" uid="uid://c2wcqrc46xig7" path="res://assets/textures/elements/enemy/enemyshock1.png" id="17_sbidc"]
@@ -120,6 +124,10 @@ charge_sfx = Array[AudioStream]([ExtResource("2_cj1wi")])
 hit_sfx = Array[AudioStream]([ExtResource("3_i8esi"), ExtResource("4_6pt4c")])
 hurt_sfx = Array[AudioStream]([ExtResource("5_4bbuc"), ExtResource("6_fc4qb")])
 shock_sfx = Array[AudioStream]([ExtResource("7_4lg2v"), ExtResource("8_wihsh")])
+impact_sfx = Array[AudioStream]([ExtResource("14_wihsh")])
+shift_begin_sfx = Array[AudioStream]([ExtResource("15_4n2nw")])
+shift_end_sfx = Array[AudioStream]([ExtResource("16_p86yi")])
+freeze_sfx = Array[AudioStream]([ExtResource("17_03cf6")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=525685523]
 bus = &"SFX"

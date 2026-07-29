@@ -67,8 +67,17 @@ func begin_level(index: int) -> void:
 		level_music_player.stream = level.music
 		level_music_player.name = "MusicPlayer"
 		level_music_player.bus = &"Music"
-		level_music_player.autoplay = true
 		level_music_player.volume_db = -5
+		if level.jingle:
+			audio_stream_player.stream = level.jingle
+			audio_stream_player.play()
+			var music_play_callback: Callable
+			music_play_callback = func():
+				level_music_player.play()
+				audio_stream_player.finished.disconnect(music_play_callback)
+			audio_stream_player.finished.connect(music_play_callback)
+		else:
+			level_music_player.autoplay = true
 	else:
 		level_music_player = scene_tree.current_scene.get_node("MusicPlayer")
 		level_music_player.autoplay = false
