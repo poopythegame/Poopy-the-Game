@@ -28,6 +28,7 @@ var slopefactor := 0.0
 @onready var prep_timer: Timer = $PrepTimer
 var spotted_player: bool = false
 var is_preparing: bool = false
+var shockdone = false #used to indicate if the shock ANIMATION is finished
 
 
 # --- POSITIONING & TRAVEL VARIABLES ---
@@ -201,6 +202,8 @@ func physics_process_normal(delta):
 #---- 6. Enemy attack loop
 
 	var player = get_tree().get_first_node_in_group("Player")
+	
+	var direction = sign(player.global_position.x - global_position.x)
 
 	if abs(motion.x) != 0:
 		# If moving right (1), point right. If moving left (-1), point left.
@@ -258,13 +261,19 @@ func physics_process_normal(delta):
 					play_audio(charge_sfx)
 				isattacking = true
 				
-				var direction = sign(player.global_position.x - global_position.x)
-				
 				if direction == sign(motion.x) or motion.x == 0:
+					
+					$AnimatedSprite2D.play("run")
+					$AnimatedSprite2D.speed_scale = clamp(abs(motion.x)/90, 0.5, 8)
+					
 					if abs(motion.x) <= topspeed: 
 						motion.x += attackacc * direction
 							
-				else: 
+				else:
+					 
+					$AnimatedSprite2D.play("skid")
+					$AnimatedSprite2D.speed_scale = clamp(abs(motion.x)/90, 1, 8)
+					
 					if abs(slopefactor) < 0.4: 
 						motion.x += dec * direction * 2
 					else: 
@@ -283,13 +292,21 @@ func physics_process_normal(delta):
 	
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 	
-# --- 8. ANIMATION
+# --- 8. SHOCK ANIMATION
 
-	var shockdone = false
+	if direction > 0:
+		$AnimatedSprite2D.flip_h = false
+	elif direction < 0:
+		$AnimatedSprite2D.flip_h = true
 	
-	if is_preparing:
+	if vulnerable:
+		$AnimatedSprite2D.play("vulnerable")
+		
+	elif is_preparing:
 		if shockdone == false:
-			$Sprite.play("shock")
+			$AnimatedSprite2D.play("shock")
+		else:
+			$AnimatedSprite2D.play("run")
 
 func _physics_process(delta):
 	
@@ -556,3 +573,7 @@ func launch_enemy(player):
 
 func _on_prep_timer_timeout():
 	is_preparing = false # The 2 seconds are up! Ready to attack!
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	shockdone = true

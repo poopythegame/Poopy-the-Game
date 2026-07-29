@@ -82,7 +82,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("20_vdo4l")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"shock",
 "speed": 12.0
 }, {
@@ -125,11 +125,10 @@ shock_sfx = Array[AudioStream]([ExtResource("7_4lg2v"), ExtResource("8_wihsh")])
 bus = &"SFX"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1435156332]
-position = Vector2(1.0000005, -0.49999893)
-scale = Vector2(0.062499996, 0.06119791)
+position = Vector2(4.25, -2.528)
+scale = Vector2(0.072265625, 0.070760086)
 sprite_frames = SubResource("SpriteFrames_0cdpu")
-animation = &"shock"
-frame_progress = 0.8664139
+animation = &"vulnerable"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=401968449]
 shape = SubResource("SegmentShape2D_qi2p4")
@@ -153,8 +152,9 @@ shape = SubResource("RectangleShape2D_qi2p4")
 visible = false
 
 [node name="PrepTimer" type="Timer" parent="." unique_id=468747841]
-wait_time = 3.0
+wait_time = 1.5
 one_shot = true
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="PrepTimer" to="." method="_on_prep_timer_timeout"]
