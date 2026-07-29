@@ -22,7 +22,7 @@
 [ext_resource type="Script" uid="uid://c3f38pxpyhfbt" path="res://scripts/level_select.gd" id="14_877pj"]
 [ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="15_pw24t"]
 [ext_resource type="Texture2D" uid="uid://bxlxmdu2juey5" path="res://assets/textures/characters/color/poopy.png" id="16_5dct7"]
-[ext_resource type="Script" uid="uid://bxm6m6wg6vqbc" path="res://scripts/scrolling_background.gd" id="16_e6a60"]
+[ext_resource type="Script" uid="uid://ckowyte5bq8wj" path="res://scripts/scrolling_background.gd" id="16_e6a60"]
 [ext_resource type="Texture2D" uid="uid://dh44qpr2m3ppx" path="res://assets/textures/ui/main_menu/press_enter.png" id="16_rbask"]
 [ext_resource type="Script" uid="uid://0j7m4i65so5p" path="res://scripts/characters_screen.gd" id="17_qilvv"]
 [ext_resource type="Texture2D" uid="uid://bpnq0w3a1p1c2" path="res://assets/textures/characters/color/chud_squad.png" id="18_jbte4"]
