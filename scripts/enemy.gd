@@ -298,6 +298,14 @@ func physics_process_normal(delta):
 		motion.x = move_toward(motion.x, 0, acc - 1)
 	
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
+	
+# --- 8. ANIMATION
+
+	var shockdone = false
+	
+	if is_preparing:
+		if shockdone == false:
+			$Sprite.play("shock")
 
 func _physics_process(delta):
 	

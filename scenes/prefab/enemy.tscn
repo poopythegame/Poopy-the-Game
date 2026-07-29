@@ -19,6 +19,14 @@
 [ext_resource type="AudioStream" uid="uid://dnun44j5dkljb" path="res://addons/grid_move_left.ogg" id="15_4n2nw"]
 [ext_resource type="AudioStream" uid="uid://bp1ij7r5o1a3s" path="res://addons/grid_move_right.ogg" id="16_p86yi"]
 [ext_resource type="AudioStream" uid="uid://0hvn6rkpw024" path="res://assets/audio/effects/freeze.ogg" id="17_03cf6"]
+[ext_resource type="Texture2D" uid="uid://ds73di4acf87n" path="res://assets/textures/elements/enemy/enemyrun1.png" id="15_wvuay"]
+[ext_resource type="Texture2D" uid="uid://dmjay8bhvi63i" path="res://assets/textures/elements/enemy/enemyrun2.png" id="16_ncm7u"]
+[ext_resource type="Texture2D" uid="uid://c2wcqrc46xig7" path="res://assets/textures/elements/enemy/enemyshock1.png" id="17_sbidc"]
+[ext_resource type="Texture2D" uid="uid://chhltbxyvpm4k" path="res://assets/textures/elements/enemy/enemyshock2.png" id="18_lto0j"]
+[ext_resource type="Texture2D" uid="uid://7r8thpjtdn10" path="res://assets/textures/elements/enemy/enemyshock3.png" id="19_0n851"]
+[ext_resource type="Texture2D" uid="uid://hxmvacqmwu7n" path="res://assets/textures/elements/enemy/enemyshock4.png" id="20_vdo4l"]
+[ext_resource type="Texture2D" uid="uid://ce832nkpok8oj" path="res://assets/textures/elements/enemy/enemyskid1.png" id="21_elryl"]
+[ext_resource type="Texture2D" uid="uid://cjpheq0uqhch1" path="res://assets/textures/elements/enemy/enemyskid2.png" id="22_tdtcc"]
 [ext_resource type="Script" uid="uid://c4s4srij28h5u" path="res://scripts/enemy.gd" id="GDScript_0e48y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fwm00"]
@@ -56,6 +64,45 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("15_wvuay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ncm7u")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_sbidc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_lto0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_0n851")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_vdo4l")
+}],
+"loop": 1,
+"name": &"shock",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_elryl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_tdtcc")
+}],
+"loop": 1,
+"name": &"skid",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("3_eb0v4")
 }],
 "loop": 1,
@@ -89,7 +136,8 @@ bus = &"SFX"
 position = Vector2(1.0000005, -0.49999893)
 scale = Vector2(0.062499996, 0.06119791)
 sprite_frames = SubResource("SpriteFrames_0cdpu")
-animation = &"idle"
+animation = &"shock"
+frame_progress = 0.8664139
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=401968449]
 shape = SubResource("SegmentShape2D_qi2p4")
