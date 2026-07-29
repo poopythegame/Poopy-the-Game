@@ -547,7 +547,7 @@ func check_player_impact(delta):
 					perform_bounce(player)
 				else:
 					launch_enemy(player)
-					vulnerable = true
+				vulnerable = true
 
 func test_player_impact(_delta: float):
 	var overlapping_bodies: Array[Node2D] = hitbox.get_overlapping_bodies()
