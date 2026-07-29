@@ -121,7 +121,10 @@ func _input(event: InputEvent) -> void:
 		play_audio(select_sfx)
 		select_tween = create_tween()
 		select_tween.tween_method(_flicker_option_box, 0, 0, select_sfx[0].get_length())
-		select_tween.tween_callback(option_selected.emit.bind(selected))
+		select_tween.tween_callback(func():
+			option_selected.emit(selected)
+			option_boxes[selected].show()
+		)
 
 func _flicker_option_box(_dummy: int) -> void:
 	var option_box := option_boxes[selected]

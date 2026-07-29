@@ -22,6 +22,7 @@ class_name Player
 @export var jump_sfx: Array[AudioStream]
 @export var roll_sfx: Array[AudioStream]
 @export var stomp_sfx: Array[AudioStream]
+@export var boost_sfx: Array[AudioStream]
 @export var death_sfx: Array[AudioStream]
 @export var hit_sfx: Array[AudioStream]
 @export var final_hit_sfx: Array[AudioStream]
@@ -589,16 +590,10 @@ func physics_process_normal(delta):
 		if jumping and motion.y < -JUMP_VELOCITY / 1.625: # If your jumping motion goes beyond a certain point...
 			if not Input.is_action_pressed("jump") and not Input.is_action_pressed("action") and not exitgrapple: # ...but you're NOT pressing the jump button anymore...
 				motion.y = -JUMP_VELOCITY / 2.2
-				# Set your vertical motion to that exact point.
-				## Simply put, this lets you do high and low jumps depending on- 
-				## -how long you press the button.
 
-
-
-
- #(Debug) Speed Boost
 	if Input.is_action_just_pressed("boost") and canspeedboost:
 		motion.x = 780 * Input.get_axis("left", "right")
+		play_audio(boost_sfx)
 		canspeedboost = false
 		
 #	var actionlist = ["action", "grapple", "dual"]

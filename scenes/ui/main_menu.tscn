@@ -13,12 +13,16 @@
 [ext_resource type="SpriteFrames" uid="uid://dvs8fhjv7ymto" path="res://assets/animations/title_player.tres" id="7_ayp64"]
 [ext_resource type="Shader" uid="uid://bvel1g671w7v4" path="res://shaders/wipe.gdshader" id="7_jbte4"]
 [ext_resource type="AudioStream" uid="uid://811p4ayls6kk" path="res://assets/audio/effects/far_fall.ogg" id="8_rbask"]
+[ext_resource type="AudioStream" uid="uid://d1aj8x5fp3xlr" path="res://assets/audio/effects/trans_in.ogg" id="9_5et21"]
 [ext_resource type="AudioStream" uid="uid://57s8jt5h5uil" path="res://assets/audio/effects/crash.ogg" id="9_e6a60"]
+[ext_resource type="AudioStream" uid="uid://s6jni5u5fy2v" path="res://assets/audio/effects/trans_out.ogg" id="10_ei00g"]
+[ext_resource type="AudioStream" uid="uid://cr7ncmb6hx2d6" path="res://assets/audio/effects/evil_laugh.ogg" id="11_ei00g"]
 [ext_resource type="PackedScene" uid="uid://nqpeaq2b7udk" path="res://scenes/prefab/ui/main_menu_screen.tscn" id="12_8ekit"]
 [ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="13_n4uci"]
 [ext_resource type="Script" uid="uid://c3f38pxpyhfbt" path="res://scripts/level_select.gd" id="14_877pj"]
 [ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="15_pw24t"]
 [ext_resource type="Texture2D" uid="uid://bxlxmdu2juey5" path="res://assets/textures/characters/color/poopy.png" id="16_5dct7"]
+[ext_resource type="Script" uid="uid://ckowyte5bq8wj" path="res://scripts/scrolling_background.gd" id="16_e6a60"]
 [ext_resource type="Texture2D" uid="uid://dh44qpr2m3ppx" path="res://assets/textures/ui/main_menu/press_enter.png" id="16_rbask"]
 [ext_resource type="Script" uid="uid://0j7m4i65so5p" path="res://scripts/characters_screen.gd" id="17_qilvv"]
 [ext_resource type="Texture2D" uid="uid://bpnq0w3a1p1c2" path="res://assets/textures/characters/color/chud_squad.png" id="18_jbte4"]
@@ -110,6 +114,9 @@ back_sfx = Array[AudioStream]([ExtResource("5_5dct7")])
 trumpet_sfx = Array[AudioStream]([ExtResource("6_ktljq")])
 falling_sfx = Array[AudioStream]([ExtResource("8_rbask")])
 crash_sfx = Array[AudioStream]([ExtResource("9_e6a60")])
+crossfade_in_sound = ExtResource("9_5et21")
+crossfade_out_sound = ExtResource("10_ei00g")
+evil_laugh_sound = ExtResource("11_ei00g")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=453858802]
 bus = &"SFX"
@@ -209,14 +216,11 @@ stretch_mode = 4
 visible = false
 material = SubResource("ShaderMaterial_e0hcc")
 
-[node name="Background" type="TextureRect" parent="MenuCanvasGroup" unique_id=1645064994]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Background" type="Control" parent="MenuCanvasGroup" unique_id=1461045860]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("16_e6a60")
 texture = ExtResource("2_n4uci")
-expand_mode = 1
 
 [node name="Screen" parent="MenuCanvasGroup" unique_id=1181466732 instance=ExtResource("12_8ekit")]
 process_mode = 4
