@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://chivuxah6fbkc" path="res://scenes/levels/tutorial.tscn" id="25_e1edl"]
 [ext_resource type="AudioStream" uid="uid://dlv4a7pps2hcb" path="res://assets/audio/music/level/big_farma.ogg" id="26_sav0g"]
 [ext_resource type="AudioStream" uid="uid://hbnc74cpcejm" path="res://assets/audio/effects/trumpet_1.ogg" id="34_6tjyv"]
+[ext_resource type="AudioStream" uid="uid://bwubgsqiwenj7" path="res://assets/audio/jingles/big_farma.ogg" id="36_0oi5t"]
 
 [sub_resource type="Resource" id="Resource_jk1qb"]
 script = ExtResource("2_x5qbs")
@@ -112,6 +113,7 @@ metadata/_custom_type_script = "uid://7xfldx24oh8g"
 [sub_resource type="Resource" id="Resource_q8iik"]
 script = ExtResource("1_8dco6")
 title = "Big Farma"
+jingle = ExtResource("36_0oi5t")
 music = ExtResource("26_sav0g")
 scene = ExtResource("3_x5qbs")
 rankings = Array[ExtResource("2_x5qbs")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
