@@ -13,6 +13,7 @@ class_name MainMenu
 @export var crash_sfx: Array[AudioStream]
 @export var crossfade_in_sound: AudioStream
 @export var crossfade_out_sound: AudioStream
+@export var evil_laugh_sound: AudioStream
 
 enum Transition {
 	NONE,
@@ -279,7 +280,11 @@ func reveal_screen_cg_wipe(screen_cg: CanvasGroup):
 	screen_cg.z_index = 3001
 	var screen_change_tween := create_tween()
 	screen_change_tween.tween_interval(1)
-	screen_change_tween.tween_callback(john_person.show)
+	screen_change_tween.tween_callback(func():
+		john_person.show()
+		audio_stream_player.stream = evil_laugh_sound
+		audio_stream_player.play()
+	)
 	screen_change_tween.tween_property(screen_cg, "material:shader_parameter/progress", 1.0, 1)
 	var orig_size := screen_rect.size.x
 	var augmented_size := orig_size + john_person.get_rect().size.x
