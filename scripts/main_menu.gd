@@ -162,7 +162,7 @@ func _input(event: InputEvent) -> void:
 			change_screen(Screen.MENU, false, Transition.WIPE)
 
 func title_poopy_jump(t: float) -> void:
-	if t <= 0.03:
+	if t <= 0.05:
 		title_poopy_jump_vel -= 10
 	title_poopy.position.y += title_poopy_jump_vel
 	if title_poopy.position.y > 330:
@@ -192,7 +192,7 @@ func title_begin_title_reveal():
 	var tween := create_tween()
 	title_title_reveal_tween = tween
 	tween.tween_callback(play_audio.bind(trumpet_sfx))
-	tween.tween_interval(4)
+	tween.tween_interval(4 - trumpet_sfx[0].get_length())
 	tween.tween_callback(func():
 		play_audio(falling_sfx)
 	)
