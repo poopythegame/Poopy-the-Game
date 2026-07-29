@@ -347,36 +347,37 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
 			music_switch_tween.tween_callback(func():
 				music_player.stream = menu_audio_stream
+				music_player.volume_linear = 1
 				music_player.play()
 			)
-			music_switch_tween.tween_property(music_player, "volume_linear", 1., 0.5)
 		elif not music_player.playing:
 			var music_switch_tween := create_tween()
 			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
 			music_switch_tween.tween_callback(func():
 				music_player.stream = menu_audio_stream
+				music_player.volume_linear = 1
 				music_player.play()
 			)
-			music_switch_tween.tween_property(music_player, "volume_linear", 1., 0.5)
 	elif new_screen == Screen.LEVEL_SELECT:
 		whiteout.hide()
 		level_select_background.show()
 		if not music_player.stream == menu_audio_stream:
+			music_player.stream = menu_audio_stream
 			var music_switch_tween := create_tween()
 			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
 			music_switch_tween.tween_callback(func():
 				music_player.stream = menu_audio_stream
+				music_player.volume_linear = 1
 				music_player.play()
 			)
-			music_switch_tween.tween_property(music_player, "volume_linear", 1., 0.5)
-		if not music_player.playing:
+		elif not music_player.playing:
 			var music_switch_tween := create_tween()
 			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
 			music_switch_tween.tween_callback(func():
 				music_player.stream = menu_audio_stream
+				music_player.volume_linear = 1
 				music_player.play()
 			)
-			music_switch_tween.tween_property(music_player, "volume_linear", 1., 0.5)
 		screen_cg = level_select_cg
 	elif new_screen == Screen.CHARACTERS:
 		whiteout.hide()
