@@ -308,6 +308,9 @@ func physics_process_normal(delta):
 	
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 	
+	if is_on_wall() and $CollisionShape2D/WallCast.is_colliding(): # If you bump into a wall...
+		motion.x = 0
+	
 # --- 8. SHOCK ANIMATION
 
 	if direction > 0:
