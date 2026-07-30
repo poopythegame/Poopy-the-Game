@@ -48,11 +48,12 @@ expand_margin_left = 50.0
 expand_margin_top = 25.0
 expand_margin_right = 50.0
 expand_margin_bottom = 25.0
-region_rect = Rect2(199.02014, 189.5705, 1940.1774, 1028.7773)
+region_rect = Rect2(12.941772, -2.9429321, 2245.5884, 1400.0115)
 
 [node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_5ilvl")]
 script = ExtResource("2_georf")
 options = Array[ExtResource("3_bwikf")]([SubResource("Resource_5dct7"), SubResource("Resource_qch7b"), SubResource("Resource_1mexh"), SubResource("Resource_6ud2m")])
+disable_selection = true
 
 [node name="PortraitContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="1" unique_id=541114955]
 theme_override_styles/panel = SubResource("StyleBoxTexture_rbno7")
