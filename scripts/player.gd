@@ -147,6 +147,8 @@ var jumpbuffered = false
 
 ## The Player's stats.
 
+var base_snap_length = 16 # this is for the floor snap length logic
+
 var SLOPEMULT = 2
 
 const AIRDRAG = 1.3
@@ -400,7 +402,28 @@ func physics_process_normal(delta):
 		slopefactor = surface_normal.x
 	else:
 		slopefactor = 0
+		
+	
+	# --- 2.1 UPDATE THE FLOORSNAP LENGTH
+	
+	floor_snap_length = base_snap_length
+	
+	if grounded:
+		if jumping:
+			grounded = false
+			motion = get_real_velocity() 
+			rot = 0
+			up_direction = Vector2(0, -1)
+			# 1. MID-AIR ENFORCEMENT (Jump): Reset snap length instantly
+			base_snap_length = 16
 
+		else:
+			base_snap_length += int(abs(motion.x / 10 * delta))
+	
+	else:
+		base_snap_length = 16
+
+		
 	# --- 3. ROTATION VISUALS ---
 	$Collision.rotation = rot
 	$Sprite.rotation = lerp_angle($Sprite.rotation, rot, 0.25)
@@ -420,70 +443,18 @@ func physics_process_normal(delta):
 		up_direction = surface_normal
 		rot = slopeangle
 		
-	else: 
-		# --- LEAVING THE FLOOR ---
-		var base_ray_length = 4.0 # (Keep your custom value here)
-		
-		if grounded:
-			if jumping:
-				grounded = false
-				motion = get_real_velocity() 
-				rot = 0
-				up_direction = Vector2(0, -1)
-				# 1. MID-AIR ENFORCEMENT (Jump): Reset raycast instantly
-				$Collision/Raycast.target_position = Vector2(0, base_ray_length)
-			else:
-				var should_detach = false
-				
-				# 2. DYNAMICALLY EXTEND (Only while grounded)
-				# We use min() to put a hard limit on the extension so it doesn't grow infinitely at high speeds
-				var speed_reach = abs(motion.x) * delta * 18.0 
-				
-				$Collision/Raycast.target_position = Vector2(0, base_ray_length + speed_reach)
-				$Collision/Raycast.force_raycast_update() 
-				
-				# 3. CHECK COLLISION AND ANGLE
-				if not $Collision/Raycast.is_colliding():
-					should_detach = true
-				else:
-					var hit_point = $Collision/Raycast.get_collision_point()
-					var distance_to_floor = global_position.distance_to(hit_point)
-					
-					# CLIFF DETECTOR: If the floor is found, but it's too far down, it's a ledge drop, not a slope!
-					# (You can tweak the '20.0' if you find yourself falling off very steep slopes)
-					if distance_to_floor > (base_ray_length + 20.0):
-						should_detach = true
-					else:
-						var ray_normal = $Collision/Raycast.get_collision_normal()
-						var next_slopeangle = ray_normal.angle() + (PI/2)
-						var angle_diff = abs(angle_difference(rot, next_slopeangle))
-						
-						if angle_diff >= deg_to_rad(50):
-							should_detach = true
-						else:
-							# SMOOTH ATTACHMENT FIX
-							up_direction = ray_normal
-							rot = next_slopeangle
-							
-							var temp_vel = velocity
-							velocity = Vector2(0, (distance_to_floor / delta) * 1.5).rotated(rot) 
-							move_and_slide() 
-							velocity = temp_vel
-							
-				# 4. APPLY DETACHMENT
-				if should_detach:
-					grounded = false
-					motion = get_real_velocity()
-					rot = 0
-					up_direction = Vector2(0, -1)
-					
-				# 5. RESET RAYCAST
-				$Collision/Raycast.target_position = Vector2(0, base_ray_length)
-
-		else:
-			# --- MID-AIR ENFORCEMENT (Falling) ---
-			# If the player is already mid-air (grounded is false), guarantee the raycast is locked to normal.
-			$Collision/Raycast.target_position = Vector2(0, base_ray_length)
+	else: # If not on the floor anymore...
+		# Reset Rotation and apply Momentum
+		if not $Collision/Raycast.is_colliding() and grounded:
+			grounded = false
+			
+			motion = get_real_velocity()
+			# Set your motion to your actual velocity.
+			## This is what converts your momentum when you fly off a slope.
+			
+			rot = 0
+			up_direction = Vector2(0, -1)
+			# Set your Rotation and Up Direction to their defaults.
 
 # Gravity
 	if not is_on_floor() and rot == 0 or springing:
