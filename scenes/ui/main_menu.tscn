@@ -20,16 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://nqpeaq2b7udk" path="res://scenes/prefab/ui/main_menu_screen.tscn" id="12_8ekit"]
 [ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="13_n4uci"]
 [ext_resource type="Script" uid="uid://c3f38pxpyhfbt" path="res://scripts/level_select.gd" id="14_877pj"]
-[ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="15_pw24t"]
-[ext_resource type="Texture2D" uid="uid://bxlxmdu2juey5" path="res://assets/textures/characters/color/poopy.png" id="16_5dct7"]
 [ext_resource type="Script" uid="uid://ckowyte5bq8wj" path="res://scripts/scrolling_background.gd" id="16_e6a60"]
 [ext_resource type="Texture2D" uid="uid://dh44qpr2m3ppx" path="res://assets/textures/ui/main_menu/press_enter.png" id="16_rbask"]
-[ext_resource type="Script" uid="uid://0j7m4i65so5p" path="res://scripts/characters_screen.gd" id="17_qilvv"]
-[ext_resource type="Texture2D" uid="uid://bpnq0w3a1p1c2" path="res://assets/textures/characters/color/chud_squad.png" id="18_jbte4"]
-[ext_resource type="Script" uid="uid://8kv681icjouq" path="res://scripts/character_def.gd" id="19_e0hcc"]
-[ext_resource type="Texture2D" uid="uid://khv13jwuvvgf" path="res://assets/textures/characters/color/john_person.png" id="21_4ovp2"]
-[ext_resource type="Texture2D" uid="uid://b0sju53qqk14b" path="res://assets/textures/characters/color/pop_i.png" id="22_6ud2m"]
 [ext_resource type="PackedScene" uid="uid://ceg8x1m3frt2q" path="res://scenes/prefab/ui/options_menu.tscn" id="22_jbte4"]
+[ext_resource type="PackedScene" uid="uid://co2ky5qlrx73b" path="res://scenes/prefab/ui/characters_screen.tscn" id="23_6ud2m"]
 [ext_resource type="Texture2D" uid="uid://drk7x2pb2mqpb" path="res://assets/textures/ui/main_menu/john_person/john_person_fr0.png" id="23_qch7b"]
 [ext_resource type="Texture2D" uid="uid://dpvsha2a5eit4" path="res://assets/textures/ui/main_menu/john_person/john_person_fr1.png" id="24_4ovp2"]
 [ext_resource type="PackedScene" uid="uid://cpvt7jfaq7yjl" path="res://scenes/ui/rankings.tscn" id="25_4ovp2"]
@@ -53,34 +47,6 @@ shader_parameter/progress = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ovp2"]
 shader = ExtResource("7_jbte4")
 shader_parameter/progress = 1.0
-
-[sub_resource type="Resource" id="Resource_5dct7"]
-script = ExtResource("19_e0hcc")
-bio = "The main guy from the game. Despite always being silent, Poopy makes a racket everywhere he goes with his action. He’s a lil goober most of the time, but he turns into a bloodthirsty maniac the moment anyone ticks him. In his latest adventure, he goes to stop John Person’s evil scheme of reselling his pet chicken, the Cock."
-title = "Poopy the Game"
-portrait = ExtResource("16_5dct7")
-metadata/_custom_type_script = "uid://8kv681icjouq"
-
-[sub_resource type="Resource" id="Resource_qch7b"]
-script = ExtResource("19_e0hcc")
-bio = " The evil CEO of the monopoly corporation Person Industry."
-title = "John Person"
-portrait = ExtResource("21_4ovp2")
-metadata/_custom_type_script = "uid://8kv681icjouq"
-
-[sub_resource type="Resource" id="Resource_1mexh"]
-script = ExtResource("19_e0hcc")
-bio = "An awesome animatronic band in Person Industry’s subsidiary restaurant, Pop-I’s pizza showtime. People always assume they are creepy possessed killer robots because of their uncanny appearances, but in reality, they just want a pal to sing with."
-title = "Pop-I's Munching March"
-portrait = ExtResource("22_6ud2m")
-metadata/_custom_type_script = "uid://8kv681icjouq"
-
-[sub_resource type="Resource" id="Resource_6ud2m"]
-script = ExtResource("19_e0hcc")
-bio = "[placeholder]"
-title = "Chud Squad"
-portrait = ExtResource("18_jbte4")
-metadata/_custom_type_script = "uid://8kv681icjouq"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qilvv"]
 shader = ExtResource("7_jbte4")
@@ -226,6 +192,7 @@ texture = ExtResource("2_n4uci")
 process_mode = 4
 offset_right = 1280.0
 offset_bottom = 720.0
+selected = 3
 slide_time = 2.0
 
 [node name="LevelSelectCanvasGroup" type="CanvasGroup" parent="." unique_id=601334975]
@@ -248,7 +215,6 @@ offset_bottom = 720.0
 script = ExtResource("14_877pj")
 
 [node name="CharactersCanvasGroup" type="CanvasGroup" parent="." unique_id=645091776]
-visible = false
 material = SubResource("ShaderMaterial_4ovp2")
 
 [node name="Background" type="TextureRect" parent="CharactersCanvasGroup" unique_id=1902345679]
@@ -261,14 +227,14 @@ texture = ExtResource("2_n4uci")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Screen" parent="CharactersCanvasGroup" unique_id=42329872 instance=ExtResource("13_n4uci")]
-process_mode = 4
+[node name="Screen" parent="CharactersCanvasGroup" unique_id=1939100007 instance=ExtResource("23_6ud2m")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_right = 1280.0
 offset_bottom = 720.0
-script = ExtResource("17_qilvv")
-options = Array[ExtResource("15_pw24t")]([SubResource("Resource_5dct7"), SubResource("Resource_qch7b"), SubResource("Resource_1mexh"), SubResource("Resource_6ud2m")])
-slide_time = 2.0
-disable_selection = true
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="OptionsMenuCanvasGroup" type="CanvasGroup" parent="." unique_id=221585019]
 visible = false

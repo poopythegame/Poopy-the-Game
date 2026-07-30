@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://co2ky5qlrx73b"]
+
+[ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="1_5ilvl"]
+[ext_resource type="Script" uid="uid://0j7m4i65so5p" path="res://scripts/characters_screen.gd" id="2_georf"]
+[ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="3_bwikf"]
+[ext_resource type="Texture2D" uid="uid://bxlxmdu2juey5" path="res://assets/textures/characters/color/poopy.png" id="4_gsfsb"]
+[ext_resource type="Script" uid="uid://8kv681icjouq" path="res://scripts/character_def.gd" id="5_vp7t4"]
+[ext_resource type="Texture2D" uid="uid://khv13jwuvvgf" path="res://assets/textures/characters/color/john_person.png" id="6_t35ro"]
+[ext_resource type="Texture2D" uid="uid://b0sju53qqk14b" path="res://assets/textures/characters/color/pop_i.png" id="7_76bgj"]
+[ext_resource type="Texture2D" uid="uid://bpnq0w3a1p1c2" path="res://assets/textures/characters/color/chud_squad.png" id="8_bnhp2"]
+[ext_resource type="Texture2D" uid="uid://d2fgy05ui0hxv" path="res://assets/textures/ui/main_menu/characters_background.png" id="9_x5eat"]
+
+[sub_resource type="Resource" id="Resource_5dct7"]
+script = ExtResource("5_vp7t4")
+bio = "The main guy from the game. Despite always being silent, Poopy makes a racket everywhere he goes with his action. He’s a lil goober most of the time, but he turns into a bloodthirsty maniac the moment anyone ticks him. In his latest adventure, he goes to stop John Person’s evil scheme of reselling his pet chicken, the Cock."
+title = "Poopy the Game"
+portrait = ExtResource("4_gsfsb")
+metadata/_custom_type_script = "uid://8kv681icjouq"
+
+[sub_resource type="Resource" id="Resource_qch7b"]
+script = ExtResource("5_vp7t4")
+bio = " The evil CEO of the monopoly corporation Person Industry."
+title = "John Person"
+portrait = ExtResource("6_t35ro")
+metadata/_custom_type_script = "uid://8kv681icjouq"
+
+[sub_resource type="Resource" id="Resource_1mexh"]
+script = ExtResource("5_vp7t4")
+bio = "An awesome animatronic band in Person Industry’s subsidiary restaurant, Pop-I’s pizza showtime. People always assume they are creepy possessed killer robots because of their uncanny appearances, but in reality, they just want a pal to sing with."
+title = "Pop-I's Munching March"
+portrait = ExtResource("7_76bgj")
+metadata/_custom_type_script = "uid://8kv681icjouq"
+
+[sub_resource type="Resource" id="Resource_6ud2m"]
+script = ExtResource("5_vp7t4")
+bio = "[placeholder]"
+title = "Chud Squad"
+portrait = ExtResource("8_bnhp2")
+metadata/_custom_type_script = "uid://8kv681icjouq"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rbno7"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+texture = ExtResource("9_x5eat")
+expand_margin_left = 50.0
+expand_margin_top = 25.0
+expand_margin_right = 50.0
+expand_margin_bottom = 25.0
+region_rect = Rect2(199.02014, 189.5705, 1940.1774, 1028.7773)
+
+[node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_5ilvl")]
+script = ExtResource("2_georf")
+options = Array[ExtResource("3_bwikf")]([SubResource("Resource_5dct7"), SubResource("Resource_qch7b"), SubResource("Resource_1mexh"), SubResource("Resource_6ud2m")])
+selected = -1
+
+[node name="PortraitContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="1" unique_id=541114955]
+theme_override_styles/panel = SubResource("StyleBoxTexture_rbno7")
+
+[node name="TitlesContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="3" unique_id=890400313]
+offset_transform_position = Vector2(510, 0)
