@@ -73,9 +73,9 @@ func begin_level(index: int) -> void:
 			audio_stream_player.play()
 			var music_play_callback: Callable
 			music_play_callback = func():
-				if level_music_player:
-					level_music_player.play()
-				audio_stream_player.finished.disconnect(music_play_callback)
+				level_music_player.play()
+				for connection in audio_stream_player.finished.get_connections():
+					audio_stream_player.finished.disconnect(connection["callable"])
 			audio_stream_player.finished.connect(music_play_callback)
 		else:
 			level_music_player.autoplay = true
