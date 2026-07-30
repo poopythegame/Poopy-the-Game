@@ -215,6 +215,7 @@ offset_bottom = 720.0
 script = ExtResource("14_877pj")
 
 [node name="CharactersCanvasGroup" type="CanvasGroup" parent="." unique_id=645091776]
+visible = false
 material = SubResource("ShaderMaterial_4ovp2")
 
 [node name="Background" type="TextureRect" parent="CharactersCanvasGroup" unique_id=1902345679]

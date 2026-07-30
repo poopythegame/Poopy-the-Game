@@ -9,9 +9,14 @@ func _preview_option(option: OptionDef) -> Control:
 	var bio_label: Label = Label.new()
 	bio_label.text = option.bio
 	bio_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	bio_label.add_theme_font_size_override("font_size", 28)
+	bio_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	bio_label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	bio_label.size_flags_horizontal = SIZE_EXPAND_FILL
 	bio_label.custom_maximum_size = Vector2(394, -1)
 	bio_label.autowrap_mode = TextServer.AutowrapMode.AUTOWRAP_WORD
+	bio_label.add_theme_constant_override("line_spacing", 38)
+	bio_label.add_theme_font_size_override("font_size", 12)
+	bio_label.offset_transform_enabled = true
+	bio_label.offset_transform_position.y = 35
 	container.add_child(bio_label)
 	return container
