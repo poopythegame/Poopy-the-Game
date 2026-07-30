@@ -73,7 +73,8 @@ func begin_level(index: int) -> void:
 			audio_stream_player.play()
 			var music_play_callback: Callable
 			music_play_callback = func():
-				level_music_player.play()
+				if level_music_player:
+					level_music_player.play()
 				audio_stream_player.finished.disconnect(music_play_callback)
 			audio_stream_player.finished.connect(music_play_callback)
 		else:
