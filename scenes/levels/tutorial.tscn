@@ -74,7 +74,7 @@ mesh = SubResource("ArrayMesh_arvqe")
 material = ExtResource("5_wr5d5")
 z_index = -10
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0jsbf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mn5d3"]
 shader = ExtResource("7_cyy7t")
 shader_parameter/texture_scale = Vector2(68, 16)
 shader_parameter/texture_offset = Vector2(0, 0)
@@ -96,9 +96,9 @@ _surfaces = [{
 script = ExtResource("4_l8ohl")
 texture = ExtResource("8_1x4hw")
 mesh = SubResource("ArrayMesh_p4ft5")
-material = SubResource("ShaderMaterial_0jsbf")
+material = SubResource("ShaderMaterial_mn5d3")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8cmmm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0tpbb"]
 shader = ExtResource("9_hux2q")
 shader_parameter/tex = ExtResource("10_n1gr0")
 
@@ -115,45 +115,19 @@ _surfaces = [{
 "vertex_data": PackedByteArray("ERUMRKqL3cIAAAAAsW8KRFai5sIAAAAA7Uq+Q9ynCUMAAAAAOzDAQz6zEEMAAAAANDY+QHRiEUMAAAAAUN2cvpSuGEMAAAAA0zZawxPb58IAAAAA9U1gwzV73cIAAAAA/3//f/tLARr/f/9//EsBGv9//3/XLJQp/3//f8ssmin/f/9/0ifpU/9//3/HJ+NT/3//fy1FlmL/f/9/LEWWYg==")
 }]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_24aq3"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nk0kf"]
 size = Vector2(102, 8)
 
 [sub_resource type="Resource" id="Resource_l8ohl"]
 script = ExtResource("4_l8ohl")
-texture = SubResource("PlaceholderTexture2D_24aq3")
+texture = SubResource("PlaceholderTexture2D_nk0kf")
 mesh = SubResource("ArrayMesh_uy53l")
-material = SubResource("ShaderMaterial_8cmmm")
+material = SubResource("ShaderMaterial_0tpbb")
 z_index = -1
-
-[sub_resource type="Resource" id="Resource_wr5d5"]
-script = ExtResource("2_uy53l")
-position = Vector2(8, 8)
-
-[sub_resource type="Resource" id="Resource_q462l"]
-script = ExtResource("2_uy53l")
-position = Vector2(-40, 16)
-
-[sub_resource type="Resource" id="Resource_hux2q"]
-script = ExtResource("2_uy53l")
-position = Vector2(0, 40)
-
-[sub_resource type="Resource" id="Resource_n1gr0"]
-script = ExtResource("2_uy53l")
-position = Vector2(8, 8)
 
 [sub_resource type="Resource" id="Resource_cyy7t"]
 script = ExtResource("2_iig34")
-_points = {
-0: SubResource("Resource_n1gr0"),
-6: SubResource("Resource_wr5d5"),
-7: SubResource("Resource_q462l"),
-8: SubResource("Resource_hux2q")
-}
-_point_order = PackedInt32Array(0, 8, 7, 6)
-_constraints = {
-Vector2i(6, 0): 15
-}
-_next_key = 9
+_point_order = PackedInt32Array()
 
 [sub_resource type="Resource" id="Resource_1x4hw"]
 script = ExtResource("18_q462l")
@@ -167,10 +141,10 @@ editor_description = "Tips:
 2. Change the Material property under the Materials category of the Terrain[n] node to res://assets/ss2d_materials/wood.tres for the wood material."
 
 [node name="Terrain1_CollisionPolygon2D" type="CollisionPolygon2D" parent="Body1" unique_id=518235711]
-polygon = PackedVector2Array(-440, 0, 344, 0, 168, 255, -216, 263)
+polygon = PackedVector2Array(-456, 0, 328, 0, 152, 255, -232, 263)
 
 [node name="Terrain1" type="Node2D" parent="Body1" unique_id=584507454]
-position = Vector2(-216, 111)
+position = Vector2(-232, 111)
 script = ExtResource("1_7ac3l")
 _points = SubResource("Resource_irnc0")
 _meshes = Array[ExtResource("4_l8ohl")]([SubResource("Resource_4n5tw"), SubResource("Resource_rixlv"), SubResource("Resource_l8ohl")])
@@ -201,15 +175,11 @@ script = ExtResource("7_iig34")
 [node name="InGameOverlay" parent="." unique_id=1911954101 instance=ExtResource("8_3e81p")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=769958513]
-position = Vector2(416, -2)
 
 [node name="SS2D_Shape" type="Node2D" parent="StaticBody2D" unique_id=1627778582]
-position = Vector2(8, 7)
 script = ExtResource("1_7ac3l")
 _points = SubResource("Resource_cyy7t")
 shape_material = SubResource("Resource_1x4hw")
 metadata/_custom_type_script = "uid://dhdc4b8yddyej"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1341562826]
-position = Vector2(7, 0)
-polygon = PackedVector2Array(0, 0, 16, 0, 0, 8)
