@@ -47,12 +47,12 @@ enum Screen {
 @onready var title_logo: TextureRect = $TitleScreenCanvasGroup/Screen/VBoxContainer/Logo
 @onready var title_joke_logo: Label = $TitleScreenCanvasGroup/Screen/VBoxContainer/JokeLogo
 @onready var title_info_box: TextureRect = $TitleScreenCanvasGroup/Screen/VBoxContainer/Info
-@onready var title_background: TextureRect = $TitleScreenCanvasGroup/Background
-@onready var title_screen_background: TextureRect = $TitleScreenCanvasGroup/Background
+@onready var title_background: Control = $TitleScreenCanvasGroup/Background
+@onready var title_screen_background: Control = $TitleScreenCanvasGroup/Background
 @onready var menu_background: Control = $MenuCanvasGroup/Background
-@onready var level_select_background: TextureRect = $LevelSelectCanvasGroup/Background
-@onready var options_background: TextureRect = $OptionsMenuCanvasGroup/Background
-@onready var characters_background: TextureRect = $CharactersCanvasGroup/Background
+@onready var level_select_background: Control = $LevelSelectCanvasGroup/Background
+@onready var options_background: Control = $OptionsMenuCanvasGroup/Background
+@onready var characters_background: Control = $CharactersCanvasGroup/Background
 @onready var title_poopy: AnimatedSprite2D = $TitleScreenCanvasGroup/Screen/VBoxContainer/Logo/PoopyContainer/Poopy
 @onready var title_portraits_background: Node2D = $TitleScreenCanvasGroup/Screen/PortraitsBackground
 @onready var title_infobox: TextureRect = $TitleScreenCanvasGroup/Screen/VBoxContainer/Info
@@ -71,7 +71,7 @@ enum Screen {
 
 @onready var rankings_screen_cg: CanvasGroup = $RankingsCanvasGroup
 @onready var rankings_screen: RankingsScreen = $RankingsCanvasGroup/Screen
-@onready var rankings_background: TextureRect = $RankingsCanvasGroup/Background
+@onready var rankings_background: Control = $RankingsCanvasGroup/Background
 
 @onready var levels := Global.levels.levels
 

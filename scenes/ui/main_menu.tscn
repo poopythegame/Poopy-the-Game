@@ -95,15 +95,12 @@ bus = &"Music"
 visible = false
 material = SubResource("ShaderMaterial_jbte4")
 
-[node name="Background" type="TextureRect" parent="TitleScreenCanvasGroup" unique_id=517563952]
+[node name="Background" type="Control" parent="TitleScreenCanvasGroup" unique_id=517563952]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("16_e6a60")
 texture = ExtResource("2_n4uci")
-expand_mode = 1
 
 [node name="Screen" type="MarginContainer" parent="TitleScreenCanvasGroup" unique_id=204882257]
 anchors_preset = 15
@@ -198,14 +195,11 @@ slide_time = 2.0
 visible = false
 material = SubResource("ShaderMaterial_qch7b")
 
-[node name="Background" type="TextureRect" parent="LevelSelectCanvasGroup" unique_id=1902345678]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Background" type="Control" parent="LevelSelectCanvasGroup" unique_id=1902345678]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("16_e6a60")
 texture = ExtResource("2_n4uci")
-expand_mode = 1
 
 [node name="Screen" parent="LevelSelectCanvasGroup" unique_id=14696676 instance=ExtResource("13_n4uci")]
 process_mode = 4
@@ -217,14 +211,11 @@ script = ExtResource("14_877pj")
 visible = false
 material = SubResource("ShaderMaterial_4ovp2")
 
-[node name="Background" type="TextureRect" parent="CharactersCanvasGroup" unique_id=1902345679]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Background" type="Control" parent="CharactersCanvasGroup" unique_id=1902345679]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("16_e6a60")
 texture = ExtResource("2_n4uci")
-expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Screen" parent="CharactersCanvasGroup" unique_id=1939100007 instance=ExtResource("23_6ud2m")]
@@ -240,14 +231,11 @@ grow_vertical = 1
 visible = false
 material = SubResource("ShaderMaterial_qilvv")
 
-[node name="Background" type="TextureRect" parent="OptionsMenuCanvasGroup" unique_id=1902345680]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Background" type="Control" parent="OptionsMenuCanvasGroup" unique_id=1902345680]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("16_e6a60")
 texture = ExtResource("2_n4uci")
-expand_mode = 1
 
 [node name="Screen" parent="OptionsMenuCanvasGroup" unique_id=1122078735 instance=ExtResource("22_jbte4")]
 offset_right = 1290.0
@@ -257,15 +245,12 @@ offset_bottom = 720.0
 visible = false
 material = SubResource("ShaderMaterial_1mexh")
 
-[node name="Background" type="TextureRect" parent="RankingsCanvasGroup" unique_id=1976052789]
+[node name="Background" type="Control" parent="RankingsCanvasGroup" unique_id=1976052789]
 z_index = -1001
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("16_e6a60")
 texture = ExtResource("2_n4uci")
-expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Screen" parent="RankingsCanvasGroup" unique_id=222648667 instance=ExtResource("25_4ovp2")]
