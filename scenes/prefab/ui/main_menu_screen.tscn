@@ -40,7 +40,7 @@ metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_epp4d")]
 options = Array[ExtResource("2_6l6qt")]([SubResource("Resource_6l6qt"), SubResource("Resource_ydpsd"), SubResource("Resource_50wf3"), SubResource("Resource_vggm2")])
-selected = 4
+selected = 1
 
 [node name="Title" type="TextureRect" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="0" unique_id=991393468]
 custom_minimum_size = Vector2(503.69, 62.58)
