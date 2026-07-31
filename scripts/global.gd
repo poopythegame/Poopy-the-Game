@@ -8,6 +8,7 @@ var fullscreen_colorrect: ColorRect
 @onready var levels: LevelsDesc = load("uid://bhtmoith33eb6")
 var save_data: SaveData
 var is_switching_levels := false
+var canvas_layer: CanvasLayer
 
 @onready var quit_sfx: Array[AudioStream] = [load("uid://rtq3b4h4llvf")]
 
@@ -33,13 +34,14 @@ func stop_audio():
 		audio_stream_player.stream = null
 
 func _ready() -> void:
-	var canvas_layer = CanvasLayer.new()
+	canvas_layer = CanvasLayer.new()
 	fullscreen_colorrect = ColorRect.new()
 	fullscreen_colorrect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	canvas_layer.add_child(fullscreen_colorrect)
 	add_child(canvas_layer)
 	fullscreen_colorrect.modulate.a = 0
 	fullscreen_colorrect.hide()
+	fullscreen_colorrect.z_index = 2000
 	canvas_layer.layer = 2000
 	var data_dir: String = OS.get_user_data_dir()
 	var save_path: String = data_dir.path_join("save.res")
@@ -68,17 +70,7 @@ func begin_level(index: int) -> void:
 		level_music_player.name = "MusicPlayer"
 		level_music_player.bus = &"Music"
 		level_music_player.volume_db = -5
-		if level.jingle:
-			audio_stream_player.stream = level.jingle
-			audio_stream_player.play()
-			var music_play_callback: Callable
-			music_play_callback = func():
-				level_music_player.play()
-				for connection in audio_stream_player.finished.get_connections():
-					audio_stream_player.finished.disconnect(connection["callable"])
-			audio_stream_player.finished.connect(music_play_callback)
-		else:
-			level_music_player.autoplay = true
+		level_music_player.autoplay = true
 	else:
 		level_music_player = scene_tree.current_scene.get_node("MusicPlayer")
 		level_music_player.autoplay = false
@@ -89,6 +81,8 @@ func begin_level(index: int) -> void:
 	scene_tree.change_scene_to_node(level_node)
 
 func begin_level_crossfade(index: int) -> void:
+	if index < 0:
+		return
 	var tween := create_tween()
 	fullscreen_colorrect.color = Color.BLACK
 	fullscreen_colorrect.show()
@@ -103,6 +97,78 @@ func begin_level_crossfade(index: int) -> void:
 		is_switching_levels = false
 		get_tree().current_scene.process_mode = ProcessMode.PROCESS_MODE_INHERIT
 	)
+
+func begin_level_title_card(index: int):
+	if index < 0:
+		return
+	var tween := create_tween()
+	var level := levels.levels[index]
+	var scene_tree := get_tree()
+	reset_coins()
+	var level_node := level.scene.instantiate()
+	var level_music_player: AudioStreamPlayer
+	if index != current_level:
+		level_music_player = AudioStreamPlayer.new()
+		level_music_player.stream = level.music
+		level_music_player.name = "MusicPlayer"
+		level_music_player.bus = &"Music"
+		level_music_player.volume_db = -5
+		var title_card_node: TextureRect
+		if level.title_card:
+			title_card_node = TextureRect.new()
+			title_card_node.texture = level.title_card
+			title_card_node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			title_card_node.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			title_card_node.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			title_card_node.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+			title_card_node.stretch_mode = TextureRect.STRETCH_SCALE
+			if level.title_card_delegate:
+				title_card_node.set_script(level.title_card_delegate)
+				if level.jingle:
+					title_card_node.animation_duration = level.jingle.get_length()
+				else:
+					title_card_node.animation_duration = 3.5
+			get_tree().current_scene.process_mode = ProcessMode.PROCESS_MODE_DISABLED
+			fullscreen_colorrect.color = Color.BLACK
+			fullscreen_colorrect.show()
+			fullscreen_colorrect.modulate.a = 0
+			tween.tween_property(fullscreen_colorrect, "modulate:a", 1, .5)
+			tween.tween_callback(func():
+				canvas_layer.add_child(title_card_node)
+			)
+			tween.tween_property(fullscreen_colorrect, "modulate:a", 0, .5)
+			tween.tween_callback(func():
+				title_card_node._begin_animation()
+				audio_stream_player.stream = level.jingle
+				level_node.process_mode = Node.PROCESS_MODE_DISABLED
+				audio_stream_player.play()
+			)
+			tween.tween_callback(fullscreen_colorrect.hide)
+		else:
+			audio_stream_player.stream = level.jingle
+			level_node.process_mode = Node.PROCESS_MODE_DISABLED
+			audio_stream_player.play()
+		if level.jingle:
+			tween.tween_await(audio_stream_player.finished)
+			tween.tween_callback(func():
+				level_music_player.play()
+				level_node.process_mode = Node.PROCESS_MODE_INHERIT
+				title_card_node.queue_free()
+			)
+		else:
+			tween.tween_await(title_card_node.animation_finished)
+			level_music_player.autoplay = true
+		is_switching_levels = true
+		tween.tween_callback(func():
+			is_switching_levels = false
+			get_tree().change_scene_to_node(level_node)
+		)
+	else:
+		level_music_player = scene_tree.current_scene.get_node("MusicPlayer")
+		level_music_player.autoplay = false
+		scene_tree.current_scene.remove_child(level_music_player)
+	level_node.add_child(level_music_player)
+	current_level = index
 
 func add_coin():
 	coins += 1

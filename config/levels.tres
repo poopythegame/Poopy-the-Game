@@ -39,6 +39,8 @@
 [ext_resource type="Texture2D" uid="uid://tme2u2h5lvbu" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr7.png" id="32_wdc13"]
 [ext_resource type="AudioStream" uid="uid://hbnc74cpcejm" path="res://assets/audio/effects/trumpet_1.ogg" id="34_6tjyv"]
 [ext_resource type="AudioStream" uid="uid://bwubgsqiwenj7" path="res://assets/audio/jingles/big_farma.ogg" id="36_0oi5t"]
+[ext_resource type="Texture2D" uid="uid://csaok6kny0y08" path="res://assets/textures/level/big_farma/title_card.png" id="39_r7s68"]
+[ext_resource type="Script" uid="uid://cl7hws3vjpti2" path="res://scripts/big_farma/title_card_delegate.gd" id="40_vwncn"]
 
 [sub_resource type="Resource" id="Resource_jk1qb"]
 script = ExtResource("2_x5qbs")
@@ -114,6 +116,8 @@ metadata/_custom_type_script = "uid://7xfldx24oh8g"
 script = ExtResource("1_8dco6")
 title = "Big Farma"
 jingle = ExtResource("36_0oi5t")
+title_card = ExtResource("39_r7s68")
+title_card_delegate = ExtResource("40_vwncn")
 music = ExtResource("26_sav0g")
 scene = ExtResource("3_x5qbs")
 rankings = Array[ExtResource("2_x5qbs")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
