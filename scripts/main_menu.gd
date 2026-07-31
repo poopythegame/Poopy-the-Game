@@ -156,8 +156,6 @@ func _input(event: InputEvent) -> void:
 			flicker_tween.tween_callback(func(): title_info_box.modulate.a = 0).set_delay(.016)
 			flicker_tween.tween_callback(func(): title_info_box.modulate.a = 1).set_delay(.016)
 			flicker_tween.tween_callback(func(): title_info_box.modulate.a = 0).set_delay(.016)
-			music_player.stop()
-			# title_background.show()
 			play_audio(select_sfx)
 			change_screen(Screen.MENU, false, Transition.WIPE)
 
@@ -304,6 +302,7 @@ func reveal_screen_cg_crossfade(screen_cg: CanvasGroup):
 	current_screen_cg.show()
 	blackout.modulate.a = 0
 	screen_change_tween.tween_property(blackout, "modulate:a", 1, crossfade_in_sound.get_length())
+	# screen_change_tween.parallel().tween_property(music_player, "volume_linear", 0, crossfade_in_sound.get_length())
 	screen_change_tween.parallel().tween_callback(func():
 		audio_stream_player.stream = crossfade_in_sound
 		audio_stream_player.play()
@@ -341,7 +340,6 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 		menu_background.show()
 		screen_cg = menu_screen_cg
 		if not music_player.stream == menu_audio_stream:
-			music_player.stream = menu_audio_stream
 			var music_switch_tween := create_tween()
 			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
 			music_switch_tween.tween_callback(func():
@@ -361,7 +359,6 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 		whiteout.hide()
 		level_select_background.show()
 		if not music_player.stream == menu_audio_stream:
-			music_player.stream = menu_audio_stream
 			var music_switch_tween := create_tween()
 			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
 			music_switch_tween.tween_callback(func():
