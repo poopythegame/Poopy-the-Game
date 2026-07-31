@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/enemy_impact.ogg-f13177a08608d5ae6e844e777abd
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

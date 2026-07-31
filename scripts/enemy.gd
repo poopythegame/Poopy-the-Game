@@ -57,6 +57,7 @@ var spawning_dots: bool = false
 var distance_since_last_dot_spawn: float = 0
 var prev_pos: Vector2
 var node_spawn_host: Node
+var prev_grid_input: Vector2 = Vector2.ZERO
 
 # --- STATS ---
 var SLOPEMULT = 2
@@ -85,9 +86,9 @@ func play_audio(streams: Array[AudioStream]):
 func play_all_audio_multiselect(multistreams: Array[Array]):
 	var streams: Array[AudioStream] = []
 	for multistream: Array[AudioStream] in multistreams:
-		var choice = randi_range(0, len(multistream) - 1)
+		var choice: int = randi_range(0, len(multistream) - 1)
 		streams.append(multistream[choice])
-	var polystream := AudioStreamPolyphonic.new()
+	var polystream: AudioStreamPolyphonic = AudioStreamPolyphonic.new()
 	audio_stream_player.stream = polystream
 	audio_stream_player.play()
 	var playback: AudioStreamPlaybackPolyphonic = audio_stream_player.get_stream_playback()
@@ -95,7 +96,7 @@ func play_all_audio_multiselect(multistreams: Array[Array]):
 		playback.play_stream(stream)
 
 func stop_audio():
-	var stream := audio_stream_player.stream
+	var stream: AudioStream = audio_stream_player.stream
 	if stream is AudioStreamWAV:
 		if stream.loop_mode != AudioStreamWAV.LOOP_DISABLED:
 			audio_stream_player.stop()
@@ -120,18 +121,18 @@ func _ready():
 
 func physics_process_normal(delta):
 # --- 1. SURFACE DETECTION ---
-	var is_touching_surface = false
-	var surface_normal = Vector2.UP 
+	var is_touching_surface: bool = false
+	var surface_normal: Vector2 = Vector2.UP 
 	
 	if is_on_floor():
 		is_touching_surface = true
 		surface_normal = get_floor_normal()
 	elif is_on_ceiling() or is_on_wall():
 		for i in get_slide_collision_count():
-			var col = get_slide_collision(i)
+			var col: KinematicCollision2D = get_slide_collision(i)
 			if col.get_collider().is_in_group("Player"):
 				continue
-			var n = col.get_normal()
+			var n: Vector2 = col.get_normal()
 			
 			if abs(n.x) > 0.01 and abs(n.y) > 0.01:
 				is_touching_surface = true
@@ -160,10 +161,10 @@ func physics_process_normal(delta):
 		rot = slopeangle
 		
 	else: 
-		var base_ray_length = 4.0 
+		var base_ray_length: float = 4.0 
 		
 		if grounded:
-			var should_detach = false
+			var should_detach: bool = false
 			var speed_reach = abs(motion.x) * delta * 18.0 
 			
 			$CollisionShape2D/RayCast.target_position = Vector2(0, base_ray_length + speed_reach)
@@ -172,15 +173,15 @@ func physics_process_normal(delta):
 			if not $CollisionShape2D/RayCast.is_colliding():
 				should_detach = true
 			else:
-				var hit_point = $CollisionShape2D/RayCast.get_collision_point()
-				var distance_to_floor = global_position.distance_to(hit_point)
+				var hit_point: Vector2 = $CollisionShape2D/RayCast.get_collision_point()
+				var distance_to_floor: float = global_position.distance_to(hit_point)
 				
 				if distance_to_floor > (base_ray_length + 20.0):
 					should_detach = true
 				else:
-					var ray_normal = $CollisionShape2D/RayCast.get_collision_normal()
-					var next_slopeangle = ray_normal.angle() + (PI/2)
-					var angle_diff = abs(angle_difference(rot, next_slopeangle))
+					var ray_normal: Vector2 = $CollisionShape2D/RayCast.get_collision_normal()
+					var next_slopeangle: float = ray_normal.angle() + (PI/2)
+					var angle_diff: float = abs(angle_difference(rot, next_slopeangle))
 					
 					if angle_diff >= deg_to_rad(50):
 						should_detach = true
@@ -188,7 +189,7 @@ func physics_process_normal(delta):
 						up_direction = ray_normal
 						rot = next_slopeangle
 						
-						var temp_vel = velocity
+						var temp_vel: Vector2 = velocity
 						velocity = Vector2(0, (distance_to_floor / delta) * 1.5).rotated(rot) 
 						move_and_slide() 
 						velocity = temp_vel
@@ -218,7 +219,7 @@ func physics_process_normal(delta):
 
 #---- 6. Enemy attack loop
 
-	var player = get_tree().get_first_node_in_group("Player")
+	var player: Node = get_tree().get_first_node_in_group("Player")
 	
 	var direction = sign(player.global_position.x - global_position.x)
 
@@ -228,7 +229,7 @@ func physics_process_normal(delta):
 		$CollisionShape2D/WallCast.target_position.x = 7.0 * sign(motion.x)
 	
 	if isattacking:
-		var overlapping_bodies = hitbox.get_overlapping_bodies()
+		var overlapping_bodies: Array[Node2D] = hitbox.get_overlapping_bodies()
 		for body in overlapping_bodies:
 			if body.name == "Player" or body.is_in_group("Player"):
 				if (player.jumping or player.isrolling) and not player.is_grappling:
@@ -286,7 +287,6 @@ func physics_process_normal(delta):
 						motion.x += attackacc * direction
 							
 				else:
-					 
 					$AnimatedSprite2D.play("skid")
 					$AnimatedSprite2D.speed_scale = clamp(abs(motion.x)/90, 1, 8)
 					
@@ -349,7 +349,7 @@ func _physics_process(delta):
 
 		move_and_slide()
 		if spawning_dots:
-			var dist = global_position.distance_to(prev_pos)
+			var dist: float = global_position.distance_to(prev_pos)
 			distance_since_last_dot_spawn += dist
 			if distance_since_last_dot_spawn > dot_spawn_distance:
 				distance_since_last_dot_spawn = 0
@@ -395,7 +395,7 @@ func disengage_freeze():
 	is_traveling = false
 	
 	# --- NEW: Restore default pass-through state when unfrozen ---
-	var player = get_tree().get_first_node_in_group("Player")
+	var player: Node = get_tree().get_first_node_in_group("Player")
 	if player and not player in get_collision_exceptions():
 		add_collision_exception_with(player)
 		
@@ -410,12 +410,12 @@ func process_grid_input():
 	if is_traveling: return
 
 	# --- NEW: PREVENT GRID MOVE WHILE GRAPPLING ---
-	var player = get_tree().get_first_node_in_group("Player")
+	var player: Node = get_tree().get_first_node_in_group("Player")
 	if player and "is_grappling" in player and player.is_grappling:
 		return # Deny input entirely if player is attached
 
-	var input_vector = Vector2.ZERO
-	var sound = 0
+	var input_vector: Vector2 = Vector2.ZERO
+	var sound: int = 0
 	if Input.is_action_pressed("ui_up"):
 		input_vector.y -= 1
 		sound = 1
@@ -429,10 +429,12 @@ func process_grid_input():
 		input_vector.x += 1
 		sound = 2
 	
-	if sound == 1:
-		play_audio(shift_begin_sfx)
-	elif sound == 2:
-		play_audio(shift_end_sfx)
+	if input_vector != prev_grid_input:
+		if sound == 1:
+			play_audio(shift_begin_sfx)
+		elif sound == 2:
+			play_audio(shift_end_sfx)
+	prev_grid_input = input_vector
 
 	if input_vector != Vector2.ZERO:
 		var dx = clamp(input_vector.x, -1, 1)
@@ -443,7 +445,7 @@ func process_grid_input():
 		next_grid_coords.y = clamp(next_grid_coords.y, -1, 1)
 		position = frozen_origin + next_grid_coords * GRID_OFFSET
 		
-		var is_colliding = test_move(global_transform, Vector2.ZERO)
+		var is_colliding: bool = test_move(global_transform, Vector2.ZERO)
 		if is_colliding:
 			next_grid_coords = grid_coords
 		else:
@@ -466,14 +468,14 @@ func process_frozen_behavior(delta):
 		freeze_ghost_timer -= delta
 
 	# 1. CHECK PLAYER GRAPPLE STATE
-	var player = get_tree().get_first_node_in_group("Player")
-	var player_grappling = false
+	var player: Node = get_tree().get_first_node_in_group("Player")
+	var player_grappling: bool = false
 	if player and "is_grappling" in player and player.is_grappling:
 		player_grappling = true
 	
 	# 2. MANAGE GHOSTING
 	# We ghost if we are traveling, if the 0.2s timer is active, or if player is grappling.
-	var should_ghost = is_traveling or (freeze_ghost_timer > 0) or player_grappling
+	var should_ghost: bool = is_traveling or (freeze_ghost_timer > 0) or player_grappling
 	
 	if player:
 		if should_ghost:
@@ -494,12 +496,12 @@ func process_frozen_behavior(delta):
 			anchor.monitoring = false
 			anchor.monitorable = false
 
-		var distance = global_position.distance_to(target_position)
+		var distance: float = global_position.distance_to(target_position)
 		
 		if distance < ARRIVAL_DISTANCE:
 			stop_traveling()
 		else:
-			var direction = global_position.direction_to(target_position)
+			var direction: Vector2 = global_position.direction_to(target_position)
 			velocity = direction * TRAVEL_SPEED
 			floor_snap_length = 0.0
 			move_and_slide()
@@ -544,13 +546,13 @@ func check_player_impact(delta):
 	for body in overlapping_bodies:
 		if body.name == "Player" or body.is_in_group("Player"):
 			var player: Player = body 
-			
-			if (player.jumping or player.isrolling) and (not player.is_grappling):
+			var attacking := player.jumping or player.isrolling
+			if attacking and not player.is_grappling or vulnerable:
 				if player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
 					perform_bounce(player)
 				else:
 					launch_enemy(player)
-					vulnerable = true
+				vulnerable = true
 
 func test_player_impact(_delta: float):
 	var overlapping_bodies: Array[Node2D] = hitbox.get_overlapping_bodies()

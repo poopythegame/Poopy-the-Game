@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://cwu1p8ufbbf6n"]
+
+[ext_resource type="Texture2D" uid="uid://u7kkhgj3xous" path="res://assets/textures/level/big_farma/title_card_john_person_fr0.png" id="1_sj18k"]
+[ext_resource type="Texture2D" uid="uid://8ji8p61fvj5s" path="res://assets/textures/level/big_farma/title_card_john_person_fr1.png" id="2_1lq1l"]
+[ext_resource type="Texture2D" uid="uid://bdj22yq3bmrky" path="res://assets/textures/level/big_farma/a_rank_fr0.png" id="3_hlu6a"]
+[ext_resource type="Texture2D" uid="uid://npam2h0qr2n0" path="res://assets/textures/level/big_farma/a_rank_fr1.png" id="4_4u6w3"]
+[ext_resource type="Texture2D" uid="uid://e58uxy4i1o3n" path="res://assets/textures/level/big_farma/run_fr0.png" id="5_iyf0s"]
+[ext_resource type="Texture2D" uid="uid://c5hmhd0babwsk" path="res://assets/textures/level/big_farma/run_fr1.png" id="6_mpb14"]
+[ext_resource type="Texture2D" uid="uid://bpllncnoebqtk" path="res://assets/textures/level/big_farma/run_fr2.png" id="7_2sgdo"]
+[ext_resource type="Texture2D" uid="uid://cq44mw5bb2ikd" path="res://assets/textures/level/big_farma/run_fr3.png" id="8_mf65a"]
+[ext_resource type="Texture2D" uid="uid://h8od6gus6qfc" path="res://assets/textures/player/walk/walk_fr0.png" id="9_kguwh"]
+[ext_resource type="Texture2D" uid="uid://cxoiopasw5ijk" path="res://assets/textures/player/walk/walk_fr1.png" id="10_dceow"]
+[ext_resource type="Texture2D" uid="uid://n57eh3b6j5tj" path="res://assets/textures/player/walk/walk_fr2.png" id="11_bbtc8"]
+[ext_resource type="Texture2D" uid="uid://bo0qb4e1301q4" path="res://assets/textures/player/walk/walk_fr3.png" id="12_m5wak"]
+[ext_resource type="Texture2D" uid="uid://cfyeh43t775l1" path="res://assets/textures/player/walk/walk_fr4.png" id="13_xr5l3"]
+[ext_resource type="Texture2D" uid="uid://rglrs0plo71r" path="res://assets/textures/player/walk/walk_fr5.png" id="14_ndbro"]
+[ext_resource type="Texture2D" uid="uid://bg6r3qls4m7lf" path="res://assets/textures/player/walk/walk_fr6.png" id="15_pqtpf"]
+[ext_resource type="Texture2D" uid="uid://borogfc2eousr" path="res://assets/textures/player/walk/walk_fr7.png" id="16_p35ka"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0cdpu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sj18k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_1lq1l")
+}],
+"loop": 1,
+"name": &"helicopter",
+"speed": 6.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k51th"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hlu6a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4u6w3")
+}],
+"loop": 1,
+"name": &"armflap",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_iyf0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_mpb14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2sgdo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mf65a")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_kguwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_dceow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bbtc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_m5wak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_xr5l3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ndbro")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_pqtpf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_p35ka")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="BigFarmaTitleCard" type="Node" unique_id=867630524]
+
+[node name="JohnPerson" type="AnimatedSprite2D" parent="." unique_id=1247664073]
+position = Vector2(-385, 10)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_0cdpu")
+animation = &"helicopter"
+frame_progress = 0.79636747
+centered = false
+
+[node name="PoopyTheGame" type="AnimatedSprite2D" parent="." unique_id=744456477]
+position = Vector2(-268, 450)
+scale = Vector2(0.35, 0.35)
+sprite_frames = SubResource("SpriteFrames_k51th")
+animation = &"walk"
+frame = 2
+frame_progress = 0.323867
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2045114908]

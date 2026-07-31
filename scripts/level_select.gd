@@ -16,4 +16,4 @@ func _add_options() -> void:
         options.append(option)
 
 func _on_option_selected(index: int):
-    Global.begin_level(index)
+    Global.begin_level_title_card(index)

@@ -62,13 +62,14 @@ func start_animation_sequence():
 		rank_animation_animated_texture.set_frame_texture(index, frame)
 		rank_animation_animated_texture.set_frame_duration(index, frame_duration)
 		index += 1
-	var tween = create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_callback(func():
 		audio_stream_player.stream = drumroll_sound
 		audio_stream_player.play()
 		pass)
 	tween.tween_await(audio_stream_player.finished)
 	tween.tween_callback(func(): rank_animation_animated_texture.pause = false)
+	var time_since_music_track_1 := 0.
 	if curr_rank.music_track_1 != null:
 		tween.tween_callback(func():
 			audio_stream_player.stream = curr_rank.music_track_1
@@ -77,12 +78,14 @@ func start_animation_sequence():
 			rank_icon_dummy_spacer.hide()
 			rank_icon.show()).set_delay(1.44)
 		tween.tween_property(rank_icon, "offset_transform_scale", Vector2(1, 1), 0.5)
+		time_since_music_track_1 += .5
 	else:
 		tween.tween_callback(func():
 			rank_icon_dummy_spacer.hide()
 			rank_icon.show())
 		tween.tween_property(rank_icon, "offset_transform_scale", Vector2(1, 1), 0.5)
 	tween.tween_method(screen_shake, 10, 5, 0.5)
+	time_since_music_track_1 += .5
 	tween.tween_callback(func():
 		apply_rank_animation()
 		# Just sticking this in here
@@ -93,12 +96,14 @@ func start_animation_sequence():
 			portraits_background.scroll_speed = 200
 		tween.tween_callback(whiteout.show)
 		tween.tween_property(whiteout, "modulate:a", 1, 0.2)
+		time_since_music_track_1 += .2
 		tween.tween_callback(func():
 			portraits_background.show()
 			portraits_background.process_mode = Node.PROCESS_MODE_INHERIT)
 		tween.tween_property(whiteout, "modulate:a", 0, 0.2)
+		time_since_music_track_1 += .2
 		tween.tween_callback(whiteout.hide)
-	if curr_rank.music_track_1 != null:
+	if curr_rank.music_track_1 != null and time_since_music_track_1 < curr_rank.music_track_1.get_length():
 		tween.tween_await(audio_stream_player.finished)
 	if curr_rank.music_track_2 != null:
 		tween.tween_callback(func():
