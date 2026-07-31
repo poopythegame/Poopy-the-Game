@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0onqcrbo0uom"
-path="res://.godot/imported/d_rank_fr14.png-e994a36bc52f739091d91130faaeb904.ctex"
+uid="uid://chuk8ohpi78mx"
+path="res://.godot/imported/credits.png-c2d12def1b0a9f3ea6c960948809f630.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/rankings/player_animations/d_rank_fr14.png"
-dest_files=["res://.godot/imported/d_rank_fr14.png-e994a36bc52f739091d91130faaeb904.ctex"]
+source_file="res://assets/textures/ui/main_menu/option_portraits/credits.png"
+dest_files=["res://.godot/imported/credits.png-c2d12def1b0a9f3ea6c960948809f630.ctex"]
 
 [params]
 

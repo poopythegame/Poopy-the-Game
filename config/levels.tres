@@ -23,22 +23,24 @@
 [ext_resource type="Texture2D" uid="uid://bfhpdjqj3p1lh" path="res://assets/textures/ui/rankings/small/a_rank_small.png" id="13_cxb4r"]
 [ext_resource type="Texture2D" uid="uid://cadobt2c1luk8" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr0.png" id="13_e1edl"]
 [ext_resource type="Texture2D" uid="uid://cluts3ihvcgxe" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr1.png" id="14_sav0g"]
-[ext_resource type="Texture2D" uid="uid://b3gv55rshr68l" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr0.png" id="16_h2k1g"]
-[ext_resource type="Texture2D" uid="uid://dwfg0jg70yuyw" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr2.png" id="17_3dhcv"]
+[ext_resource type="Texture2D" uid="uid://cv5qt6i3chmg2" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr0.png" id="16_h2k1g"]
+[ext_resource type="Texture2D" uid="uid://bikgasrdx2aqq" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr2.png" id="17_3dhcv"]
 [ext_resource type="AudioStream" uid="uid://djbpkmmoaiser" path="res://assets/audio/music/rankings/ranking_funk_b.ogg" id="17_4cit1"]
-[ext_resource type="Texture2D" uid="uid://dq7xceluw6c70" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr4.png" id="18_cxb4r"]
-[ext_resource type="Texture2D" uid="uid://bartbwj64ubb4" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr6.png" id="19_4cit1"]
+[ext_resource type="Texture2D" uid="uid://logmgfpgjugd" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr4.png" id="18_cxb4r"]
+[ext_resource type="Texture2D" uid="uid://c1n0jalv0avdc" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr6.png" id="19_4cit1"]
 [ext_resource type="Texture2D" uid="uid://bgmkgmbmu3oyb" path="res://assets/textures/ui/rankings/small/b_rank_small.png" id="19_ttfwy"]
-[ext_resource type="Texture2D" uid="uid://bnvb13c4yjry5" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr8.png" id="20_ttfwy"]
 [ext_resource type="AudioStream" uid="uid://64nhvswoqd3g" path="res://assets/audio/music/rankings/ranking_funk_c.ogg" id="21_ttfwy"]
-[ext_resource type="Texture2D" uid="uid://bndst27a07hls" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr10.png" id="21_vakqa"]
-[ext_resource type="Texture2D" uid="uid://w73fkbc7pebe" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr12.png" id="22_v4uu0"]
-[ext_resource type="Texture2D" uid="uid://0onqcrbo0uom" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr14.png" id="23_4jqr8"]
 [ext_resource type="Texture2D" uid="uid://bpe3ad8ekcxau" path="res://assets/textures/ui/rankings/small/c_rank_small.png" id="24_vakqa"]
 [ext_resource type="PackedScene" uid="uid://chivuxah6fbkc" path="res://scenes/levels/tutorial.tscn" id="25_e1edl"]
+[ext_resource type="Texture2D" uid="uid://olecyvl5w8f" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr1.png" id="26_0oi5t"]
 [ext_resource type="AudioStream" uid="uid://dlv4a7pps2hcb" path="res://assets/audio/music/level/big_farma.ogg" id="26_sav0g"]
+[ext_resource type="Texture2D" uid="uid://clo55ocxla03h" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr3.png" id="28_r7s68"]
+[ext_resource type="Texture2D" uid="uid://bi74x2c7iegj7" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr5.png" id="30_vwncn"]
+[ext_resource type="Texture2D" uid="uid://tme2u2h5lvbu" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr7.png" id="32_wdc13"]
 [ext_resource type="AudioStream" uid="uid://hbnc74cpcejm" path="res://assets/audio/effects/trumpet_1.ogg" id="34_6tjyv"]
 [ext_resource type="AudioStream" uid="uid://bwubgsqiwenj7" path="res://assets/audio/jingles/big_farma.ogg" id="36_0oi5t"]
+[ext_resource type="Texture2D" uid="uid://csaok6kny0y08" path="res://assets/textures/level/big_farma/title_card.png" id="39_r7s68"]
+[ext_resource type="Script" uid="uid://cl7hws3vjpti2" path="res://scripts/big_farma/title_card_delegate.gd" id="40_vwncn"]
 
 [sub_resource type="Resource" id="Resource_jk1qb"]
 script = ExtResource("2_x5qbs")
@@ -94,7 +96,7 @@ script = ExtResource("2_x5qbs")
 letter = "D"
 icon = ExtResource("7_thqn0")
 small_icon = ExtResource("7_thqn0")
-animation_frames = Array[Texture2D]([ExtResource("16_h2k1g"), ExtResource("17_3dhcv"), ExtResource("18_cxb4r"), ExtResource("19_4cit1"), ExtResource("20_ttfwy"), ExtResource("21_vakqa"), ExtResource("22_v4uu0"), ExtResource("23_4jqr8")])
+animation_frames = Array[Texture2D]([ExtResource("16_h2k1g"), ExtResource("26_0oi5t"), ExtResource("17_3dhcv"), ExtResource("28_r7s68"), ExtResource("18_cxb4r"), ExtResource("30_vwncn"), ExtResource("19_4cit1"), ExtResource("32_wdc13")])
 animation_fps = 12.0
 use_time = false
 time = 150.0
@@ -114,6 +116,8 @@ metadata/_custom_type_script = "uid://7xfldx24oh8g"
 script = ExtResource("1_8dco6")
 title = "Big Farma"
 jingle = ExtResource("36_0oi5t")
+title_card = ExtResource("39_r7s68")
+title_card_delegate = ExtResource("40_vwncn")
 music = ExtResource("26_sav0g")
 scene = ExtResource("3_x5qbs")
 rankings = Array[ExtResource("2_x5qbs")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
