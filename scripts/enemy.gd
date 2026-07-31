@@ -229,7 +229,6 @@ func physics_process_normal(delta):
 			# If this is the exact moment the enemy first spots the player, start the node!
 			if (distance_from_player < 200 and vertical_distance_from_player < 200):
 				if not spotted_player:
-					print("spotted!")
 					spotted_player = true
 					is_preparing = true
 					play_audio(shock_sfx)
@@ -333,7 +332,6 @@ func _physics_process(delta):
 				var dot: Node2D = dot_prefab.instantiate()
 				dot.global_position = global_position
 				node_spawn_host.add_child(dot)
-				print("spawned dot")
 
 	# slope_stuck_failsafe()
 

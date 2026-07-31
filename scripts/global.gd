@@ -155,7 +155,6 @@ func begin_level_title_card(index: int):
 		if level.jingle:
 			tween.tween_await(audio_stream_player.finished)
 			tween.tween_callback(func():
-				print("Made it")
 				level_music_player.play()
 				level_node.process_mode = Node.PROCESS_MODE_INHERIT
 				title_card_node.queue_free()

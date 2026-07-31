@@ -727,7 +727,6 @@ func physics_process_normal(delta):
 
 # Set Velocity to the Motion variable, but rotated.
 	# if motion.y != 50:
-	# 	print(motion)
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 	
 	# Right here's where the magic happens.
@@ -992,7 +991,6 @@ func screen_shake(intensity: float):
 
 func death_launch(t: float):
 	var delta := t - death_animation_last_t
-	print(t)
 	if t < 0.03:
 		var h_comp = Vector2.LEFT
 		if $Sprite.flip_h:

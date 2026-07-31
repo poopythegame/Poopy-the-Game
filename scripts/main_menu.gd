@@ -121,7 +121,6 @@ func _ready() -> void:
 	var window_size := Vector2(ProjectSettings.get("display/window/size/viewport_width"), ProjectSettings.get("display/window/size/viewport_height"))
 	title_background.size = window_size
 	title_screen_background.size = window_size
-	# menu_background.size = window_size
 	level_select_background.size = window_size
 	options_background.size = window_size
 	characters_background.size = window_size
