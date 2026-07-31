@@ -160,50 +160,19 @@ func physics_process_normal(delta):
 		up_direction = surface_normal
 		rot = slopeangle
 		
-	else: 
-		var base_ray_length: float = 4.0 
-		
-		if grounded:
-			var should_detach: bool = false
-			var speed_reach = abs(motion.x) * delta * 18.0 
+	else: # If not on the floor anymore...
+		# Reset Rotation and apply Momentum
+		if not $CollisionShape2D/RayCast.is_colliding() and grounded:
+			grounded = false
 			
-			$CollisionShape2D/RayCast.target_position = Vector2(0, base_ray_length + speed_reach)
-			$CollisionShape2D/RayCast.force_raycast_update()
+			motion = get_real_velocity()
+			# Set your motion to your actual velocity.
+			## This is what converts your momentum when you fly off a slope.
 			
-			if not $CollisionShape2D/RayCast.is_colliding():
-				should_detach = true
-			else:
-				var hit_point: Vector2 = $CollisionShape2D/RayCast.get_collision_point()
-				var distance_to_floor: float = global_position.distance_to(hit_point)
-				
-				if distance_to_floor > (base_ray_length + 20.0):
-					should_detach = true
-				else:
-					var ray_normal: Vector2 = $CollisionShape2D/RayCast.get_collision_normal()
-					var next_slopeangle: float = ray_normal.angle() + (PI/2)
-					var angle_diff: float = abs(angle_difference(rot, next_slopeangle))
-					
-					if angle_diff >= deg_to_rad(50):
-						should_detach = true
-					else:
-						up_direction = ray_normal
-						rot = next_slopeangle
-						
-						var temp_vel: Vector2 = velocity
-						velocity = Vector2(0, (distance_to_floor / delta) * 1.5).rotated(rot) 
-						move_and_slide() 
-						velocity = temp_vel
-						
-			if should_detach:
-				grounded = false
-				motion = get_real_velocity()
-				rot = 0
-				up_direction = Vector2(0, -1)
-				
-			$CollisionShape2D/RayCast.target_position = Vector2(0, base_ray_length)
+			rot = 0
+			up_direction = Vector2(0, -1)
+			# Set your Rotation and Up Direction to their defaults.
 
-		else:
-			$CollisionShape2D/RayCast.target_position = Vector2(0, base_ray_length)
 	
 	if grounded:
 		spawning_dots = false
@@ -212,10 +181,11 @@ func physics_process_normal(delta):
 	if not is_on_floor() and rot == 0:
 		motion.y += GRAVITY * delta
 	else:
-		if abs(slopefactor) == 1: 
-			motion.y = 0
-		else:
-			motion.y = 50
+		motion.y = 0
+		#if abs(slopefactor) == 1: 
+			#motion.y = 0
+		#else:
+		#	motion.y = 50
 
 #---- 6. Enemy attack loop
 
@@ -307,6 +277,16 @@ func physics_process_normal(delta):
 		motion.x = move_toward(motion.x, 0, acc - 1)
 	
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
+	
+	#WALL STOPPER
+	if is_on_wall() and $CollisionShape2D/WallCast.is_colliding(): # If you bump into a wall...
+		if not grounded:
+			motion.x = 0
+		elif grounded:
+			var tempslopeangle = abs(slopeangle)
+			if (tempslopeangle >= 0 and tempslopeangle <= 0.25):
+				motion.x = 0
+		# Stop moving.
 	
 # --- 8. SHOCK ANIMATION
 
@@ -516,6 +496,7 @@ func process_frozen_behavior(delta):
 		if not should_ghost:
 			if test_player_impact(delta):
 				disengage_freeze()
+				launch_enemy(player)
 
 func stop_traveling():
 	is_traveling = false
@@ -543,8 +524,8 @@ func check_player_impact(delta):
 	for body in overlapping_bodies:
 		if body.name == "Player" or body.is_in_group("Player"):
 			var player: Player = body 
-			var attacking := player.jumping or player.isrolling
-			if attacking and not player.is_grappling or vulnerable:
+			
+			if (player.jumping or player.isrolling) and (not player.is_grappling):
 				if player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
 					perform_bounce(player)
 				else:
