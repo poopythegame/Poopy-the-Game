@@ -546,8 +546,8 @@ func check_player_impact(delta):
 	for body in overlapping_bodies:
 		if body.name == "Player" or body.is_in_group("Player"):
 			var player: Player = body 
-			var attacking := player.jumping or player.isrolling
-			if attacking and not player.is_grappling or vulnerable:
+			
+			if (player.jumping or player.isrolling) and (not player.is_grappling):
 				if player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
 					perform_bounce(player)
 				else:
