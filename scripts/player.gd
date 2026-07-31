@@ -592,7 +592,7 @@ func physics_process_normal(delta):
 				motion.y = -JUMP_VELOCITY / 2.2
 
 	if Input.is_action_just_pressed("boost") and canspeedboost:
-		motion.x = 780 * Input.get_axis("left", "right")
+		motion.x = 675 * Input.get_axis("left", "right")
 		play_audio(boost_sfx)
 		canspeedboost = false
 		
