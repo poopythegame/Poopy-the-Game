@@ -207,7 +207,6 @@ func title_begin_title_reveal():
 		position = Vector2.ZERO
 	)
 	tween.tween_callback(func(): title_logo.modulate.a = 1).set_delay(.05)
-	tween.tween_await(audio_stream_player.finished)
 	tween.tween_callback(whiteout.show)
 	tween.parallel().tween_property(whiteout, "modulate:a", 1, 0.2)
 	tween.tween_callback(func():
