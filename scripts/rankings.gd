@@ -62,7 +62,7 @@ func start_animation_sequence():
 		rank_animation_animated_texture.set_frame_texture(index, frame)
 		rank_animation_animated_texture.set_frame_duration(index, frame_duration)
 		index += 1
-	var tween = create_tween()
+	var tween: Tween = create_tween()
 	tween.tween_callback(func():
 		audio_stream_player.stream = drumroll_sound
 		audio_stream_player.play()
