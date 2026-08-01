@@ -22,7 +22,7 @@ config/name="Poopy the Game"
 run/main_scene="uid://dady2wku1xusy"
 config/features=PackedStringArray("4.7", "Mobile")
 run/max_fps=60
-config/icon="res://Maddies physics stuff/amy icon.png"
+config/icon="uid://0e8y4uioqvmy"
 
 [audio]
 
