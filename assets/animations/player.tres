@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c65uq87fp1a0k" path="res://assets/textures/player/jump/jump_fr0.png" id="4_nsvki"]
 [ext_resource type="Texture2D" uid="uid://euf3um3ler4m" path="res://assets/textures/player/airdash/airdash_fr3.png" id="4_vbv6c"]
 [ext_resource type="Texture2D" uid="uid://blo2ck310ciuh" path="res://assets/textures/player/jump/jump_fr1.png" id="5_8p1s0"]
-[ext_resource type="Texture2D" uid="uid://t5naeo1uhh8e" path="res://assets/textures/player/Idle_real.png" id="5_sompp"]
+[ext_resource type="Texture2D" uid="uid://bfqm6tlkkjvwj" path="res://assets/textures/player/idle.png" id="5_sompp"]
 [ext_resource type="Texture2D" uid="uid://6vq3dsvl1mdv" path="res://assets/textures/player/jump/jump_fr2.png" id="6_sompp"]
 [ext_resource type="Texture2D" uid="uid://dws7vw5skciuo" path="res://assets/textures/player/jump/jump_fr3.png" id="7_7um1e"]
 [ext_resource type="Texture2D" uid="uid://c81qw2uiov4yy" path="res://assets/textures/player/jump/jump_fr4.png" id="8_vbv6c"]
