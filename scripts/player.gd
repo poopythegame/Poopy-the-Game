@@ -983,7 +983,7 @@ func die():
 	if $Sprite.flip_h:
 		end_angle = 90
 	death_tween.parallel().tween_property(self, "global_rotation_degrees", end_angle, .25)
-	# death_tween.parallel().tween_await(audio_stream_player.finished)
+	death_tween.parallel().tween_await(audio_stream_player.finished)
 	death_tween.parallel().tween_method(screen_shake, 5, 5, .25)
 	death_tween.tween_callback(restart)
 
