@@ -594,6 +594,7 @@ func physics_process_normal(delta):
 	if Input.is_action_just_pressed("boost") and canspeedboost:
 		motion.x = 690 * Input.get_axis("left", "right")
 		play_audio(boost_sfx)
+		camera.screen_shake_for(.25)
 		canspeedboost = false
 		
 #	var actionlist = ["action", "grapple", "dual"]
@@ -967,7 +968,7 @@ func die():
 	death_animation_camera_origin = camera.global_position
 	motion = Vector2.ZERO
 	dying = true
-	var sprite = $Sprite
+	var sprite: AnimatedSprite2D = $Sprite
 	sprite.play("idle")
 	death_tween.set_ease(Tween.EASE_IN)
 	death_tween.set_trans(Tween.TRANS_CUBIC)
@@ -978,11 +979,11 @@ func die():
 		play_audio(death_sfx)
 		camera.frozen = true)
 	death_tween.tween_method(death_launch, 0., 1., 2)
-	var end_angle = -90
+	var end_angle: int = -90
 	if $Sprite.flip_h:
 		end_angle = 90
 	death_tween.parallel().tween_property(self, "global_rotation_degrees", end_angle, .25)
-	death_tween.parallel().tween_await(audio_stream_player.finished)
+	# death_tween.parallel().tween_await(audio_stream_player.finished)
 	death_tween.parallel().tween_method(screen_shake, 5, 5, .25)
 	death_tween.tween_callback(restart)
 
@@ -992,7 +993,7 @@ func screen_shake(intensity: float):
 func death_launch(t: float):
 	var delta := t - death_animation_last_t
 	if t < 0.03:
-		var h_comp = Vector2.LEFT
+		var h_comp: Vector2 = Vector2.LEFT
 		if $Sprite.flip_h:
 			h_comp = Vector2.RIGHT
 		death_launch_velocity += (Vector2.UP * 1.25 + h_comp) * 1000

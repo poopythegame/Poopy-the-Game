@@ -1,6 +1,7 @@
 extends Camera2D
 class_name Camera
 
+@export var screen_shake_intensity := 5
 ## Note: lookahead cannot be manually disabled or enabled. It's now a user setting.
 @export_group("Lookahead")
 ## How far the lookahead shifts the camera to show what's in front of the player.
@@ -14,6 +15,7 @@ class_name Camera
 @export var terrain_bobbing_offset: float = 50
 
 var frozen: bool = false
+var screen_shaking: bool = false
 var player: Player
 var left_boundary: Node2D
 var right_boundary: Node2D
@@ -46,7 +48,7 @@ func get_rect() -> Rect2:
 func _process(delta: float) -> void:
 	if frozen:
 		return
-	var prev_next_offset = next_x_offset
+	var prev_next_offset: float = next_x_offset
 	if should_disable_lookahead():
 		next_x_offset = 0
 	elif player.velocity.x > MINSPD:
@@ -60,7 +62,7 @@ func _process(delta: float) -> void:
 		x_offset_t = 0
 	curr_x_offset = x_offset
 	if next_x_offset != x_offset:
-		var t = x_offset_t / lookahead_time
+		var t: float = x_offset_t / lookahead_time
 		curr_x_offset = lerp(x_offset, next_x_offset, ease(t, lookahead_ease))
 		x_offset_t += delta
 		if x_offset_t > lookahead_time:
@@ -70,7 +72,7 @@ func _process(delta: float) -> void:
 	var rect := get_rect()
 	var left_x := rect.position.x
 	var right_x := left_x + rect.size.x
-	var x_shift_amount := 0.
+	var x_shift_amount: float = 0.
 	if left_boundary:
 		if left_boundary.global_position.x > left_x:
 			x_shift_amount = left_boundary.global_position.x - left_x
@@ -78,16 +80,33 @@ func _process(delta: float) -> void:
 		if right_boundary.global_position.x < right_x:
 			x_shift_amount = right_boundary.global_position.x - right_x
 	global_position.x += x_shift_amount
-	var y_shift_amount := 0.
+	var y_shift_amount: float = 0.
 	if enable_terrain_bobbing:
-		var raycast_distance := rect.size.y / 2
-		var query = PhysicsRayQueryParameters2D.create(global_position, Vector2(global_position.x, global_position.y + raycast_distance))
+		var raycast_distance: float = rect.size.y / 2
+		var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(global_position, Vector2(global_position.x, global_position.y + raycast_distance))
 		query.hit_from_inside = false
-		var hit = get_world_2d().direct_space_state.intersect_ray(query)
+		var hit: Dictionary = get_world_2d().direct_space_state.intersect_ray(query)
 		if not hit.is_empty():
 			var hit_y: float = hit["position"].y
 			y_shift_amount = raycast_distance - hit_y
 	global_position.y -= y_shift_amount
+	if screen_shaking:
+		global_position += Vector2(randf_range(-1, 1), randf_range(-1, 1)) * screen_shake_intensity
+
+func screen_shake_for(duration: float) -> void:
+	start_screen_shake()
+	var timer: Timer = Timer.new()
+	timer.autostart = true
+	timer.wait_time = duration
+	timer.timeout.connect(stop_screen_shake)
+	timer.timeout.connect(timer.queue_free)
+	add_child(timer)
+
+func start_screen_shake() -> void:
+	screen_shaking = true
+
+func stop_screen_shake() -> void:
+	screen_shaking = false
 
 func should_disable_lookahead() -> bool:
 	if player.is_grappling:
