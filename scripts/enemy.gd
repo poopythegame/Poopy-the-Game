@@ -282,8 +282,8 @@ func physics_process_normal(delta):
 		if not grounded:
 			motion.x = 0
 		elif grounded:
-			var tempslopeangle = abs(slopeangle)
-			if (tempslopeangle >= 0 and tempslopeangle <= 0.25):
+			var ref_angle = asin(abs(slopefactor))
+			if (ref_angle <= 0.1):
 				motion.x = 0
 		# Stop moving.
 	
