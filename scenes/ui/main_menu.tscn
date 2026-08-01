@@ -151,9 +151,7 @@ grow_vertical = 2
 visible = false
 scale = Vector2(0.075, 0.075)
 sprite_frames = ExtResource("7_ayp64")
-animation = &"dance2"
-frame = 7
-frame_progress = 0.0045999386
+animation = &"idle"
 
 [node name="JokeLogo" type="Label" parent="TitleScreenCanvasGroup/Screen/VBoxContainer" unique_id=149390959]
 z_index = -1
