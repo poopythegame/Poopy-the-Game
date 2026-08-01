@@ -74,7 +74,7 @@ mesh = SubResource("ArrayMesh_arvqe")
 material = ExtResource("5_wr5d5")
 z_index = -10
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mn5d3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0jsbf"]
 shader = ExtResource("7_cyy7t")
 shader_parameter/texture_scale = Vector2(68, 16)
 shader_parameter/texture_offset = Vector2(0, 0)
@@ -96,9 +96,9 @@ _surfaces = [{
 script = ExtResource("4_l8ohl")
 texture = ExtResource("8_1x4hw")
 mesh = SubResource("ArrayMesh_p4ft5")
-material = SubResource("ShaderMaterial_mn5d3")
+material = SubResource("ShaderMaterial_0jsbf")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0tpbb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8cmmm"]
 shader = ExtResource("9_hux2q")
 shader_parameter/tex = ExtResource("10_n1gr0")
 
@@ -115,19 +115,20 @@ _surfaces = [{
 "vertex_data": PackedByteArray("ERUMRKqL3cIAAAAAsW8KRFai5sIAAAAA7Uq+Q9ynCUMAAAAAOzDAQz6zEEMAAAAANDY+QHRiEUMAAAAAUN2cvpSuGEMAAAAA0zZawxPb58IAAAAA9U1gwzV73cIAAAAA/3//f/tLARr/f/9//EsBGv9//3/XLJQp/3//f8ssmin/f/9/0ifpU/9//3/HJ+NT/3//fy1FlmL/f/9/LEWWYg==")
 }]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nk0kf"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_24aq3"]
 size = Vector2(102, 8)
 
 [sub_resource type="Resource" id="Resource_l8ohl"]
 script = ExtResource("4_l8ohl")
-texture = SubResource("PlaceholderTexture2D_nk0kf")
+texture = SubResource("PlaceholderTexture2D_24aq3")
 mesh = SubResource("ArrayMesh_uy53l")
-material = SubResource("ShaderMaterial_0tpbb")
+material = SubResource("ShaderMaterial_8cmmm")
 z_index = -1
 
 [sub_resource type="Resource" id="Resource_cyy7t"]
 script = ExtResource("2_iig34")
 _point_order = PackedInt32Array()
+_next_key = 5
 
 [sub_resource type="Resource" id="Resource_1x4hw"]
 script = ExtResource("18_q462l")
@@ -168,7 +169,6 @@ position = Vector2(128, 0)
 flip = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1929185180]
-position = Vector2(84, 408)
 zoom = Vector2(3.5, 3.5)
 script = ExtResource("7_iig34")
 
@@ -180,6 +180,7 @@ script = ExtResource("7_iig34")
 script = ExtResource("1_7ac3l")
 _points = SubResource("Resource_cyy7t")
 shape_material = SubResource("Resource_1x4hw")
+collision_polygon_node_path = NodePath("../CollisionPolygon2D")
 metadata/_custom_type_script = "uid://dhdc4b8yddyej"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1341562826]
