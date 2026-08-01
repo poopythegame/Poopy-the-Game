@@ -1,5 +1,4 @@
-﻿@tool
-extends Control
+﻿extends Control
 
 @export var scroll_speed := 100.
 @export var texture: Texture2D:

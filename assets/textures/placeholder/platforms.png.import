@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpxg476ec1mjy"
-path="res://.godot/imported/sonic sprite.png-85fb456533746ae36099d4a841585aae.ctex"
+uid="uid://cvgft3yqhaqxm"
+path="res://.godot/imported/platforms.png-3bfd646a6abb642d14fbd1415ba7854a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Maddies physics stuff/brackeys_platformer_assets/sprites/sonic sprite.png"
-dest_files=["res://.godot/imported/sonic sprite.png-85fb456533746ae36099d4a841585aae.ctex"]
+source_file="res://assets/textures/placeholder/platforms.png"
+dest_files=["res://.godot/imported/platforms.png-3bfd646a6abb642d14fbd1415ba7854a.ctex"]
 
 [params]
 
