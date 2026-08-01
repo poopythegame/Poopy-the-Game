@@ -144,7 +144,7 @@ func begin_level_title_card(index: int):
 				audio_stream_player.play()
 			)
 			tween.tween_callback(fullscreen_colorrect.hide)
-		else:
+		elif level.jingle:
 			audio_stream_player.stream = level.jingle
 			level_node.process_mode = Node.PROCESS_MODE_DISABLED
 			audio_stream_player.play()
@@ -160,7 +160,8 @@ func begin_level_title_card(index: int):
 				title_card_node.queue_free()
 			)
 		else:
-			tween.tween_await(title_card_node.animation_finished)
+			if title_card_node and level.title_card_delegate:
+				tween.tween_await(title_card_node.animation_finished)
 			level_music_player.autoplay = true
 		is_switching_levels = true
 	else:
