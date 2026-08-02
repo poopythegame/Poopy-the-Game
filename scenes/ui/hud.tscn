@@ -1,14 +1,17 @@
 [gd_scene format=3 uid="uid://ba1g5kyug022g"]
 
 [ext_resource type="Script" uid="uid://ctl0k7lht8h4k" path="res://scripts/hud.gd" id="1_erikh"]
+[ext_resource type="AudioStream" uid="uid://byo5coto8e3s6" path="res://assets/audio/effects/beep1.ogg" id="2_0h1do"]
 [ext_resource type="Texture2D" uid="uid://h2iq5b5gp3nk" path="res://assets/textures/ui/hud/x_speed.png" id="2_6u1a4"]
 [ext_resource type="Texture2D" uid="uid://b7fc7m24olmv" path="res://assets/textures/ui/hud/y_speed.png" id="2_f8v8u"]
+[ext_resource type="AudioStream" uid="uid://bh367e0rney1b" path="res://assets/audio/effects/beep2.ogg" id="3_4d46k"]
 [ext_resource type="Texture2D" uid="uid://b17v6ih6a7eqs" path="res://assets/textures/ui/hud/meters_per_second.png" id="3_f8v8u"]
 [ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="3_n08jr"]
 [ext_resource type="Texture2D" uid="uid://drb13ll3bun77" path="res://assets/textures/ui/hud/time.png" id="4_n08jr"]
 [ext_resource type="Texture2D" uid="uid://crqpnjku14cx3" path="res://assets/textures/ui/hud/healthbar.png" id="6_3e1ei"]
 [ext_resource type="Texture2D" uid="uid://die3cm5oaxfsu" path="res://assets/textures/ui/hud/coin.png" id="6_f8v8u"]
 [ext_resource type="PackedScene" uid="uid://c21lk22qvbrvh" path="res://scenes/prefab/ui/pause_menu.tscn" id="9_4jqwt"]
+[ext_resource type="Texture2D" uid="uid://dunj542d1n646" path="res://assets/textures/ui/hud/go.png" id="10_kicr4"]
 
 [sub_resource type="FontVariation" id="FontVariation_3e1ei"]
 base_font = ExtResource("3_n08jr")
@@ -29,6 +32,7 @@ texture = ExtResource("6_3e1ei")
 
 [node name="InGameOverlay" type="CanvasLayer" unique_id=1911954101]
 script = ExtResource("1_erikh")
+beep_sfx = Array[AudioStream]([ExtResource("2_0h1do"), ExtResource("3_4d46k")])
 
 [node name="Right" type="VBoxContainer" parent="." unique_id=1466593241]
 anchors_preset = 1
@@ -146,3 +150,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Blackout" type="ColorRect" parent="." unique_id=1863595711]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="Blackout" unique_id=179177971]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Go" type="TextureRect" parent="Blackout/CenterContainer" unique_id=486019597]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+texture = ExtResource("10_kicr4")
+expand_mode = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=736933381]

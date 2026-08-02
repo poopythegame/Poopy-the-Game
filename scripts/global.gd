@@ -6,6 +6,7 @@ var coins: int = 0
 var is_quitting := false
 var fullscreen_colorrect: ColorRect
 @onready var levels: LevelsDesc = load("uid://bhtmoith33eb6")
+@onready var hold_texture: Texture2D = load("uid://weuptoh73m0o")
 var save_data: SaveData
 var is_switching_levels := false
 var canvas_layer: CanvasLayer
@@ -163,6 +164,16 @@ func begin_level_title_card(index: int):
 				fullscreen_colorrect.color = Color.BLACK
 				fullscreen_colorrect.modulate.a = 0
 				fullscreen_colorrect.show()
+				# TODO: Make this not use a dynamically instantiated node.
+				var hold_texture_rect := TextureRect.new()
+				hold_texture_rect.texture = hold_texture
+				hold_texture_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+				hold_texture_rect.custom_minimum_size.y = 95
+				var hold_container := CenterContainer.new()
+				hold_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+				hold_container.add_child(hold_texture_rect)
+				hold_container.name = "Temp"
+				fullscreen_colorrect.add_child(hold_container)
 			)
 			tween.tween_property(fullscreen_colorrect, "modulate:a", 1., .5)
 		tween.tween_callback(func():
@@ -173,7 +184,10 @@ func begin_level_title_card(index: int):
 		)
 		if title_card_node:
 			tween.tween_property(fullscreen_colorrect, "modulate:a", 0., .5)
-			tween.tween_callback(fullscreen_colorrect.hide)
+			tween.tween_callback(func():
+				fullscreen_colorrect.hide()
+				fullscreen_colorrect.get_node("Temp").queue_free()
+			)
 		is_switching_levels = true
 	else:
 		level_music_player = scene_tree.current_scene.get_node("MusicPlayer")
