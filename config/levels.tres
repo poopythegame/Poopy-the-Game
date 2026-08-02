@@ -37,7 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://clo55ocxla03h" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr3.png" id="28_r7s68"]
 [ext_resource type="Texture2D" uid="uid://bi74x2c7iegj7" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr5.png" id="30_vwncn"]
 [ext_resource type="Texture2D" uid="uid://tme2u2h5lvbu" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr7.png" id="32_wdc13"]
-[ext_resource type="AudioStream" uid="uid://hbnc74cpcejm" path="res://assets/audio/effects/trumpet_1.ogg" id="34_6tjyv"]
+[ext_resource type="AudioStream" uid="uid://bf62x7i5okshp" path="res://assets/audio/effects/trumpet_4.ogg" id="34_vwncn"]
 [ext_resource type="AudioStream" uid="uid://bwubgsqiwenj7" path="res://assets/audio/jingles/big_farma.ogg" id="36_0oi5t"]
 [ext_resource type="Texture2D" uid="uid://csaok6kny0y08" path="res://assets/textures/level/big_farma/title_card.png" id="39_r7s68"]
 [ext_resource type="Script" uid="uid://cl7hws3vjpti2" path="res://scripts/big_farma/title_card_delegate.gd" id="40_vwncn"]
@@ -100,7 +100,7 @@ animation_frames = Array[Texture2D]([ExtResource("16_h2k1g"), ExtResource("26_0o
 animation_fps = 12.0
 use_time = false
 time = 150.0
-music_track_2 = ExtResource("34_6tjyv")
+music_track_2 = ExtResource("34_vwncn")
 use_walk_off_animation = true
 flip_animation = true
 metadata/_custom_type_script = "uid://h46hneoomiqh"
