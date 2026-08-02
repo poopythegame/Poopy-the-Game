@@ -148,21 +148,32 @@ func begin_level_title_card(index: int):
 			audio_stream_player.stream = level.jingle
 			level_node.process_mode = Node.PROCESS_MODE_DISABLED
 			audio_stream_player.play()
-		tween.tween_callback(func():
-			is_switching_levels = false
-			get_tree().change_scene_to_node(level_node)
-		)
 		if level.jingle:
 			tween.tween_await(audio_stream_player.finished)
 			tween.tween_callback(func():
 				level_music_player.play()
 				level_node.process_mode = Node.PROCESS_MODE_INHERIT
-				title_card_node.queue_free()
 			)
 		else:
 			if title_card_node and level.title_card_delegate:
 				tween.tween_await(title_card_node.animation_finished)
 			level_music_player.autoplay = true
+		if title_card_node:
+			tween.tween_callback(func():
+				fullscreen_colorrect.color = Color.BLACK
+				fullscreen_colorrect.modulate.a = 0
+				fullscreen_colorrect.show()
+			)
+			tween.tween_property(fullscreen_colorrect, "modulate:a", 1., .5)
+		tween.tween_callback(func():
+			is_switching_levels = false
+			if title_card_node:
+				title_card_node.queue_free()
+			get_tree().change_scene_to_node(level_node)
+		)
+		if title_card_node:
+			tween.tween_property(fullscreen_colorrect, "modulate:a", 0., .5)
+			tween.tween_callback(fullscreen_colorrect.hide)
 		is_switching_levels = true
 	else:
 		level_music_player = scene_tree.current_scene.get_node("MusicPlayer")
