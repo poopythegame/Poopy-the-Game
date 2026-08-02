@@ -664,7 +664,13 @@ func physics_process_normal(delta):
 		$Collision/WallCast.target_position.x = 7.0 * sign(motion.x)
 
 	#braking control seen in classic sonic games
-	var direction = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
+	var direction: float = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
+	# Prevent controller from allowing unlimited speed boost bugs
+	if direction < 0:
+		direction = -1
+	elif direction > 0:
+		direction = 1
+		
 	
 	if direction == -(sign(motion.x)) and (abs(motion.x) >= (topspeed/1.5)) and is_on_floor():
 		if not isskidding:
