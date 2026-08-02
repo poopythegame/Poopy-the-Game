@@ -95,12 +95,15 @@ bus = &"Music"
 visible = false
 material = SubResource("ShaderMaterial_jbte4")
 
-[node name="Background" type="Control" parent="TitleScreenCanvasGroup" unique_id=517563952]
+[node name="Background" type="TextureRect" parent="TitleScreenCanvasGroup" unique_id=517563952]
 visible = false
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("16_e6a60")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_n4uci")
+expand_mode = 1
 
 [node name="Screen" type="MarginContainer" parent="TitleScreenCanvasGroup" unique_id=204882257]
 anchors_preset = 15
@@ -174,7 +177,6 @@ texture = ExtResource("16_rbask")
 stretch_mode = 4
 
 [node name="MenuCanvasGroup" type="CanvasGroup" parent="." unique_id=157187082]
-visible = false
 material = SubResource("ShaderMaterial_e0hcc")
 
 [node name="Background" type="Control" parent="MenuCanvasGroup" unique_id=1461045860]
@@ -243,12 +245,15 @@ offset_bottom = 720.0
 visible = false
 material = SubResource("ShaderMaterial_1mexh")
 
-[node name="Background" type="Control" parent="RankingsCanvasGroup" unique_id=1976052789]
+[node name="Background" type="TextureRect" parent="RankingsCanvasGroup" unique_id=1976052789]
 z_index = -1001
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("16_e6a60")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_n4uci")
+expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Screen" parent="RankingsCanvasGroup" unique_id=222648667 instance=ExtResource("25_4ovp2")]

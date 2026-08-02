@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://etr2r3hs4fd0"
-path="res://.godot/imported/characters.png-51616bafa1acd671b163b5c3b457b426.ctex"
+uid="uid://csrwlq0o8bctl"
+path="res://.godot/imported/credits_color.png-93e47d11dcd85eb2732cf59c39731746.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/main_menu/option_portraits/characters.png"
-dest_files=["res://.godot/imported/characters.png-51616bafa1acd671b163b5c3b457b426.ctex"]
+source_file="res://assets/textures/ui/main_menu/option_portraits/credits_color.png"
+dest_files=["res://.godot/imported/credits_color.png-93e47d11dcd85eb2732cf59c39731746.ctex"]
 
 [params]
 

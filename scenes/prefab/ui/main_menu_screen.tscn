@@ -3,39 +3,63 @@
 [ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="1_epp4d"]
 [ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="2_6l6qt"]
 [ext_resource type="Texture2D" uid="uid://csipwt7j8bu23" path="res://assets/textures/ui/main_menu/title.png" id="2_dwr1o"]
+[ext_resource type="Texture2D" uid="uid://5khcbml7lf7t" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/credits/credits_fr0.png" id="3_r0gtl"]
 [ext_resource type="Texture2D" uid="uid://k0qmq705scns" path="res://assets/textures/ui/main_menu/option_label_credits.png" id="3_wibf0"]
+[ext_resource type="Texture2D" uid="uid://7mtbfunjnhnr" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/credits/credits_fr1.png" id="4_6et50"]
 [ext_resource type="Texture2D" uid="uid://bhxan4q8j23fw" path="res://assets/textures/ui/main_menu/option_label_level_select.png" id="4_j0dn2"]
-[ext_resource type="Texture2D" uid="uid://euwa74x2hljj" path="res://assets/textures/ui/main_menu/option_portraits/level_select.png" id="5_j0dn2"]
+[ext_resource type="Texture2D" uid="uid://csrwlq0o8bctl" path="res://assets/textures/ui/main_menu/option_portraits/credits_color.png" id="4_v5r5l"]
+[ext_resource type="Texture2D" uid="uid://br618ej23k18b" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/credits/credits_fr2.png" id="5_1krr5"]
+[ext_resource type="Texture2D" uid="uid://6kjw7oqa56id" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/level_select/level_select_fr0.png" id="5_fo3sc"]
 [ext_resource type="Texture2D" uid="uid://dpl8egxwrkkt" path="res://assets/textures/ui/main_menu/option_label_options.png" id="5_vpns8"]
-[ext_resource type="Texture2D" uid="uid://mn2urhasbeh3" path="res://assets/textures/ui/main_menu/option_portraits/options.png" id="7_vpns8"]
-[ext_resource type="Texture2D" uid="uid://cbs1hmlegx2e6" path="res://assets/textures/ui/main_menu/option_portraits/credits.png" id="8_fwm00"]
-[ext_resource type="Texture2D" uid="uid://etr2r3hs4fd0" path="res://assets/textures/ui/main_menu/option_portraits/characters.png" id="9_t6piy"]
+[ext_resource type="Texture2D" uid="uid://cyx2he53ake7h" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/level_select/level_select_fr1.png" id="6_ijord"]
+[ext_resource type="Texture2D" uid="uid://clvbkj3ma17wi" path="res://assets/textures/ui/main_menu/option_portraits/level_select_color.png" id="6_t6piy"]
+[ext_resource type="Texture2D" uid="uid://juw2tykarfjc" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/level_select/level_select_fr2.png" id="7_3fq7c"]
+[ext_resource type="Texture2D" uid="uid://d4e7hc3jdk8w7" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/options/options_fr0.png" id="10_1awyr"]
+[ext_resource type="Texture2D" uid="uid://dikyeto34gl7c" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/options/options_fr1.png" id="11_8v531"]
+[ext_resource type="Texture2D" uid="uid://bvg4lm4uo4egw" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/options/options_fr2.png" id="12_8ee1y"]
+[ext_resource type="Texture2D" uid="uid://dg2dl88ckkk04" path="res://assets/textures/ui/main_menu/option_portraits/options_color.png" id="14_v5r5l"]
+[ext_resource type="Texture2D" uid="uid://5qxsqor7rxtq" path="res://assets/textures/ui/main_menu/option_portraits/characters_color.png" id="15_1awyr"]
+[ext_resource type="Texture2D" uid="uid://ks3jp0slnko2" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/characters/characters_fr0.png" id="15_v5r5l"]
+[ext_resource type="Texture2D" uid="uid://c8b4b0cb635bu" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/characters/characters_fr1.png" id="16_e4esd"]
+[ext_resource type="Texture2D" uid="uid://11gq5d0udhaj" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/characters/characters_fr2.png" id="17_7djrc"]
 
 [sub_resource type="Resource" id="Resource_6l6qt"]
 script = ExtResource("2_6l6qt")
 title = "Credits"
-portrait = ExtResource("8_fwm00")
+portrait = ExtResource("4_v5r5l")
+enable_animated_overlay = true
+animated_overlay_frames = Array[Texture2D]([ExtResource("3_r0gtl"), ExtResource("4_6et50"), ExtResource("5_1krr5")])
+animated_overlay_fps = 6.0
 label_icon = ExtResource("3_wibf0")
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [sub_resource type="Resource" id="Resource_ydpsd"]
 script = ExtResource("2_6l6qt")
 title = "Level Select"
-portrait = ExtResource("5_j0dn2")
+portrait = ExtResource("6_t6piy")
+enable_animated_overlay = true
+animated_overlay_frames = Array[Texture2D]([ExtResource("5_fo3sc"), ExtResource("6_ijord"), ExtResource("7_3fq7c")])
+animated_overlay_fps = 6.0
 label_icon = ExtResource("4_j0dn2")
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [sub_resource type="Resource" id="Resource_50wf3"]
 script = ExtResource("2_6l6qt")
 title = "Options"
-portrait = ExtResource("7_vpns8")
+portrait = ExtResource("14_v5r5l")
+enable_animated_overlay = true
+animated_overlay_frames = Array[Texture2D]([ExtResource("10_1awyr"), ExtResource("11_8v531"), ExtResource("12_8ee1y")])
+animated_overlay_fps = 6.0
 label_icon = ExtResource("5_vpns8")
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [sub_resource type="Resource" id="Resource_vggm2"]
 script = ExtResource("2_6l6qt")
 title = "Characters"
-portrait = ExtResource("9_t6piy")
+portrait = ExtResource("15_1awyr")
+enable_animated_overlay = true
+animated_overlay_frames = Array[Texture2D]([ExtResource("15_v5r5l"), ExtResource("16_e4esd"), ExtResource("17_7djrc")])
+animated_overlay_fps = 6.0
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_epp4d")]
@@ -54,4 +78,4 @@ stretch_mode = 4
 custom_minimum_size = Vector2(0, 18)
 
 [node name="TitlesContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="4" unique_id=890400313]
-offset_transform_position = Vector2(-1288.5, 0)
+offset_transform_position = Vector2(-54.5, 0)

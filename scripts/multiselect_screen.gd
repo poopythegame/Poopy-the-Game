@@ -101,7 +101,27 @@ func _preview_option(option: OptionDef) -> Control:
 	texture_rect.texture = option.portrait
 	texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	return texture_rect
+	if option.enable_animated_overlay:
+		var animated_overlay_rect := TextureRect.new()
+		var animated_texture := AnimatedTexture.new()
+		animated_texture.frames = len(option.animated_overlay_frames)
+		var frame_duration := 1. / option.animated_overlay_fps
+		var index := 0
+		for frame in option.animated_overlay_frames:
+			animated_texture.set_frame_texture(index, frame)
+			animated_texture.set_frame_duration(index, frame_duration)
+			index += 1
+		animated_overlay_rect.texture = animated_texture
+		animated_overlay_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		animated_overlay_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		var container := Control.new()
+		texture_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		animated_overlay_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		container.add_child(texture_rect)
+		container.add_child(animated_overlay_rect)
+		return container
+	else:
+		return texture_rect
 
 func preview_option(option: OptionDef) -> Control:
 	var control := _preview_option(option)
