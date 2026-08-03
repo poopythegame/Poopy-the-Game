@@ -2,8 +2,6 @@ extends CanvasLayer
 class_name InGameOverlay
 
 @export var whiteout_time := .5
-@export_group("Sounds")
-@export var beep_sfx: Array[AudioStream]
 
 @onready var main_menu_scene: PackedScene = load("uid://dady2wku1xusy")
 
@@ -14,9 +12,7 @@ class_name InGameOverlay
 @onready var health_label: Label = $Left/HealthBar/HealthNumber
 @onready var time_label: Label = $Left/Time/Readout
 @onready var whiteout: ColorRect = $Whiteout
-@onready var go_indicator: ColorRect = $Blackout
 @onready var pause_menu: PauseMenu = $PauseMenu
-@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var stopwatch_paused := true
 @onready var coins_label: Label = $Left/Coins/Readout
@@ -24,11 +20,6 @@ var time: float = 0.0
 var minutes: int = 0
 var seconds: int = 0
 var millis: int = 0
-
-func play_audio(streams: Array[AudioStream]):
-	var choice = randi_range(0, len(streams) - 1)
-	audio_stream_player.stream = streams[choice]
-	audio_stream_player.play()
 
 func _ready() -> void:
 	millis = fmod(time, 1) * 1000 as int
@@ -55,22 +46,6 @@ func show_pause_menu() -> void:
 func hide_pause_menu() -> void:
 	get_tree().paused = false
 	pause_menu.hide()
-
-func show_go_indicator() -> void:
-	process_mode = PROCESS_MODE_WHEN_PAUSED
-	pause_menu.process_mode = PROCESS_MODE_PAUSABLE
-	get_tree().paused = true
-	go_indicator.show()
-	go_indicator.modulate.a = 0
-	var tween := create_tween()
-	play_audio(beep_sfx)
-	tween.tween_property(go_indicator, "modulate:a", 1., .5)
-	tween.tween_property(go_indicator, "modulate:a", 0., .5)
-	tween.tween_callback(func():
-		get_tree().paused = false
-		pause_menu.process_mode = PROCESS_MODE_WHEN_PAUSED
-		process_mode = PROCESS_MODE_PAUSABLE
-	)
 
 func _process(delta): 
 	var coins: int = Global.get_coins()

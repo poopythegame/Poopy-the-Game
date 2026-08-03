@@ -2,12 +2,19 @@
 
 [ext_resource type="Script" uid="uid://ccmuyywpupyo0" path="res://scripts/lvl_start.gd" id="1_ut64v"]
 [ext_resource type="Texture2D" uid="uid://cg0s1100a03o2" path="res://assets/textures/elements/level_start.png" id="2_tyhpm"]
+[ext_resource type="Texture2D" uid="uid://weuptoh73m0o" path="res://assets/textures/ui/hud/hold.png" id="3_4vouc"]
+[ext_resource type="Texture2D" uid="uid://dunj542d1n646" path="res://assets/textures/ui/hud/go.png" id="3_8sc0l"]
+[ext_resource type="AudioStream" uid="uid://byo5coto8e3s6" path="res://assets/audio/effects/beep1.ogg" id="4_2qpic"]
+[ext_resource type="AudioStream" uid="uid://bh367e0rney1b" path="res://assets/audio/effects/beep2.ogg" id="5_4elot"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8son"]
 size = Vector2(32, 387)
 
 [node name="LevelStart" type="Area2D" unique_id=496126979]
 script = ExtResource("1_ut64v")
+go_texture = ExtResource("3_8sc0l")
+hold_texture = ExtResource("3_4vouc")
+beep_sfx = Array[AudioStream]([ExtResource("4_2qpic"), ExtResource("5_4elot")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1196488207]
 position = Vector2(16, -126.5)
@@ -18,5 +25,11 @@ position = Vector2(-24, -4)
 scale = Vector2(0.065, 0.065)
 texture = ExtResource("2_tyhpm")
 centered = false
+
+[node name="Indicator" type="Sprite2D" parent="." unique_id=1438035170]
+position = Vector2(16, 54)
+scale = Vector2(0.07, 0.07)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1883975351]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
