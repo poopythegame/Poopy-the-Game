@@ -150,10 +150,6 @@ func begin_level_title_card(index: int):
 			audio_stream_player.play()
 		if level.jingle:
 			tween.tween_await(audio_stream_player.finished)
-			tween.tween_callback(func():
-				level_music_player.play()
-				level_node.process_mode = Node.PROCESS_MODE_INHERIT
-			)
 		else:
 			if title_card_node and level.title_card_delegate:
 				tween.tween_await(title_card_node.animation_finished)
@@ -175,6 +171,11 @@ func begin_level_title_card(index: int):
 			tween.tween_property(fullscreen_colorrect, "modulate:a", 0., .5)
 			tween.tween_callback(func():
 				fullscreen_colorrect.hide()
+			)
+		if level.jingle:
+			tween.tween_callback(func():
+				level_music_player.play()
+				level_node.process_mode = Node.PROCESS_MODE_INHERIT
 			)
 		is_switching_levels = true
 	else:
