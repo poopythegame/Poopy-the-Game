@@ -70,7 +70,7 @@ expand_margin_left = 50.0
 expand_margin_top = 25.0
 expand_margin_right = 50.0
 expand_margin_bottom = 25.0
-region_rect = Rect2(106.572876, 74.42435, 2111.4106, 1250.6436)
+region_rect = Rect2(67, 61, 2236, 1382)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e0hcc"]
 shader = ExtResource("7_jbte4")

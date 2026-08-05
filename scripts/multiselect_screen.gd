@@ -89,6 +89,9 @@ func _create_boxes():
 		if option.use_label_icon:
 			var option_icon_label: TextureRect = option_box.get_node("TextureRect")
 			option_icon_label.texture = option.label_icon
+			option_icon_label.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+			option_icon_label.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			option_icon_label.custom_minimum_size.y = get_theme_font_size("font_size", "Label")
 			option_label.hide()
 			option_icon_label.show()
 		else:
