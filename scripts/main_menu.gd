@@ -57,6 +57,10 @@ enum Screen {
 @onready var title_portraits_background: Node2D = $TitleScreenCanvasGroup/Screen/PortraitsBackground
 @onready var title_infobox: TextureRect = $TitleScreenCanvasGroup/Screen/VBoxContainer/Info
 
+@onready var credits_screen_cg: CanvasGroup = $CreditsCanvasGroup
+@onready var credits_background: Control = $CreditsCanvasGroup/Background
+@onready var credits_screen: MultiselectScreen = $CreditsCanvasGroup/Screen
+
 @onready var menu_screen_cg: CanvasGroup = $MenuCanvasGroup
 @onready var menu_screen: MultiselectScreen = $MenuCanvasGroup/Screen
 
@@ -75,7 +79,7 @@ enum Screen {
 
 @onready var levels := Global.levels.levels
 
-@onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, characters_screen_cg, rankings_screen_cg]
+@onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, characters_screen_cg, rankings_screen_cg, credits_screen_cg]
 
 var screen := Screen.UNDEFINED
 var current_screen_cg: CanvasGroup
@@ -130,7 +134,7 @@ func _ready() -> void:
 
 func _on_menu_option_selected(index: int):
 	if index == 0:
-		pass
+		change_screen(Screen.CREDITS, true, Transition.CROSSFADE)
 	elif index == 1:
 		change_screen(Screen.LEVEL_SELECT, true, Transition.CROSSFADE)
 	elif index == 2:
@@ -377,9 +381,45 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 		whiteout.hide()
 		characters_background.show()
 		screen_cg = characters_screen_cg
+	elif new_screen == Screen.CREDITS:
+		whiteout.hide()
+		credits_background.show()
+		if not music_player.stream == menu_audio_stream:
+			var music_switch_tween := create_tween()
+			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
+			music_switch_tween.tween_callback(func():
+				music_player.stream = menu_audio_stream
+				music_player.volume_linear = 1
+				music_player.play()
+			)
+		elif not music_player.playing:
+			var music_switch_tween := create_tween()
+			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
+			music_switch_tween.tween_callback(func():
+				music_player.stream = menu_audio_stream
+				music_player.volume_linear = 1
+				music_player.play()
+			)
+		screen_cg = credits_screen_cg
 	elif new_screen == Screen.OPTIONS:
 		whiteout.hide()
 		options_background.show()
+		if not music_player.stream == menu_audio_stream:
+			var music_switch_tween := create_tween()
+			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
+			music_switch_tween.tween_callback(func():
+				music_player.stream = menu_audio_stream
+				music_player.volume_linear = 1
+				music_player.play()
+			)
+		elif not music_player.playing:
+			var music_switch_tween := create_tween()
+			music_switch_tween.tween_property(music_player, "volume_linear", 0., 0.5)
+			music_switch_tween.tween_callback(func():
+				music_player.stream = menu_audio_stream
+				music_player.volume_linear = 1
+				music_player.play()
+			)
 		screen_cg = options_screen_cg
 		options_screen._on_enter()
 	elif new_screen == Screen.RANKINGS:

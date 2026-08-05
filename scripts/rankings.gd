@@ -96,7 +96,8 @@ func start_animation_sequence():
 	if curr_rank.music_track_2 != null:
 		tween.tween_callback(func():
 			audio_stream_player.stream = curr_rank.music_track_2
-			audio_stream_player.play())	
+			audio_stream_player.play()
+	)
 	if curr_rank.show_portraits_background != 0:
 		if curr_rank.show_portraits_background == 2:
 			portraits_background.scroll_speed = 200
