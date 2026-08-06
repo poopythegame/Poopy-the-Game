@@ -6836,7 +6836,7 @@ position = Vector2(9576, -64)
 [node name="Coin6" parent="." unique_id=402414690 instance=ExtResource("1_coin")]
 position = Vector2(9576, 0)
 
-[node name="Enemy" parent="." unique_id=1921139154 instance=ExtResource("1_enemy")]
+[node name="Enemy" parent="." unique_id=1921139154 groups=["Enemy"] instance=ExtResource("1_enemy")]
 position = Vector2(-648, -855.9999)
 
 [node name="Coin7" parent="." unique_id=1725540365 instance=ExtResource("1_coin")]
