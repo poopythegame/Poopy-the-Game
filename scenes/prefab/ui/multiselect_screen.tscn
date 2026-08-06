@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://dndgonbb4w5ex"]
 
 [ext_resource type="Script" uid="uid://d1sk5ecjtxwb" path="res://scripts/multiselect_screen.gd" id="1_p4jrt"]
-[ext_resource type="Texture2D" uid="uid://bu1qqh82x47yt" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="2_lgjot"]
 [ext_resource type="AudioStream" uid="uid://lnvvw3422kgq" path="res://assets/audio/effects/menu_left.ogg" id="2_ryp7i"]
 [ext_resource type="AudioStream" uid="uid://cuehpn8m2fakd" path="res://assets/audio/effects/menu_press.ogg" id="3_e0yf4"]
 [ext_resource type="AudioStream" uid="uid://da8y4i2qvk454" path="res://assets/audio/effects/menu_right.ogg" id="4_01fnu"]
+[ext_resource type="Texture2D" uid="uid://ci3s54aa4h2h4" path="res://assets/textures/ui/main_menu/main_menu_option_portrait_background.png" id="5_ryp7i"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hddne"]
-texture = ExtResource("2_lgjot")
+texture = ExtResource("5_ryp7i")
 expand_margin_left = 50.0
 expand_margin_top = 25.0
 expand_margin_right = 50.0
 expand_margin_bottom = 25.0
-region_rect = Rect2(199.02014, 189.5705, 1940.1774, 1028.7773)
+region_rect = Rect2(213, 205, 1910, 1007)
 
 [node name="MultiselectScreen" type="MarginContainer" unique_id=1181466732]
 anchors_preset = 15

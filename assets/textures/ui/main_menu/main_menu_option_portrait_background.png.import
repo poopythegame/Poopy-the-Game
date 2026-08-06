@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu1i6i56y3msq"
-path="res://.godot/imported/option_portrait_background.png-6bac09cfe53cb705111784a0aac62c82.ctex"
+uid="uid://ci3s54aa4h2h4"
+path="res://.godot/imported/main_menu_option_portrait_background.png-b014b58faaf62725fca78bd72f62b340.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/main_menu/option_portrait_background.png"
-dest_files=["res://.godot/imported/option_portrait_background.png-6bac09cfe53cb705111784a0aac62c82.ctex"]
+source_file="res://assets/textures/ui/main_menu/main_menu_option_portrait_background.png"
+dest_files=["res://.godot/imported/main_menu_option_portrait_background.png-b014b58faaf62725fca78bd72f62b340.ctex"]
 
 [params]
 

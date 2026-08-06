@@ -30,6 +30,7 @@ portrait = ExtResource("4_v5r5l")
 enable_animated_overlay = true
 animated_overlay_frames = Array[Texture2D]([ExtResource("3_r0gtl"), ExtResource("4_6et50"), ExtResource("5_1krr5")])
 animated_overlay_fps = 6.0
+use_label_icon = true
 label_icon = ExtResource("3_wibf0")
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
@@ -40,6 +41,7 @@ portrait = ExtResource("6_t6piy")
 enable_animated_overlay = true
 animated_overlay_frames = Array[Texture2D]([ExtResource("5_fo3sc"), ExtResource("6_ijord"), ExtResource("7_3fq7c")])
 animated_overlay_fps = 6.0
+use_label_icon = true
 label_icon = ExtResource("4_j0dn2")
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
@@ -50,6 +52,7 @@ portrait = ExtResource("14_v5r5l")
 enable_animated_overlay = true
 animated_overlay_frames = Array[Texture2D]([ExtResource("10_1awyr"), ExtResource("11_8v531"), ExtResource("12_8ee1y")])
 animated_overlay_fps = 6.0
+use_label_icon = true
 label_icon = ExtResource("5_vpns8")
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
@@ -78,4 +81,4 @@ stretch_mode = 4
 custom_minimum_size = Vector2(0, 18)
 
 [node name="TitlesContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="4" unique_id=890400313]
-offset_transform_position = Vector2(-54.5, 0)
+offset_transform_position = Vector2(-137.67575, 0)

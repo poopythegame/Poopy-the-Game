@@ -4130,8 +4130,9 @@ metadata/_custom_type_script = "uid://dhdc4b8yddyej"
 [node name="LevelStart" parent="." unique_id=496126979 instance=ExtResource("4_g7bfq")]
 position = Vector2(47, -64)
 
-[node name="Player" parent="." unique_id=1090100472 groups=["Player"] instance=ExtResource("5_4a02d")]
+[node name="Player" parent="." unique_id=1090100472 node_paths=PackedStringArray("camera") groups=["Player"] instance=ExtResource("5_4a02d")]
 position = Vector2(-26, 0)
+camera = NodePath("../Camera2D")
 
 [node name="LeftCamBound" parent="." unique_id=1310596363 instance=ExtResource("6_uu0hj")]
 editor_description = "Move this node to where you want the left-hand camera limit to be."
