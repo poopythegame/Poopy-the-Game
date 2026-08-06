@@ -147,8 +147,6 @@ var jumpbuffered = false
 
 ## The Player's stats.
 
-var base_snap_length = 16 # this is for the floor snap length logic
-
 var SLOPEMULT = 2
 
 const AIRDRAG = 1.3
@@ -402,26 +400,6 @@ func physics_process_normal(delta):
 		slopefactor = surface_normal.x
 	else:
 		slopefactor = 0
-		
-	
-	# --- 2.1 UPDATE THE FLOORSNAP LENGTH
-	
-	floor_snap_length = base_snap_length
-	
-	if grounded:
-		if jumping:
-			grounded = false
-			motion = get_real_velocity() 
-			rot = 0
-			up_direction = Vector2(0, -1)
-			# 1. MID-AIR ENFORCEMENT (Jump): Reset snap length instantly
-			base_snap_length = 16
-
-		else:
-			base_snap_length += int(abs(motion.x / 10 * delta))
-	
-	else:
-		base_snap_length = 16
 
 		
 	# --- 3. ROTATION VISUALS ---
@@ -454,16 +432,15 @@ func physics_process_normal(delta):
 				rot = 0
 				up_direction = Vector2(0, -1)
 				# 1. MID-AIR ENFORCEMENT (Jump): Reset raycast instantly
-				$Collision/Raycast.target_position = Vector2(0, base_ray_length)
+				floor_snap_length = 16
 			else:
 				var should_detach = false
 				
 				# 2. DYNAMICALLY EXTEND (Only while grounded)
 				# We use min() to put a hard limit on the extension so it doesn't grow infinitely at high speeds
-				var speed_reach = abs(motion.x) * delta * 18.0 
+				var base_snap_length = int(abs(motion.x / 10 * delta))
 				
-				$Collision/Raycast.target_position = Vector2(0, base_ray_length + speed_reach)
-				$Collision/Raycast.force_raycast_update() 
+				floor_snap_length += base_snap_length
 				
 				# 3. CHECK COLLISION AND ANGLE
 				if not $Collision/Raycast.is_colliding():
@@ -501,12 +478,12 @@ func physics_process_normal(delta):
 					up_direction = Vector2(0, -1)
 					
 				# 5. RESET RAYCAST
-				$Collision/Raycast.target_position = Vector2(0, base_ray_length)
+				floor_snap_length = 16
 
 		else:
 			# --- MID-AIR ENFORCEMENT (Falling) ---
 			# If the player is already mid-air (grounded is false), guarantee the raycast is locked to normal.
-			$Collision/Raycast.target_position = Vector2(0, base_ray_length)
+			floor_snap_length = 16
 
 # Gravity
 	if not is_on_floor() and rot == 0 or springing:
