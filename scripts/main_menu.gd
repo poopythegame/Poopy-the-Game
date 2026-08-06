@@ -254,7 +254,6 @@ func title_begin_title_reveal():
 	tween.tween_interval(15.05 - 13.90)
 	tween.tween_callback(title_poopy.play.bind("armflap"))
 	tween.tween_interval(50.28 - 15.05)
-	tween.tween_property(audio_stream_player, "volume_linear", 0, .25)
 	tween.tween_callback(change_screen.bind(Screen.MENU, false, Transition.WIPE))
 	tween.set_trans(Tween.TRANS_CUBIC)
 
