@@ -278,7 +278,7 @@ func physics_process_normal(delta):
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 	
 	#WALL STOPPER
-	if is_on_wall() and $CollisionShape2D/WallCast.is_colliding(): # If you bump into a wall...
+	if is_on_wall() and $CollisionShape2D/WallCast.is_colliding() and not vulnerable: # If you bump into a wall...
 		if not grounded:
 			motion.x = 0
 		elif grounded:
