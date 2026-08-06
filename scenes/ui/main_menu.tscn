@@ -18,8 +18,6 @@
 [ext_resource type="AudioStream" uid="uid://s6jni5u5fy2v" path="res://assets/audio/effects/trans_out.ogg" id="10_ei00g"]
 [ext_resource type="AudioStream" uid="uid://cr7ncmb6hx2d6" path="res://assets/audio/effects/evil_laugh.ogg" id="11_ei00g"]
 [ext_resource type="PackedScene" uid="uid://nqpeaq2b7udk" path="res://scenes/prefab/ui/main_menu_screen.tscn" id="12_8ekit"]
-[ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="13_n4uci"]
-[ext_resource type="Script" uid="uid://c3f38pxpyhfbt" path="res://scripts/level_select.gd" id="14_877pj"]
 [ext_resource type="Script" uid="uid://ckowyte5bq8wj" path="res://scripts/scrolling_background.gd" id="16_e6a60"]
 [ext_resource type="Texture2D" uid="uid://dh44qpr2m3ppx" path="res://assets/textures/ui/main_menu/press_enter.png" id="16_rbask"]
 [ext_resource type="Script" uid="uid://0j7m4i65so5p" path="res://scripts/characters_screen.gd" id="20_75tx2"]
@@ -33,7 +31,8 @@
 [ext_resource type="Texture2D" uid="uid://dpvsha2a5eit4" path="res://assets/textures/ui/main_menu/john_person/john_person_fr1.png" id="24_4ovp2"]
 [ext_resource type="PackedScene" uid="uid://cpvt7jfaq7yjl" path="res://scenes/ui/rankings.tscn" id="25_4ovp2"]
 [ext_resource type="Texture2D" uid="uid://cgsogu7ex6wck" path="res://assets/textures/placeholder/cyan.png" id="25_75tx2"]
-[ext_resource type="Texture2D" uid="uid://bu1qqh82x47yt" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="26_75tx2"]
+[ext_resource type="Texture2D" uid="uid://bu1i6i56y3msq" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="26_75tx2"]
+[ext_resource type="PackedScene" uid="uid://5ofw62jqnci8" path="res://scenes/prefab/ui/level_select_screen.tscn" id="28_ei00g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbte4"]
 shader = ExtResource("7_jbte4")
@@ -290,11 +289,9 @@ anchors_preset = 0
 script = ExtResource("16_e6a60")
 texture = ExtResource("2_n4uci")
 
-[node name="Screen" parent="LevelSelectCanvasGroup" unique_id=14696676 instance=ExtResource("13_n4uci")]
-process_mode = 4
+[node name="Screen" parent="LevelSelectCanvasGroup" unique_id=2098987741 instance=ExtResource("28_ei00g")]
 offset_right = 1280.0
 offset_bottom = 720.0
-script = ExtResource("14_877pj")
 
 [node name="CharactersCanvasGroup" type="CanvasGroup" parent="." unique_id=645091776]
 visible = false

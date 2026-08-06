@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://5ofw62jqnci8"]
+
+[ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="1_d0yg0"]
+[ext_resource type="Texture2D" uid="uid://bu1i6i56y3msq" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="2_riwin"]
+[ext_resource type="Script" uid="uid://c3f38pxpyhfbt" path="res://scripts/level_select.gd" id="2_vmmm6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vmmm6"]
+texture = ExtResource("2_riwin")
+expand_margin_left = 50.0
+expand_margin_top = 25.0
+expand_margin_right = 50.0
+expand_margin_bottom = 25.0
+region_rect = Rect2(67, 61, 2236, 1382)
+
+[node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_d0yg0")]
+script = ExtResource("2_vmmm6")
+
+[node name="PortraitContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="1" unique_id=541114955]
+theme_override_styles/panel = SubResource("StyleBoxTexture_vmmm6")
