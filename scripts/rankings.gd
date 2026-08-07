@@ -25,7 +25,7 @@ var main_menu: MainMenu
 
 func _on_enter() -> void:
 	rank_animation_animated_texture = rank_animation_tr.texture
-	var rank_id: int = 4#Global.get_rank()
+	var rank_id: int = Global.get_rank()
 	curr_rank = Global.get_ranks()[rank_id]
 	rank_icon.texture = curr_rank.icon
 	var time := Global.get_time()
