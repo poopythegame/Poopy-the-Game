@@ -1,8 +1,8 @@
 @tool
 extends MultiselectScreen
 
-func _preview_option(option: OptionDef) -> Control:
-	var texture: TextureRect = super._preview_option(option)
+func _preview_option(option: OptionDef, option_index: int) -> Control:
+	var texture: TextureRect = super._preview_option(option, option_index)
 	texture.size_flags_horizontal = SIZE_EXPAND_FILL
 	var container: HBoxContainer = HBoxContainer.new()
 	container.add_child(texture)
@@ -17,6 +17,6 @@ func _preview_option(option: OptionDef) -> Control:
 	bio_label.add_theme_constant_override("line_spacing", 8)
 	bio_label.add_theme_font_size_override("font_size", 24)
 	bio_label.offset_transform_enabled = true
-	bio_label.offset_transform_position = Vector2(-10, 80)
+	bio_label.offset_transform_position = Vector2(5, 110)
 	container.add_child(bio_label)
 	return container
