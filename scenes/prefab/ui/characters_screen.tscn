@@ -7,8 +7,9 @@
 [ext_resource type="Script" uid="uid://8kv681icjouq" path="res://scripts/character_def.gd" id="5_vp7t4"]
 [ext_resource type="Texture2D" uid="uid://khv13jwuvvgf" path="res://assets/textures/characters/color/john_person.png" id="6_t35ro"]
 [ext_resource type="Texture2D" uid="uid://b0sju53qqk14b" path="res://assets/textures/characters/color/pop_i.png" id="7_76bgj"]
-[ext_resource type="Texture2D" uid="uid://bpnq0w3a1p1c2" path="res://assets/textures/characters/color/chud_squad.png" id="8_bnhp2"]
+[ext_resource type="Texture2D" uid="uid://cpwsxje5mjt4m" path="res://assets/textures/characters/color/chud_squad.png" id="8_bnhp2"]
 [ext_resource type="Texture2D" uid="uid://d2fgy05ui0hxv" path="res://assets/textures/ui/main_menu/characters_background.png" id="9_x5eat"]
+[ext_resource type="Texture2D" uid="uid://bpnq0w3a1p1c2" path="res://assets/textures/characters/color/grease_under_pressure.png" id="10_gsfsb"]
 
 [sub_resource type="Resource" id="Resource_5dct7"]
 script = ExtResource("5_vp7t4")
@@ -22,6 +23,12 @@ script = ExtResource("5_vp7t4")
 bio = "Evil CEO of the corporation Person Industry. Due to the influence of both him and his company, Person Industry has formed a global monopoly over all industries imaginable. Shoes? Restaurants? Cars? Amusement parks? Person Industry is literally the only prominent corporation responsible for these. As you can guess, he is really cunning and selfish, and incredibly proud of who he is overall, despite his insecurity of his pink colored fur, making him look “sissy”, as he put it. In his latest corporate venture, he establishes a firm that resells literally every single thing in this universe, including living beings. One day, he kidnaps Poopy’s pet chicken the Cock to resell him, ticking off Poopy and starting the incident."
 title = "John Person"
 portrait = ExtResource("6_t35ro")
+metadata/_custom_type_script = "uid://8kv681icjouq"
+
+[sub_resource type="Resource" id="Resource_j4d8q"]
+script = ExtResource("5_vp7t4")
+bio = "Poopy’s precious pet chicken. Just like his owner, no one can guess what he’s thinking, or whether or not he’s thinking at all. All he does is eat, sleep, and rinse and repeat. Despite all that, the Cock makes up for all his flaws through his immortality. He straight up cannot die for whatever reason."
+title = "The Cock"
 metadata/_custom_type_script = "uid://8kv681icjouq"
 
 [sub_resource type="Resource" id="Resource_1mexh"]
@@ -38,6 +45,13 @@ title = "Chud Squad"
 portrait = ExtResource("8_bnhp2")
 metadata/_custom_type_script = "uid://8kv681icjouq"
 
+[sub_resource type="Resource" id="Resource_75tx2"]
+script = ExtResource("5_vp7t4")
+bio = "[placeholder]"
+title = "Grease Under Pressure"
+portrait = ExtResource("10_gsfsb")
+metadata/_custom_type_script = "uid://8kv681icjouq"
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rbno7"]
 content_margin_left = 5.0
 content_margin_top = 5.0
@@ -52,7 +66,7 @@ region_rect = Rect2(12.941772, -2.9429321, 2245.5884, 1400.0115)
 
 [node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_5ilvl")]
 script = ExtResource("2_georf")
-options = Array[ExtResource("3_bwikf")]([SubResource("Resource_5dct7"), SubResource("Resource_qch7b"), SubResource("Resource_1mexh"), SubResource("Resource_6ud2m")])
+options = Array[ExtResource("3_bwikf")]([SubResource("Resource_5dct7"), SubResource("Resource_qch7b"), SubResource("Resource_j4d8q"), SubResource("Resource_1mexh"), SubResource("Resource_6ud2m"), SubResource("Resource_75tx2")])
 disable_selection = true
 
 [node name="PortraitContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="1" unique_id=541114955]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpwsxje5mjt4m"
-path="res://.godot/imported/chud_squad.png-e8672e2a627ec1e9e6cd7e627b9d37fe.ctex"
+uid="uid://bpnq0w3a1p1c2"
+path="res://.godot/imported/grease_under_pressure.png-00a3204d830b48935813561024bb232b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/characters/color/chud_squad.png"
-dest_files=["res://.godot/imported/chud_squad.png-e8672e2a627ec1e9e6cd7e627b9d37fe.ctex"]
+source_file="res://assets/textures/characters/color/grease_under_pressure.png"
+dest_files=["res://.godot/imported/grease_under_pressure.png-00a3204d830b48935813561024bb232b.ctex"]
 
 [params]
 
