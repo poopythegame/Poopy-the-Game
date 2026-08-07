@@ -201,8 +201,19 @@ func get_time() -> float:
 	var times: Array = save_data.times[current_level]
 	return times[len(times) - 1]
 
-func get_rank():
-	var rank: int = save_data.ranks[current_level]
+func get_best_time(level: int = -1) -> float:
+	if level == -1:
+		level = current_level
+	var best_time = INF
+	for time in save_data.times[level]:
+		if time < best_time:
+			best_time = time
+	return best_time
+
+func get_rank(level: int = -1):
+	if level == -1:
+		level = current_level
+	var rank: int = save_data.ranks[level]
 	if rank == -1:
 		return null
 	else:

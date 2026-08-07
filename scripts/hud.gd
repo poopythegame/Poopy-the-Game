@@ -78,7 +78,8 @@ func calculate_rank():
 		if (time <= rank_def.time or not rank_def.use_time) and rank_def.time < best_rank_time:
 			rank = i
 			best_rank_time = rank_def.time
-	Global.set_rank(rank)
+	if best_rank_time < Global.get_best_time():
+		Global.set_rank(rank)
 
 func show_rank():
 	whiteout.modulate.a = 0

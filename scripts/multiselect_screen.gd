@@ -99,7 +99,7 @@ func _create_boxes():
 		options_container.add_child(option_box)
 		option_boxes.append(option_box)
 
-func _preview_option(option: OptionDef) -> Control:
+func _preview_option(option: OptionDef, option_index: int) -> Control:
 	var texture_rect := TextureRect.new()
 	texture_rect.texture = option.portrait
 	texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -126,8 +126,8 @@ func _preview_option(option: OptionDef) -> Control:
 	else:
 		return texture_rect
 
-func preview_option(option: OptionDef) -> Control:
-	var control := _preview_option(option)
+func preview_option(index: int) -> Control:
+	var control := _preview_option(options[index], index)
 	control.custom_minimum_size = Vector2(788, 491)
 	control.custom_maximum_size = Vector2(788, 491)
 	return control
@@ -177,7 +177,7 @@ func switch(index: int) -> void:
 	var option_box := option_boxes[index]
 	var option := options[index]
 	var final_x := -option_box.position.x - option_box.get_rect().size.x / 2 + half_width
-	var new_option_display = preview_option(option)
+	var new_option_display = preview_option(index)
 	new_option_display.modulate.a = 0
 	move_tween.tween_property(options_container, "offset_transform_position:x", final_x, .5)
 	move_tween.tween_property(option_display, "modulate:a", 0, .25)
@@ -201,7 +201,7 @@ func instant_switch(index: int, visual_only: bool = false) -> void:
 	options_container.offset_transform_position.x = final_x
 	if option_display:
 		option_display.queue_free()
-	option_display = preview_option(option)
+	option_display = preview_option(index)
 	option_display_container.add_child(option_display)
 	option_display.modulate.a = 1
 	if not visual_only:
