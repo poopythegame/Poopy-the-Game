@@ -52,10 +52,13 @@ func _ready() -> void:
 	else:
 		save_data = ResourceLoader.load(save_path)
 
-func _exit_tree() -> void:
+func save_game() -> void:
 	var data_dir: String = OS.get_user_data_dir()
 	var save_path: String = data_dir.path_join("save.res")
 	ResourceSaver.save(save_data, save_path)
+
+func _exit_tree() -> void:
+	save_game()
 
 func begin_level(index: int) -> void:
 	if index < 0:

@@ -78,11 +78,15 @@ func _set(property: StringName, value: Variant) -> bool:
 	var key: String = String(property)
 	settings[key] = value
 	setting_changed.emit(key, value)
+	save_settings()
 	return true
 
-func _exit_tree() -> void:
+func save_settings() -> void:
 	var data_dir := OS.get_user_data_dir()
 	var settings_path := data_dir.path_join("settings.json")
 	var file := FileAccess.open(settings_path, FileAccess.WRITE)
 	file.store_string(JSON.stringify(settings, "  "))
 	file.close()
+
+func _exit_tree() -> void:
+	save_settings()
