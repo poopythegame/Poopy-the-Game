@@ -47,7 +47,7 @@ metadata/_custom_type_script = "uid://8kv681icjouq"
 
 [sub_resource type="Resource" id="Resource_75tx2"]
 script = ExtResource("5_vp7t4")
-bio = "[placeholder]"
+bio = "Animatronic band in the spin-off hot dog restaurant of Pop-I’s pizza showtime, Hillbilly Glizzy. The team comprises Hillbilly Barry, Carmen Cheese, and Doug. Due to both restaurants’ overwhelming loyalty to John Person, and their equal amount of popularity, they have formed a sibling rivalry in a way, always trying to one-up each other. At the end of the day though, they care about each other and think both are fallible without one another."
 title = "Grease Under Pressure"
 portrait = ExtResource("10_gsfsb")
 metadata/_custom_type_script = "uid://8kv681icjouq"
@@ -67,10 +67,11 @@ region_rect = Rect2(12.941772, -2.9429321, 2245.5884, 1400.0115)
 [node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_5ilvl")]
 script = ExtResource("2_georf")
 options = Array[ExtResource("3_bwikf")]([SubResource("Resource_5dct7"), SubResource("Resource_qch7b"), SubResource("Resource_j4d8q"), SubResource("Resource_1mexh"), SubResource("Resource_6ud2m"), SubResource("Resource_75tx2")])
+selected = 5
 disable_selection = true
 
 [node name="PortraitContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="1" unique_id=541114955]
 theme_override_styles/panel = SubResource("StyleBoxTexture_rbno7")
 
 [node name="TitlesContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="3" unique_id=890400313]
-offset_transform_position = Vector2(510, 0)
+offset_transform_position = Vector2(-2919, 0)
