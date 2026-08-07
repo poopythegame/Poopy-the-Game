@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://chivuxah6fbkc"]
 
 [ext_resource type="Script" uid="uid://dhdc4b8yddyej" path="res://addons/rmsmartshape/shapes/shape.gd" id="1_7ac3l"]
+[ext_resource type="PackedScene" uid="uid://qq417f51qvd1" path="res://scenes/prefab/tutorial_background.tscn" id="1_giya0"]
 [ext_resource type="Script" uid="uid://bo5f7qe27jfje" path="res://addons/rmsmartshape/shapes/point_array.gd" id="2_iig34"]
 [ext_resource type="Script" uid="uid://bwcf4pjgprn0k" path="res://addons/rmsmartshape/shapes/point.gd" id="2_uy53l"]
 [ext_resource type="Resource" uid="uid://b7m2f5qfj3r7h" path="res://assets/ss2d_materials/grass.tres" id="3_3e81p"]
@@ -4109,6 +4110,8 @@ size = Vector2(80, 384)
 
 [node name="Tutorial" type="Node2D" unique_id=987998091]
 editor_description = "Welcome to the tutorial scene. It is for now a sample scene with some helpful tips. Hover over the various nodes for additional help."
+
+[node name="Background" parent="." unique_id=1295814687 instance=ExtResource("1_giya0")]
 
 [node name="Body1" type="StaticBody2D" parent="." unique_id=2042129562]
 editor_description = "Tips:
