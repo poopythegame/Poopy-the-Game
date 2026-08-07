@@ -3952,6 +3952,10 @@ z_index = -1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uavqj"]
 size = Vector2(80, 384)
 
+[sub_resource type="Resource" id="Resource_v06om"]
+script = ExtResource("2_uy53l")
+position = Vector2(128, 328)
+
 [sub_resource type="Resource" id="Resource_56idx"]
 script = ExtResource("2_uy53l")
 position = Vector2(128, 328)
@@ -3971,10 +3975,6 @@ position = Vector2(-128, 392)
 [sub_resource type="Resource" id="Resource_uitys"]
 script = ExtResource("2_uy53l")
 position = Vector2(-32, 392)
-
-[sub_resource type="Resource" id="Resource_v06om"]
-script = ExtResource("2_uy53l")
-position = Vector2(128, 328)
 
 [sub_resource type="Resource" id="Resource_vm5vw"]
 script = ExtResource("2_iig34")
