@@ -3,4 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://bo5ngclhtcy5m" path="res://assets/textures/elements/setdressing/billboard/pizza.png" id="1_5todl"]
 
 [node name="Billboard" type="Sprite2D" unique_id=2114021506]
+z_index = -1999
 texture = ExtResource("1_5todl")
