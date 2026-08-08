@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/prefab/dash_panel.tscn" id="6_mkcba"]
 [ext_resource type="Shader" uid="uid://bxjra7tqfuq06" path="res://shaders/retexture.gdshader" id="7_gcd2f"]
 [ext_resource type="Texture2D" uid="uid://cerwkjbbxbhcq" path="res://assets/textures/ground/wood_edge.png" id="8_q03le"]
-[ext_resource type="PackedScene" uid="uid://dhuok84j6oiig" path="res://scenes/prefab/background.tscn" id="8_ydant"]
+[ext_resource type="PackedScene" uid="uid://dhuok84j6oiig" path="res://scenes/prefab/big_farma_background.tscn" id="8_ydant"]
 [ext_resource type="Script" uid="uid://dhdc4b8yddyej" path="res://addons/rmsmartshape/shapes/shape.gd" id="9_clb5c"]
 [ext_resource type="Script" uid="uid://bwcf4pjgprn0k" path="res://addons/rmsmartshape/shapes/point.gd" id="10_qu4m5"]
 [ext_resource type="Shader" uid="uid://cqy3l3jlbgmkb" path="res://shaders/ground_material.gdshader" id="11_jjt6x"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://llobjh5hvry" path="res://addons/rmsmartshape/shapes/mesh.gd" id="12_7dmr1"]
 [ext_resource type="Texture2D" uid="uid://s4c4pgnq5bj7" path="res://assets/textures/ground/wood.png" id="12_clb5c"]
 [ext_resource type="Resource" uid="uid://1knvyj6c4v71" path="res://assets/ss2d_materials/wood.tres" id="14_tftgv"]
+[ext_resource type="PackedScene" uid="uid://bbk2j8b2ajex5" path="res://scenes/prefab/setdressing/billboard/pizza.tscn" id="15_yvnra"]
 [ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/prefab/spike.tscn" id="16_jjt6x"]
 [ext_resource type="PackedScene" uid="uid://fieh7uoavdwx" path="res://scenes/prefab/anchor.tscn" id="18_qu4m5"]
 [ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://scenes/prefab/enemy.tscn" id="18_yvnra"]
@@ -154,6 +155,10 @@ position = Vector2(419, -16)
 
 [node name="Coin3" parent="." unique_id=1988470552 instance=ExtResource("6_kamxp")]
 position = Vector2(492, -16)
+
+[node name="Billboard" parent="." unique_id=2114021506 instance=ExtResource("15_yvnra")]
+position = Vector2(976, -158)
+scale = Vector2(0.3, 0.3)
 
 [node name="Background" parent="." unique_id=1453801180 instance=ExtResource("8_ydant")]
 
