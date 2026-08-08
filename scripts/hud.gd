@@ -80,6 +80,7 @@ func calculate_rank():
 			best_rank_time = rank_def.time
 	if best_rank_time < Global.get_best_time():
 		Global.set_rank(rank)
+	Global.save_game()
 
 func show_rank():
 	whiteout.modulate.a = 0
