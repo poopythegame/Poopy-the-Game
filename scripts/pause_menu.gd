@@ -18,55 +18,68 @@ class_name PauseMenu
 var exiting := false
 
 func play_audio(streams: Array[AudioStream]):
-    var choice = randi_range(0, len(streams) - 1)
-    audio_stream_player.stream = streams[choice]
-    audio_stream_player.play()
+	var choice = randi_range(0, len(streams) - 1)
+	audio_stream_player.stream = streams[choice]
+	audio_stream_player.play()
 
 var hud: InGameOverlay
 
 func _ready() -> void:
-    continue_button.pressed.connect(_continue)
-    restart_button.pressed.connect(_restart)
-    return_to_menu_button.pressed.connect(_menu)
-    quit_button.pressed.connect(_quit)
+	continue_button.pressed.connect(_continue)
+	restart_button.pressed.connect(_restart)
+	return_to_menu_button.pressed.connect(_menu)
+	quit_button.pressed.connect(_quit)
 
 func _input(event: InputEvent) -> void:
-    if event.is_action_pressed("esc"):
-        get_viewport().set_input_as_handled()
-        _continue()
+	if event.is_action_pressed("esc"):
+		get_viewport().set_input_as_handled()
+		_continue()
 
 func _on_show() -> void:
-    music_player.play()
-    continue_button.grab_focus()
-    play_audio(enter_sfx)
+	music_player.play()
+	continue_button.grab_focus()
+	play_audio(enter_sfx)
 
 func _continue() -> void:
-    if exiting:
-        return
-    hud.hide_pause_menu()
-    play_audio(exit_sfx)
+	if exiting:
+		return
+	hud.hide_pause_menu()
+	play_audio(exit_sfx)
 
 func _restart() -> void:
-    if exiting:
-        return
-    get_tree().paused = false
-    play_audio(select_sfx)
-    Global.begin_level_crossfade(Global.current_level)
+	if exiting:
+		return
+	get_tree().paused = false
+	play_audio(select_sfx)
+	Global.begin_level_crossfade(Global.current_level)
 
 func _menu() -> void:
-    if exiting:
-        return
-    get_tree().paused = false
-    play_audio(select_sfx)
-    var main_menu: MainMenu = main_menu_prefab.instantiate()
-    Global.current_level = -1
-    main_menu.start_screen = MainMenu.Screen.MENU
-    get_tree().change_scene_to_node(main_menu)
+	if exiting:
+		return
+	var tree := get_tree()
+	tree.paused = false
+	play_audio(select_sfx)
+	var main_menu: MainMenu = main_menu_prefab.instantiate()
+	Global.current_level = -1
+	main_menu.start_screen = MainMenu.Screen.AUX
+	var new_parent := main_menu.get_node("AuxCanvasGroup")
+	reparent(new_parent)
+	name = "Screen"
+	tree.change_scene_to_node(main_menu)
+	main_menu.ready.connect(func():
+		main_menu.change_screen(MainMenu.Screen.MENU, false, MainMenu.Transition.WIPE)
+		music_player.process_mode = Node.PROCESS_MODE_PAUSABLE
+		var tween := music_player.create_tween()
+		tween.tween_property(music_player, "volume_linear", 0., .5)
+		tween.tween_callback(func():
+			music_player.process_mode = ProcessMode.PROCESS_MODE_INHERIT
+		)
+	)
 
 func _quit() -> void:
-    if exiting:
-        return
-    exiting = true
-    play_audio(select_sfx)
-    await audio_stream_player.finished
-    get_tree().quit()
+	if exiting:
+		return
+	exiting = true
+	play_audio(select_sfx)
+	await audio_stream_player.finished
+	get_tree().quit()

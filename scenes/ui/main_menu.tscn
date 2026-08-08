@@ -115,6 +115,10 @@ shader_parameter/progress = 1.0
 shader = ExtResource("7_jbte4")
 shader_parameter/progress = 1.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_75tx2"]
+shader = ExtResource("7_jbte4")
+shader_parameter/progress = 1.0
+
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_0cdpu"]
 frames = 2
 frame_0/texture = ExtResource("23_qch7b")
@@ -369,6 +373,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Screen" parent="RankingsCanvasGroup" unique_id=222648667 instance=ExtResource("25_4ovp2")]
 offset_right = 1280.0
 offset_bottom = 720.0
+
+[node name="AuxCanvasGroup" type="CanvasGroup" parent="." unique_id=888330399]
+visible = false
+material = SubResource("ShaderMaterial_75tx2")
 
 [node name="Whiteout" type="ColorRect" parent="." unique_id=1167688859]
 visible = false

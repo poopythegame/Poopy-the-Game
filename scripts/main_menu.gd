@@ -30,6 +30,7 @@ enum Screen {
 	OPTIONS,
 	CHARACTERS,
 	RANKINGS,
+	AUX,
 }
 
 @onready var title_logo_complete: Texture2D = load("uid://b5w0pc7x5csx5")
@@ -77,9 +78,11 @@ enum Screen {
 @onready var rankings_screen: RankingsScreen = $RankingsCanvasGroup/Screen
 @onready var rankings_background: TextureRect = $RankingsCanvasGroup/Background
 
+@onready var aux_cg: CanvasGroup = $AuxCanvasGroup
+
 @onready var levels := Global.levels.levels
 
-@onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, characters_screen_cg, rankings_screen_cg, credits_screen_cg]
+@onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, characters_screen_cg, rankings_screen_cg, credits_screen_cg, aux_cg]
 
 var screen := Screen.UNDEFINED
 var current_screen_cg: CanvasGroup
@@ -327,7 +330,9 @@ func reveal_screen_cg_crossfade(screen_cg: CanvasGroup):
 func change_screen(new_screen: Screen, record_undo: bool = true, transition_type: Transition = Transition.NONE):
 	for s in screen_cgs:
 		s.hide()
-		s.get_node("Screen").process_mode = Node.PROCESS_MODE_DISABLED
+		var screen_node := s.get_node("Screen")
+		if screen_node:
+			screen_node.process_mode = Node.PROCESS_MODE_DISABLED
 	if new_screen == screen:
 		return
 	var screen_cg: CanvasGroup
@@ -426,6 +431,8 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 		rankings_background.show()
 		screen_cg = rankings_screen_cg
 		rankings_screen._on_enter()
+	elif new_screen == Screen.AUX:
+		screen_cg = aux_cg
 	if record_undo:
 		undo_queue.append(screen)
 	match transition_type:
