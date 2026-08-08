@@ -109,6 +109,7 @@ func begin_level_title_card(index: int):
 	var scene_tree := get_tree()
 	reset_coins()
 	var level_node := level.scene.instantiate()
+	var camera: Camera2D = level_node.get_node("Camera2D")
 	var level_music_player: AudioStreamPlayer
 	if index != current_level:
 		level_music_player = AudioStreamPlayer.new()
@@ -168,6 +169,7 @@ func begin_level_title_card(index: int):
 			is_switching_levels = false
 			if title_card_node:
 				title_card_node.queue_free()
+			camera.process_mode = PROCESS_MODE_ALWAYS 
 			get_tree().change_scene_to_node(level_node)
 		)
 		if title_card_node:
@@ -180,6 +182,7 @@ func begin_level_title_card(index: int):
 				level_music_player.play()
 				level_node.process_mode = Node.PROCESS_MODE_INHERIT
 			)
+		tween.tween_callback(func(): camera.process_mode = Node.PROCESS_MODE_INHERIT)
 		is_switching_levels = true
 	else:
 		level_music_player = scene_tree.current_scene.get_node("MusicPlayer")
