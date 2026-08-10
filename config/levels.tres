@@ -39,6 +39,8 @@
 [ext_resource type="Texture2D" uid="uid://tme2u2h5lvbu" path="res://assets/textures/ui/rankings/player_animations/d_rank_fr7.png" id="32_wdc13"]
 [ext_resource type="AudioStream" uid="uid://bf62x7i5okshp" path="res://assets/audio/effects/trumpet_4.ogg" id="34_vwncn"]
 [ext_resource type="AudioStream" uid="uid://bwubgsqiwenj7" path="res://assets/audio/jingles/big_farma.ogg" id="36_0oi5t"]
+[ext_resource type="Texture2D" uid="uid://byj3fpu1pjuru" path="res://assets/textures/level/tutorial/title_card.png" id="36_wdc13"]
+[ext_resource type="Script" uid="uid://c0xpd8kp2k05y" path="res://scripts/tutorial/title_card_delegate.gd" id="37_quwhv"]
 [ext_resource type="Texture2D" uid="uid://csaok6kny0y08" path="res://assets/textures/level/big_farma/title_card.png" id="39_r7s68"]
 [ext_resource type="Script" uid="uid://cl7hws3vjpti2" path="res://scripts/big_farma/title_card_delegate.gd" id="40_vwncn"]
 
@@ -107,7 +109,9 @@ metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_7365d"]
 script = ExtResource("1_8dco6")
-title = "Tutorial"
+title = "Poopy's Basics in Platforming"
+title_card = ExtResource("36_wdc13")
+title_card_delegate = ExtResource("37_quwhv")
 scene = ExtResource("25_e1edl")
 rankings = Array[ExtResource("2_x5qbs")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
 metadata/_custom_type_script = "uid://7xfldx24oh8g"

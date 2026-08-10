@@ -180,7 +180,10 @@ func begin_level_title_card(index: int):
 		if level.jingle:
 			tween.tween_callback(func():
 				level_music_player.play()
-				level_node.process_mode = Node.PROCESS_MODE_INHERIT
+			)
+		if level.jingle or title_card_node:
+			tween.tween_callback(func():
+					level_node.process_mode = Node.PROCESS_MODE_INHERIT
 			)
 		tween.tween_callback(func(): camera.process_mode = Node.PROCESS_MODE_INHERIT)
 		is_switching_levels = true
