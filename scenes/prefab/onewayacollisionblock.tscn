@@ -1,18 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmfvkehjaa7fe"]
+[gd_scene format=3 uid="uid://bmfvkehjaa7fe"]
 
-[ext_resource type="Texture2D" uid="uid://c0wjtb64dng2k" path="res://icon.svg" id="1_863oe"]
+[ext_resource type="Texture2D" uid="uid://cerwkjbbxbhcq" path="res://assets/textures/ground/wood_edge.png" id="1_q4j2k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_31mwd"]
 size = Vector2(768, 8)
 
-[node name="AnimatableBody2D" type="AnimatableBody2D"]
+[node name="AnimatableBody2D" type="AnimatableBody2D" unique_id=374445710]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1.14441e-05, 4)
-scale = Vector2(6, 0.0625)
-texture = ExtResource("1_863oe")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1965346784]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_31mwd")
 one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=875440915]
+position = Vector2(-192.23027, 4)
+scale = Vector2(0.37508342, 0.060150377)
+texture = ExtResource("1_q4j2k")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=2024220730]
+position = Vector2(191.99997, 4)
+scale = Vector2(0.37463412, 0.060150377)
+texture = ExtResource("1_q4j2k")

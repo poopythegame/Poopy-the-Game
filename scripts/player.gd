@@ -751,7 +751,7 @@ func physics_process_normal(delta):
 		if not isrolling:
 			play_audio(roll_sfx)
 		isrolling = true
-	if Input.is_action_just_released("down") or not is_on_floor() or abs(motion.x) <= 25:
+	if Input.is_action_just_released("down") or not is_on_floor():# or abs(motion.x) <= 25:
 		isrolling = false
 		
 # Slopes
