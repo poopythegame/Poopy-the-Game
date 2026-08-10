@@ -665,6 +665,9 @@ func physics_process_normal(delta):
 
 	#braking control seen in classic sonic games
 	var direction: float = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
+	if Input.is_action_pressed("enemyfreeze"):
+		# Lock movement while grid-moving
+		direction = 0
 	# Prevent controller from allowing unlimited speed boost bugs
 	if direction < 0:
 		direction = -1
