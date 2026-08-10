@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlir03j3i5ucf"
-path="res://.godot/imported/tutorial jump.png-019055bbc80bfdc530e7dc2f17d40bd6.ctex"
+uid="uid://bafi8e5b4s05y"
+path="res://.godot/imported/lightening_mcfake.png-fc94fb4a8b7131719769c23e78b480c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/tutorial jump.png"
-dest_files=["res://.godot/imported/tutorial jump.png-019055bbc80bfdc530e7dc2f17d40bd6.ctex"]
+source_file="res://assets/textures/elements/setdressing/billboard/lightening_mcfake.png"
+dest_files=["res://.godot/imported/lightening_mcfake.png-fc94fb4a8b7131719769c23e78b480c5.ctex"]
 
 [params]
 

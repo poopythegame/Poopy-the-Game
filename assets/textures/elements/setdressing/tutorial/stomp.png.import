@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1m3uranw3lbk"
-path="res://.godot/imported/tutorial enemy grid move.png-620e131884826faed4dfad57147ccc1a.ctex"
+uid="uid://dv1hl2uvpypqn"
+path="res://.godot/imported/stomp.png-db7ecd519a159f5388229de72ab7cab2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/tutorial enemy grid move.png"
-dest_files=["res://.godot/imported/tutorial enemy grid move.png-620e131884826faed4dfad57147ccc1a.ctex"]
+source_file="res://assets/textures/elements/setdressing/tutorial/stomp.png"
+dest_files=["res://.godot/imported/stomp.png-db7ecd519a159f5388229de72ab7cab2.ctex"]
 
 [params]
 

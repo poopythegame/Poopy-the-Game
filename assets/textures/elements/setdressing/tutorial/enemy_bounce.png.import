@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bafi8e5b4s05y"
-path="res://.godot/imported/Lightning McFake.png-105a406f5403fa5c77a6ab99a4a209c2.ctex"
+uid="uid://ce5mygnw4qi2m"
+path="res://.godot/imported/enemy_bounce.png-5812c40765a10c884e7ee9d3dfea3b59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/Lightning McFake.png"
-dest_files=["res://.godot/imported/Lightning McFake.png-105a406f5403fa5c77a6ab99a4a209c2.ctex"]
+source_file="res://assets/textures/elements/setdressing/tutorial/enemy_bounce.png"
+dest_files=["res://.godot/imported/enemy_bounce.png-5812c40765a10c884e7ee9d3dfea3b59.ctex"]
 
 [params]
 

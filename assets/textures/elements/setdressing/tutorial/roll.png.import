@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvvq2bc1wnr8l"
-path="res://.godot/imported/tutorial roll.png-a2eb113145998041f98b82ec12726a26.ctex"
+path="res://.godot/imported/roll.png-47285eb65e605dac14de085dd9372fc8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/tutorial roll.png"
-dest_files=["res://.godot/imported/tutorial roll.png-a2eb113145998041f98b82ec12726a26.ctex"]
+source_file="res://assets/textures/elements/setdressing/tutorial/roll.png"
+dest_files=["res://.godot/imported/roll.png-47285eb65e605dac14de085dd9372fc8.ctex"]
 
 [params]
 

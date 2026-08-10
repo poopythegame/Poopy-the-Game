@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dno8sc343lbx2"
-path="res://.godot/imported/big chudsquad.png-4380e319d66e1b406321cb866c1d342b.ctex"
+path="res://.godot/imported/big_chud_squad.png-f12a371307d12bff0d93ee85b7f6b393.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/big chudsquad.png"
-dest_files=["res://.godot/imported/big chudsquad.png-4380e319d66e1b406321cb866c1d342b.ctex"]
+source_file="res://assets/textures/elements/setdressing/billboard/big_chud_squad.png"
+dest_files=["res://.godot/imported/big_chud_squad.png-f12a371307d12bff0d93ee85b7f6b393.ctex"]
 
 [params]
 

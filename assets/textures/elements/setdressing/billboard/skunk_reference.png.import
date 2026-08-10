@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c602bkx6lvlgg"
-path="res://.godot/imported/big GUP.png-8eb1dbe4dfef052c0b75e6062d733747.ctex"
+uid="uid://dd63kqmbggx2r"
+path="res://.godot/imported/skunk_reference.png-a66ae37da77a396c6d137d04a4e18e0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/big GUP.png"
-dest_files=["res://.godot/imported/big GUP.png-8eb1dbe4dfef052c0b75e6062d733747.ctex"]
+source_file="res://assets/textures/elements/setdressing/billboard/skunk_reference.png"
+dest_files=["res://.godot/imported/skunk_reference.png-a66ae37da77a396c6d137d04a4e18e0c.ctex"]
 
 [params]
 

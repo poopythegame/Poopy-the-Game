@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd63kqmbggx2r"
-path="res://.godot/imported/wowsunkyreference.png-ed734573a3dcc2549c6ea909b4102894.ctex"
+uid="uid://dlir03j3i5ucf"
+path="res://.godot/imported/jump.png-73bc501b79c9c485fc42f9bb82fe65ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/wowsunkyreference.png"
-dest_files=["res://.godot/imported/wowsunkyreference.png-ed734573a3dcc2549c6ea909b4102894.ctex"]
+source_file="res://assets/textures/elements/setdressing/tutorial/jump.png"
+dest_files=["res://.godot/imported/jump.png-73bc501b79c9c485fc42f9bb82fe65ee.ctex"]
 
 [params]
 

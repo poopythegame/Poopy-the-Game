@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://touu51f7t1em"
-path="res://.godot/imported/big pop-I.png-801f415ab0f7ce50d0f9917d9e77e19f.ctex"
+uid="uid://c602bkx6lvlgg"
+path="res://.godot/imported/big_gup.png-e7f7a9298daacabd0451267182aba35e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/big pop-I.png"
-dest_files=["res://.godot/imported/big pop-I.png-801f415ab0f7ce50d0f9917d9e77e19f.ctex"]
+source_file="res://assets/textures/elements/setdressing/billboard/big_gup.png"
+dest_files=["res://.godot/imported/big_gup.png-e7f7a9298daacabd0451267182aba35e.ctex"]
 
 [params]
 

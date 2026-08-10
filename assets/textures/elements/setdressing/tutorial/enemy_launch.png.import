@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xrh0olvytqmy"
-path="res://.godot/imported/tutorial grapple.png-57c6c83ddf4ba87136197b522710910a.ctex"
+uid="uid://cm8jy3keuh6cx"
+path="res://.godot/imported/enemy_launch.png-53a45513feb654ded6b0c8d612917bf3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/tutorial grapple.png"
-dest_files=["res://.godot/imported/tutorial grapple.png-57c6c83ddf4ba87136197b522710910a.ctex"]
+source_file="res://assets/textures/elements/setdressing/tutorial/enemy_launch.png"
+dest_files=["res://.godot/imported/enemy_launch.png-53a45513feb654ded6b0c8d612917bf3.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce5mygnw4qi2m"
-path="res://.godot/imported/tutorial enemy bounce.png-84f9a35e3242a4c905f5f31392c29f35.ctex"
+uid="uid://xrh0olvytqmy"
+path="res://.godot/imported/grapple.png-cf844af4eb8374ba5ad10d5f6efdf08b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/tutorial enemy bounce.png"
-dest_files=["res://.godot/imported/tutorial enemy bounce.png-84f9a35e3242a4c905f5f31392c29f35.ctex"]
+source_file="res://assets/textures/elements/setdressing/tutorial/grapple.png"
+dest_files=["res://.godot/imported/grapple.png-cf844af4eb8374ba5ad10d5f6efdf08b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm8jy3keuh6cx"
-path="res://.godot/imported/tutorial enemy launch.png-0412fb5231c3f58a588a2132ea9525e5.ctex"
+uid="uid://touu51f7t1em"
+path="res://.godot/imported/big_pop_i.png-83ee277eb7d18f5a535a674e00cced5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/tutorial enemy launch.png"
-dest_files=["res://.godot/imported/tutorial enemy launch.png-0412fb5231c3f58a588a2132ea9525e5.ctex"]
+source_file="res://assets/textures/elements/setdressing/billboard/big_pop_i.png"
+dest_files=["res://.godot/imported/big_pop_i.png-83ee277eb7d18f5a535a674e00cced5f.ctex"]
 
 [params]
 
