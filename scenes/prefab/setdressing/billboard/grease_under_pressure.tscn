@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://caeb82du5bfps"]
+
+[ext_resource type="Texture2D" uid="uid://c602bkx6lvlgg" path="res://assets/textures/elements/setdressing/billboard/big_gup.png" id="1_cx6tb"]
+
+[node name="Billboard" type="Sprite2D" unique_id=374766916]
+z_index = -1999
+texture = ExtResource("1_cx6tb")
