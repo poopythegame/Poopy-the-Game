@@ -58,6 +58,7 @@ var distance_since_last_dot_spawn: float = 0
 var prev_pos: Vector2
 var node_spawn_host: Node
 var prev_grid_input: Vector2 = Vector2.ZERO
+var player_raw_motion = null
 
 # --- STATS ---
 var SLOPEMULT = 2
@@ -69,6 +70,12 @@ const SLIDE_THRESHOLD = 100.0
 const BOUNCE_FORGIVENESS_X = 50.0
 const AIRDRAG = 1.3
 const topspeed = 400.0
+
+enum TestResult {
+	LAUNCH,
+	BOUNCE,
+	NOOP
+}
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
@@ -492,9 +499,11 @@ func process_frozen_behavior(delta):
 
 		# IMPORTANT: Only test for impact if we are NOT currently ghosting!
 		if not should_ghost:
-			if test_player_impact(delta):
+			if test_player_impact(delta) == TestResult.LAUNCH:
 				disengage_freeze()
 				launch_enemy(player)
+			elif test_player_impact(delta) == TestResult.BOUNCE:
+				perform_bounce(player)
 
 func stop_traveling():
 	is_traveling = false
@@ -530,7 +539,7 @@ func check_player_impact(delta):
 					launch_enemy(player)
 				vulnerable = true
 
-func test_player_impact(_delta: float):
+func test_player_impact(_delta: float) -> TestResult:
 	var overlapping_bodies: Array[Node2D] = hitbox.get_overlapping_bodies()
 	for body in overlapping_bodies:
 		if body.name == "Player" or body.is_in_group("Player"):
@@ -538,12 +547,13 @@ func test_player_impact(_delta: float):
 			
 			if (player.jumping or player.isrolling) and (not player.is_grappling):
 				if player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
-					perform_bounce(player)
-					return false
+					return TestResult.BOUNCE
 				else:
-					return true
+					return TestResult.LAUNCH
+	return TestResult.NOOP
 
 func perform_bounce(player):
+	player_raw_motion = player.motion
 	player.motion.y = abs(player.motion.y) * -1
 	if "exitgrapple" in player: player.exitgrapple = false
 	player.canstomp = true
@@ -554,15 +564,19 @@ func perform_bounce(player):
 func launch_enemy(player):
 	hit_cooldown = true
 	hit_timer = 1
+	var player_motion: Vector2 = player.motion
+	if player_raw_motion != null:
+		player_motion = player_raw_motion
+		player_raw_motion = null
 	
-	var launch_x = player.motion.x * 1.35
+	var launch_x: float = player_motion.x * 1.35
 	#if abs(launch_x) < 200 and abs(launch_x) >= 25:
 		#var dir = sign(global_position.x - player.global_position.x)
 		#if dir == 0: dir = 1
 		#launch_x = 200 * dir
 	motion.x = launch_x
 	
-	var vertical_force = player.motion.y * 1.05
+	var vertical_force: float = player_motion.y * 1.05
 	# if abs(player.motion.y) < 100 and player.is_on_floor():
 	# 	vertical_force = -300 
 	motion.y = vertical_force	
