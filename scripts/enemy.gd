@@ -391,16 +391,16 @@ func process_grid_input():
 
 	var input_vector: Vector2 = Vector2.ZERO
 	var sound: int = 0
-	if Input.is_action_just_pressed("grid_up"):
+	if Input.is_action_pressed("grid_up"):
 		input_vector.y -= 1
 		sound = 1
-	if Input.is_action_just_pressed("grid_down"):
+	if Input.is_action_pressed("grid_down"):
 		input_vector.y += 1
 		sound = 2
-	if Input.is_action_just_pressed("grid_left"):
+	if Input.is_action_pressed("grid_left"):
 		input_vector.x -= 1
 		sound = 1
-	if Input.is_action_just_pressed("grid_right"): 
+	if Input.is_action_pressed("grid_right"): 
 		input_vector.x += 1
 		sound = 2
 	
