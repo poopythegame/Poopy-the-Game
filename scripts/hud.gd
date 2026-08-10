@@ -78,7 +78,7 @@ func calculate_rank():
 		if (time <= rank_def.time or not rank_def.use_time) and rank_def.time < best_rank_time:
 			rank = i
 			best_rank_time = rank_def.time
-	if best_rank_time < Global.get_best_time():
+	if time == Global.get_best_time():
 		Global.set_rank(rank)
 	Global.save_game()
 
