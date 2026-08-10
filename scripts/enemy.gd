@@ -351,6 +351,8 @@ func engage_freeze():
 	frozen_origin = global_position
 	target_position = global_position
 	grid_coords = Vector2.ZERO
+	next_grid_coords = Vector2.ZERO
+	prev_grid_input = Vector2.ZERO
 	
 	if anchor:
 		anchor.visible = true
@@ -419,18 +421,13 @@ func process_grid_input():
 		next_grid_coords.x = clamp(next_grid_coords.x, -1, 1)
 		next_grid_coords.y = clamp(next_grid_coords.y, -1, 1)
 		position = frozen_origin + next_grid_coords * GRID_OFFSET
-		
-		var is_colliding: bool = test_move(global_transform, Vector2.ZERO)
-		if is_colliding:
-			next_grid_coords = grid_coords
-		else:
-			if grid_move_tween != null and grid_move_tween.is_running():
-				grid_move_tween.kill()
-			grid_move_tween = create_tween()
-			grid_move_tween.tween_property(self, "grid_coords", next_grid_coords, 0.1)
-			grid_move_tween.tween_callback(finish_grid_move)
-			grid_move_tween.set_trans(Tween.TRANS_CUBIC)
-			grid_move_tween.set_ease(Tween.EASE_IN)
+		if grid_move_tween != null and grid_move_tween.is_running():
+			grid_move_tween.kill()
+		grid_move_tween = create_tween()
+		grid_move_tween.tween_property(self, "grid_coords", next_grid_coords, 0.1)
+		grid_move_tween.tween_callback(finish_grid_move)
+		grid_move_tween.set_trans(Tween.TRANS_CUBIC)
+		grid_move_tween.set_ease(Tween.EASE_IN)
 	
 	position = frozen_origin + grid_coords * GRID_OFFSET
 
