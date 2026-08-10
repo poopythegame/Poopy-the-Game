@@ -3,16 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://cerwkjbbxbhcq" path="res://assets/textures/ground/wood_edge.png" id="1_vi27n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uavqj"]
-size = Vector2(128, 16)
+size = Vector2(64, 8)
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" unique_id=1311114954]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=74079008]
-position = Vector2(0, -8)
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_uavqj")
 one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1517373990]
-position = Vector2(-0.12503052, -8)
-scale = Vector2(0.12512201, 0.120300755)
+position = Vector2(-0.06251526, -4)
+scale = Vector2(0.062561005, 0.060150377)
 texture = ExtResource("1_vi27n")

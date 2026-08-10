@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cglfmftrlg2kn"]
+
+[ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/prefab/coin.tscn" id="1_nn5l3"]
+
+[node name="Node2D" type="Node2D" unique_id=1745966527]
+
+[node name="Coin" parent="." unique_id=1725540365 instance=ExtResource("1_nn5l3")]
+
+[node name="Coin3" parent="." unique_id=807841860 instance=ExtResource("1_nn5l3")]
+position = Vector2(0, 80)
+
+[node name="Coin5" parent="." unique_id=910051594 instance=ExtResource("1_nn5l3")]
+position = Vector2(0, 160)
