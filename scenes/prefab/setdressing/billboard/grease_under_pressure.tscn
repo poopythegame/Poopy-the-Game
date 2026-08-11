@@ -6,4 +6,4 @@
 z_index = -1999
 position = Vector2(0, -55)
 scale = Vector2(0.067073174, 0.067073174)
-texture = ExtResource("11_cx6t")
+texture = ExtResource("1_cx6tb")
