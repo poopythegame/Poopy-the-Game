@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://bpyr753oc7pu3"]
+[gd_scene format=3 uid="uid://caeb82du5bfps"]
 
-[ext_resource type="Texture2D" uid="uid://c602bkx6lvlgg" path="res://scenes/prefab/big GUP.png" id="1_0e801"]
+[ext_resource type="Texture2D" uid="uid://c602bkx6lvlgg" path="res://assets/textures/elements/setdressing/billboard/big_gup.png" id="1_cx6tb"]
 
-[node name="Sprite2D" type="Sprite2D" unique_id=187441263]
+[node name="Billboard" type="Sprite2D" unique_id=374766916]
 z_index = -1999
 position = Vector2(0, -55)
 scale = Vector2(0.067073174, 0.067073174)
-texture = ExtResource("1_0e801")
+texture = ExtResource("11_cx6t")

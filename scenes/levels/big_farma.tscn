@@ -36,7 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://byj23nwvndjop" path="res://scenes/prefab/setdressing/billboard/dino_land.tscn" id="35_mn5d3"]
 [ext_resource type="PackedScene" uid="uid://bdio4m0jvcpps" path="res://scenes/prefab/5coins_horizontal.tscn" id="36_wp5th"]
 [ext_resource type="PackedScene" uid="uid://cglfmftrlg2kn" path="res://scenes/prefab/5coins_vertical.tscn" id="37_tlbrp"]
-[ext_resource type="PackedScene" uid="uid://bpyr753oc7pu3" path="res://scenes/prefab/setdressing/billboard/GreaseUnderPressure.tscn" id="37_wp5th"]
+[ext_resource type="PackedScene" uid="uid://bpyr753oc7pu3" path="res://scenes/prefab/setdressing/billboard/grease_under_pressure.tscn" id="37_wp5th"]
 
 [sub_resource type="Resource" id="SS2D_Point_1"]
 script = ExtResource("1_point")

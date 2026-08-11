@@ -91,6 +91,20 @@ func start_animation_sequence():
 		# Just sticking this in here
 		main_menu.position = Vector2.ZERO
 	)
+	if curr_rank.show_portraits_background != 0:
+		if curr_rank.show_portraits_background == 2:
+			portraits_background.scroll_speed = 200
+		tween.tween_callback(whiteout.show)
+		tween.tween_property(whiteout, "modulate:a", 1, 0.2)
+		time_since_music_track_1 += .2
+		tween.tween_callback(func():
+			portraits_background.show()
+			portraits_background.process_mode = Node.PROCESS_MODE_INHERIT)
+		tween.tween_property(whiteout, "modulate:a", 0, 0.2)
+		time_since_music_track_1 += .2
+		tween.tween_callback(whiteout.hide)
+	if curr_rank.use_walk_off_animation:
+		tween.parallel().tween_property(rank_animation_tr, "offset_transform_position:x", -2800, 3)
 	if curr_rank.music_track_1 != null and time_since_music_track_1 < curr_rank.music_track_1.get_length():
 		tween.tween_await(audio_stream_player.finished)
 	if curr_rank.music_track_2 != null:
@@ -98,21 +112,7 @@ func start_animation_sequence():
 			audio_stream_player.stream = curr_rank.music_track_2
 			audio_stream_player.play()
 	)
-	if curr_rank.show_portraits_background != 0:
-		if curr_rank.show_portraits_background == 2:
-			portraits_background.scroll_speed = 200
-		tween.tween_callback(whiteout.show)
-		tween.tween_property(whiteout, "modulate:a", 1, 0.2)
-		# time_since_music_track_1 += .2
-		tween.tween_callback(func():
-			portraits_background.show()
-			portraits_background.process_mode = Node.PROCESS_MODE_INHERIT)
-		tween.tween_property(whiteout, "modulate:a", 0, 0.2)
-		# time_since_music_track_1 += .2
-		tween.tween_callback(whiteout.hide)
 	tween.tween_property(ranks_container, "modulate:a", 1, 2)
-	if curr_rank.use_walk_off_animation:
-		tween.parallel().tween_property(rank_animation_tr, "offset_transform_position:x", -2800, 3)
 	tween.set_trans(Tween.TRANS_CUBIC)
 
 func apply_rank_animation():
