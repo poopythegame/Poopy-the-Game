@@ -420,24 +420,23 @@ func process_grid_input():
 			play_audio(shift_end_sfx)
 	prev_grid_input = input_vector
 
-	if input_vector != Vector2.ZERO:
-		var dx = clamp(input_vector.x, -1, 1)
-		var dy = clamp(input_vector.y, -1, 1)
-		next_grid_coords.x += dx
-		next_grid_coords.y += dy
-		next_grid_coords.x = clamp(next_grid_coords.x, -1, 1)
-		next_grid_coords.y = clamp(next_grid_coords.y, -1, 1)
-		var is_colliding: bool = test_move(global_transform, Vector2.ZERO)
-		if is_colliding:
-			next_grid_coords = grid_coords
-		else:
-			if grid_move_tween != null and grid_move_tween.is_running():
-				grid_move_tween.kill()
-			grid_move_tween = create_tween()
-			grid_move_tween.tween_property(self, "grid_coords", next_grid_coords, 0.1)
-			grid_move_tween.tween_callback(finish_grid_move)
-			grid_move_tween.set_trans(Tween.TRANS_CUBIC)
-			grid_move_tween.set_ease(Tween.EASE_IN)
+	if grid_move_tween == null or not grid_move_tween.is_running():
+		if input_vector != Vector2.ZERO:
+			var dx = clamp(input_vector.x, -1, 1)
+			var dy = clamp(input_vector.y, -1, 1)
+			next_grid_coords.x += dx
+			next_grid_coords.y += dy
+			next_grid_coords.x = clamp(next_grid_coords.x, -1, 1)
+			next_grid_coords.y = clamp(next_grid_coords.y, -1, 1)
+			var is_colliding: bool = test_move(global_transform, Vector2.ZERO)
+			if is_colliding:
+				next_grid_coords = grid_coords
+			else:
+				grid_move_tween = create_tween()
+				grid_move_tween.tween_property(self, "grid_coords", next_grid_coords, 0.1)
+				grid_move_tween.tween_callback(finish_grid_move)
+				grid_move_tween.set_trans(Tween.TRANS_CUBIC)
+				grid_move_tween.set_ease(Tween.EASE_IN)
 	
 	position = frozen_origin + grid_coords * GRID_OFFSET
 
