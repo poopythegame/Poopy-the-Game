@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://qyqflb5mywfp"]
+
+[ext_resource type="Texture2D" uid="uid://3rc6vabw4fqv" path="res://assets/textures/elements/setdressing/billboard/resell.png" id="1_00nyu"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1723294883]
+position = Vector2(0, -56)
+scale = Vector2(0.06829269, 0.06829269)
+texture = ExtResource("1_00nyu")

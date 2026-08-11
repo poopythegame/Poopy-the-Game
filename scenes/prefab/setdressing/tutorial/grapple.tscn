@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dt0rf5iybodqt"]
+
+[ext_resource type="Texture2D" uid="uid://xrh0olvytqmy" path="res://assets/textures/elements/setdressing/tutorial/grapple.png" id="1_5xmxh"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1896120248]
+position = Vector2(0, -52)
+scale = Vector2(0.06341465, 0.06341463)
+texture = ExtResource("1_5xmxh")

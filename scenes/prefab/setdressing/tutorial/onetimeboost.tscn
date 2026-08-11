@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://csfyb3d1j1wgg"]
+
+[ext_resource type="Texture2D" uid="uid://jtk1wl1gm45w" path="res://assets/textures/elements/setdressing/tutorial/boost.png" id="1_anvnx"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=931378532]
+position = Vector2(0, -52)
+scale = Vector2(0.06341463, 0.06341463)
+texture = ExtResource("1_anvnx")

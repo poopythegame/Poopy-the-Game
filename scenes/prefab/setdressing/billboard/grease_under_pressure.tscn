@@ -4,4 +4,6 @@
 
 [node name="Billboard" type="Sprite2D" unique_id=374766916]
 z_index = -1999
+position = Vector2(0, -55)
+scale = Vector2(0.067073174, 0.067073174)
 texture = ExtResource("1_cx6tb")

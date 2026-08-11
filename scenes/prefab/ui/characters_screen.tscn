@@ -7,20 +7,21 @@
 [ext_resource type="Script" uid="uid://8kv681icjouq" path="res://scripts/character_def.gd" id="5_vp7t4"]
 [ext_resource type="Texture2D" uid="uid://khv13jwuvvgf" path="res://assets/textures/characters/color/john_person.png" id="6_t35ro"]
 [ext_resource type="Texture2D" uid="uid://b0sju53qqk14b" path="res://assets/textures/characters/color/pop_i.png" id="7_76bgj"]
+[ext_resource type="Texture2D" uid="uid://b18gckgrv1g3n" path="res://assets/textures/characters/color/the_cock.png" id="7_bwikf"]
 [ext_resource type="Texture2D" uid="uid://cpwsxje5mjt4m" path="res://assets/textures/characters/color/chud_squad.png" id="8_bnhp2"]
 [ext_resource type="Texture2D" uid="uid://d2fgy05ui0hxv" path="res://assets/textures/ui/main_menu/characters_background.png" id="9_x5eat"]
 [ext_resource type="Texture2D" uid="uid://b6a6ntfgwsf14" path="res://assets/textures/characters/color/grease_under_pressure.png" id="10_gsfsb"]
 
 [sub_resource type="Resource" id="Resource_5dct7"]
 script = ExtResource("5_vp7t4")
-bio = "Main Goofer in this game. Despite always being silent, Poopy makes a racket everywhere he goes with his action. He’s a lil goober with unreadable thoughts most of the time, but he turns into a bloodthirsty maniac the moment anyone ticks him off. In his latest adventure, he goes to stop John Person’s evil scheme of reselling his pet chicken, the Cock."
+bio = "Main Goofer in this game. Despite being mute, Poopy makes a racket everywhere he goes with his action. He’s a lil goober with unreadable thoughts most of the time, but he turns into a bloodthirsty maniac the moment anyone ticks him off. In his latest adventure, he goes to stop John Person’s evil scheme of reselling his pet chicken, the Cock."
 title = "Poopy the Game"
 portrait = ExtResource("4_gsfsb")
 metadata/_custom_type_script = "uid://8kv681icjouq"
 
 [sub_resource type="Resource" id="Resource_qch7b"]
 script = ExtResource("5_vp7t4")
-bio = "Evil CEO of the corporation Person Industry. Due to the influence of both him and his company, Person Industry has formed a global monopoly over all industries imaginable. Shoes? Restaurants? Cars? Amusement parks? Person Industry is literally the only prominent corporation responsible for these. As you can guess, he is really cunning and selfish, and incredibly proud of who he is overall, despite his insecurity of his pink colored fur, making him look “sissy”, as he put it. In his latest corporate venture, he establishes a firm that resells literally every single thing in this universe, including living beings. One day, he kidnaps Poopy’s pet chicken the Cock to resell him, ticking off Poopy and starting the incident."
+bio = "Evil CEO of the corporation Person Industry has formed a global monopoly over all industries imaginable. As you can guess, he is really cunning and selfish, and incredibly proud of who he is overall, despite his insecurity of his pink colored fur, making him look “sissy”, as he put it."
 title = "John Person"
 portrait = ExtResource("6_t35ro")
 metadata/_custom_type_script = "uid://8kv681icjouq"
@@ -29,6 +30,7 @@ metadata/_custom_type_script = "uid://8kv681icjouq"
 script = ExtResource("5_vp7t4")
 bio = "Poopy’s precious pet chicken. Just like his owner, no one can guess what he’s thinking, or whether or not he’s thinking at all. All he does is eat, sleep, and rinse and repeat. Despite all that, the Cock makes up for all his flaws through his immortality. He straight up cannot die for whatever reason."
 title = "The Cock"
+portrait = ExtResource("7_bwikf")
 metadata/_custom_type_script = "uid://8kv681icjouq"
 
 [sub_resource type="Resource" id="Resource_1mexh"]
@@ -40,14 +42,14 @@ metadata/_custom_type_script = "uid://8kv681icjouq"
 
 [sub_resource type="Resource" id="Resource_6ud2m"]
 script = ExtResource("5_vp7t4")
-bio = "Team of clowns that is responsible for all the shows in Person Industry’s subsidiary amusement park, Karnival Kid’s. Before they were hired, they were a mess to say the absolute least. Always being on the internet and arguing over the stupidest things known to mankind, they were a nuisance to society. After they were hired though, they finally became able to take advantage of what they are best at."
+bio = "Team of clowns that is responsible for all the shows in Person Industry’s subsidiary amusement park, Karnival Kid’s. Before they were hired, they were always arguing over the stupidest things known to mankind on the internet. They were a nuisance to society. After they were hired though, they finally became able to take advantage of what they are best at."
 title = "Chud Squad"
 portrait = ExtResource("8_bnhp2")
 metadata/_custom_type_script = "uid://8kv681icjouq"
 
 [sub_resource type="Resource" id="Resource_75tx2"]
 script = ExtResource("5_vp7t4")
-bio = "Animatronic band in the spin-off hot dog restaurant of Pop-I’s pizza showtime, Hillbilly Glizzy. The team comprises Hillbilly Barry, Carmen Cheese, and Doug. Due to both restaurants’ overwhelming loyalty to John Person, and their equal amount of popularity, they have formed a sibling rivalry in a way, always trying to one-up each other. At the end of the day though, they care about each other and think both are fallible without one another."
+bio = "Animatronic band in the spin-off hot dog restaurant of Pop-I’s pizza showtime. Due to both restaurants’ overwhelming loyalty to John Person, and their equal amount of popularity, they have formed a sibling rivalry in a way, always trying to one-up each other. Something Pop-I can do, Barry try anything he can to do it better."
 title = "Grease Under Pressure"
 portrait = ExtResource("10_gsfsb")
 metadata/_custom_type_script = "uid://8kv681icjouq"

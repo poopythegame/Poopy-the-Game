@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cygpvxjxym30m"]
+
+[ext_resource type="Texture2D" uid="uid://dd63kqmbggx2r" path="res://assets/textures/elements/setdressing/billboard/skunk_reference.png" id="1_q73co"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=232550872]
+position = Vector2(0, -68)
+scale = Vector2(0.08292685, 0.08292683)
+texture = ExtResource("1_q73co")

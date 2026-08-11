@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://coenhxcs1ebp1"]
+
+[ext_resource type="Texture2D" uid="uid://touu51f7t1em" path="res://assets/textures/elements/setdressing/billboard/big_pop_i.png" id="1_rsc1v"]
+
+[node name="Pop-I" type="Sprite2D" unique_id=1508028880]
+position = Vector2(0, -68.5)
+scale = Vector2(0.08231708, 0.08231708)
+texture = ExtResource("1_rsc1v")

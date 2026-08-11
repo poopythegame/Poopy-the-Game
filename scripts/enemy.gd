@@ -428,7 +428,9 @@ func process_grid_input():
 			next_grid_coords.y += dy
 			next_grid_coords.x = clamp(next_grid_coords.x, -1, 1)
 			next_grid_coords.y = clamp(next_grid_coords.y, -1, 1)
-			var is_colliding: bool = test_move(global_transform, Vector2.ZERO)
+			var offset := (frozen_origin + next_grid_coords * GRID_OFFSET) - position
+			print(offset)
+			var is_colliding: bool = test_move(global_transform, offset)
 			if is_colliding:
 				next_grid_coords = grid_coords
 			else:

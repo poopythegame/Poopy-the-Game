@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://boi0joawiyob7"]
+
+[ext_resource type="Texture2D" uid="uid://df4jekm8jesyy" path="res://assets/textures/elements/setdressing/tutorial/airdash.png" id="1_li4w8"]
+
+[node name="airdash" type="Sprite2D" unique_id=903599725]
+position = Vector2(0, -68)
+scale = Vector2(0.08292685, 0.08292684)
+texture = ExtResource("1_li4w8")

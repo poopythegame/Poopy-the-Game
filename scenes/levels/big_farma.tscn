@@ -36,7 +36,12 @@
 [ext_resource type="PackedScene" uid="uid://byj23nwvndjop" path="res://scenes/prefab/setdressing/billboard/dino_land.tscn" id="35_mn5d3"]
 [ext_resource type="PackedScene" uid="uid://bdio4m0jvcpps" path="res://scenes/prefab/5coins_horizontal.tscn" id="36_wp5th"]
 [ext_resource type="PackedScene" uid="uid://cglfmftrlg2kn" path="res://scenes/prefab/5coins_vertical.tscn" id="37_tlbrp"]
-[ext_resource type="PackedScene" uid="uid://bpyr753oc7pu3" path="res://scenes/prefab/setdressing/billboard/grease_under_pressure.tscn" id="37_wp5th"]
+[ext_resource type="PackedScene" uid="uid://caeb82du5bfps" path="res://scenes/prefab/setdressing/billboard/grease_under_pressure.tscn" id="37_wp5th"]
+[ext_resource type="PackedScene" uid="uid://qyqflb5mywfp" path="res://scenes/prefab/setdressing/billboard/resellr.tscn" id="38_8a5fe"]
+[ext_resource type="PackedScene" uid="uid://btbpfuf1bpwc8" path="res://scenes/prefab/setdressing/billboard/doug.tscn" id="39_x8p5s"]
+[ext_resource type="PackedScene" uid="uid://bqsajhmo604fc" path="res://scenes/prefab/setdressing/billboard/lightning_mcfake.tscn" id="40_7d2ck"]
+[ext_resource type="PackedScene" uid="uid://doutkcly04luh" path="res://scenes/prefab/setdressing/billboard/chud_squad.tscn" id="41_qe653"]
+[ext_resource type="PackedScene" uid="uid://coenhxcs1ebp1" path="res://scenes/prefab/setdressing/billboard/pop_i.tscn" id="42_827mw"]
 
 [sub_resource type="Resource" id="SS2D_Point_1"]
 script = ExtResource("1_point")
@@ -6967,11 +6972,11 @@ position = Vector2(-1070.5154, -824.0625)
 scale = Vector2(0.07956976, 0.07956976)
 
 [node name="Billboard2" parent="." unique_id=582853644 instance=ExtResource("32_q40wm")]
-position = Vector2(6711.9995, -216)
+position = Vector2(15087.999, 199.99998)
 scale = Vector2(0.08106657, 0.08106657)
 
 [node name="Billboard3" parent="." unique_id=2114021506 instance=ExtResource("33_wp5th")]
-position = Vector2(6127.9995, -152)
+position = Vector2(14735.999, 168)
 scale = Vector2(0.08004078, 0.08004076)
 
 [node name="Billboard4" parent="." unique_id=374766916 instance=ExtResource("34_tlbrp")]
@@ -6979,7 +6984,7 @@ position = Vector2(10592, -312.00003)
 scale = Vector2(0.08006994, 0.08006994)
 
 [node name="Billboard5" parent="." unique_id=1715537770 instance=ExtResource("35_mn5d3")]
-position = Vector2(14968.001, 199.99998)
+position = Vector2(15168, 1879.9999)
 scale = Vector2(0.0805085, 0.08050848)
 
 [node name="Node2D2" parent="." unique_id=1404405138 instance=ExtResource("36_wp5th")]
@@ -7083,5 +7088,22 @@ position = Vector2(19128, 2160)
 flip = true
 
 [node name="Sprite2D" parent="." unique_id=187441263 instance=ExtResource("37_wp5th")]
-position = Vector2(11536.001, -392)
+position = Vector2(6128, -166)
 scale = Vector2(0.087804876, 0.08780488)
+
+[node name="Sprite2D2" parent="." unique_id=1723294883 instance=ExtResource("38_8a5fe")]
+position = Vector2(7928, -512)
+scale = Vector2(0.07804872, 0.07804872)
+
+[node name="Sprite2D3" parent="." unique_id=1053692453 instance=ExtResource("39_x8p5s")]
+position = Vector2(15984, 1800)
+
+[node name="Sprite2D4" parent="." unique_id=1423319349 instance=ExtResource("40_7d2ck")]
+position = Vector2(18312, 2240)
+scale = Vector2(0.081707366, 0.08170735)
+
+[node name="chud_squad" parent="." unique_id=1886609133 instance=ExtResource("41_qe653")]
+position = Vector2(11504.001, -387)
+
+[node name="Pop-I" parent="." unique_id=1508028880 instance=ExtResource("42_827mw")]
+position = Vector2(7248, -223.99998)

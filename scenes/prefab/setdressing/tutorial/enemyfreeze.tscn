@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c1frdito0bs73"]
+
+[ext_resource type="Texture2D" uid="uid://c1m3uranw3lbk" path="res://assets/textures/elements/setdressing/tutorial/enemy_grid_move.png" id="1_1tkfs"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=939178963]
+position = Vector2(0, -52)
+scale = Vector2(0.06341463, 0.063414626)
+texture = ExtResource("1_1tkfs")

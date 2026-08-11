@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://btbpfuf1bpwc8"]
+
+[ext_resource type="Texture2D" uid="uid://c6ktqomuhah24" path="res://assets/textures/elements/setdressing/billboard/doug.png" id="1_waaig"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1053692453]
+position = Vector2(0, -56)
+scale = Vector2(0.068292685, 0.068292685)
+texture = ExtResource("1_waaig")

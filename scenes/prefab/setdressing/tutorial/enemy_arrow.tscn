@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bbbo55bsiuso1"]
+
+[ext_resource type="Texture2D" uid="uid://dym1aeu8ituny" path="res://assets/textures/elements/setdressing/tutorial/enemy_arrow.png" id="1_3hfkh"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1382319225]
+position = Vector2(0, 16)
+scale = Vector2(0.071777366, 0.071777366)
+texture = ExtResource("1_3hfkh")

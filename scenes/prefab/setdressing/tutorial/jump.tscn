@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dd88oqbihsgi4"]
+
+[ext_resource type="Texture2D" uid="uid://dlir03j3i5ucf" path="res://assets/textures/elements/setdressing/tutorial/jump.png" id="1_vwsv0"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=2053328155]
+position = Vector2(-4.7683716e-07, -51.750008)
+scale = Vector2(0.06371952, 0.0637195)
+texture = ExtResource("1_vwsv0")
