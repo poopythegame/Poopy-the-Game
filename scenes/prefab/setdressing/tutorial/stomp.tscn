@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dinmeiy8qjja0"]
+
+[ext_resource type="Texture2D" uid="uid://dv1hl2uvpypqn" path="res://assets/textures/elements/setdressing/tutorial/stomp.png" id="1_mtmrs"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=78673687]
+position = Vector2(-9.536743e-07, -52)
+scale = Vector2(0.06341463, 0.063414626)
+texture = ExtResource("1_mtmrs")

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://6w76jdjksf4v"]
+
+[ext_resource type="Texture2D" uid="uid://dpi8t6fcuwiko" path="res://assets/textures/elements/setdressing/tutorial/enemy_target.png" id="1_vb872"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=165900166]
+position = Vector2(2.861023e-06, -15.999999)
+scale = Vector2(0.115722656, 0.115722656)
+texture = ExtResource("1_vb872")

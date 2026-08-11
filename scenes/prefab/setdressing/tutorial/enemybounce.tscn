@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ca178sqnk2w2c"]
+
+[ext_resource type="Texture2D" uid="uid://ce5mygnw4qi2m" path="res://assets/textures/elements/setdressing/tutorial/enemy_bounce.png" id="1_83v6v"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1939052044]
+position = Vector2(0, -52)
+scale = Vector2(0.06341464, 0.06341464)
+texture = ExtResource("1_83v6v")

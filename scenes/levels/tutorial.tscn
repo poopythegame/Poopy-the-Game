@@ -30,7 +30,18 @@
 [ext_resource type="PackedScene" uid="uid://cphck7o4au8e3" path="res://scenes/prefab/lvl_end.tscn" id="28_x7mr2"]
 [ext_resource type="PackedScene" uid="uid://cglfmftrlg2kn" path="res://scenes/prefab/5coins_vertical.tscn" id="30_arvqe"]
 [ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/prefab/coin.tscn" id="31_4n5tw"]
+[ext_resource type="PackedScene" uid="uid://dd88oqbihsgi4" path="res://scenes/prefab/setdressing/tutorial/jump.tscn" id="32_chuyq"]
 [ext_resource type="PackedScene" uid="uid://bdio4m0jvcpps" path="res://scenes/prefab/5coins_horizontal.tscn" id="32_p4ft5"]
+[ext_resource type="PackedScene" uid="uid://tluuhw8sd0oq" path="res://scenes/prefab/setdressing/tutorial/roll.tscn" id="33_deb6a"]
+[ext_resource type="PackedScene" uid="uid://dinmeiy8qjja0" path="res://scenes/prefab/setdressing/tutorial/stomp.tscn" id="34_dpm4q"]
+[ext_resource type="PackedScene" uid="uid://dt0rf5iybodqt" path="res://scenes/prefab/setdressing/tutorial/grapple.tscn" id="35_bqw4n"]
+[ext_resource type="PackedScene" uid="uid://b2gor5nekkt8k" path="res://scenes/prefab/setdressing/tutorial/enemylaunch.tscn" id="36_4xybc"]
+[ext_resource type="PackedScene" uid="uid://c1frdito0bs73" path="res://scenes/prefab/setdressing/tutorial/enemyfreeze.tscn" id="37_x04ov"]
+[ext_resource type="PackedScene" uid="uid://ca178sqnk2w2c" path="res://scenes/prefab/setdressing/tutorial/enemybounce.tscn" id="38_pmj0t"]
+[ext_resource type="PackedScene" uid="uid://csfyb3d1j1wgg" path="res://scenes/prefab/setdressing/tutorial/onetimeboost.tscn" id="39_4xybc"]
+[ext_resource type="PackedScene" uid="uid://b24b5njw3wjbi" path="res://scenes/prefab/setdressing/tutorial/enemy_position.tscn" id="40_t1oap"]
+[ext_resource type="PackedScene" uid="uid://6w76jdjksf4v" path="res://scenes/prefab/setdressing/tutorial/enemy_target.tscn" id="41_ney7n"]
+[ext_resource type="PackedScene" uid="uid://bbbo55bsiuso1" path="res://scenes/prefab/setdressing/tutorial/enemy_arrow.tscn" id="42_8j442"]
 
 [sub_resource type="Resource" id="Resource_giya0"]
 script = ExtResource("2_uy53l")
@@ -4836,7 +4847,7 @@ position = Vector2(18848, -1272)
 position = Vector2(18848, -1336)
 
 [node name="Node2D24" parent="." unique_id=2091991688 instance=ExtResource("30_arvqe")]
-position = Vector2(20352, -1184)
+position = Vector2(20352, -1216)
 
 [node name="Coin10" parent="." unique_id=593288370 instance=ExtResource("31_4n5tw")]
 position = Vector2(18784, -1240)
@@ -4887,4 +4898,64 @@ position = Vector2(15104, -648)
 position = Vector2(17072, -984)
 
 [node name="Node2D25" parent="." unique_id=1667637172 instance=ExtResource("30_arvqe")]
-position = Vector2(20352, -968)
+position = Vector2(20352, -1000)
+
+[node name="Sprite2D" parent="." unique_id=2053328155 instance=ExtResource("32_chuyq")]
+position = Vector2(255.99998, -48)
+
+[node name="Sprite2D2" parent="." unique_id=1427375494 instance=ExtResource("33_deb6a")]
+position = Vector2(1880, -624)
+
+[node name="Sprite2D3" parent="." unique_id=78673687 instance=ExtResource("34_dpm4q")]
+position = Vector2(7928, -180)
+
+[node name="Sprite2D4" parent="." unique_id=1896120248 instance=ExtResource("35_bqw4n")]
+position = Vector2(12088, 37)
+
+[node name="Sprite2D5" parent="." unique_id=721408896 instance=ExtResource("36_4xybc")]
+z_index = -1900
+position = Vector2(16912, -952)
+
+[node name="Sprite2D6" parent="." unique_id=939178963 instance=ExtResource("37_x04ov")]
+z_index = -1900
+position = Vector2(17456, -1136)
+
+[node name="Sprite2D7" parent="." unique_id=1939052044 instance=ExtResource("38_pmj0t")]
+z_index = -1900
+position = Vector2(20224, -816)
+
+[node name="Sprite2D8" parent="." unique_id=931378532 instance=ExtResource("39_4xybc")]
+position = Vector2(20544, -1168)
+
+[node name="Node2D5" parent="." unique_id=1093101666 instance=ExtResource("30_arvqe")]
+position = Vector2(9704, -952)
+
+[node name="Node2D26" parent="." unique_id=1964360720 instance=ExtResource("30_arvqe")]
+position = Vector2(9704, -704)
+
+[node name="Node2D27" parent="." unique_id=908145735 instance=ExtResource("30_arvqe")]
+position = Vector2(9704, -464)
+
+[node name="enemy_position" parent="." unique_id=1724996134 instance=ExtResource("40_t1oap")]
+position = Vector2(17664, -1208)
+scale = Vector2(0.07714838, 0.07714838)
+
+[node name="enemy_target" parent="enemy_position" unique_id=165900166 instance=ExtResource("41_ney7n")]
+position = Vector2(0.03125, -0.0009765625)
+scale = Vector2(1.5000012, 1.5000012)
+
+[node name="enemy_position2" parent="." unique_id=1400129028 instance=ExtResource("40_t1oap")]
+position = Vector2(20352, -808)
+scale = Vector2(0.07714838, 0.07714838)
+
+[node name="Sprite2D" parent="enemy_position2" unique_id=1382319225 instance=ExtResource("42_8j442")]
+position = Vector2(-0.0017318726, -103.69615)
+scale = Vector2(1.005296, 1.005296)
+
+[node name="enemy_position3" parent="." unique_id=1042471807 instance=ExtResource("40_t1oap")]
+position = Vector2(19024, -1216)
+scale = Vector2(0.07714838, 0.07714838)
+
+[node name="enemy_target" parent="enemy_position3" unique_id=416365712 instance=ExtResource("41_ney7n")]
+position = Vector2(0.03125, -0.0009765625)
+scale = Vector2(1.5000012, 1.5000012)

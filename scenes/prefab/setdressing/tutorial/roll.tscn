@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://tluuhw8sd0oq"]
+
+[ext_resource type="Texture2D" uid="uid://bvvq2bc1wnr8l" path="res://assets/textures/elements/setdressing/tutorial/roll.png" id="1_li3lj"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1427375494]
+position = Vector2(0, -52)
+scale = Vector2(0.06341465, 0.063414626)
+texture = ExtResource("1_li3lj")
