@@ -1,13 +1,6 @@
-extends TextureRect 
+extends "res://scripts/big_farma/title_card_delegate.gd"
 
-signal animation_finished()
-
-var timer: SceneTreeTimer 
-var animation_duration: float
-
-func _begin_animation() -> void:
-	timer = get_tree().create_timer(2)
-	timer.timeout.connect(_end_animation)
-
-func _end_animation() -> void:
-	animation_finished.emit()
+func _ready() -> void:
+	# 343 Industries reference?
+	animation_duration = 3.43
+	super._ready()
