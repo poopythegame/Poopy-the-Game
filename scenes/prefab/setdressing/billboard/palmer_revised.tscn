@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://yooo84qywdf4"]
+
+[ext_resource type="Texture2D" uid="uid://dejn7wb8ttgxp" path="res://assets/textures/elements/setdressing/billboard/palmer_revised.png" id="1_k3huk"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1235232339]
+position = Vector2(0, -68)
+scale = Vector2(0.08292682, 0.08292682)
+texture = ExtResource("1_k3huk")

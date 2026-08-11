@@ -42,6 +42,8 @@
 [ext_resource type="PackedScene" uid="uid://bqsajhmo604fc" path="res://scenes/prefab/setdressing/billboard/lightning_mcfake.tscn" id="40_7d2ck"]
 [ext_resource type="PackedScene" uid="uid://doutkcly04luh" path="res://scenes/prefab/setdressing/billboard/chud_squad.tscn" id="41_qe653"]
 [ext_resource type="PackedScene" uid="uid://coenhxcs1ebp1" path="res://scenes/prefab/setdressing/billboard/pop_i.tscn" id="42_827mw"]
+[ext_resource type="PackedScene" uid="uid://yooo84qywdf4" path="res://scenes/prefab/setdressing/billboard/palmer_revised.tscn" id="43_7d2ck"]
+[ext_resource type="PackedScene" uid="uid://cygpvxjxym30m" path="res://scenes/prefab/setdressing/billboard/cereal.tscn" id="44_qe653"]
 
 [sub_resource type="Resource" id="SS2D_Point_1"]
 script = ExtResource("1_point")
@@ -6984,7 +6986,8 @@ position = Vector2(10592, -312.00003)
 scale = Vector2(0.08006994, 0.08006994)
 
 [node name="Billboard5" parent="." unique_id=1715537770 instance=ExtResource("35_mn5d3")]
-position = Vector2(15168, 1879.9999)
+z_index = 150
+position = Vector2(14912, 1911.9999)
 scale = Vector2(0.0805085, 0.08050848)
 
 [node name="Node2D2" parent="." unique_id=1404405138 instance=ExtResource("36_wp5th")]
@@ -7107,3 +7110,11 @@ position = Vector2(11504.001, -387)
 
 [node name="Pop-I" parent="." unique_id=1508028880 instance=ExtResource("42_827mw")]
 position = Vector2(7248, -223.99998)
+
+[node name="Sprite2D5" parent="." unique_id=1235232339 instance=ExtResource("43_7d2ck")]
+z_index = -1900
+position = Vector2(15728, 1823)
+
+[node name="Sprite2D6" parent="." unique_id=232550872 instance=ExtResource("44_qe653")]
+z_index = 150
+position = Vector2(16752, 1696)
