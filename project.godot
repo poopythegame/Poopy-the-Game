@@ -47,7 +47,7 @@ project/assembly_name="experimental hodge podge"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/rider-plugin/plugin.cfg", "res://addons/rmsmartshape/plugin.cfg")
+enabled=PackedStringArray("res://addons/rmsmartshape/plugin.cfg")
 
 [global_group]
 
