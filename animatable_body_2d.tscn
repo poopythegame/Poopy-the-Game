@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://c38kn0vik32mt"]
 
-[ext_resource type="Texture2D" uid="uid://cvgft3yqhaqxm" path="res://assets/textures/placeholder/platforms.png" id="1_s2ghs"]
+[ext_resource type="Texture2D" uid="uid://cerwkjbbxbhcq" path="res://assets/textures/ground/wood_edge.png" id="1_s2ghs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7f7r"]
 size = Vector2(32, 10)
 
-[node name="AnimatableBody2D" type="AnimatableBody2D"]
+[node name="AnimatableBody2D" type="AnimatableBody2D" unique_id=685097404]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_s2ghs")
-region_enabled = true
-region_rect = Rect2(16.0486, 0, 32.862, 10.7294)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=65405024]
 shape = SubResource("RectangleShape2D_v7f7r")
 one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1385884884]
+position = Vector2(-0.23025703, -3.8146973e-06)
+scale = Vector2(0.031668793, 0.07894738)
+texture = ExtResource("1_s2ghs")

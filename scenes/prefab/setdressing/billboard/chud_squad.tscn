@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://doutkcly04luh"]
+
+[ext_resource type="Texture2D" uid="uid://dno8sc343lbx2" path="res://assets/textures/elements/setdressing/billboard/big_chud_squad.png" id="1_mq10s"]
+
+[node name="chud_squad" type="Sprite2D" unique_id=1886609133]
+position = Vector2(0, -68)
+scale = Vector2(0.08292683, 0.082926825)
+texture = ExtResource("1_mq10s")
