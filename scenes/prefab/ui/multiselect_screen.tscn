@@ -4,14 +4,12 @@
 [ext_resource type="AudioStream" uid="uid://lnvvw3422kgq" path="res://assets/audio/effects/menu_left.ogg" id="2_ryp7i"]
 [ext_resource type="AudioStream" uid="uid://cuehpn8m2fakd" path="res://assets/audio/effects/menu_press.ogg" id="3_e0yf4"]
 [ext_resource type="AudioStream" uid="uid://da8y4i2qvk454" path="res://assets/audio/effects/menu_right.ogg" id="4_01fnu"]
+[ext_resource type="Texture2D" uid="uid://2t6uyuv3rq01" path="res://assets/textures/ui/cancel.png" id="5_01fnu"]
 [ext_resource type="Texture2D" uid="uid://ci3s54aa4h2h4" path="res://assets/textures/ui/main_menu/main_menu_option_portrait_background.png" id="5_ryp7i"]
+[ext_resource type="Texture2D" uid="uid://dva0q0wlb0gny" path="res://assets/textures/ui/confirm.png" id="7_a8kia"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hddne"]
 texture = ExtResource("5_ryp7i")
-expand_margin_left = 50.0
-expand_margin_top = 25.0
-expand_margin_right = 50.0
-expand_margin_bottom = 25.0
 region_rect = Rect2(213, 205, 1910, 1007)
 
 [node name="MultiselectScreen" type="MarginContainer" unique_id=1181466732]
@@ -41,11 +39,31 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PortraitContainer" type="PanelContainer" parent="VBoxContainer" unique_id=541114955]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1687052117]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BackHint" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1650238897]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("5_01fnu")
+expand_mode = 5
+
+[node name="PortraitContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=541114955]
+custom_minimum_size = Vector2(788, 491)
+custom_maximum_size = Vector2(788, 491)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_hddne")
+
+[node name="ConfirmHint" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=344237949]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("7_a8kia")
+expand_mode = 5
 
 [node name="Spacer" type="Control" parent="VBoxContainer" unique_id=729717884]
 layout_mode = 2

@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://bma5s00usjygf"]
+
+[ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="1_xax08"]
+[ext_resource type="Script" uid="uid://0j7m4i65so5p" path="res://scripts/characters_screen.gd" id="2_6dvwj"]
+[ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="3_nkfnr"]
+[ext_resource type="Texture2D" uid="uid://cnkkm4vbux23p" path="res://assets/textures/ui/credits/jason.png" id="4_xre4m"]
+[ext_resource type="Script" uid="uid://8kv681icjouq" path="res://scripts/character_def.gd" id="5_16ial"]
+[ext_resource type="Texture2D" uid="uid://caunj2585vle2" path="res://assets/textures/ui/credits/cubeguy.png" id="6_4guh7"]
+[ext_resource type="Texture2D" uid="uid://dsw3ulxi6ch0o" path="res://assets/textures/ui/credits/sheo_fr0.png" id="7_ftiaj"]
+[ext_resource type="Texture2D" uid="uid://cyndnisqknxw8" path="res://assets/textures/ui/credits/sheo_fr1.png" id="8_3wrq7"]
+[ext_resource type="Texture2D" uid="uid://bcbmtmyqah4kt" path="res://assets/textures/ui/credits/hyptac.jpg" id="9_a0duj"]
+[ext_resource type="Texture2D" uid="uid://bu1i6i56y3msq" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="10_nkfnr"]
+[ext_resource type="Texture2D" uid="uid://k0qmq705scns" path="res://assets/textures/ui/main_menu/option_label_credits.png" id="11_xre4m"]
+
+[sub_resource type="Resource" id="Resource_r6ok0"]
+script = ExtResource("5_16ial")
+bio = "• Project management
+• Game design
+• Characters and worldbuilding
+• Programming
+• Art and animation
+• Additional music composition (main
+theme, \"Big Farma\", ranking funk)"
+title = "Jungsoo \"Jason\" Park"
+portrait = ExtResource("4_xre4m")
+metadata/_custom_type_script = "uid://8kv681icjouq"
+
+[sub_resource type="Resource" id="Resource_oq1mw"]
+script = ExtResource("5_16ial")
+bio = "• Programming"
+title = "Devon Albert"
+portrait = ExtResource("6_4guh7")
+metadata/_custom_type_script = "uid://8kv681icjouq"
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_5et21"]
+frames = 2
+frame_0/texture = ExtResource("7_ftiaj")
+frame_0/duration = 0.17
+frame_1/texture = ExtResource("8_3wrq7")
+frame_1/duration = 0.17
+
+[sub_resource type="Resource" id="Resource_cc4y2"]
+script = ExtResource("5_16ial")
+bio = "• Music arrangement/composition (all music)
+• Sound effects"
+title = "SheoM. / Edé Eliseo A. M."
+portrait = SubResource("AnimatedTexture_5et21")
+metadata/_custom_type_script = "uid://8kv681icjouq"
+
+[sub_resource type="Resource" id="Resource_ei00g"]
+script = ExtResource("5_16ial")
+bio = "• Running animation groundwork
+• UI programming"
+title = "Kismet Elmenchawi"
+metadata/_custom_type_script = "uid://8kv681icjouq"
+
+[sub_resource type="Resource" id="Resource_75tx2"]
+script = ExtResource("5_16ial")
+bio = "• \"Big Farma\" alt. music composition"
+title = "Nurtas"
+portrait = ExtResource("9_a0duj")
+metadata/_custom_type_script = "uid://8kv681icjouq"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_16ial"]
+texture = ExtResource("10_nkfnr")
+expand_margin_left = 50.0
+expand_margin_top = 25.0
+expand_margin_right = 50.0
+expand_margin_bottom = 25.0
+region_rect = Rect2(67, 61, 2236, 1382)
+
+[node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_xax08")]
+script = ExtResource("2_6dvwj")
+options = Array[ExtResource("3_nkfnr")]([SubResource("Resource_r6ok0"), SubResource("Resource_oq1mw"), SubResource("Resource_cc4y2"), SubResource("Resource_ei00g"), SubResource("Resource_75tx2")])
+
+[node name="PortraitContainer" parent="VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(1687052117) index="1" unique_id=541114955]
+theme_override_styles/panel = SubResource("StyleBoxTexture_16ial")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/PortraitContainer" index="1" unique_id=1216453844]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("11_xre4m")
+expand_mode = 3
+
+[node name="ConfirmHint" parent="VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(1687052117) index="2" unique_id=344237949]
+modulate = Color(1, 1, 1, 0)
+
+[node name="TitlesContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="3" unique_id=890400313]
+offset_transform_position = Vector2(477, 0)
