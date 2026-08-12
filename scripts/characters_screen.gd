@@ -4,6 +4,11 @@ extends MultiselectScreen
 func _preview_option(option: OptionDef, option_index: int) -> Control:
 	var texture: TextureRect = super._preview_option(option, option_index)
 	texture.size_flags_horizontal = SIZE_EXPAND_FILL
+	texture.size_flags_vertical = SIZE_SHRINK_CENTER
+	texture.expand_mode = TextureRect.EXPAND_FIT_HEIGHT
+	texture.offset_transform_enabled = true
+	texture.offset_transform_position = Vector2(0, 45)
+	texture.custom_maximum_size.y = 300
 	var container: HBoxContainer = HBoxContainer.new()
 	container.add_child(texture)
 	var bio_label: Label = Label.new()
