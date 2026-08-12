@@ -353,7 +353,15 @@ func engage_freeze():
 	velocity = Vector2.ZERO
 	
 	# --- NEW: Start the 0.2s invulnerability timer ---
-	freeze_ghost_timer = 0.2
+	var overlapping_bodies := hitbox.get_overlapping_bodies()
+	var has_player := false
+	for body in overlapping_bodies:
+		if body.is_in_group("Player"):
+			has_player = true
+	if has_player:
+		freeze_ghost_timer = 0.2
+	else:
+		freeze_ghost_timer = 0
 	
 	frozen_origin = global_position
 	target_position = global_position
