@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="1_d0yg0"]
 [ext_resource type="Texture2D" uid="uid://bu1i6i56y3msq" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="2_riwin"]
 [ext_resource type="Script" uid="uid://c3f38pxpyhfbt" path="res://scripts/level_select.gd" id="2_vmmm6"]
+[ext_resource type="Texture2D" uid="uid://bhxan4q8j23fw" path="res://assets/textures/ui/main_menu/option_label_level_select.png" id="4_vmmm6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vmmm6"]
 texture = ExtResource("2_riwin")
@@ -16,4 +17,15 @@ region_rect = Rect2(67, 61, 2236, 1382)
 script = ExtResource("2_vmmm6")
 
 [node name="PortraitContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="1" unique_id=541114955]
+custom_minimum_size = Vector2(788, 491)
+custom_maximum_size = Vector2(788, 491)
 theme_override_styles/panel = SubResource("StyleBoxTexture_vmmm6")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PortraitContainer" index="0" unique_id=518399489]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("4_vmmm6")
+expand_mode = 3
+stretch_mode = 5
