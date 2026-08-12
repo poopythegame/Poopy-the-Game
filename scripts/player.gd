@@ -978,7 +978,7 @@ func die():
 	motion = Vector2.ZERO
 	dying = true
 	var sprite: AnimatedSprite2D = $Sprite
-	sprite.play("idle")
+	sprite.play("stare")
 	death_tween.set_ease(Tween.EASE_IN)
 	death_tween.set_trans(Tween.TRANS_CUBIC)
 	death_tween.tween_callback(func():

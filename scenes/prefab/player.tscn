@@ -47,8 +47,10 @@ final_hit_sfx = Array[AudioStream]([ExtResource("15_rp2o6"), ExtResource("16_vc3
 position = Vector2(0, 1)
 scale = Vector2(0.0534135, 0.0534135)
 sprite_frames = ExtResource("2_mx6bk")
-animation = &"idle"
+animation = &"stare"
 autoplay = "idle"
+frame = 1
+frame_progress = 1.0
 offset = Vector2(0, -270.04)
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2098401984]

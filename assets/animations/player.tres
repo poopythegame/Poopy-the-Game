@@ -20,8 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://cxoiopasw5ijk" path="res://assets/textures/player/walk/walk_fr1.png" id="14_1m7ma"]
 [ext_resource type="Texture2D" uid="uid://n57eh3b6j5tj" path="res://assets/textures/player/walk/walk_fr2.png" id="15_rqddi"]
 [ext_resource type="Texture2D" uid="uid://bo0qb4e1301q4" path="res://assets/textures/player/walk/walk_fr3.png" id="16_eln8t"]
+[ext_resource type="Texture2D" uid="uid://5va7pdcu1gwp" path="res://assets/textures/ui/main_menu/player_turn_around/fr0.png" id="17_7um1e"]
 [ext_resource type="Texture2D" uid="uid://cfyeh43t775l1" path="res://assets/textures/player/walk/walk_fr4.png" id="17_gytsp"]
 [ext_resource type="Texture2D" uid="uid://rglrs0plo71r" path="res://assets/textures/player/walk/walk_fr5.png" id="18_h0yss"]
+[ext_resource type="Texture2D" uid="uid://opyo3j6f558" path="res://assets/textures/ui/main_menu/player_turn_around/fr1.png" id="18_vbv6c"]
 [ext_resource type="Texture2D" uid="uid://bg6r3qls4m7lf" path="res://assets/textures/player/walk/walk_fr6.png" id="19_d4lfm"]
 [ext_resource type="Texture2D" uid="uid://borogfc2eousr" path="res://assets/textures/player/walk/walk_fr7.png" id="20_vpmv7"]
 
@@ -99,6 +101,17 @@ animations = [{
 "loop": 1,
 "name": &"skid",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_7um1e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_vbv6c")
+}],
+"loop": 0,
+"name": &"stare",
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
