@@ -10,6 +10,10 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hddne"]
 texture = ExtResource("5_ryp7i")
+expand_margin_left = 25.0
+expand_margin_top = 25.0
+expand_margin_right = 25.0
+expand_margin_bottom = 25.0
 region_rect = Rect2(213, 205, 1910, 1007)
 
 [node name="MultiselectScreen" type="MarginContainer" unique_id=1181466732]
@@ -42,6 +46,7 @@ size_flags_vertical = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1687052117]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/separation = 15
 
 [node name="BackHint" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1650238897]
 custom_minimum_size = Vector2(150, 0)
