@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bxfj2a7kqusl0" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr1.png" id="10_nuwws"]
 [ext_resource type="AudioStream" uid="uid://dmudigh1dtlb1" path="res://assets/audio/music/rankings/ranking_funk_a.ogg" id="11_3dhcv"]
 [ext_resource type="Texture2D" uid="uid://behhk7f3nw1ed" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr2.png" id="11_owg44"]
-[ext_resource type="AudioStream" uid="uid://drjb7op0m0ri5" path="res://assets/audio/music/rankings/a_rank.ogg" id="12_cxb4r"]
+[ext_resource type="AudioStream" uid="uid://bk71qf6pdoi7n" path="res://assets/audio/music/rankings/a_rank.ogg" id="12_cxb4r"]
 [ext_resource type="Texture2D" uid="uid://bfhpdjqj3p1lh" path="res://assets/textures/ui/rankings/small/a_rank_small.png" id="13_cxb4r"]
 [ext_resource type="Texture2D" uid="uid://cadobt2c1luk8" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr0.png" id="13_e1edl"]
 [ext_resource type="Texture2D" uid="uid://cluts3ihvcgxe" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr1.png" id="14_sav0g"]
