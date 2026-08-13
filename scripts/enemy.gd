@@ -562,7 +562,7 @@ func test_player_impact(_delta: float) -> TestResult:
 	return TestResult.NOOP
 
 func perform_bounce(player: Player):
-	player_raw_motion = player.motion
+	player_raw_motion = player.velocity
 	player.motion.y = abs(player.motion.y) * -1
 	if "exitgrapple" in player: player.exitgrapple = false
 	player.canstomp = true
@@ -573,7 +573,7 @@ func perform_bounce(player: Player):
 func launch_enemy(player):
 	hit_cooldown = true
 	hit_timer = 1
-	var player_motion: Vector2 = player.motion
+	var player_motion: Vector2 = player.velocity
 	if player_raw_motion != null:
 		player_motion = player_raw_motion
 		player_raw_motion = null
