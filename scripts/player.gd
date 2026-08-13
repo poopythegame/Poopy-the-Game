@@ -100,6 +100,7 @@ var isskidding = false
 var cangrapple = false
 
 var canstomp = false
+var stomp_enabled: bool = true
 
 var canairdash = false
 
@@ -627,7 +628,7 @@ func physics_process_normal(delta):
 		isairdashing = false
 	
 	if not is_on_floor():
-		if Input.is_action_pressed("action") and Input.is_action_pressed("down") and canstomp:
+		if Input.is_action_pressed("action") and Input.is_action_pressed("down") and canstomp and stomp_enabled:
 			if motion.y < 450:
 				motion.y = 450
 
@@ -642,6 +643,7 @@ func physics_process_normal(delta):
 				isstomping = true
 				play_all_audio_multiselect([stomp_sfx, screwdive_sfx])
 				isairdashing = false
+			stomp_enabled = false
 		elif Input.is_action_just_pressed("action") and canairdash and abs(motion.x) >= 20:
 			motion.x += abs(motion.x) * 0.15 * Input.get_axis("left", "right")
 			canairdash = false
@@ -649,13 +651,10 @@ func physics_process_normal(delta):
 			play_all_audio_multiselect([airdash_sfx, screwdive_sfx])
 			isstomping = false
 	
-	#This is the speedometer
-	main.display_speed(motion.x, motion.y)
+	if not Input.is_action_pressed("action"):
+		stomp_enabled = true
 	
-
-		
-
-# Movement
+	main.display_speed(motion.x, motion.y)
 	
 	if abs(motion.x) != 0:
 		# If moving right (1), point right. If moving left (-1), point left.

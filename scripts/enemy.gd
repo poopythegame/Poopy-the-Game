@@ -561,7 +561,7 @@ func test_player_impact(_delta: float) -> TestResult:
 					return TestResult.LAUNCH
 	return TestResult.NOOP
 
-func perform_bounce(player):
+func perform_bounce(player: Player):
 	player_raw_motion = player.motion
 	player.motion.y = abs(player.motion.y) * -1
 	if "exitgrapple" in player: player.exitgrapple = false
