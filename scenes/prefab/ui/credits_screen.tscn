@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dndgonbb4w5ex" path="res://scenes/prefab/ui/multiselect_screen.tscn" id="1_xax08"]
 [ext_resource type="Script" uid="uid://0j7m4i65so5p" path="res://scripts/characters_screen.gd" id="2_6dvwj"]
 [ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="3_nkfnr"]
+[ext_resource type="Texture2D" uid="uid://d4jqwrmcft378" path="res://assets/textures/ui/credits/godot_logo.svg" id="4_16ial"]
 [ext_resource type="Texture2D" uid="uid://cnkkm4vbux23p" path="res://assets/textures/ui/credits/jason.png" id="4_xre4m"]
 [ext_resource type="Script" uid="uid://8kv681icjouq" path="res://scripts/character_def.gd" id="5_16ial"]
 [ext_resource type="Texture2D" uid="uid://caunj2585vle2" path="res://assets/textures/ui/credits/cubeguy.png" id="6_4guh7"]
@@ -10,15 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://cyndnisqknxw8" path="res://assets/textures/ui/credits/sheo_fr1.png" id="8_3wrq7"]
 [ext_resource type="Texture2D" uid="uid://bcbmtmyqah4kt" path="res://assets/textures/ui/credits/hyptac.jpg" id="9_a0duj"]
 [ext_resource type="Texture2D" uid="uid://bu1i6i56y3msq" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="10_nkfnr"]
-[ext_resource type="Texture2D" uid="uid://c0wjtb64dng2k" path="res://icon.svg" id="10_xre4m"]
 [ext_resource type="Texture2D" uid="uid://k0qmq705scns" path="res://assets/textures/ui/main_menu/option_label_credits.png" id="11_xre4m"]
 
 [sub_resource type="Resource" id="Resource_uavqj"]
 script = ExtResource("5_16ial")
-bio = "Godot Engine
-Maddie's Physics by Cateline"
+bio = "• Godot Engine
+• Maddie's Physics by Cateline"
 title = "Powered by"
-portrait = ExtResource("10_xre4m")
+portrait = ExtResource("4_16ial")
 metadata/_custom_type_script = "uid://8kv681icjouq"
 
 [sub_resource type="Resource" id="Resource_r6ok0"]
@@ -70,20 +70,24 @@ title = "Nurtas"
 portrait = ExtResource("9_a0duj")
 metadata/_custom_type_script = "uid://8kv681icjouq"
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_16ial"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xre4m"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
 texture = ExtResource("10_nkfnr")
 expand_margin_left = 50.0
 expand_margin_top = 25.0
 expand_margin_right = 50.0
 expand_margin_bottom = 25.0
-region_rect = Rect2(67, 61, 2236, 1382)
+region_rect = Rect2(12.941772, -2.9429321, 2245.5884, 1400.0115)
 
 [node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_xax08")]
 script = ExtResource("2_6dvwj")
 options = Array[ExtResource("3_nkfnr")]([SubResource("Resource_uavqj"), SubResource("Resource_r6ok0"), SubResource("Resource_oq1mw"), SubResource("Resource_cc4y2"), SubResource("Resource_ei00g"), SubResource("Resource_75tx2")])
 
 [node name="PortraitContainer" parent="VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(1687052117) index="1" unique_id=541114955]
-theme_override_styles/panel = SubResource("StyleBoxTexture_16ial")
+theme_override_styles/panel = SubResource("StyleBoxTexture_xre4m")
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/PortraitContainer" index="0" unique_id=1216453844]
 custom_minimum_size = Vector2(0, 50)
