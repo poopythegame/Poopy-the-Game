@@ -76,7 +76,7 @@ options = Array[ExtResource("3_nkfnr")]([SubResource("Resource_r6ok0"), SubResou
 [node name="PortraitContainer" parent="VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(1687052117) index="1" unique_id=541114955]
 theme_override_styles/panel = SubResource("StyleBoxTexture_16ial")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/PortraitContainer" index="1" unique_id=1216453844]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/PortraitContainer" index="0" unique_id=1216453844]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_horizontal = 4
