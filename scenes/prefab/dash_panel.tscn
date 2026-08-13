@@ -2,21 +2,30 @@
 
 [ext_resource type="Script" uid="uid://cr3drh4v7i2ll" path="res://scripts/dash_panel.gd" id="1_proyd"]
 [ext_resource type="AudioStream" uid="uid://dhjqda2lyu4gx" path="res://assets/audio/effects/use_dash_panel.ogg" id="2_ufoi8"]
-[ext_resource type="Texture2D" uid="uid://poy2l887xr1d" path="res://assets/textures/placeholder/green.png" id="2_uiwi0"]
+[ext_resource type="Texture2D" uid="uid://2qvf48augxmr" path="res://assets/textures/elements/dash_panel/dash_panel_fr0.png" id="3_ufoi8"]
+[ext_resource type="Texture2D" uid="uid://c8scnpwlxtrag" path="res://assets/textures/elements/dash_panel/dash_panel_fr1.png" id="4_dc2g0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2g2j0"]
 size = Vector2(68, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uavqj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ufoi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dc2g0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="DashPanel" type="Node2D" unique_id=203562222]
 z_index = -1001
 script = ExtResource("1_proyd")
 use_sfx = Array[AudioStream]([ExtResource("2_ufoi8")])
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=849902879]
-scale = Vector2(0.065, 0.065)
-texture = ExtResource("2_uiwi0")
-region_enabled = true
-region_rect = Rect2(0, 0, 1024, 509.0204)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=576495798]
 
@@ -25,3 +34,10 @@ shape = SubResource("RectangleShape2D_2g2j0")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1912343754]
 bus = &"SFX"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=395844749]
+position = Vector2(11.562, -7.5)
+scale = Vector2(0.122233056, 0.122233056)
+sprite_frames = SubResource("SpriteFrames_uavqj")
+autoplay = "default"
+frame_progress = 0.63108474

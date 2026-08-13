@@ -35,7 +35,7 @@ func stop_audio():
 func _ready() -> void:
 	area.body_entered.connect(_contact)
 	if flip:
-		var sprite: Sprite2D = $Sprite2D
+		var sprite: AnimatedSprite2D = $AnimatedSprite2D
 		sprite.flip_h = true
 
 func _contact(body):
