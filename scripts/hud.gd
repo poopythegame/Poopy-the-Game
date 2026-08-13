@@ -69,7 +69,7 @@ func display_speed(x: float, y: float):
 func log_health(value: float, max_health: float) -> void:
 	health_indicator.scale.x = clamp(value / max_health, 0, 1)
 
-func calculate_rank():
+func calculate_rank() -> int:
 	var ranks := Global.get_ranks()
 	var rank := len(ranks) - 1
 	var best_rank_time := INF
@@ -81,17 +81,20 @@ func calculate_rank():
 	if time == Global.get_best_time():
 		Global.set_rank(rank)
 	Global.save_game()
+	return rank
 
 func show_rank():
+	var rank := calculate_rank()
 	whiteout.modulate.a = 0
 	whiteout.show()
 	var whiteout_tween = create_tween()
 	whiteout_tween.tween_property(whiteout, "modulate:a", 1, 2)
-	whiteout_tween.tween_callback(_finish_show_rankings)
+	whiteout_tween.tween_callback(_finish_show_rankings.bind(rank))
 	whiteout_tween.set_ease(Tween.EASE_OUT)
 	whiteout_tween.set_trans(Tween.TRANS_CUBIC)
 
-func _finish_show_rankings():
+func _finish_show_rankings(rank: int):
 	var main_menu: MainMenu = main_menu_scene.instantiate()
 	main_menu.start_screen = MainMenu.Screen.RANKINGS
+	main_menu.rank_to_show = rank
 	get_tree().change_scene_to_node(main_menu)

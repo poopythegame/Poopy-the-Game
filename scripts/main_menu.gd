@@ -84,6 +84,8 @@ enum Screen {
 
 @onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, characters_screen_cg, rankings_screen_cg, credits_screen_cg, aux_cg]
 
+var rank_to_show: int = -1
+
 var screen := Screen.UNDEFINED
 var current_screen_cg: CanvasGroup
 var main_scene: PackedScene
@@ -430,7 +432,7 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 		whiteout.hide()
 		rankings_background.show()
 		screen_cg = rankings_screen_cg
-		rankings_screen._on_enter()
+		rankings_screen._on_enter(rank_to_show)
 	elif new_screen == Screen.AUX:
 		screen_cg = aux_cg
 	if record_undo:

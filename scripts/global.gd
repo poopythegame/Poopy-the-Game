@@ -226,7 +226,7 @@ func get_rank(level: int = -1):
 	if rank == -1:
 		return null
 	else:
-		return save_data.ranks[current_level] 
+		return save_data.ranks[level] 
 
 func get_ranks() -> Array[RankDef]:
 	return levels.levels[current_level].rankings

@@ -23,9 +23,9 @@ var rank_animation_animated_texture: AnimatedTexture
 var curr_rank: RankDef
 var main_menu: MainMenu
 
-func _on_enter() -> void:
+func _on_enter(rank_to_show: int) -> void:
 	rank_animation_animated_texture = rank_animation_tr.texture
-	var rank_id: int = Global.get_rank()
+	var rank_id: int = rank_to_show
 	curr_rank = Global.get_ranks()[rank_id]
 	rank_icon.texture = curr_rank.icon
 	var time := Global.get_time()
