@@ -2,10 +2,12 @@ extends CanvasLayer
 class_name InGameOverlay
 
 @export var whiteout_time := .5
+@export var boost_indicator_on: Texture2D
+@export var boost_indicator_off: Texture2D
 
 @onready var main_menu_scene: PackedScene = load("uid://dady2wku1xusy")
 
-@onready var player: CharacterBody2D = get_parent().get_node("Player")
+@onready var player: Player = get_parent().get_node("Player")
 @onready var horizontal_speed: Label = $Left/HorizontalSpeed/Readout
 @onready var vertical_speed: Label = $Right/VerticalSpeed/Readout
 @onready var health_indicator: ColorRect = $Left/HealthBar/ColorRect
@@ -13,6 +15,7 @@ class_name InGameOverlay
 @onready var time_label: Label = $Left/Time/Readout
 @onready var whiteout: ColorRect = $Whiteout
 @onready var pause_menu: PauseMenu = $PauseMenu
+@onready var boost_indicator: TextureRect = $Right/BoostIndicator
 
 var stopwatch_paused := true
 @onready var coins_label: Label = $Left/Coins/Readout
@@ -57,6 +60,10 @@ func _process(delta):
 		minutes = fmod(time, 3600) / 60 as int
 		var time_readout: String = "%02d:%02d.%03d" % [minutes, seconds, millis]
 		time_label.text = time_readout
+	if player.canspeedboost:
+		boost_indicator.texture = boost_indicator_on
+	else:
+		boost_indicator.texture = boost_indicator_off
 
 func display_speed(x: float, y: float):
 	var raw_vspeed = clamp(abs(y) - 50, 0, INF)
