@@ -43,6 +43,8 @@
 [ext_resource type="Script" uid="uid://c0xpd8kp2k05y" path="res://scripts/tutorial/title_card_delegate.gd" id="37_quwhv"]
 [ext_resource type="Texture2D" uid="uid://csaok6kny0y08" path="res://assets/textures/level/big_farma/title_card.png" id="39_r7s68"]
 [ext_resource type="Script" uid="uid://cl7hws3vjpti2" path="res://scripts/big_farma/title_card_delegate.gd" id="40_vwncn"]
+[ext_resource type="AudioStream" uid="uid://dhl0vgil3p2ln" path="res://assets/audio/music/level/tutorial_intro.ogg" id="41_eq1kq"]
+[ext_resource type="AudioStream" uid="uid://bouvphnbcshlu" path="res://assets/audio/music/level/tutorial_loop.ogg" id="42_eq1kq"]
 
 [sub_resource type="Resource" id="Resource_jk1qb"]
 script = ExtResource("2_x5qbs")
@@ -113,6 +115,8 @@ title = "Poopy's Basics in Platforming"
 jingle = ExtResource("36_0oi5t")
 title_card = ExtResource("36_wdc13")
 title_card_delegate = ExtResource("37_quwhv")
+music_intro = ExtResource("41_eq1kq")
+music_loop = ExtResource("42_eq1kq")
 scene = ExtResource("25_e1edl")
 rankings = Array[ExtResource("2_x5qbs")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
 metadata/_custom_type_script = "uid://7xfldx24oh8g"
