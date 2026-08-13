@@ -280,6 +280,8 @@ func attempt_grapple_start():
 		# Reset Maddie's physics states
 		grounded = false
 		slopefactor = 0
+		isairdashing = false
+		isstomping = false
 		canairdash = true
 		canstomp = true
 		rot = 0
@@ -928,7 +930,21 @@ func animate():
 			$Sprite.speed_scale = 1
 			
 		elif isstomping:
-			$Sprite.play("jump")
+
+			var stomprot = abs(motion.x) / 1000
+		
+			stomprot = clamp(stomprot, 0, PI/3)
+		
+			$Sprite.rotation = lerp_angle($Sprite.rotation, stomprot, 1)
+				
+			if sign(motion.x) > 0:
+				$Sprite.flip_h = false
+			elif sign(motion.x) < 0:
+				$Sprite.flip_h = true
+				
+			#Actual animation
+			$Sprite.play("stomp")
+			$Sprite.speed_scale = clamp(motion.y/250, 1, 3)
 			
 		elif jumping:
 			$Sprite.play("jump")
