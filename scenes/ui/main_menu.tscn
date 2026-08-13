@@ -181,7 +181,6 @@ texture = ExtResource("16_rbask")
 stretch_mode = 4
 
 [node name="CreditsCanvasGroup" type="CanvasGroup" parent="." unique_id=158372516]
-visible = false
 
 [node name="Background" type="Control" parent="CreditsCanvasGroup" unique_id=1269202384]
 layout_mode = 3
@@ -190,8 +189,8 @@ script = ExtResource("16_e6a60")
 texture = ExtResource("2_n4uci")
 
 [node name="Screen" parent="CreditsCanvasGroup" unique_id=1181466732 instance=ExtResource("20_6ud2m")]
-offset_right = 1136.0
-offset_bottom = 610.0
+offset_right = 1291.0
+offset_bottom = 720.0
 
 [node name="MenuCanvasGroup" type="CanvasGroup" parent="." unique_id=157187082]
 visible = false
@@ -210,6 +209,7 @@ offset_bottom = 720.0
 slide_time = 2.0
 
 [node name="LevelSelectCanvasGroup" type="CanvasGroup" parent="." unique_id=601334975]
+visible = false
 material = SubResource("ShaderMaterial_qch7b")
 
 [node name="Background" type="Control" parent="LevelSelectCanvasGroup" unique_id=1902345678]
