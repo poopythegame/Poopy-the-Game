@@ -69,7 +69,7 @@ func begin_level(index: int) -> void:
 	var level_music_player: AudioStreamPlayer
 	if index != current_level:
 		level_music_player = AudioStreamPlayer.new()
-		level_music_player.stream = level.music
+		_apply_level_music(level_music_player, level)
 		level_music_player.name = "MusicPlayer"
 		level_music_player.bus = &"Music"
 		level_music_player.volume_db = -5
@@ -113,7 +113,7 @@ func begin_level_title_card(index: int):
 	var level_music_player: AudioStreamPlayer
 	if index != current_level:
 		level_music_player = AudioStreamPlayer.new()
-		level_music_player.stream = level.music
+		_apply_level_music(level_music_player, level)
 		level_music_player.name = "MusicPlayer"
 		level_music_player.bus = &"Music"
 		level_music_player.volume_db = -5
@@ -200,6 +200,20 @@ func add_coin():
 func reset_coins():
 	coins = 0
 
+func _apply_level_music(player: AudioStreamPlayer, level: LevelDesc) -> void:
+	if level.music_intro and level.music_loop:
+		player.stream = level.music_intro
+		if not player.finished.is_connected(_on_music_intro_finished.bind(player, level.music_loop)):
+			player.finished.connect(_on_music_intro_finished.bind(player, level.music_loop))
+	elif level.music:
+		player.stream = level.music
+
+func _on_music_intro_finished(player: AudioStreamPlayer, loop_stream: AudioStream) -> void:
+	if player.stream == loop_stream:
+		return
+	player.stream = loop_stream
+	player.play()
+
 func set_rank(rank_id: int):
 	save_data.ranks[current_level] = rank_id
 
@@ -226,7 +240,7 @@ func get_rank(level: int = -1):
 	if rank == -1:
 		return null
 	else:
-		return save_data.ranks[current_level] 
+		return save_data.ranks[level] 
 
 func get_ranks() -> Array[RankDef]:
 	return levels.levels[current_level].rankings

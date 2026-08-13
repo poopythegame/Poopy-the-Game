@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dejn7wb8ttgxp"
-path="res://.godot/imported/palmer_revised.png-42c397e3028f997536c73e95d027777b.ctex"
+uid="uid://83riv6rjk7k1"
+path="res://.godot/imported/Palmer.png-390f3af6d60c6dac88438d19964c4fdf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/elements/setdressing/billboard/palmer_revised.png"
-dest_files=["res://.godot/imported/palmer_revised.png-42c397e3028f997536c73e95d027777b.ctex"]
+source_file="res://assets/textures/elements/setdressing/billboard/Palmer.png"
+dest_files=["res://.godot/imported/Palmer.png-390f3af6d60c6dac88438d19964c4fdf.ctex"]
 
 [params]
 

@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bxfj2a7kqusl0" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr1.png" id="10_nuwws"]
 [ext_resource type="AudioStream" uid="uid://dmudigh1dtlb1" path="res://assets/audio/music/rankings/ranking_funk_a.ogg" id="11_3dhcv"]
 [ext_resource type="Texture2D" uid="uid://behhk7f3nw1ed" path="res://assets/textures/ui/rankings/player_animations/b_rank_fr2.png" id="11_owg44"]
-[ext_resource type="AudioStream" uid="uid://drjb7op0m0ri5" path="res://assets/audio/music/rankings/a_rank.ogg" id="12_cxb4r"]
+[ext_resource type="AudioStream" uid="uid://bk71qf6pdoi7n" path="res://assets/audio/music/rankings/a_rank.ogg" id="12_cxb4r"]
 [ext_resource type="Texture2D" uid="uid://bfhpdjqj3p1lh" path="res://assets/textures/ui/rankings/small/a_rank_small.png" id="13_cxb4r"]
 [ext_resource type="Texture2D" uid="uid://cadobt2c1luk8" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr0.png" id="13_e1edl"]
 [ext_resource type="Texture2D" uid="uid://cluts3ihvcgxe" path="res://assets/textures/ui/rankings/player_animations/c_rank_fr1.png" id="14_sav0g"]
@@ -43,6 +43,8 @@
 [ext_resource type="Script" uid="uid://c0xpd8kp2k05y" path="res://scripts/tutorial/title_card_delegate.gd" id="37_quwhv"]
 [ext_resource type="Texture2D" uid="uid://csaok6kny0y08" path="res://assets/textures/level/big_farma/title_card.png" id="39_r7s68"]
 [ext_resource type="Script" uid="uid://cl7hws3vjpti2" path="res://scripts/big_farma/title_card_delegate.gd" id="40_vwncn"]
+[ext_resource type="AudioStream" uid="uid://dhl0vgil3p2ln" path="res://assets/audio/music/level/tutorial_intro.ogg" id="41_eq1kq"]
+[ext_resource type="AudioStream" uid="uid://bouvphnbcshlu" path="res://assets/audio/music/level/tutorial_loop.ogg" id="42_eq1kq"]
 
 [sub_resource type="Resource" id="Resource_jk1qb"]
 script = ExtResource("2_x5qbs")
@@ -51,7 +53,7 @@ icon = ExtResource("3_4o7sf")
 small_icon = ExtResource("3_4o7sf")
 animation_frames = Array[Texture2D]([ExtResource("3_smksl"), ExtResource("4_e1edl")])
 animation_fps = 12.0
-time = 60.0
+time = 65.0
 music_track_1 = ExtResource("6_e58h7")
 music_track_2 = ExtResource("7_h2k1g")
 show_portraits_background = 2
@@ -110,11 +112,27 @@ metadata/_custom_type_script = "uid://h46hneoomiqh"
 [sub_resource type="Resource" id="Resource_7365d"]
 script = ExtResource("1_8dco6")
 title = "Poopy's Basics in Platforming"
+jingle = ExtResource("36_0oi5t")
 title_card = ExtResource("36_wdc13")
 title_card_delegate = ExtResource("37_quwhv")
+music_intro = ExtResource("41_eq1kq")
+music_loop = ExtResource("42_eq1kq")
 scene = ExtResource("25_e1edl")
 rankings = Array[ExtResource("2_x5qbs")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
 metadata/_custom_type_script = "uid://7xfldx24oh8g"
+
+[sub_resource type="Resource" id="Resource_m3rbm"]
+script = ExtResource("2_x5qbs")
+letter = "P"
+icon = ExtResource("3_4o7sf")
+small_icon = ExtResource("3_4o7sf")
+animation_frames = Array[Texture2D]([ExtResource("3_smksl"), ExtResource("4_e1edl")])
+animation_fps = 12.0
+time = 60.0
+music_track_1 = ExtResource("6_e58h7")
+music_track_2 = ExtResource("7_h2k1g")
+show_portraits_background = 2
+metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_q8iik"]
 script = ExtResource("1_8dco6")
@@ -124,7 +142,7 @@ title_card = ExtResource("39_r7s68")
 title_card_delegate = ExtResource("40_vwncn")
 music = ExtResource("26_sav0g")
 scene = ExtResource("3_x5qbs")
-rankings = Array[ExtResource("2_x5qbs")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
+rankings = Array[ExtResource("2_x5qbs")]([SubResource("Resource_m3rbm"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
 metadata/_custom_type_script = "uid://7xfldx24oh8g"
 
 [resource]

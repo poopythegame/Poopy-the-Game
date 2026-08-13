@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu8r0su8p2krl"
-path="res://.godot/imported/Toolbar.png-a521e2493bd3c08a829245b3129bb58f.ctex"
+uid="uid://cow7uxbb0kcka"
+path="res://.godot/imported/can_boost.png-24aea7d1265283ffa88e29afe3557365.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/rider-plugin/screenshots/Toolbar.png"
-dest_files=["res://.godot/imported/Toolbar.png-a521e2493bd3c08a829245b3129bb58f.ctex"]
+source_file="res://assets/textures/ui/hud/can_boost.png"
+dest_files=["res://.godot/imported/can_boost.png-24aea7d1265283ffa88e29afe3557365.ctex"]
 
 [params]
 

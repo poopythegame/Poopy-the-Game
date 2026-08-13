@@ -77,5 +77,9 @@ stretch_mode = 4
 [node name="Spacer2" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="1" unique_id=399737110]
 custom_minimum_size = Vector2(0, 18)
 
+[node name="PortraitContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="2" unique_id=541114955]
+custom_minimum_size = Vector2(788, 491)
+custom_maximum_size = Vector2(788, 491)
+
 [node name="TitlesContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="4" unique_id=890400313]
-offset_transform_position = Vector2(-137.67575, 0)
+offset_transform_position = Vector2(-54.5, 0)

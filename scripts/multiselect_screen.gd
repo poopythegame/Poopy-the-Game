@@ -30,7 +30,7 @@ signal option_selected(index: int)
 @onready var option_prefab: PackedScene = load("uid://cy14air0s7d4u")
 
 @onready var options_container: Control = $VBoxContainer/TitlesContainer
-@onready var option_display_container: PanelContainer = $VBoxContainer/PortraitContainer
+@onready var option_display_container: PanelContainer = $VBoxContainer/HBoxContainer/PortraitContainer
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var viewport_rect: Rect2

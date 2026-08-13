@@ -20,19 +20,12 @@
 [ext_resource type="PackedScene" uid="uid://nqpeaq2b7udk" path="res://scenes/prefab/ui/main_menu_screen.tscn" id="12_8ekit"]
 [ext_resource type="Script" uid="uid://ckowyte5bq8wj" path="res://scripts/scrolling_background.gd" id="16_e6a60"]
 [ext_resource type="Texture2D" uid="uid://dh44qpr2m3ppx" path="res://assets/textures/ui/main_menu/press_enter.png" id="16_rbask"]
-[ext_resource type="Script" uid="uid://0j7m4i65so5p" path="res://scripts/characters_screen.gd" id="20_75tx2"]
-[ext_resource type="Script" uid="uid://co0g5pmxbg578" path="res://scripts/option_def.gd" id="21_j4d8q"]
-[ext_resource type="Texture2D" uid="uid://cnkkm4vbux23p" path="res://assets/textures/ui/credits/jason.png" id="22_ei00g"]
+[ext_resource type="PackedScene" uid="uid://bma5s00usjygf" path="res://scenes/prefab/ui/credits_screen.tscn" id="20_6ud2m"]
 [ext_resource type="PackedScene" uid="uid://ceg8x1m3frt2q" path="res://scenes/prefab/ui/options_menu.tscn" id="22_jbte4"]
 [ext_resource type="PackedScene" uid="uid://co2ky5qlrx73b" path="res://scenes/prefab/ui/characters_screen.tscn" id="23_6ud2m"]
 [ext_resource type="Texture2D" uid="uid://drk7x2pb2mqpb" path="res://assets/textures/ui/main_menu/john_person/john_person_fr0.png" id="23_qch7b"]
-[ext_resource type="Script" uid="uid://8kv681icjouq" path="res://scripts/character_def.gd" id="23_wabu5"]
 [ext_resource type="Texture2D" uid="uid://dpvsha2a5eit4" path="res://assets/textures/ui/main_menu/john_person/john_person_fr1.png" id="24_4ovp2"]
-[ext_resource type="Texture2D" uid="uid://caunj2585vle2" path="res://assets/textures/ui/credits/cubeguy.png" id="24_ei00g"]
 [ext_resource type="PackedScene" uid="uid://cpvt7jfaq7yjl" path="res://scenes/ui/rankings.tscn" id="25_4ovp2"]
-[ext_resource type="Texture2D" uid="uid://dsw3ulxi6ch0o" path="res://assets/textures/ui/credits/sheo_fr0.png" id="25_75tx2"]
-[ext_resource type="Texture2D" uid="uid://bu1i6i56y3msq" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="26_75tx2"]
-[ext_resource type="Texture2D" uid="uid://cyndnisqknxw8" path="res://assets/textures/ui/credits/sheo_fr1.png" id="26_j4d8q"]
 [ext_resource type="PackedScene" uid="uid://5ofw62jqnci8" path="res://scenes/prefab/ui/level_select_screen.tscn" id="28_ei00g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbte4"]
@@ -42,58 +35,6 @@ shader_parameter/progress = 1.0
 [sub_resource type="LabelSettings" id="LabelSettings_0cdpu"]
 font = ExtResource("4_n4uci")
 font_size = 53
-
-[sub_resource type="Resource" id="Resource_r6ok0"]
-script = ExtResource("23_wabu5")
-bio = "• Project management
-• Game design
-• Characters and worldbuilding
-• Programming
-• Art and animation
-• Additional music composition (main
-theme, \"Big Farma\", ranking funk)"
-title = "Jungsoo \"Jason\" Park"
-portrait = ExtResource("22_ei00g")
-metadata/_custom_type_script = "uid://8kv681icjouq"
-
-[sub_resource type="Resource" id="Resource_oq1mw"]
-script = ExtResource("23_wabu5")
-bio = "• Programming"
-title = "Devon Albert"
-portrait = ExtResource("24_ei00g")
-metadata/_custom_type_script = "uid://8kv681icjouq"
-
-[sub_resource type="AnimatedTexture" id="AnimatedTexture_5et21"]
-frames = 2
-frame_0/texture = ExtResource("25_75tx2")
-frame_0/duration = 0.17
-frame_1/texture = ExtResource("26_j4d8q")
-frame_1/duration = 0.17
-
-[sub_resource type="Resource" id="Resource_cc4y2"]
-script = ExtResource("23_wabu5")
-bio = "• Music
-• Sound design"
-title = "SheoM. / Edé Eliseo A. M."
-portrait = SubResource("AnimatedTexture_5et21")
-metadata/_custom_type_script = "uid://8kv681icjouq"
-
-[sub_resource type="Resource" id="Resource_ei00g"]
-script = ExtResource("23_wabu5")
-bio = "• Running animation assistance
-• UI programming"
-title = "Kismet Elmenchawi"
-metadata/_custom_type_script = "uid://8kv681icjouq"
-
-[sub_resource type="Resource" id="Resource_75tx2"]
-script = ExtResource("23_wabu5")
-bio = "• \"Big Farma\" alt. music composition"
-title = "Nurtas"
-metadata/_custom_type_script = "uid://8kv681icjouq"
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j4d8q"]
-texture = ExtResource("26_75tx2")
-region_rect = Rect2(67, 61, 2236, 1382)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e0hcc"]
 shader = ExtResource("7_jbte4")
@@ -248,48 +189,9 @@ anchors_preset = 0
 script = ExtResource("16_e6a60")
 texture = ExtResource("2_n4uci")
 
-[node name="Screen" type="MarginContainer" parent="CreditsCanvasGroup" unique_id=1181466732]
-offset_right = 1280.0
-offset_bottom = 720.0
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-script = ExtResource("20_75tx2")
-options = Array[ExtResource("21_j4d8q")]([SubResource("Resource_r6ok0"), SubResource("Resource_oq1mw"), SubResource("Resource_cc4y2"), SubResource("Resource_ei00g"), SubResource("Resource_75tx2")])
-slide_time = 1.0
-disable_selection = true
-left_sfx = Array[AudioStream]([ExtResource("2_y1h5l")])
-select_sfx = Array[AudioStream]([ExtResource("3_pw24t")])
-right_sfx = Array[AudioStream]([ExtResource("4_5dct7")])
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CreditsCanvasGroup/Screen" unique_id=167130769]
-bus = &"SFX"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CreditsCanvasGroup/Screen" unique_id=346008450]
-layout_mode = 2
-alignment = 1
-
-[node name="Spacer2" type="Control" parent="CreditsCanvasGroup/Screen/VBoxContainer" unique_id=399737110]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="PortraitContainer" type="PanelContainer" parent="CreditsCanvasGroup/Screen/VBoxContainer" unique_id=541114955]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxTexture_j4d8q")
-
-[node name="Spacer" type="Control" parent="CreditsCanvasGroup/Screen/VBoxContainer" unique_id=729717884]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="TitlesContainer" type="Control" parent="CreditsCanvasGroup/Screen/VBoxContainer" unique_id=890400313]
-custom_minimum_size = Vector2(0, 67)
-layout_mode = 2
-size_flags_vertical = 8
-offset_transform_enabled = true
-offset_transform_position = Vector2(477, 0)
+[node name="Screen" parent="CreditsCanvasGroup" unique_id=1181466732 instance=ExtResource("20_6ud2m")]
+offset_right = 1136.0
+offset_bottom = 610.0
 
 [node name="MenuCanvasGroup" type="CanvasGroup" parent="." unique_id=157187082]
 visible = false
@@ -308,7 +210,6 @@ offset_bottom = 720.0
 slide_time = 2.0
 
 [node name="LevelSelectCanvasGroup" type="CanvasGroup" parent="." unique_id=601334975]
-visible = false
 material = SubResource("ShaderMaterial_qch7b")
 
 [node name="Background" type="Control" parent="LevelSelectCanvasGroup" unique_id=1902345678]

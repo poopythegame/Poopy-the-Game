@@ -1,5 +1,6 @@
 {
     "files.exclude": {
         "**/*.uid": true
-    }
+    },
+    "godotTools.editorPath.godot4": "c:\\Users\\devon\\fgvm\\installations\\4.7.1-stable-mono\\mono_windows_arm64\\Godot_v4.7.1-stable_mono_windows_arm64.exe"
 }
