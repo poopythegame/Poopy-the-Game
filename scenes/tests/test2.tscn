@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://bn8j6pteveo81" path="res://scripts/camera.gd" id="1_mkcba"]
 [ext_resource type="PackedScene" uid="uid://ba1g5kyug022g" path="res://scenes/ui/hud.tscn" id="4_51wsq"]
 [ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/prefab/coin.tscn" id="6_kamxp"]
-[ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/prefab/dash_panel.tscn" id="6_mkcba"]
 [ext_resource type="Shader" uid="uid://bxjra7tqfuq06" path="res://shaders/retexture.gdshader" id="7_gcd2f"]
 [ext_resource type="Texture2D" uid="uid://cerwkjbbxbhcq" path="res://assets/textures/ground/wood_edge.png" id="8_q03le"]
 [ext_resource type="PackedScene" uid="uid://dhuok84j6oiig" path="res://scenes/prefab/big_farma_background.tscn" id="8_ydant"]
@@ -144,9 +143,6 @@ camera = NodePath("../Camera2D")
 
 [node name="InGameOverlay" parent="." unique_id=1911954101 instance=ExtResource("4_51wsq")]
 
-[node name="DashPanel" parent="." unique_id=685655057 instance=ExtResource("6_mkcba")]
-position = Vector2(197, 4)
-
 [node name="Coin" parent="." unique_id=1725540365 instance=ExtResource("6_kamxp")]
 position = Vector2(347, -17)
 
@@ -169,4 +165,4 @@ position = Vector2(630, 1)
 position = Vector2(874, -137)
 
 [node name="Enemy" parent="." unique_id=1921139154 groups=["Enemy"] instance=ExtResource("18_yvnra")]
-position = Vector2(726, -8)
+position = Vector2(147, -8)
