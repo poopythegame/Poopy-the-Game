@@ -17,8 +17,8 @@ class_name Player
 @export var screwdive_sfx: Array[AudioStream]
 @export var skid_sfx: Array[AudioStream]
 @export var grapple_sfx: Array[AudioStream]
-# @export var run_sfx: Array[AudioStream]
-# @export var fast_run_sfx: Array[AudioStream]
+@export var run_sfx: Array[AudioStream]
+@export var fast_run_sfx: Array[AudioStream]
 @export var jump_sfx: Array[AudioStream]
 @export var roll_sfx: Array[AudioStream]
 @export var stomp_sfx: Array[AudioStream]
@@ -38,6 +38,8 @@ var has_initialized_health = false
 var death_launch_velocity := Vector2.ZERO
 var death_animation_last_t := 0
 var death_animation_camera_origin: Vector2
+var is_playing_run_sound: bool = false
+var is_playing_fast_run_sound: bool = false
 
 ### ### Maddie's Ultra-Simple Sonic Physics!! ### ###
 ## The absolute bare minimum needed to make a Sonic fangame.
@@ -231,6 +233,9 @@ func stop_audio():
 		audio_stream_player.stop()
 	if not audio_stream_player.playing:
 		audio_stream_player.stream = null
+	is_playing_fast_run_sound = false
+	
+	is_playing_run_sound = false
 
 func _physics_process(delta):
 	
@@ -907,7 +912,15 @@ func animate():
 		elif abs(motion.x) >= topspeed and not isskidding: # If you've reached, or are at least close enough to your Top Speed...
 			$Sprite.play("run")
 			$Sprite.speed_scale = clamp(abs(motion.x)/90, 1.5, 8)
-			stop_audio()
+			if abs(motion.x) > topspeed + 100:
+				if not is_playing_fast_run_sound:
+					play_audio(fast_run_sfx)
+					is_playing_run_sound = false 
+					is_playing_fast_run_sound = true 
+			elif not is_playing_run_sound:
+				play_audio(run_sfx)
+				is_playing_run_sound = true
+				is_playing_fast_run_sound = false
 			# Play Running Animation, quickening it even further if you escalate past your Top Speed.
 			
 	elif not grounded:

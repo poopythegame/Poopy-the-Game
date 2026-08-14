@@ -10,8 +10,10 @@
 [ext_resource type="AudioStream" uid="uid://bwccju81byha0" path="res://assets/audio/effects/screw_dive2.ogg" id="5_isfnt"]
 [ext_resource type="AudioStream" uid="uid://dpqd3cyqpiyjm" path="res://assets/audio/effects/grapple2.ogg" id="6_2v2me"]
 [ext_resource type="AudioStream" uid="uid://8a3pls25jtt4" path="res://assets/audio/effects/jump1.ogg" id="7_5q2mw"]
+[ext_resource type="AudioStream" uid="uid://c0aqrx33js7s2" path="res://assets/audio/effects/run.ogg" id="9_isfnt"]
 [ext_resource type="AudioStream" uid="uid://dbpltt6yp6cli" path="res://assets/audio/effects/roll.ogg" id="9_oq628"]
 [ext_resource type="AudioStream" uid="uid://bx83xl6vvsx38" path="res://assets/audio/effects/stomp_fall.ogg" id="10_37wxj"]
+[ext_resource type="AudioStream" uid="uid://caavkjsn6xngn" path="res://assets/audio/effects/run_max.ogg" id="10_rp2o6"]
 [ext_resource type="AudioStream" uid="uid://bdn6jkrwclumg" path="res://assets/audio/effects/poopy_dead1.ogg" id="11_vg2fa"]
 [ext_resource type="AudioStream" uid="uid://uf2vlttmq37u" path="res://assets/audio/effects/player_boost.ogg" id="12_37wxj"]
 [ext_resource type="AudioStream" uid="uid://ba17x1dn3jchl" path="res://assets/audio/effects/poopy_dead2.ogg" id="12_oq628"]
@@ -35,6 +37,8 @@ airdash_sfx = Array[AudioStream]([ExtResource("2_ob2so"), ExtResource("3_l8smq")
 screwdive_sfx = Array[AudioStream]([ExtResource("4_37wxj"), ExtResource("5_isfnt")])
 skid_sfx = Array[AudioStream]([ExtResource("4_psnur")])
 grapple_sfx = Array[AudioStream]([ExtResource("5_gumar"), ExtResource("6_2v2me")])
+run_sfx = Array[AudioStream]([ExtResource("9_isfnt")])
+fast_run_sfx = Array[AudioStream]([ExtResource("10_rp2o6")])
 jump_sfx = Array[AudioStream]([ExtResource("7_5q2mw")])
 roll_sfx = Array[AudioStream]([ExtResource("9_oq628")])
 stomp_sfx = Array[AudioStream]([ExtResource("10_37wxj")])
