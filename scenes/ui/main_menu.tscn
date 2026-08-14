@@ -181,6 +181,7 @@ texture = ExtResource("16_rbask")
 stretch_mode = 4
 
 [node name="CreditsCanvasGroup" type="CanvasGroup" parent="." unique_id=158372516]
+visible = false
 
 [node name="Background" type="Control" parent="CreditsCanvasGroup" unique_id=1269202384]
 layout_mode = 3

@@ -22,6 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://ks3jp0slnko2" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/characters/characters_fr0.png" id="15_v5r5l"]
 [ext_resource type="Texture2D" uid="uid://c8b4b0cb635bu" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/characters/characters_fr1.png" id="16_e4esd"]
 [ext_resource type="Texture2D" uid="uid://11gq5d0udhaj" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/characters/characters_fr2.png" id="17_7djrc"]
+[ext_resource type="Texture2D" uid="uid://bp7nqglwfyf7t" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/discord/discord_fr0.png" id="22_8pkwp"]
+[ext_resource type="Texture2D" uid="uid://bovcvo8stofux" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/discord/discord_fr1.png" id="23_5lgk8"]
+[ext_resource type="Texture2D" uid="uid://dmacxgqjj27b0" path="res://assets/textures/ui/main_menu/option_portraits/animated_overlays/discord/discord_fr2.png" id="24_hgn11"]
+[ext_resource type="Texture2D" uid="uid://c2h5qngk0ngjg" path="res://assets/textures/ui/main_menu/option_portraits/discord_color.png" id="25_s4xhm"]
 
 [sub_resource type="Resource" id="Resource_6l6qt"]
 script = ExtResource("2_6l6qt")
@@ -62,8 +66,17 @@ animated_overlay_frames = Array[Texture2D]([ExtResource("15_v5r5l"), ExtResource
 animated_overlay_fps = 6.0
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
+[sub_resource type="Resource" id="Resource_r0gtl"]
+script = ExtResource("2_6l6qt")
+title = "Join the Official Discord"
+portrait = ExtResource("25_s4xhm")
+enable_animated_overlay = true
+animated_overlay_frames = Array[Texture2D]([ExtResource("22_8pkwp"), ExtResource("23_5lgk8"), ExtResource("24_hgn11")])
+animated_overlay_fps = 6.0
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
 [node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_epp4d")]
-options = Array[ExtResource("2_6l6qt")]([SubResource("Resource_6l6qt"), SubResource("Resource_ydpsd"), SubResource("Resource_50wf3"), SubResource("Resource_vggm2")])
+options = Array[ExtResource("2_6l6qt")]([SubResource("Resource_6l6qt"), SubResource("Resource_ydpsd"), SubResource("Resource_50wf3"), SubResource("Resource_vggm2"), SubResource("Resource_r0gtl")])
 selected = 1
 
 [node name="Title" type="TextureRect" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="0" unique_id=991393468]
@@ -76,10 +89,6 @@ stretch_mode = 4
 
 [node name="Spacer2" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="1" unique_id=399737110]
 custom_minimum_size = Vector2(0, 18)
-
-[node name="PortraitContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="2" unique_id=541114955]
-custom_minimum_size = Vector2(788, 491)
-custom_maximum_size = Vector2(788, 491)
 
 [node name="TitlesContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="4" unique_id=890400313]
 offset_transform_position = Vector2(-54.5, 0)
