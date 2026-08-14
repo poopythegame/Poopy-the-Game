@@ -227,7 +227,7 @@ func get_time() -> float:
 func get_best_time(level: int = -1) -> float:
 	if level == -1:
 		level = current_level
-	var best_time: float = INF
+	var best_time = INF
 	for time in save_data.times[level]:
 		if time < best_time:
 			best_time = time
