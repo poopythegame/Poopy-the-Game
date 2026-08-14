@@ -579,16 +579,8 @@ func launch_enemy(player):
 		player_raw_motion = null
 	
 	var launch_x: float = player_motion.x * 1.35
-	#if abs(launch_x) < 200 and abs(launch_x) >= 25:
-		#var dir = sign(global_position.x - player.global_position.x)
-		#if dir == 0: dir = 1
-		#launch_x = 200 * dir
-	motion.x = launch_x
-	
-	var vertical_force: float = player_motion.y * 1.05
-	# if abs(player.motion.y) < 100 and player.is_on_floor():
-	# 	vertical_force = -300 
-	motion.y = vertical_force	
+	var launch_y: float = player_motion.y * 1.05
+	motion += Vector2(launch_x, launch_y).rotated(-rot)
 	grounded = false
 	rot = 0
 	position.y -= 8 
