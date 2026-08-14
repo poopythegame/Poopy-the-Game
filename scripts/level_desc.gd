@@ -9,6 +9,5 @@ class_name LevelDesc
 @export var music: AudioStream
 @export var music_intro: AudioStream
 @export var music_loop: AudioStream
-@export var music_volume: float = -5
 @export var scene: PackedScene
 @export var rankings: Array[RankDef]
