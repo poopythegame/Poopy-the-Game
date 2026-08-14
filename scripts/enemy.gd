@@ -426,9 +426,12 @@ func process_grid_input():
 			play_audio(shift_begin_sfx)
 		elif sound == 2:
 			play_audio(shift_end_sfx)
+	var new_axis_x := prev_grid_input.x == 0 and input_vector.x != 0
+	var new_axis_y := prev_grid_input.y == 0 and input_vector.y != 0
+	var new_axis := new_axis_x or new_axis_y
 	prev_grid_input = input_vector
 
-	if grid_move_tween == null or not grid_move_tween.is_running():
+	if grid_move_tween == null or not grid_move_tween.is_running() or new_axis:
 		if input_vector != Vector2.ZERO:
 			var dx = clamp(input_vector.x, -1, 1)
 			var dy = clamp(input_vector.y, -1, 1)
@@ -562,7 +565,7 @@ func test_player_impact(_delta: float) -> TestResult:
 	return TestResult.NOOP
 
 func perform_bounce(player: Player):
-	player_raw_motion = player.motion
+	player_raw_motion = player.velocity
 	player.motion.y = abs(player.motion.y) * -1
 	if "exitgrapple" in player: player.exitgrapple = false
 	
@@ -573,11 +576,12 @@ func perform_bounce(player: Player):
 	
 	hit_cooldown = true
 	hit_timer = 0.2 
+	show_damage_fx()
 
 func launch_enemy(player):
 	hit_cooldown = true
 	hit_timer = 1
-	var player_motion: Vector2 = player.motion
+	var player_motion: Vector2 = player.velocity
 	if player_raw_motion != null:
 		player_motion = player_raw_motion
 		player_raw_motion = null
@@ -599,6 +603,9 @@ func launch_enemy(player):
 	sprite_2d.rotation = 0
 	$CollisionShape2D.rotation = 0
 	spawning_dots = true
+	show_damage_fx()
+
+func show_damage_fx() -> void:
 	var expl_pos: Vector2 = global_position
 	var animated_sprite := AnimatedSprite2D.new()
 	animated_sprite.position = expl_pos

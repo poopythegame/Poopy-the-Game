@@ -1,6 +1,8 @@
 extends Control
 class_name MainMenu
 
+const DISCORD_LINK: String = "https://discord.gg/AAUyDqRbS"
+
 @export var labels_slide_time := 2.
 @export var start_screen := Screen.TITLE
 @export_group("Sounds")
@@ -146,6 +148,8 @@ func _on_menu_option_selected(index: int):
 		change_screen(Screen.OPTIONS, true, Transition.CROSSFADE)
 	elif index == 3:
 		change_screen(Screen.CHARACTERS, true, Transition.CROSSFADE)
+	elif index == 4:
+		OS.shell_open(DISCORD_LINK)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("back"):
@@ -433,6 +437,7 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 		rankings_background.show()
 		screen_cg = rankings_screen_cg
 		rankings_screen._on_enter(rank_to_show)
+		Global.current_level = -1
 	elif new_screen == Screen.AUX:
 		screen_cg = aux_cg
 	if record_undo:
