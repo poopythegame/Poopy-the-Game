@@ -426,9 +426,12 @@ func process_grid_input():
 			play_audio(shift_begin_sfx)
 		elif sound == 2:
 			play_audio(shift_end_sfx)
+	var new_axis_x := prev_grid_input.x == 0 and input_vector.x != 0
+	var new_axis_y := prev_grid_input.y == 0 and input_vector.y != 0
+	var new_axis := new_axis_x or new_axis_y
 	prev_grid_input = input_vector
 
-	if grid_move_tween == null or not grid_move_tween.is_running():
+	if grid_move_tween == null or not grid_move_tween.is_running() or new_axis:
 		if input_vector != Vector2.ZERO:
 			var dx = clamp(input_vector.x, -1, 1)
 			var dy = clamp(input_vector.y, -1, 1)
