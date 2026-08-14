@@ -19,7 +19,7 @@ func _preview_option(option: OptionDef, option_index: int) -> Control:
 	bio_label.size_flags_horizontal = SIZE_EXPAND_FILL
 	bio_label.custom_maximum_size = Vector2(394, -1)
 	bio_label.autowrap_mode = TextServer.AutowrapMode.AUTOWRAP_WORD
-	bio_label.add_theme_constant_override("line_spacing", 8)
+	bio_label.add_theme_constant_override("line_spacing", 6)
 	bio_label.add_theme_font_size_override("font_size", 24)
 	bio_label.offset_transform_enabled = true
 	bio_label.offset_transform_position = Vector2(5, 110)
