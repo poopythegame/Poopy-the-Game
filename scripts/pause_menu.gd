@@ -44,13 +44,13 @@ func _continue() -> void:
 	if exiting:
 		return
 	hud.hide_pause_menu()
-	play_audio(exit_sfx)
+	Global.play_audio(select_sfx)
 
 func _restart() -> void:
 	if exiting:
 		return
 	get_tree().paused = false
-	play_audio(select_sfx)
+	Global.play_audio(select_sfx)
 	Global.begin_level_crossfade(Global.current_level)
 
 func _menu() -> void:
@@ -65,6 +65,7 @@ func _menu() -> void:
 	var new_parent := main_menu.get_node("AuxCanvasGroup")
 	reparent(new_parent)
 	name = "Screen"
+	Global.play_audio(select_sfx)
 	tree.change_scene_to_node(main_menu)
 	main_menu.ready.connect(func():
 		main_menu.change_screen(MainMenu.Screen.MENU, false, MainMenu.Transition.WIPE)
