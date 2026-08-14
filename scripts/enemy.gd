@@ -569,6 +569,7 @@ func perform_bounce(player: Player):
 	player.canairdash = true
 	hit_cooldown = true
 	hit_timer = 0.2 
+	show_damage_fx()
 
 func launch_enemy(player):
 	hit_cooldown = true
@@ -587,6 +588,9 @@ func launch_enemy(player):
 	sprite_2d.rotation = 0
 	$CollisionShape2D.rotation = 0
 	spawning_dots = true
+	show_damage_fx()
+
+func show_damage_fx() -> void:
 	var expl_pos: Vector2 = global_position
 	var animated_sprite := AnimatedSprite2D.new()
 	animated_sprite.position = expl_pos
