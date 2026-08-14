@@ -111,12 +111,13 @@ metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_7365d"]
 script = ExtResource("1_8dco6")
-title = "Poopy's Basics"
+title = "Poopy Basics"
 jingle = ExtResource("36_0oi5t")
 title_card = ExtResource("36_wdc13")
 title_card_delegate = ExtResource("37_quwhv")
 music_intro = ExtResource("41_eq1kq")
 music_loop = ExtResource("42_eq1kq")
+music_volume = 6.0
 scene = ExtResource("25_e1edl")
 rankings = Array[ExtResource("2_x5qbs")]([SubResource("Resource_jk1qb"), SubResource("Resource_5dd4i"), SubResource("Resource_lgwnu"), SubResource("Resource_flqon"), SubResource("Resource_rcqid")])
 metadata/_custom_type_script = "uid://7xfldx24oh8g"

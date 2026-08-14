@@ -72,7 +72,7 @@ func begin_level(index: int) -> void:
 		_apply_level_music(level_music_player, level)
 		level_music_player.name = "MusicPlayer"
 		level_music_player.bus = &"Music"
-		level_music_player.volume_db = -5
+		level_music_player.volume_db = level.music_volume
 		level_music_player.autoplay = true
 	else:
 		level_music_player = scene_tree.current_scene.get_node("MusicPlayer")
@@ -116,7 +116,7 @@ func begin_level_title_card(index: int):
 		_apply_level_music(level_music_player, level)
 		level_music_player.name = "MusicPlayer"
 		level_music_player.bus = &"Music"
-		level_music_player.volume_db = -5
+		level_music_player.volume_db = level.music_volume
 		var title_card_node: TextureRect
 		if level.title_card:
 			title_card_node = TextureRect.new()
