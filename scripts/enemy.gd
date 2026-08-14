@@ -565,8 +565,12 @@ func perform_bounce(player: Player):
 	player_raw_motion = player.motion
 	player.motion.y = abs(player.motion.y) * -1
 	if "exitgrapple" in player: player.exitgrapple = false
+	
+	player.isstomping = false
+	player.isairdashing = false
 	player.canstomp = true
 	player.canairdash = true
+	
 	hit_cooldown = true
 	hit_timer = 0.2 
 

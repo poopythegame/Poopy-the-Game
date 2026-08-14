@@ -929,16 +929,11 @@ func animate():
 			
 		elif isstomping:
 
-			var stomprot = abs(motion.x) / 1000
+			var stomprot = -1 * motion.x / 1000
 		
-			stomprot = clamp(stomprot, 0, PI/3)
+			stomprot = clamp(stomprot, -PI/4.5, PI/4.5)
 		
 			$Sprite.rotation = lerp_angle($Sprite.rotation, stomprot, 1)
-				
-			if sign(motion.x) > 0:
-				$Sprite.flip_h = false
-			elif sign(motion.x) < 0:
-				$Sprite.flip_h = true
 				
 			#Actual animation
 			$Sprite.play("stomp")
