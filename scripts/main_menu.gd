@@ -433,6 +433,7 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 		rankings_background.show()
 		screen_cg = rankings_screen_cg
 		rankings_screen._on_enter(rank_to_show)
+		Global.current_level = -1
 	elif new_screen == Screen.AUX:
 		screen_cg = aux_cg
 	if record_undo:
