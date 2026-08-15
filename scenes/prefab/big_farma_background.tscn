@@ -14,6 +14,7 @@ follow_viewport_scale = 0.286
 
 [node name="Sky_Inf" type="Parallax2D" parent="." unique_id=1841160076]
 scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(1270, 0)
 repeat_times = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Sky_Inf" unique_id=1438247718]

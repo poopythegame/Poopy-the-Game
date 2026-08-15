@@ -7,10 +7,12 @@
 [node name="Background" type="CanvasLayer" unique_id=1295814687]
 layer = -2000
 follow_viewport_enabled = true
-follow_viewport_scale = 0.29
+follow_viewport_scale = 0.286
 
 [node name="SkyInf" type="Parallax2D" parent="." unique_id=1633580612]
 scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(1270, 0)
+repeat_times = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="SkyInf" unique_id=1945043410]
 scale = Vector2(0.3333333, 0.3333333)
