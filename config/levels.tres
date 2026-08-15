@@ -66,7 +66,7 @@ icon = ExtResource("3_q8iik")
 small_icon = ExtResource("13_cxb4r")
 animation_frames = Array[Texture2D]([ExtResource("6_sav0g"), ExtResource("7_a7loy")])
 animation_fps = 30.0
-time = 70.0
+time = 95.0
 music_track_1 = ExtResource("11_3dhcv")
 music_track_2 = ExtResource("12_cxb4r")
 show_portraits_background = 1
@@ -79,7 +79,7 @@ icon = ExtResource("4_dte0d")
 small_icon = ExtResource("19_ttfwy")
 animation_frames = Array[Texture2D]([ExtResource("9_0syye"), ExtResource("10_nuwws"), ExtResource("11_owg44")])
 animation_fps = 12.0
-time = 100.0
+time = 145.0
 music_track_1 = ExtResource("17_4cit1")
 metadata/_custom_type_script = "uid://h46hneoomiqh"
 
@@ -90,7 +90,7 @@ icon = ExtResource("5_4o7sf")
 small_icon = ExtResource("24_vakqa")
 animation_frames = Array[Texture2D]([ExtResource("13_e1edl"), ExtResource("14_sav0g")])
 animation_fps = 5.0
-time = 130.0
+time = 180.0
 music_track_1 = ExtResource("21_ttfwy")
 is_animation_one_shot = true
 metadata/_custom_type_script = "uid://h46hneoomiqh"
@@ -111,7 +111,7 @@ metadata/_custom_type_script = "uid://h46hneoomiqh"
 
 [sub_resource type="Resource" id="Resource_7365d"]
 script = ExtResource("1_8dco6")
-title = "Poopy Basics"
+title = "Poopy's Basics"
 jingle = ExtResource("36_0oi5t")
 title_card = ExtResource("36_wdc13")
 title_card_delegate = ExtResource("37_quwhv")
