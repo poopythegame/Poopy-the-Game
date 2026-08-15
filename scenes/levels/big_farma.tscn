@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bigfarma"]
 
 [ext_resource type="PackedScene" uid="uid://fieh7uoavdwx" path="res://scenes/prefab/anchor.tscn" id="1_anchor"]
-[ext_resource type="PackedScene" uid="uid://c38kn0vik32mt" path="res://animatable_body_2d.tscn" id="1_animatable_body_2d"]
+[ext_resource type="PackedScene" uid="uid://c38kn0vik32mt" path="res://scenes/prefab/one_way_platform.tscn" id="1_animatable_body_2d"]
 [ext_resource type="Script" uid="uid://bn8j6pteveo81" path="res://scripts/camera.gd" id="1_camera"]
 [ext_resource type="PackedScene" uid="uid://n40asi5s347t" path="res://scenes/prefab/cam_boundary.tscn" id="1_cam_boundary"]
 [ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/prefab/coin.tscn" id="1_coin"]
