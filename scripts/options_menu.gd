@@ -1,6 +1,8 @@
 extends CenterContainer
 class_name OptionsMenu
 
+const HSLIDER_SCRIPT: GDScript = preload("uid://c43vk2s6cfq4g")
+
 @onready var options_container: GridContainer = $OptionsContainer
 
 func _create_controls() -> void:
@@ -15,7 +17,6 @@ func _create_controls() -> void:
 			control.toggled.connect(func(checked):
 				UserSettingsInstance.set(result.id, checked)
 			)
-			control.size_flags_horizontal = Control.SIZE_SHRINK_END
 		elif result.type == TYPE_FLOAT:
 			control = HSlider.new()
 			control.min_value = 0
@@ -26,6 +27,7 @@ func _create_controls() -> void:
 				UserSettingsInstance.set(result.id, new_value)
 			)
 			control.custom_minimum_size = Vector2(250, 0)
+			control.set_script(HSLIDER_SCRIPT)
 		control.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		options_container.add_child(control)
 
