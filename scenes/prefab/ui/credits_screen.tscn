@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dsw3ulxi6ch0o" path="res://assets/textures/ui/credits/sheo_fr0.png" id="7_ftiaj"]
 [ext_resource type="Texture2D" uid="uid://cyndnisqknxw8" path="res://assets/textures/ui/credits/sheo_fr1.png" id="8_3wrq7"]
 [ext_resource type="Texture2D" uid="uid://bcbmtmyqah4kt" path="res://assets/textures/ui/credits/hyptac.jpg" id="9_a0duj"]
+[ext_resource type="Texture2D" uid="uid://chk2k5o4s70hg" path="res://assets/textures/ui/credits/kismet.jpg" id="10_16ial"]
 [ext_resource type="Texture2D" uid="uid://bu1i6i56y3msq" path="res://assets/textures/ui/main_menu/option_portrait_background.png" id="10_nkfnr"]
 [ext_resource type="Texture2D" uid="uid://k0qmq705scns" path="res://assets/textures/ui/main_menu/option_label_credits.png" id="11_xre4m"]
 
@@ -61,12 +62,13 @@ script = ExtResource("5_16ial")
 bio = "• Running animation groundwork
 • UI programming"
 title = "Kismet Elmenchawi"
+portrait = ExtResource("10_16ial")
 metadata/_custom_type_script = "uid://8kv681icjouq"
 
 [sub_resource type="Resource" id="Resource_75tx2"]
 script = ExtResource("5_16ial")
-bio = "• \"Big Farma\" alt. music composition"
-title = "Nurtas"
+bio = "• \"Big Farma\" alt. music composition (will be used in later updates)"
+title = "Nurtas Mirzakhmet"
 portrait = ExtResource("9_a0duj")
 metadata/_custom_type_script = "uid://8kv681icjouq"
 
