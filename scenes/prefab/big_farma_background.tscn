@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dhuok84j6oiig"]
 
+[ext_resource type="Script" uid="uid://dghr72dlj132t" path="res://scripts/parallax_background.gd" id="1_25gw3"]
 [ext_resource type="Texture2D" uid="uid://ca6fxkpqc02wn" path="res://assets/textures/parallax/sky.png" id="1_wax1t"]
 [ext_resource type="Texture2D" uid="uid://mob63ia6e8bj" path="res://assets/textures/parallax/sun.png" id="2_1tmhi"]
 [ext_resource type="Texture2D" uid="uid://dikvhgp53b1t0" path="res://assets/textures/parallax/clouds.png" id="3_l5f8m"]
@@ -9,13 +10,14 @@
 
 [node name="Background" type="CanvasLayer" unique_id=1453801180]
 layer = -2000
-follow_viewport_enabled = true
 follow_viewport_scale = 0.286
+script = ExtResource("1_25gw3")
 
 [node name="Sky_Inf" type="Parallax2D" parent="." unique_id=1841160076]
 scroll_scale = Vector2(0, 0)
 repeat_size = Vector2(1270, 0)
 repeat_times = 2
+ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Sky_Inf" unique_id=1438247718]
 z_index = -1
@@ -25,6 +27,7 @@ centered = false
 
 [node name="Sun_Inf" type="Parallax2D" parent="." unique_id=1455928734]
 scroll_scale = Vector2(0, 0)
+ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Sun_Inf" unique_id=1085693618]
 scale = Vector2(0.33333337, 0.33333334)
@@ -34,6 +37,7 @@ centered = false
 [node name="Clouds_Inf" type="Parallax2D" parent="." unique_id=1909693612]
 scroll_scale = Vector2(0, 0)
 repeat_times = 2
+ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Clouds_Inf" unique_id=1271964847]
 scale = Vector2(0.33333337, 0.33333334)
@@ -45,6 +49,7 @@ visible = false
 scroll_scale = Vector2(0.5, 0)
 repeat_size = Vector2(1279, 0)
 repeat_times = 2
+ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Hills_Far" unique_id=289815271]
 z_index = 1
@@ -58,6 +63,7 @@ scroll_scale = Vector2(0.55, 0)
 scroll_offset = Vector2(0, 6.9930067)
 repeat_size = Vector2(1279, 0)
 repeat_times = 2
+ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Hills_Near2" unique_id=604516949]
 z_index = 2
@@ -70,6 +76,7 @@ centered = false
 scroll_scale = Vector2(0.6, 0)
 repeat_size = Vector2(1279, 0)
 repeat_times = 2
+ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Hills_Near1" unique_id=287262368]
 z_index = 3

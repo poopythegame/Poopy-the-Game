@@ -1,18 +1,20 @@
 [gd_scene format=3 uid="uid://qq417f51qvd1"]
 
 [ext_resource type="Texture2D" uid="uid://ca6fxkpqc02wn" path="res://assets/textures/parallax/sky.png" id="1_bfc7m"]
+[ext_resource type="Script" uid="uid://dghr72dlj132t" path="res://scripts/parallax_background.gd" id="1_l6k3h"]
 [ext_resource type="Texture2D" uid="uid://ciixiqsncmd40" path="res://assets/textures/parallax/dots.png" id="2_r8jug"]
 [ext_resource type="Texture2D" uid="uid://dqrx8s6pb5xrg" path="res://assets/textures/parallax/tutorial_hills.png" id="3_17uyg"]
 
 [node name="Background" type="CanvasLayer" unique_id=1295814687]
 layer = -2000
-follow_viewport_enabled = true
 follow_viewport_scale = 0.286
+script = ExtResource("1_l6k3h")
 
 [node name="SkyInf" type="Parallax2D" parent="." unique_id=1633580612]
 scroll_scale = Vector2(0, 0)
 repeat_size = Vector2(1270, 0)
 repeat_times = 2
+ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="SkyInf" unique_id=1945043410]
 scale = Vector2(0.3333333, 0.3333333)
@@ -24,6 +26,7 @@ scroll_scale = Vector2(0.5, 0)
 repeat_size = Vector2(1290, 720)
 autoscroll = Vector2(0, -50)
 repeat_times = 2
+ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="DotsFar" unique_id=746822099]
 texture = ExtResource("2_r8jug")
@@ -33,6 +36,7 @@ centered = false
 scroll_scale = Vector2(0.7, 0)
 repeat_size = Vector2(1270, 0)
 repeat_times = 2
+ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="HillsNear" unique_id=1818036164]
 scale = Vector2(0.3333333, 0.3333333)
