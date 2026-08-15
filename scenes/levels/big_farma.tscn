@@ -7113,6 +7113,7 @@ scale = Vector2(0.081707366, 0.08170735)
 position = Vector2(11504.001, -387)
 
 [node name="Pop-I" parent="." unique_id=1508028880 instance=ExtResource("42_827mw")]
+z_index = -1990
 position = Vector2(7248, -223.99998)
 
 [node name="Sprite2D5" parent="." unique_id=1235232339 instance=ExtResource("43_7d2ck")]
