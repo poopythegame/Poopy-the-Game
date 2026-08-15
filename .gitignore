@@ -3,3 +3,4 @@
 /android/
 /addons/rider-plugin/bin/windows/~rider-gdextension.windows.editor.x86_64.dll
 *.tmp
+build/
