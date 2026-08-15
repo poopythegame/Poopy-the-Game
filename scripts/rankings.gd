@@ -84,6 +84,14 @@ func start_animation_sequence():
 			rank_icon_dummy_spacer.hide()
 			rank_icon.show())
 		tween.tween_property(rank_icon, "offset_transform_scale", Vector2(1, 1), 0.5)
+		if curr_rank.music_track_2 != null:
+			tween.tween_callback(func():
+				audio_stream_player.stream = curr_rank.music_track_2
+				audio_stream_player.play()
+			)
+	if curr_rank.music_track_2 != null and curr_rank.music_track_1 == null:
+		# Make the screen shake parallel
+		tween.parallel()
 	tween.tween_method(screen_shake, 10, 5, 0.5)
 	time_since_music_track_1 += .5
 	tween.tween_callback(func():
@@ -103,15 +111,16 @@ func start_animation_sequence():
 		tween.tween_property(whiteout, "modulate:a", 0, 0.2)
 		time_since_music_track_1 += .2
 		tween.tween_callback(whiteout.hide)
+	if curr_rank.music_track_1 != null:
+		if time_since_music_track_1 < curr_rank.music_track_1.get_length():
+			tween.tween_await(audio_stream_player.finished)
+		if curr_rank.music_track_2 != null:
+			tween.tween_callback(func():
+				audio_stream_player.stream = curr_rank.music_track_2
+				audio_stream_player.play()
+			)
 	if curr_rank.use_walk_off_animation:
 		tween.parallel().tween_property(rank_animation_tr, "offset_transform_position:x", -2800, 3)
-	if curr_rank.music_track_1 != null and time_since_music_track_1 < curr_rank.music_track_1.get_length():
-		tween.tween_await(audio_stream_player.finished)
-	if curr_rank.music_track_2 != null:
-		tween.tween_callback(func():
-			audio_stream_player.stream = curr_rank.music_track_2
-			audio_stream_player.play()
-	)
 	tween.tween_property(ranks_container, "modulate:a", 1, 2)
 	tween.set_trans(Tween.TRANS_CUBIC)
 
