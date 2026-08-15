@@ -2,6 +2,7 @@ extends Node
 
 @export var strength: float = 500
 @export var flip: bool = false
+@export var sprite_flip_exception: bool = false #This one prevents the sprite from flipping when turned on.
 @export_group("Sounds")
 @export var use_sfx: Array[AudioStream]
 
@@ -34,7 +35,7 @@ func stop_audio():
 
 func _ready() -> void:
 	area.body_entered.connect(_contact)
-	if flip:
+	if flip and not sprite_flip_exception: #if the sprite exception is turned on, the sprite doesn't flip.
 		var sprite: AnimatedSprite2D = $AnimatedSprite2D
 		sprite.flip_h = true
 

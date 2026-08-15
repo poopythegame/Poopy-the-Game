@@ -42,7 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://bqsajhmo604fc" path="res://scenes/prefab/setdressing/billboard/lightning_mcfake.tscn" id="40_7d2ck"]
 [ext_resource type="PackedScene" uid="uid://doutkcly04luh" path="res://scenes/prefab/setdressing/billboard/chud_squad.tscn" id="41_qe653"]
 [ext_resource type="PackedScene" uid="uid://coenhxcs1ebp1" path="res://scenes/prefab/setdressing/billboard/pop_i.tscn" id="42_827mw"]
-[ext_resource type="PackedScene" uid="uid://yooo84qywdf4" path="res://scenes/prefab/setdressing/billboard/palmer_revised.tscn" id="43_7d2ck"]
+[ext_resource type="PackedScene" uid="uid://yooo84qywdf4" path="res://scenes/prefab/setdressing/billboard/palmer.tscn" id="43_7d2ck"]
 [ext_resource type="PackedScene" uid="uid://cygpvxjxym30m" path="res://scenes/prefab/setdressing/billboard/cereal.tscn" id="44_qe653"]
 [ext_resource type="PackedScene" uid="uid://bysqls7tt11ty" path="res://scenes/prefab/setdressing/billboard/secret_1.tscn" id="45_r7xja"]
 [ext_resource type="PackedScene" uid="uid://cud41xd28f2x7" path="res://scenes/prefab/setdressing/billboard/secret_2.tscn" id="46_bmy12"]
@@ -6895,6 +6895,7 @@ position = Vector2(17058, 2792)
 position = Vector2(17856, 2032)
 strength = 1000.0
 flip = true
+sprite_flip_exception = true
 
 [node name="onewaycollision" parent="." unique_id=1639222680 instance=ExtResource("1_onewayacollisionblock")]
 position = Vector2(18976, 2432)
