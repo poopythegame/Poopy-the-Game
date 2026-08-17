@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://c07kmrrgay7lu"]
+
+[ext_resource type="Script" uid="uid://ckowyte5bq8wj" path="res://scripts/scrolling_background.gd" id="1_veqig"]
+[ext_resource type="Texture2D" uid="uid://d32ididyh760j" path="res://assets/textures/ui/background.png" id="2_k4qm2"]
+[ext_resource type="Script" uid="uid://d00nj10cvihcm" path="res://scripts/trailer_title_sequence.gd" id="3_ho144"]
+[ext_resource type="Texture2D" uid="uid://bjejowtmy7kpn" path="res://assets/textures/ui/main_menu/logo_incomplete.png" id="4_iwy5w"]
+[ext_resource type="SpriteFrames" uid="uid://dvs8fhjv7ymto" path="res://assets/animations/title_player.tres" id="5_0pnam"]
+[ext_resource type="FontFile" uid="uid://c6lup5uhxjaq8" path="res://assets/fonts/Comic-Sans-MS.ttf" id="6_4gl1c"]
+[ext_resource type="Texture2D" uid="uid://dh44qpr2m3ppx" path="res://assets/textures/ui/main_menu/press_enter.png" id="7_poqir"]
+[ext_resource type="AudioStream" uid="uid://cotx67p5iwda" path="res://assets/audio/music/title.ogg" id="8_9x3kz"]
+[ext_resource type="AudioStream" uid="uid://bf62x7i5okshp" path="res://assets/audio/effects/trumpet_4.ogg" id="9_xf2tr"]
+[ext_resource type="AudioStream" uid="uid://811p4ayls6kk" path="res://assets/audio/effects/far_fall.ogg" id="10_falw4"]
+[ext_resource type="AudioStream" uid="uid://57s8jt5h5uil" path="res://assets/audio/effects/crash.ogg" id="11_crsh3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dht53"]
+font = ExtResource("6_4gl1c")
+font_size = 53
+
+[node name="TrailerTitleSequence" type="Control" unique_id=1248479555]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollingBackground" type="Control" parent="." unique_id=1354108517]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_veqig")
+texture = ExtResource("2_k4qm2")
+
+[node name="Screen" type="MarginContainer" parent="." unique_id=1177243771]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("3_ho144")
+trumpet_sfx = Array[AudioStream]([ExtResource("9_xf2tr")])
+falling_sfx = Array[AudioStream]([ExtResource("10_falw4")])
+crash_sfx = Array[AudioStream]([ExtResource("11_crsh3")])
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Screen" unique_id=850314376]
+bus = &"SFX"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="Screen" unique_id=81294984]
+stream = ExtResource("8_9x3kz")
+volume_db = -5.0
+bus = &"Music"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen" unique_id=1934182123]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Logo" type="TextureRect" parent="Screen/VBoxContainer" unique_id=1039899200]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(666, 0)
+layout_mode = 2
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -20)
+offset_transform_scale = Vector2(6, 6)
+texture = ExtResource("4_iwy5w")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="PoopyContainer" type="Control" parent="Screen/VBoxContainer/Logo" unique_id=42338639]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Poopy" type="AnimatedSprite2D" parent="Screen/VBoxContainer/Logo/PoopyContainer" unique_id=587557061]
+visible = false
+scale = Vector2(0.075, 0.075)
+sprite_frames = ExtResource("5_0pnam")
+animation = &"idle"
+
+[node name="JokeLogo" type="Label" parent="Screen/VBoxContainer" unique_id=522132247]
+z_index = -1
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(-10, -20)
+text = "the game"
+label_settings = SubResource("LabelSettings_dht53")
+horizontal_alignment = 1
+
+[node name="Info" type="TextureRect" parent="Screen/VBoxContainer" unique_id=1554813864]
+visible = false
+custom_maximum_size = Vector2(297, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -1550)
+texture = ExtResource("7_poqir")
+stretch_mode = 4
+
+[node name="Whiteout" type="ColorRect" parent="." unique_id=1940421135]
+visible = false
+modulate = Color(1, 1, 1, 0)
+z_index = 1000
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
