@@ -19,7 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://dnun44j5dkljb" path="res://assets/audio/effects/grid_move_left.ogg" id="15_4n2nw"]
 [ext_resource type="Texture2D" uid="uid://ds73di4acf87n" path="res://assets/textures/elements/enemy/enemyrun1.png" id="15_wvuay"]
 [ext_resource type="Texture2D" uid="uid://dmjay8bhvi63i" path="res://assets/textures/elements/enemy/enemyrun2.png" id="16_ncm7u"]
-[ext_resource type="AudioStream" uid="uid://bp1ij7r5o1a3s" path="res://addons/grid_move_right.ogg" id="16_p86yi"]
+[ext_resource type="AudioStream" uid="uid://bp1ij7r5o1a3s" path="res://assets/audio/effects/grid_move_right.ogg" id="16_p86yi"]
 [ext_resource type="AudioStream" uid="uid://0hvn6rkpw024" path="res://assets/audio/effects/freeze.ogg" id="17_03cf6"]
 [ext_resource type="Texture2D" uid="uid://c2wcqrc46xig7" path="res://assets/textures/elements/enemy/enemyshock1.png" id="17_sbidc"]
 [ext_resource type="Texture2D" uid="uid://chhltbxyvpm4k" path="res://assets/textures/elements/enemy/enemyshock2.png" id="18_lto0j"]

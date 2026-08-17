@@ -40,6 +40,9 @@ var half_width: float
 var move_tween: Tween
 var select_tween: Tween
 
+# Array[Control] | Nil
+var web_preview_cache = null
+
 func play_audio(streams: Array[AudioStream]):
 	var choice: int = randi_range(0, len(streams) - 1)
 	audio_stream_player.stream = streams[choice]
@@ -65,6 +68,10 @@ func _ready() -> void:
 	else:
 		viewport_rect = get_viewport_rect()
 	half_width = viewport_rect.size.x / 2 - 20
+	if OS.has_feature("web"):
+		web_preview_cache = []
+		for i in len(options):
+			web_preview_cache.append(null)
 	_add_options()
 	_create_boxes()
 	_arrange_boxes()
@@ -127,10 +134,17 @@ func _preview_option(option: OptionDef, option_index: int) -> Control:
 		return texture_rect
 
 func preview_option(index: int) -> Control:
-	var control := _preview_option(options[index], index)
-	control.custom_minimum_size = Vector2(788, 491)
-	control.custom_maximum_size = Vector2(788, 491)
-	return control
+	var preview: Control
+	if web_preview_cache and web_preview_cache[index]:
+		var cached_preview: Control = web_preview_cache[index]
+		preview = cached_preview
+	else:
+		preview = _preview_option(options[index], index)
+		if web_preview_cache:
+			web_preview_cache[index] = preview
+	preview.custom_minimum_size = Vector2(788, 491)
+	preview.custom_maximum_size = Vector2(788, 491)
+	return preview
 
 func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint():
@@ -182,7 +196,6 @@ func switch(index: int) -> void:
 	move_tween.tween_property(options_container, "offset_transform_position:x", final_x, .5)
 	move_tween.tween_property(option_display, "modulate:a", 0, .25)
 	move_tween.tween_callback(func():
-		option_display.queue_free()
 		option_display = new_option_display
 		option_display_container.add_child(option_display))
 	move_tween.tween_property(new_option_display, "modulate:a", 1, .25)

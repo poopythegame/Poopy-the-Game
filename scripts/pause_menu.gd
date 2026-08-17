@@ -28,7 +28,10 @@ func _ready() -> void:
 	continue_button.pressed.connect(_continue)
 	restart_button.pressed.connect(_restart)
 	return_to_menu_button.pressed.connect(_menu)
-	quit_button.pressed.connect(_quit)
+	if OS.has_feature("web"):
+		quit_button.queue_free()
+	else:
+		quit_button.pressed.connect(_quit)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("esc"):

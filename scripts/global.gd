@@ -33,6 +33,10 @@ func stop_audio():
 	if not audio_stream_player.playing:
 		audio_stream_player.stream = null
 
+func _enter_tree() -> void:
+	if OS.has_feature("web"):
+		DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
+
 func _ready() -> void:
 	canvas_layer = CanvasLayer.new()
 	fullscreen_colorrect = ColorRect.new()

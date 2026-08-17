@@ -160,7 +160,7 @@ func _input(event: InputEvent) -> void:
 		if prev_screen != null:
 			change_screen(prev_screen, false, Transition.NONE)
 			play_audio(back_sfx)
-		else:
+		elif not OS.has_feature("web"):
 			get_tree().quit()
 	elif screen == Screen.TITLE:
 		if event.is_action_pressed("start") and not event.is_echo():

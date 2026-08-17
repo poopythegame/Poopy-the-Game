@@ -27,6 +27,7 @@ config/icon="uid://0e8y4uioqvmy"
 [audio]
 
 buses/default_bus_layout="uid://b83hcldu70xad"
+general/default_playback_type.web=0
 
 [autoload]
 
