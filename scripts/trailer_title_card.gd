@@ -35,7 +35,8 @@ func _begin_animation() -> void:
 		music_player.play()
 	tween.tween_property(john_person, "position:x", viewport_rect.size.x, 2)
 	tween.tween_callback(john_person.hide)
-	tween.tween_property(poopy, "position:x", viewport_rect.size.x / 16, 2)
+	tween.tween_interval(2 - 3.43/6)
+	tween.tween_property(poopy, "position:x", viewport_rect.size.x / 16, 3.43/6)
 	tween.tween_callback(func():
 		poopy.play("armflap")
 	)
