@@ -41,7 +41,7 @@ var move_tween: Tween
 var select_tween: Tween
 
 # Array[Control] | Nil
-var web_preview_cache = null
+var compatibility_preview_cache = null
 
 func play_audio(streams: Array[AudioStream]):
 	var choice: int = randi_range(0, len(streams) - 1)
@@ -68,10 +68,11 @@ func _ready() -> void:
 	else:
 		viewport_rect = get_viewport_rect()
 	half_width = viewport_rect.size.x / 2 - 20
-	if OS.has_feature("web"):
-		web_preview_cache = []
+	var is_compatibility := RenderingServer.get_rendering_device() == null
+	if is_compatibility:
+		compatibility_preview_cache = []
 		for i in len(options):
-			web_preview_cache.append(null)
+			compatibility_preview_cache.append(null)
 	_add_options()
 	_create_boxes()
 	_arrange_boxes()
@@ -135,13 +136,13 @@ func _preview_option(option: OptionDef, option_index: int) -> Control:
 
 func preview_option(index: int) -> Control:
 	var preview: Control
-	if web_preview_cache and web_preview_cache[index]:
-		var cached_preview: Control = web_preview_cache[index]
+	if compatibility_preview_cache and compatibility_preview_cache[index]:
+		var cached_preview: Control = compatibility_preview_cache[index]
 		preview = cached_preview
 	else:
 		preview = _preview_option(options[index], index)
-		if web_preview_cache:
-			web_preview_cache[index] = preview
+		if compatibility_preview_cache:
+			compatibility_preview_cache[index] = preview
 	preview.custom_minimum_size = Vector2(788, 491)
 	preview.custom_maximum_size = Vector2(788, 491)
 	return preview
