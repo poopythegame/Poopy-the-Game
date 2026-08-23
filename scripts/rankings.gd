@@ -19,12 +19,10 @@ class_name RankingsScreen
 @onready var portraits_background: PortraitsBackground = $PortraitsBackground
 @onready var audio_stream_player: AudioStreamPlayer = $MusicPlayer
 
-var rank_animation_animated_texture: AnimatedTexture
 var curr_rank: RankDef
 var main_menu: MainMenu
 
 func _on_enter(rank_to_show: int) -> void:
-	rank_animation_animated_texture = rank_animation_tr.texture
 	var rank_id: int = rank_to_show
 	curr_rank = Global.get_ranks()[rank_id]
 	rank_icon.texture = curr_rank.icon
@@ -52,23 +50,18 @@ func _on_enter(rank_to_show: int) -> void:
 
 func start_animation_sequence():
 	# Pre-Reveal animation
-	rank_animation_animated_texture.one_shot = true
-	rank_animation_animated_texture.pause = true
-	rank_animation_animated_texture.frames = len(pre_reveal_animation_frames)
-	rank_animation_animated_texture.current_frame = 0
-	var frame_duration := 1. / pre_reveal_animation_fps
-	var index := 0
-	for frame in pre_reveal_animation_frames:
-		rank_animation_animated_texture.set_frame_texture(index, frame)
-		rank_animation_animated_texture.set_frame_duration(index, frame_duration)
-		index += 1
+	# TODO: Allow frames to change at runtime.
+	var pre_reveal_animation := AnimatedTextureCacheInstance.create_or_get("rankings/pre_reveal", pre_reveal_animation_frames, pre_reveal_animation_fps)
+	rank_animation_tr.texture = pre_reveal_animation
+	pre_reveal_animation.pause = true
+	pre_reveal_animation.one_shot = true
 	var tween: Tween = create_tween()
 	tween.tween_callback(func():
 		audio_stream_player.stream = drumroll_sound
 		audio_stream_player.play()
 		pass)
 	tween.tween_await(audio_stream_player.finished)
-	tween.tween_callback(func(): rank_animation_animated_texture.pause = false)
+	tween.tween_callback(func(): pre_reveal_animation.pause = false)
 	var time_since_music_track_1 := 0.
 	if curr_rank.music_track_1 != null:
 		tween.tween_callback(func():
@@ -126,20 +119,11 @@ func start_animation_sequence():
 
 func apply_rank_animation():
 	var rank := curr_rank
-	rank_animation_animated_texture.one_shot = rank.is_animation_one_shot
-	rank_animation_animated_texture.current_frame = 0
-	rank_animation_animated_texture.pause = false
-	var frames := rank.animation_frames
-	var fps := rank.animation_fps
-	var frame_duration = 1. / fps
-	var index := 0
-	rank_animation_animated_texture.frames = len(frames)
-	for frame in frames:
-		rank_animation_animated_texture.set_frame_texture(index, frame)
-		rank_animation_animated_texture.set_frame_duration(index, frame_duration)
-		index += 1
+	var rank_animation := AnimatedTextureCacheInstance.create_or_get("rankings/level%s/%s" % [Global.current_level, curr_rank.letter], curr_rank.animation_frames, curr_rank.animation_fps)
+	rank_animation.one_shot = rank.is_animation_one_shot
 	if rank.flip_animation:
 		rank_animation_tr.flip_h = true
+	rank_animation_tr.texture = rank_animation
 
 func screen_shake(intensity: float):
 	main_menu.position = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * intensity

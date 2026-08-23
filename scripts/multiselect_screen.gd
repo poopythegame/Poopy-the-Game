@@ -114,14 +114,8 @@ func _preview_option(option: OptionDef, option_index: int) -> Control:
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	if option.enable_animated_overlay:
 		var animated_overlay_rect := TextureRect.new()
-		var animated_texture := AnimatedTexture.new()
-		animated_texture.frames = len(option.animated_overlay_frames)
-		var frame_duration := 1. / option.animated_overlay_fps
-		var index := 0
-		for frame in option.animated_overlay_frames:
-			animated_texture.set_frame_texture(index, frame)
-			animated_texture.set_frame_duration(index, frame_duration)
-			index += 1
+		var texture_name := "multiselect_screen/option_preview/%d" % option.get_instance_id()
+		var animated_texture := AnimatedTextureCacheInstance.create_or_get(texture_name, option.animated_overlay_frames, option.animated_overlay_fps)
 		animated_overlay_rect.texture = animated_texture
 		animated_overlay_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		animated_overlay_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED

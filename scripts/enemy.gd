@@ -296,19 +296,19 @@ func physics_process_normal(delta):
 	
 # --- 8. SHOCK ANIMATION
 
-	if direction > 0:
-		$AnimatedSprite2D.flip_h = false
-	elif direction < 0:
-		$AnimatedSprite2D.flip_h = true
 	
 	if vulnerable:
 		$AnimatedSprite2D.play("vulnerable")
-		
 	elif is_preparing:
 		if shockdone == false:
 			$AnimatedSprite2D.play("shock")
 		else:
 			$AnimatedSprite2D.play("run")
+	if not vulnerable:
+		if direction > 0:
+			$AnimatedSprite2D.flip_h = false
+		elif direction < 0:
+			$AnimatedSprite2D.flip_h = true
 
 func _physics_process(delta):
 	
