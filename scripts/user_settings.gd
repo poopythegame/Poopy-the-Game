@@ -3,6 +3,8 @@ class_name UserSettings
 
 signal setting_changed(id: StringName, value: Variant)
 
+const SCHEMA_VERSION: int = 1
+
 var settings: Dictionary[StringName, Variant]
 
 class Setting:
@@ -13,7 +15,9 @@ class Setting:
 
 func _get_default_settings() -> Dictionary[StringName, Variant]:
 	return {
+		&"SCHEMA_VERSION": SCHEMA_VERSION,
 		&"enable_camera_lookahead": true,
+		&"fullscreen": true,
 		&"master_volume": 1.,
 		&"music_volume": 1.,
 		&"sound_volume": 1.,
@@ -34,6 +38,9 @@ func _enter_tree() -> void:
 		else:
 			should_use_defaults = true
 
+	if &"SCHEMA_VERSION" not in settings or settings[&"SCHEMA_VERSION"] < SCHEMA_VERSION:
+		should_use_defaults = true
+	
 	if should_use_defaults:
 		settings = _get_default_settings()
 	
