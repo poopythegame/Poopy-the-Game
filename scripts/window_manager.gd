@@ -9,3 +9,7 @@ func _on_setting_changed(id: StringName, new_value: Variant) -> void:
 		if new_value:
 			new_mode = DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN
 		DisplayServer.window_set_mode(new_mode)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_fullscreen"):
+		UserSettingsInstance.fullscreen = not UserSettingsInstance.fullscreen
