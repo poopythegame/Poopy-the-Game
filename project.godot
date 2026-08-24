@@ -35,6 +35,7 @@ Global="*res://scripts/global.gd"
 UserSettingsInstance="*uid://dvb22fhd6b76y"
 AudioManager="uid://bj6gqlll6sgrr"
 AnimatedTextureCacheInstance="*uid://cid1626ucnj2e"
+WindowManager="uid://bdigudmie4ax6"
 
 [display]
 
