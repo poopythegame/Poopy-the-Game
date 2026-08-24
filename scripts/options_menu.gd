@@ -7,6 +7,8 @@ const HSLIDER_SCRIPT: GDScript = preload("uid://c43vk2s6cfq4g")
 
 func _create_controls() -> void:
 	for result in UserSettingsInstance.list_settings():
+		if result.id == &"SCHEMA_VERSION":
+			continue
 		var label: Label = Label.new()
 		label.text = result.name
 		options_container.add_child(label)
