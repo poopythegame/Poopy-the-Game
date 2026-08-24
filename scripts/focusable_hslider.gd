@@ -1,6 +1,6 @@
 extends HSlider
 
-const FOCUS_STYLEBOX: StyleBoxFlat = preload("uid://c120gqdk7oh14")
+const FOCUS_STYLEBOX: StyleBox = preload("uid://c120gqdk7oh14")
 @export var halo_offset: float = 4.0
 
 func _ready() -> void:
