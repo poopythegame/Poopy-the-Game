@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://k6lqha3f8ger"]
+
+[ext_resource type="Script" uid="uid://bqwnji2e12l2r" path="res://scripts/tutorial_billboard.gd" id="2_74rt0"]
+[ext_resource type="VideoStream" uid="uid://dlvvrj4swjcyk" path="res://assets/video/test_video.ogv" id="3_74rt0"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_ild62"]
+file = "res://assets/video/test_video.ogv"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cdpu"]
+size = Vector2(1619, 1399)
+
+[node name="TutorialBillboard" type="Sprite2D" unique_id=939608387]
+scale = Vector2(0.1, 0.1)
+region_enabled = true
+region_rect = Rect2(566, 245, 1617, 1395)
+script = ExtResource("2_74rt0")
+video = SubResource("VideoStreamTheora_ild62")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1957124957]
+position = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1973686584]
+position = Vector2(10, 11.000015)
+shape = SubResource("RectangleShape2D_0cdpu")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1494803112]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1528.5
+offset_top = -1317.5
+offset_right = 2311.5
+offset_bottom = 842.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.375, 0.375)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+stream = ExtResource("3_74rt0")
+bus = &"SFX"
