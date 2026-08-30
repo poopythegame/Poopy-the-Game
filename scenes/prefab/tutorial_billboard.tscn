@@ -20,7 +20,8 @@ video = SubResource("VideoStreamTheora_ild62")
 position = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1973686584]
-position = Vector2(10, 11.000015)
+position = Vector2(9.999999, 11.000014)
+scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_0cdpu")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1494803112]
@@ -29,10 +30,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1528.5
-offset_top = -1317.5
-offset_right = 2311.5
-offset_bottom = 842.5
+offset_left = -710.5
+offset_top = -440.49988
+offset_right = 3129.5
+offset_bottom = 1719.5001
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.375, 0.375)
