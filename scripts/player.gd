@@ -341,7 +341,11 @@ func physics_process_grapple(delta: float):
 		# Optional: If you hit a floor, maybe end the grapple?
 		#stop_grapple() 
 
-	# 6. VISUALS
+	# 6. Rotation reset to default (zero)
+	$Collision.rotation = 0
+	$Sprite.rotation = lerp_angle($Sprite.rotation, 0, 0.25)
+
+	# 7. VISUALS
 	rope_line.visible = true
 	rope_line.clear_points()
 	rope_line.add_point(Vector2.ZERO) 
@@ -389,14 +393,21 @@ func physics_process_normal(delta):
 			var col = get_slide_collision(i)
 			var n = col.get_normal()
 			
+			if is_on_wall():
 			# A perfectly flat wall has a Y normal of 0.
 			# A perfectly flat ceiling has an X normal of 0.
 			# We ONLY want to attach if both X and Y are greater than 0 (meaning it's angled).
-			if abs(n.x) > 0.01 and abs(n.y) > 0.01:
-				is_touching_surface = true
-				surface_normal = n
-				break
-
+				if abs(n.x) > 0.01 and abs(n.y) > 0.01:
+					is_touching_surface = true
+					surface_normal = n
+					break
+			elif is_on_ceiling():
+				if abs(n.x) > 0.7 and motion.y < 75:
+					is_touching_surface = true
+					surface_normal = n
+					break
+					
+					
 	# --- 2. CALCULATE SLOPE DATA ---
 	if is_touching_surface and !springing:
 		slopeangle = surface_normal.angle() + (PI/2)
@@ -595,7 +606,7 @@ func physics_process_normal(delta):
 				motion.y = -JUMP_VELOCITY / 2.2
 
 	if Input.is_action_just_pressed("boost") and canspeedboost:
-		motion.x = 690 * Input.get_axis("left", "right")
+		motion.x = 690 * sign($Collision/WallCast.target_position.x)
 		play_audio(boost_sfx)
 		camera.screen_shake_for(.25)
 		canspeedboost = false
