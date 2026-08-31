@@ -21,6 +21,7 @@ class_name RankingsScreen
 
 var curr_rank: RankDef
 var main_menu: MainMenu
+var done: bool = false
 
 func _on_enter(rank_to_show: int) -> void:
 	var rank_id: int = rank_to_show
@@ -115,6 +116,7 @@ func start_animation_sequence():
 	if curr_rank.use_walk_off_animation:
 		tween.parallel().tween_property(rank_animation_tr, "offset_transform_position:x", -2800, 3)
 	tween.tween_property(ranks_container, "modulate:a", 1, 2)
+	tween.tween_callback(func(): done = true)
 	tween.set_trans(Tween.TRANS_CUBIC)
 
 func apply_rank_animation():
@@ -129,7 +131,7 @@ func screen_shake(intensity: float):
 	main_menu.position = Vector2(randf_range(-1, 1), randf_range(-1, 1)) * intensity
 
 func _input(event: InputEvent) -> void:
-	if event.is_action("start"):
+	if event.is_action("start") and done:
 		if main_menu:
 			main_menu.change_screen(MainMenu.Screen.MENU, false, MainMenu.Transition.WIPE)
 		else:

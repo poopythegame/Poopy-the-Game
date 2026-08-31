@@ -1,10 +1,7 @@
 [gd_scene format=3 uid="uid://k6lqha3f8ger"]
 
 [ext_resource type="Script" uid="uid://bqwnji2e12l2r" path="res://scripts/tutorial_billboard.gd" id="2_74rt0"]
-[ext_resource type="VideoStream" uid="uid://dlvvrj4swjcyk" path="res://assets/video/test_video.ogv" id="3_74rt0"]
-
-[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_ild62"]
-file = "res://assets/video/test_video.ogv"
+[ext_resource type="VideoStream" uid="uid://kg81ffmk3f5e" path="res://assets/video/test_video.mp4" id="2_ild62"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0cdpu"]
 size = Vector2(1619, 1399)
@@ -14,7 +11,7 @@ scale = Vector2(0.1, 0.1)
 region_enabled = true
 region_rect = Rect2(566, 245, 1617, 1395)
 script = ExtResource("2_74rt0")
-video = SubResource("VideoStreamTheora_ild62")
+video = ExtResource("2_ild62")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1957124957]
 position = Vector2(0, -1)
@@ -39,5 +36,5 @@ grow_vertical = 2
 scale = Vector2(0.375, 0.375)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-stream = ExtResource("3_74rt0")
 bus = &"SFX"
+metadata/_edit_use_anchors_ = true
