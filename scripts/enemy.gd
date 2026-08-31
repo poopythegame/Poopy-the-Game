@@ -548,6 +548,7 @@ func check_player_impact(delta):
 				if player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
 					perform_bounce(player)
 				else:
+					player_raw_motion = null
 					launch_enemy(player)
 				vulnerable = true
 
@@ -579,9 +580,11 @@ func perform_bounce(player: Player):
 	show_damage_fx()
 
 func launch_enemy(player):
+	grounded = false
 	hit_cooldown = true
 	hit_timer = 1
 	var player_motion: Vector2 = player.velocity
+	print(player_raw_motion)
 	if player_raw_motion != null:
 		player_motion = player_raw_motion
 		player_raw_motion = null
@@ -597,7 +600,6 @@ func launch_enemy(player):
 	# if abs(player.motion.y) < 100 and player.is_on_floor():
 	# 	vertical_force = -300 
 	motion.y = vertical_force	
-	grounded = false
 	rot = 0
 	position.y -= 8 
 	sprite_2d.rotation = 0
