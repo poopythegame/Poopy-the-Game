@@ -5,8 +5,12 @@ const HSLIDER_SCRIPT: GDScript = preload("uid://c43vk2s6cfq4g")
 
 @onready var options_container: GridContainer = $OptionsContainer
 
+var controls: Dictionary[StringName, Control] = {}
+
 func _create_controls() -> void:
 	for result in UserSettingsInstance.list_settings():
+		if result.id == &"SCHEMA_VERSION":
+			continue
 		var label: Label = Label.new()
 		label.text = result.name
 		options_container.add_child(label)
@@ -30,9 +34,21 @@ func _create_controls() -> void:
 			control.set_script(HSLIDER_SCRIPT)
 		control.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		options_container.add_child(control)
+		controls[result.id] = control
 
 func _on_enter() -> void:
 	options_container.get_child(1).grab_focus()
 
 func _ready() -> void:
 	_create_controls()
+	UserSettingsInstance.setting_changed.connect(_on_setting_changed)
+
+func _on_setting_changed(id: StringName, value: Variant) -> void:
+	if id in controls:
+		var control := controls[id]
+		if typeof(value) == TYPE_BOOL:
+			var check_button: CheckButton = control
+			check_button.button_pressed = value
+		elif typeof(value) == TYPE_FLOAT:
+			var slider: HSlider = control
+			slider.value = value
