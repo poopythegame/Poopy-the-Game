@@ -377,6 +377,7 @@ func engage_freeze():
 	sprite_2d.rotation = 0
 	$CollisionShape2D.rotation = 0
 	rot = 0
+	grounded = false
 	
 	$CollisionShape2D.disabled = false
 	hit_timer = 0
