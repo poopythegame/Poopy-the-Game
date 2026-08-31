@@ -883,13 +883,10 @@ func animate():
 		# This is how the Sprite is able to turn when you move.
 	var direction = Input.get_axis("left", "right")
 	
-	if not isskidding and not Input.is_action_pressed("enemyfreeze"):
-		if direction < 0:
-			$Sprite.flip_h = true
-		elif direction > 0:
-			$Sprite.flip_h = false
-		else:
-			$Sprite.flip_h = false
+	if direction < 0 and not isskidding:
+		$Sprite.flip_h = true
+	elif direction > 0 and not isskidding:
+		$Sprite.flip_h = false
 	
 	if isrolling:
 		$Sprite.play("jump")
