@@ -286,6 +286,7 @@ func attempt_grapple_start():
 		canairdash = true
 		canstomp = true
 		rot = 0
+		up_direction = Vector2.UP
 
 func physics_process_grapple(delta: float):
 	# 1. APPLY GRAVITY
