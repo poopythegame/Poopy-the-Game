@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://k6lqha3f8ger"]
 
 [ext_resource type="Script" uid="uid://bqwnji2e12l2r" path="res://scripts/tutorial_billboard.gd" id="2_74rt0"]
-[ext_resource type="VideoStream" uid="uid://kg81ffmk3f5e" path="res://assets/video/test_video.mp4" id="2_ild62"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0cdpu"]
 size = Vector2(1619, 1399)
@@ -11,7 +10,6 @@ scale = Vector2(0.1, 0.1)
 region_enabled = true
 region_rect = Rect2(566, 245, 1617, 1395)
 script = ExtResource("2_74rt0")
-video = ExtResource("2_ild62")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1957124957]
 position = Vector2(0, -1)
