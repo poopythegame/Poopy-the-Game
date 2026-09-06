@@ -47,17 +47,17 @@ size_flags_vertical = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1687052117]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 3
 theme_override_constants/separation = 15
 
 [node name="LeftHints" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=2091486405]
 layout_mode = 2
-size_flags_vertical = 4
 
 [node name="LeftArrow" type="TextureRect" parent="VBoxContainer/HBoxContainer/LeftHints" unique_id=1478722633]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("5_a8kia")
-expand_mode = 5
+expand_mode = 3
 
 [node name="BackHint" type="TextureRect" parent="VBoxContainer/HBoxContainer/LeftHints" unique_id=1650238897]
 custom_minimum_size = Vector2(150, 0)
@@ -76,13 +76,12 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_hddne")
 
 [node name="RightHints" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=857627080]
 layout_mode = 2
-size_flags_vertical = 4
 
 [node name="RightArrow" type="TextureRect" parent="VBoxContainer/HBoxContainer/RightHints" unique_id=1456112663]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("5_a8kia")
-expand_mode = 5
+expand_mode = 3
 flip_h = true
 
 [node name="ConfirmHint" type="TextureRect" parent="VBoxContainer/HBoxContainer/RightHints" unique_id=344237949]
