@@ -1,9 +1,9 @@
-extends CenterContainer
+extends Control
 class_name OptionsMenu
 
 const HSLIDER_SCRIPT: GDScript = preload("uid://c43vk2s6cfq4g")
 
-@onready var options_container: GridContainer = $OptionsContainer
+@onready var options_container: GridContainer = %OptionsContainer
 
 var controls: Dictionary[StringName, Control] = {}
 
