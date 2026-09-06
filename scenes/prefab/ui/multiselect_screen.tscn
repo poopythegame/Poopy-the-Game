@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cuehpn8m2fakd" path="res://assets/audio/effects/menu_press.ogg" id="3_e0yf4"]
 [ext_resource type="AudioStream" uid="uid://da8y4i2qvk454" path="res://assets/audio/effects/menu_right.ogg" id="4_01fnu"]
 [ext_resource type="Texture2D" uid="uid://2t6uyuv3rq01" path="res://assets/textures/ui/cancel.png" id="5_01fnu"]
+[ext_resource type="Texture2D" uid="uid://cw78lx71h2amd" path="res://assets/textures/ui/main_menu/arrow.png" id="5_a8kia"]
 [ext_resource type="Texture2D" uid="uid://ci3s54aa4h2h4" path="res://assets/textures/ui/main_menu/main_menu_option_portrait_background.png" id="5_ryp7i"]
 [ext_resource type="Texture2D" uid="uid://dva0q0wlb0gny" path="res://assets/textures/ui/confirm.png" id="7_a8kia"]
 
@@ -48,7 +49,17 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 15
 
-[node name="BackHint" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1650238897]
+[node name="LeftHints" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=2091486405]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="LeftArrow" type="TextureRect" parent="VBoxContainer/HBoxContainer/LeftHints" unique_id=1478722633]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("5_a8kia")
+expand_mode = 5
+
+[node name="BackHint" type="TextureRect" parent="VBoxContainer/HBoxContainer/LeftHints" unique_id=1650238897]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 8
@@ -63,7 +74,18 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_hddne")
 
-[node name="ConfirmHint" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=344237949]
+[node name="RightHints" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=857627080]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="RightArrow" type="TextureRect" parent="VBoxContainer/HBoxContainer/RightHints" unique_id=1456112663]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("5_a8kia")
+expand_mode = 5
+flip_h = true
+
+[node name="ConfirmHint" type="TextureRect" parent="VBoxContainer/HBoxContainer/RightHints" unique_id=344237949]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 8
