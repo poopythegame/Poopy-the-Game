@@ -28,6 +28,7 @@ class_name Player
 @export var final_hit_sfx: Array[AudioStream]
 
 var dying: bool = false
+var is_taking_damage: bool = false
 var springing: bool = false
 var health: float = max_health:
 	set(value):
@@ -676,7 +677,7 @@ func physics_process_normal(delta):
 		
 	
 	if direction == -(sign(motion.x)) and (abs(motion.x) >= (topspeed/1.5)) and is_on_floor():
-		if not isskidding:
+		if not isskidding and not is_taking_damage:
 			play_audio(skid_sfx)
 		isskidding = true
 	if abs(motion.x) == 0 or (not is_on_floor()) or direction != -(sign(motion.x)):
@@ -834,7 +835,10 @@ func take_damage(amount: float) -> void:
 	if health <= 0:
 		die()
 	else:
+		is_taking_damage = true
 		play_audio(hit_sfx)
+		await audio_stream_player.finished
+		is_taking_damage = false
 
 func bounce(strength: float) -> void:
 	var dir = Vector2(-.5,-.5)
