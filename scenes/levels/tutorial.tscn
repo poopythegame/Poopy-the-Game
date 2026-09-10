@@ -49,6 +49,7 @@
 [ext_resource type="PackedScene" uid="uid://bbbo55bsiuso1" path="res://scenes/prefab/setdressing/tutorial/enemy_arrow.tscn" id="42_8j442"]
 [ext_resource type="PackedScene" uid="uid://bxh65cv4y62p8" path="res://scenes/prefab/spike.tscn" id="43_ney7n"]
 [ext_resource type="PackedScene" uid="uid://boi0joawiyob7" path="res://scenes/prefab/setdressing/tutorial/airdash.tscn" id="44_8j442"]
+[ext_resource type="PackedScene" uid="uid://k6lqha3f8ger" path="res://scenes/prefab/tutorial_billboard.tscn" id="50_hhicy"]
 
 [sub_resource type="Resource" id="Resource_d0yoi"]
 script = ExtResource("2_uy53l")
@@ -5018,3 +5019,7 @@ position = Vector2(9664, -1112)
 
 [node name="Coin30" parent="." unique_id=1410698369 instance=ExtResource("31_4n5tw")]
 position = Vector2(9664, -1192)
+
+[node name="TutorialBillboard" parent="." unique_id=939608387 instance=ExtResource("50_hhicy")]
+position = Vector2(479.99997, -135.99998)
+video_path = "res://assets/video/test_video.mp4"
