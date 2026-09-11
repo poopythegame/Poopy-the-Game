@@ -21,7 +21,7 @@ func _ready() -> void:
 		video = load(fallback_path)
 	video_stream_player.stream = video
 	player = get_tree().get_first_node_in_group("Player")
-	video_stream_player.finished.connect(hide)
+	video_stream_player.finished.connect(video_stream_player.hide)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("up") and player in area_2d.get_overlapping_bodies() and can_play:
