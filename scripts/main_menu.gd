@@ -93,6 +93,7 @@ var current_screen_cg: CanvasGroup
 var main_scene: PackedScene
 var screen_rect: Rect2
 var undo_queue: Array[Screen] = []
+var is_transitioning: bool = false
 
 var title_title_reveal_tween: Tween
 var title_poopy_jump_vel: float
@@ -140,6 +141,8 @@ func _ready() -> void:
 	change_screen(start_screen, false, Transition.NONE)
 
 func _on_menu_option_selected(index: int):
+	if is_transitioning:
+		return
 	if index == 0:
 		change_screen(Screen.CREDITS, true, Transition.CROSSFADE)
 	elif index == 1:
@@ -278,6 +281,7 @@ func reveal_screen_cg(screen_cg: CanvasGroup):
 	screen_cg.show()
 	screen_cg.get_node("Screen").process_mode = Node.PROCESS_MODE_INHERIT
 	current_screen_cg = screen_cg
+	is_transitioning = false
 
 func reveal_screen_cg_wipe(screen_cg: CanvasGroup):
 	current_screen_cg.show()		
@@ -309,6 +313,7 @@ func reveal_screen_cg_wipe(screen_cg: CanvasGroup):
 		screen_cg.z_index = next_screen_prev_z_index
 		screen_cg.get_node("Screen").process_mode = Node.PROCESS_MODE_INHERIT
 		current_screen_cg = screen_cg
+		is_transitioning = false
 	)
 
 func reveal_screen_cg_crossfade(screen_cg: CanvasGroup):
@@ -336,9 +341,11 @@ func reveal_screen_cg_crossfade(screen_cg: CanvasGroup):
 		blackout.hide()
 		screen_cg.get_node("Screen").process_mode = Node.PROCESS_MODE_INHERIT
 		current_screen_cg = screen_cg
+		is_transitioning = false
 	)
 
 func change_screen(new_screen: Screen, record_undo: bool = true, transition_type: Transition = Transition.NONE):
+	is_transitioning = true
 	for s in screen_cgs:
 		s.hide()
 		var screen_node := s.get_node("Screen")

@@ -11,17 +11,17 @@ var video: VideoStream
 var can_play: bool = true
 
 func _ready() -> void:
-	if OS.has_feature("web") or use_fallback:
+	video = load(video_path)
+	if not video or OS.has_feature("web") or use_fallback:
 		var base_name: String = video_path.get_basename()
 		var fallback_path: String = base_name + ".ogv"
 		if not FileAccess.file_exists(fallback_path):
 			push_error("Web: couldn't load fallback video at " + fallback_path + ". Video will not play.")
 			can_play = false
 		video = load(fallback_path)
-	else:
-		video = load(video_path)
 	video_stream_player.stream = video
 	player = get_tree().get_first_node_in_group("Player")
+	video_stream_player.finished.connect(video_stream_player.hide)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("up") and player in area_2d.get_overlapping_bodies() and can_play:
