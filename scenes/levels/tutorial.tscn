@@ -5010,3 +5010,4 @@ position = Vector2(9664, -1192)
 
 [node name="TutorialBillboard" parent="." unique_id=939608387 instance=ExtResource("50_hhicy")]
 position = Vector2(1495.9999, -424)
+video_path = "res://assets/video/speed_check.webm"
