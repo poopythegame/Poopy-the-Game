@@ -142,7 +142,7 @@ func preview_option(index: int) -> Control:
 	return preview
 
 func _input(event: InputEvent) -> void:
-	if Engine.is_editor_hint():
+	if Engine.is_editor_hint() or (select_tween and select_tween.is_running()):
 		return
 	if not select_tween or not select_tween.is_running():
 		if event.is_action_pressed("ui_right") and not event.is_echo():
