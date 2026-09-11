@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://k6lqha3f8ger"]
 
-[ext_resource type="Texture2D" uid="uid://c702fbcxyoy1x" path="res://assets/textures/elements/setdressing/tutorial/video tutorial.png" id="1_ild62"]
 [ext_resource type="Script" uid="uid://bqwnji2e12l2r" path="res://scripts/tutorial_billboard.gd" id="2_74rt0"]
+[ext_resource type="Texture2D" uid="uid://dw113vpsufvr7" path="res://assets/textures/elements/setdressing/tutorial/person TV.png" id="2_ild62"]
+[ext_resource type="Texture2D" uid="uid://unpqb231xwah" path="res://assets/textures/elements/setdressing/tutorial/person TV screen.png" id="3_74rt0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0cdpu"]
 size = Vector2(1860.0002, 1649.5002)
 
 [node name="TutorialBillboard" type="Sprite2D" unique_id=939608387]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.07, 0.07)
 region_enabled = true
 region_rect = Rect2(566, 245, 1617, 1395)
 script = ExtResource("2_74rt0")
@@ -16,20 +17,21 @@ script = ExtResource("2_74rt0")
 position = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1973686584]
-position = Vector2(6.6757195e-05, 136.25006)
+position = Vector2(0, -318.99994)
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_0cdpu")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1494803112]
+z_index = -100
 custom_minimum_size = Vector2(1620, 890)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -810.5
+offset_left = -800.5
 offset_top = -560.5
-offset_right = 809.5
+offset_right = 819.5
 offset_bottom = 329.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -40,7 +42,10 @@ bus = &"SFX"
 metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1708559978]
-z_index = -100
-position = Vector2(-230.00003, 3.8146973e-06)
-scale = Vector2(1.1565043, 1.1565042)
-texture = ExtResource("1_ild62")
+position = Vector2(-15, -390.729)
+scale = Vector2(0.9491525, 1.1820377)
+texture = ExtResource("2_ild62")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D" unique_id=2097800419]
+z_index = -1999
+texture = ExtResource("3_74rt0")
