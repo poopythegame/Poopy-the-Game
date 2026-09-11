@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bqwnji2e12l2r" path="res://scripts/tutorial_billboard.gd" id="2_74rt0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0cdpu"]
-size = Vector2(1619, 1399)
+size = Vector2(1860.0002, 1649.5002)
 
 [node name="TutorialBillboard" type="Sprite2D" unique_id=939608387]
 scale = Vector2(0.1, 0.1)
@@ -16,8 +16,8 @@ script = ExtResource("2_74rt0")
 position = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1973686584]
-position = Vector2(9.999999, 11.000014)
-scale = Vector2(0.99999994, 0.99999994)
+position = Vector2(6.6757195e-05, 136.25006)
+scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_0cdpu")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1494803112]
@@ -27,19 +27,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -800.50024
-offset_top = -470.5
-offset_right = 819.49976
-offset_bottom = 419.5
+offset_left = -810.5
+offset_top = -560.5
+offset_right = 809.5
+offset_bottom = 329.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 expand = true
 bus = &"SFX"
+metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="VideoStreamPlayer" unique_id=1708559978]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1708559978]
 z_index = -100
-position = Vector2(1493.3333, 1279.9998)
-scale = Vector2(2.191057, 2.191057)
+position = Vector2(-230.00003, 3.8146973e-06)
+scale = Vector2(1.1565043, 1.1565042)
 texture = ExtResource("1_ild62")
