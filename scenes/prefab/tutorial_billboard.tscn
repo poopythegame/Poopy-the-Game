@@ -11,7 +11,6 @@ scale = Vector2(0.1, 0.1)
 region_enabled = true
 region_rect = Rect2(566, 245, 1617, 1395)
 script = ExtResource("2_74rt0")
-video_path = "res://assets/video/speed check.mp4"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1957124957]
 position = Vector2(0, -1)
@@ -22,23 +21,22 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_0cdpu")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1494803112]
-z_index = 100
-anchors_preset = -1
-anchor_left = -2.5785406
-anchor_top = 0.5451612
-anchor_right = -2.3146775
-anchor_bottom = 0.8318996
-offset_left = -717.42145
-offset_top = -400.54517
-offset_right = 3122.5789
-offset_bottom = 1759.4547
+custom_minimum_size = Vector2(1620, 890)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -800.50024
+offset_top = -470.5
+offset_right = 819.49976
+offset_bottom = 419.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.375, 0.375)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+expand = true
 bus = &"SFX"
-metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="VideoStreamPlayer" unique_id=1708559978]
 z_index = -100
