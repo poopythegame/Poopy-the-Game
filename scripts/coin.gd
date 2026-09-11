@@ -40,12 +40,15 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D):
 	if body is Player and not used:
+		var speed_mult: float = body.motion.length() / Player.topspeed
+		if speed_mult <= 1:
+			speed_mult = 1
 		# a player picked up the coin
 		animated_sprite_2d.play("spin")
 		play_audio(collect_sfx)
 		var tween = create_tween()
-		tween.tween_property(self, "modulate:a", 0, animation_duration)
-		tween.parallel().tween_property(self, "position:y", position.y - 50, animation_duration)
+		tween.tween_property(self, "modulate:a", 0, animation_duration / speed_mult)
+		tween.parallel().tween_property(self, "position:y", position.y - 50, animation_duration / speed_mult)
 		tween.tween_callback(hide)
 		used = true
 		if body.health < body.max_health:

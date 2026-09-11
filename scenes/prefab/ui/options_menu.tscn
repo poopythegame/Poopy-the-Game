@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://ceg8x1m3frt2q"]
 
 [ext_resource type="Script" uid="uid://c4xgkd1lsc5ph" path="res://scripts/options_menu.gd" id="1_sm0gs"]
+[ext_resource type="Texture2D" uid="uid://2t6uyuv3rq01" path="res://assets/textures/ui/cancel.png" id="2_agc37"]
+[ext_resource type="Texture2D" uid="uid://dva0q0wlb0gny" path="res://assets/textures/ui/confirm.png" id="3_pwuph"]
 
-[node name="Screen" type="CenterContainer" unique_id=1122078735]
+[node name="Screen" type="Control" unique_id=1572088587]
 process_mode = 4
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,6 +14,68 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sm0gs")
 
-[node name="OptionsContainer" type="GridContainer" parent="." unique_id=974011938]
+[node name="Left" type="MarginContainer" parent="." unique_id=1718398726]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -227.0
+offset_right = 154.0
+offset_bottom = 227.0
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Left" unique_id=1489261300]
 layout_mode = 2
+
+[node name="Control" type="Control" parent="Left/VBoxContainer" unique_id=623606230]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="BackHint" type="TextureRect" parent="Left/VBoxContainer" unique_id=1574882449]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("2_agc37")
+expand_mode = 5
+
+[node name="OptionsContainer" type="GridContainer" parent="." unique_id=974011938]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
 columns = 2
+
+[node name="Right" type="MarginContainer" parent="." unique_id=573776379]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -154.0
+offset_top = -229.0
+offset_bottom = 229.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Right" unique_id=2054998226]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Right/VBoxContainer" unique_id=1472005891]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="BackHint" type="TextureRect" parent="Right/VBoxContainer" unique_id=1630520158]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("3_pwuph")
+expand_mode = 5
