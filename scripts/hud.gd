@@ -79,11 +79,14 @@ func log_health(value: float, max_health: float) -> void:
 
 func calculate_rank() -> int:
 	var ranks := Global.get_ranks()
+	var time := 601
 	var rank := len(ranks) - 1
 	var best_rank_time := INF
 	for i in len(ranks):
 		var rank_def := ranks[i]
-		if (time <= rank_def.time or not rank_def.use_time) and rank_def.time < best_rank_time:
+		if not rank_def.use_time:
+			continue
+		if time <= rank_def.time and rank_def.time < best_rank_time:
 			rank = i
 			best_rank_time = rank_def.time
 	if time <= Global.get_best_time():
