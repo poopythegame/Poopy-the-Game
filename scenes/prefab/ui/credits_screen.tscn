@@ -53,7 +53,7 @@ frame_1/duration = 0.17
 script = ExtResource("5_16ial")
 bio = "• Music arrangement/composition (all music)
 • Sound effects"
-title = "SheoM. / Edé Eliseo A. M."
+title = "SheoM. / Edén Eliseo A. M."
 portrait = SubResource("AnimatedTexture_5et21")
 metadata/_custom_type_script = "uid://8kv681icjouq"
 
@@ -99,7 +99,7 @@ size_flags_vertical = 0
 texture = ExtResource("11_xre4m")
 expand_mode = 3
 
-[node name="ConfirmHint" parent="VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(1687052117) index="2" unique_id=344237949]
+[node name="ConfirmHint" parent="VBoxContainer/HBoxContainer/RightHints" parent_id_path=PackedInt32Array(857627080) index="0" unique_id=344237949]
 modulate = Color(1, 1, 1, 0)
 
 [node name="TitlesContainer" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="3" unique_id=890400313]
