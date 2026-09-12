@@ -5010,11 +5010,11 @@ position = Vector2(9664, -1192)
 
 [node name="TutorialBillboard" parent="." unique_id=939608387 instance=ExtResource("50_hhicy")]
 position = Vector2(1488, -381)
-video_path = "res://assets/video/speed_check.webm"
+video_path = "res://assets/video/speed check.mp4"
 
 [node name="TutorialBillboard2" parent="." unique_id=1901718927 instance=ExtResource("50_hhicy")]
 position = Vector2(1888, -605)
-video_path = "res://assets/video/rolling.webm"
+video_path = "res://assets/video/rolling.mp4"
 
 [node name="TutorialBillboard3" parent="." unique_id=293495590 instance=ExtResource("50_hhicy")]
 position = Vector2(7936, -160)
@@ -5022,18 +5022,18 @@ video_path = "res://assets/video/stomping.mp4"
 
 [node name="TutorialBillboard4" parent="." unique_id=385940598 instance=ExtResource("50_hhicy")]
 position = Vector2(12096, 59)
-video_path = "res://assets/video/grappling_new.mp4"
+video_path = "res://assets/video/grappling.mp4"
 
 [node name="TutorialBillboard5" parent="." unique_id=453509910 instance=ExtResource("50_hhicy")]
 position = Vector2(14720, 416)
-video_path = "res://assets/video/momentum_conversion.webm"
+video_path = "res://assets/video/momentum conversion.mp4"
 
 [node name="TutorialBillboard6" parent="." unique_id=1553376576 instance=ExtResource("50_hhicy")]
 z_index = -100
 position = Vector2(16928, -925)
-video_path = "res://assets/video/enemy_launch.webm"
+video_path = "res://assets/video/enemy launch.mp4"
 
 [node name="TutorialBillboard7" parent="." unique_id=800079263 instance=ExtResource("50_hhicy")]
 z_index = -100
 position = Vector2(20184, -1437)
-video_path = "res://assets/video/enemy_bounce.webm"
+video_path = "res://assets/video/enemy bounce.mp4"
