@@ -79,7 +79,6 @@ func log_health(value: float, max_health: float) -> void:
 
 func calculate_rank() -> int:
 	var ranks := Global.get_ranks()
-	var time := 601
 	var rank := len(ranks) - 1
 	var best_rank_time := INF
 	for i in len(ranks):
