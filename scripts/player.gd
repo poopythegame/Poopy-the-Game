@@ -136,6 +136,9 @@ var jumping = false
 # Activates if you've successfully left the ground by Jumping.
 ## This one is necessary for our Variable Jump Height.
 
+var snap_exception = false
+#It prevents the code from snapping the player back to the ground.
+
 var canjump = false
 # Whether or not you're able to jump. When deactivated, your jump button will become useless.
 ## This one is necessary for our Coyote Timer.
@@ -441,7 +444,7 @@ func physics_process_normal(delta):
 		var base_ray_length = 4.0 # (Keep your custom value here)
 		
 		if grounded:
-			if jumping:
+			if jumping or snap_exception:
 				grounded = false
 				motion = get_real_velocity() 
 				rot = 0
@@ -599,6 +602,7 @@ func physics_process_normal(delta):
 
 	if motion.y >= 0 and grounded: # If you're DEFINITELY on the ground...
 		jumping = false
+		snap_exception = false
 		canjump = true
 		# Let the script know you're not jumping anymore, and return your ability to jump.
 
@@ -859,7 +863,7 @@ func bounce(strength: float) -> void:
 	var force = dir * strength
 	motion = force
 	springing = true
-	jumping = true
+	snap_exception = true
 
 # That's the main part of the script done with.
 # Now let's move on to extra functions and timer signals.
