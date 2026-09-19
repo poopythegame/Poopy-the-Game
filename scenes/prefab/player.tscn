@@ -63,7 +63,7 @@ target_position = Vector2(7, 0)
 hit_from_inside = true
 
 [node name="ControlLockTimer" type="Timer" parent="." unique_id=974706069]
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
 
 [node name="IdleTimer" type="Timer" parent="." unique_id=1353224515]

@@ -797,6 +797,14 @@ func physics_process_normal(delta):
 			canjump = false
 			# Detatch from the wall.
 			
+			grounded = false
+			motion = get_real_velocity()
+			rot = 0
+			up_direction = Vector2(0, -1)
+					
+			#RESET RAYCAST
+			$Collision/Raycast.target_position = Vector2(0, 4)
+			
 			control_lock = true
 			$ControlLockTimer.start()
 			# Briefly lock the player's controls.
@@ -814,8 +822,7 @@ func physics_process_normal(delta):
 		if not grounded:
 			motion.x = 0
 		elif grounded:
-			var ref_angle = asin(abs(slopefactor))
-			if (ref_angle <= 0.1):
+			if abs(slopefactor) == 0 or abs(slopefactor) == 1:
 				motion.x = 0
 		# Stop moving.
 
