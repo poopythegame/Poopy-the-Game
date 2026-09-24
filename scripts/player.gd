@@ -105,7 +105,13 @@ var stomp_enabled: bool = true
 
 var canairdash = false
 
-var canspeedboost = true
+var canspeedboost = false
+
+var cantornadojump = true
+
+var jumpcharge = 0	#charge variable used to ascend the player for the tornado jump.
+
+var canbounce = false
 
 var isrolling = false
 
@@ -611,12 +617,26 @@ func physics_process_normal(delta):
 			if not Input.is_action_pressed("jump") and not Input.is_action_pressed("action") and not exitgrapple: # ...but you're NOT pressing the jump button anymore...
 				motion.y = -JUMP_VELOCITY / 2.2
 
+
+#POOPY ELEMENTAL SHIELD ABILITIES 
+
 	if Input.is_action_just_pressed("boost") and canspeedboost:
 		motion.x = 690 * sign($Collision/WallCast.target_position.x)
 		play_audio(boost_sfx)
 		camera.screen_shake_for(.25)
 		canspeedboost = false
 		
+	if cantornadojump and grounded:
+		if Input.is_action_pressed("boost"):
+			jumpcharge += 5
+			jumpcharge = clamp(jumpcharge, 200, 1200)
+
+		elif Input.is_action_just_released("boost"):
+			snap_exception = true
+			motion.y = -1 * jumpcharge #remember: the y axis of godot is inverted.
+			cantornadojump = false
+			jumpcharge = 0
+			
 #	var actionlist = ["action", "grapple", "dual"]
 #	var index = 0
 	#if Input.is_action_just_pressed("toggle"):
