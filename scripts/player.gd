@@ -107,11 +107,11 @@ var canairdash = false
 
 var canspeedboost = false
 
-var cantornadojump = true
+var cantornadojump = false
 
 var jumpcharge = 0	#charge variable used to ascend the player for the tornado jump.
 
-var canbounce = false
+var canbounce = true
 
 var isrolling = false
 
@@ -633,9 +633,28 @@ func physics_process_normal(delta):
 
 		elif Input.is_action_just_released("boost"):
 			snap_exception = true
+			rot = 0 #no slope jump bc that would be too OP
 			motion.y = -1 * jumpcharge #remember: the y axis of godot is inverted.
+			
+			play_audio(boost_sfx)
+			camera.screen_shake_for(.25)
+			
 			cantornadojump = false
 			jumpcharge = 0
+			
+	if canbounce and not grounded:
+		if Input.is_action_pressed("boost"):
+			if is_on_floor() or is_on_wall() or is_on_ceiling():
+				var bounce_surface_normal = Vector2.UP
+				
+				if get_slide_collision_count() > 0:
+					bounce_surface_normal = get_slide_collision(0).get_normal()
+				
+				if motion.length() > 200:
+					snap_exception = true
+					motion = motion.bounce(bounce_surface_normal)
+				
+				
 			
 #	var actionlist = ["action", "grapple", "dual"]
 #	var index = 0
@@ -646,7 +665,7 @@ func physics_process_normal(delta):
 		#	index = 0
 	
 
-#POOPY MOVESET
+#POOPY GENERAL MOVESET
 	
 	if jumping or isrolling or isairdashing or isstomping:
 		isattacking = true
