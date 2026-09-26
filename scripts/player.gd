@@ -73,6 +73,8 @@ var motion := Vector2(0, 0)
 ## -found in Classic Sonic games, only with much more theoretical effectiveness.
 ## Check underneath the "Movement" segment of the script for a full explanation.
 
+var lastmotion := Vector2.ZERO
+
 var rot := 0.0
 # Rotation.
 ## This helps your Sprite and Collision rotate.
@@ -119,6 +121,7 @@ var isairdashing = false
 
 var isstomping = false
 
+var isbouncing = false
 ## Fixes for problems involving walls and steep slopes.
 
 var falloffwall = false
@@ -610,6 +613,7 @@ func physics_process_normal(delta):
 		jumping = false
 		snap_exception = false
 		canjump = true
+		isbouncing = false
 		# Let the script know you're not jumping anymore, and return your ability to jump.
 
 	if not springing:
@@ -642,17 +646,24 @@ func physics_process_normal(delta):
 			cantornadojump = false
 			jumpcharge = 0
 			
-	if canbounce and not grounded:
-		if Input.is_action_pressed("boost"):
-			if is_on_floor() or is_on_wall() or is_on_ceiling():
-				var bounce_surface_normal = Vector2.UP
+	if canbounce and Input.is_action_pressed("boost"):
+		# If we were airborne and just touched a valid surface...
+			if get_slide_collision_count() > 0:
+				var bounce_surface_normal = get_slide_collision(0).get_normal()
+				print("collided...")
 				
-				if get_slide_collision_count() > 0:
-					bounce_surface_normal = get_slide_collision(0).get_normal()
-				
-				if motion.length() > 200:
+				if lastmotion.length() > 450:
 					snap_exception = true
-					motion = motion.bounce(bounce_surface_normal)
+					grounded = false
+					
+					print("should bounce..")
+					motion = lastmotion.bounce(bounce_surface_normal)
+					
+					isbouncing = true
+					rot = 0
+					up_direction = Vector2.UP
+					
+					#canbounce = false
 				
 				
 			
@@ -857,7 +868,8 @@ func physics_process_normal(delta):
 			motion.y = 100
 			# Get sent right back down.
 
-	if is_on_wall() and $Collision/WallCast.is_colliding(): # If you bump into a wall...
+	if is_on_wall() and $Collision/WallCast.is_colliding() and not isbouncing:
+		# If you bump into a wall...
 		if not grounded:
 			motion.x = 0
 		elif grounded:
@@ -870,6 +882,7 @@ func physics_process_normal(delta):
 	# var prev_y = global_position.y
 	# if velocity.y > 300:
 	# 	velocity.y *= 2
+	lastmotion = motion
 	move_and_slide()
 	# print("%d: dy=%d" % [Engine.get_frames_drawn(), global_position.y-prev_y])
 
