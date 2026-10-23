@@ -1019,11 +1019,12 @@ func animate():
 			$Sprite.speed_scale = clamp(motion.y/250, 1, 3)
 			
 		elif jumping:
-			$Sprite.play("jump")
-			var animspeed = abs(motion.x) / 80
-			animspeed = clamp(animspeed, 1.5, 8)
+			$Sprite.rotation = lerp_angle($Sprite.rotation, motion.angle(), 1)
+
+			$Sprite.flip_h = false
 			
-			$Sprite.speed_scale = animspeed
+			$Sprite.play("airdash")
+			$Sprite.speed_scale = 1
 	
 	# Idle animation
 	
