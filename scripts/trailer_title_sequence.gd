@@ -39,28 +39,12 @@ func stop_audio():
 
 func title_begin_title_reveal():
 	var tween := create_tween()
-	tween.tween_callback(play_audio.bind(trumpet_sfx))
-	tween.tween_interval(4 - trumpet_sfx[0].get_length())
+	
 	tween.tween_callback(func():
-		play_audio(falling_sfx)
-	)
-	tween.tween_interval(2)
-	tween.tween_callback(func(): title_logo.modulate.a = 1)
-	tween.parallel().tween_property(title_logo, "offset_transform_scale", Vector2(1, 1), .5)
-	tween.parallel().tween_method(screen_shake, 10, 5, 0.35).set_delay(.4)
-	tween.parallel().tween_callback(play_audio.bind(crash_sfx)).set_delay(.4)
-	tween.tween_callback(func():
-		title_logo.modulate.a = 0
-		position = Vector2.ZERO
-	)
-	tween.tween_callback(func(): title_logo.modulate.a = 1).set_delay(.05)
-	tween.tween_callback(whiteout.show)
-	tween.parallel().tween_property(whiteout, "modulate:a", 1, 0.2)
-	tween.tween_callback(func():
-		title_logo.texture = title_logo_complete
+		#title_logo.texture = title_logo_complete
 		title_joke_logo.hide()
 		title_background.show()
-		music_player.play()
+		#music_player.play()
 		title_info_box.show()
 		var tween_drop_infobox := create_tween()
 		tween_drop_infobox.tween_callback(title_info_box.show).set_delay(19)
