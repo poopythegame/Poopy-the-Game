@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://dasf3yjhaca2b" path="res://scripts/portraits_background.gd" id="3_877pj"]
 [ext_resource type="AudioStream" uid="uid://cuehpn8m2fakd" path="res://assets/audio/effects/menu_press.ogg" id="3_pw24t"]
 [ext_resource type="AudioStream" uid="uid://da8y4i2qvk454" path="res://assets/audio/effects/menu_right.ogg" id="4_5dct7"]
-[ext_resource type="Texture2D" uid="uid://bjejowtmy7kpn" path="res://assets/textures/ui/main_menu/logo_incomplete.png" id="4_8ekit"]
 [ext_resource type="FontFile" uid="uid://c6lup5uhxjaq8" path="res://assets/fonts/Comic-Sans-MS.ttf" id="4_n4uci"]
 [ext_resource type="AudioStream" uid="uid://rtq3b4h4llvf" path="res://assets/audio/effects/menu_cancel.ogg" id="5_5dct7"]
 [ext_resource type="AudioStream" uid="uid://bf62x7i5okshp" path="res://assets/audio/effects/trumpet_4.ogg" id="6_6ud2m"]
@@ -140,7 +139,6 @@ size_flags_vertical = 4
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -20)
 offset_transform_scale = Vector2(6, 6)
-texture = ExtResource("4_8ekit")
 expand_mode = 5
 stretch_mode = 4
 

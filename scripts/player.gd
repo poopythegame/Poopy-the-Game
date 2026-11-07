@@ -121,6 +121,8 @@ var isairdashing = false
 
 var isstomping = false
 
+var isbashing = false
+
 var isbouncing = false
 ## Fixes for problems involving walls and steep slopes.
 
@@ -184,9 +186,6 @@ const dec := 15.0
 const topspeed := 300.0
 # Top Speed. Default: 300.0
 ## You won't be able to Accelerate past this point without some Momentum.
-
-## Note: If you'd like to change the player's stats mid-game, make them variables instead.
-## You can do this by changing the word "const" to "var".
 
 ### ### GRAPPLING HOOK ADDITIONS ### ###
 var is_grappling := false
@@ -951,10 +950,24 @@ func animate():
 		# This is how the Sprite is able to turn when you move.
 	var direction = Input.get_axis("left", "right")
 	
-	if direction < 0 and not isskidding:
-		$Sprite.flip_h = true
-	elif direction > 0 and not isskidding:
-		$Sprite.flip_h = false
+	if (jumping or isairdashing):
+		$Sprite.offset.y = 1
+		$Sprite.position.y = -15
+	else:
+		$Sprite.offset.y = -270.04
+		$Sprite.position.y = 1
+	
+	#This one's for the sprite flippin' logic
+	if (isskidding):
+		if sign(motion.x) > 0:
+			$Sprite.flip_h = false
+		elif sign(motion.x) < 0:
+			$Sprite.flip_h = true
+	elif (not jumping or not isairdashing):	
+		if direction < 0 and not isskidding:
+			$Sprite.flip_h = true
+		elif direction > 0 and not isskidding:
+			$Sprite.flip_h = false
 	
 	if isrolling:
 		$Sprite.play("jump")
@@ -966,10 +979,6 @@ func animate():
 		
 	elif grounded:
 		if isskidding:
-			if sign(motion.x) > 0:
-				$Sprite.flip_h = false
-			else:
-				$Sprite.flip_h = true
 			$Sprite.play("skid")
 		
 		if abs(motion.x) < 1 and not isskidding: # If you're standing still, or at least EXTREMELY CLOSE to standing still...
@@ -990,23 +999,8 @@ func animate():
 			# Play Running Animation, quickening it even further if you escalate past your Top Speed.
 			
 	elif not grounded:
-		
-		if isairdashing:
-			var airdashrot = motion.y / 750 * sign(motion.x)
-		
-			airdashrot = clamp(airdashrot, -PI/2, PI/2)
-		
-			$Sprite.rotation = lerp_angle($Sprite.rotation, airdashrot, 1)
-				
-			if sign(motion.x) > 0:
-				$Sprite.flip_h = false
-			elif sign(motion.x) < 0:
-				$Sprite.flip_h = true
 			
-			$Sprite.play("airdash")
-			$Sprite.speed_scale = 1
-			
-		elif isstomping:
+		if isstomping:
 
 			var stomprot = -1 * motion.x / 1000
 		
@@ -1017,11 +1011,10 @@ func animate():
 			#Actual animation
 			$Sprite.play("stomp")
 			$Sprite.speed_scale = clamp(motion.y/250, 1, 3)
-			
-		elif jumping:
-			$Sprite.rotation = lerp_angle($Sprite.rotation, motion.angle(), 1)
-
+	
+		elif isairdashing or jumping:
 			$Sprite.flip_h = false
+			$Sprite.rotation = lerp_angle($Sprite.rotation, motion.angle(), 1)
 			
 			$Sprite.play("airdash")
 			$Sprite.speed_scale = 1
