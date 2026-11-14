@@ -103,9 +103,14 @@ var isskidding = false
 var cangrapple = false
 
 var canstomp = false
+
 var stomp_enabled: bool = true
 
 var canairdash = false
+
+var canbash = true
+
+var canperfectbash = false
 
 var canspeedboost = false
 
@@ -122,6 +127,8 @@ var isairdashing = false
 var isstomping = false
 
 var isbashing = false
+
+var isperfectbashing = false
 
 var isbouncing = false
 ## Fixes for problems involving walls and steep slopes.
@@ -589,6 +596,7 @@ func physics_process_normal(delta):
 		# Jump.
 		
 		canjump = false
+		canbash = false
 		# Then revoke your ability to jump. Don't worry, this will get reactivated once you land.
 		## Without this part, you'd be able to fly up infinitely.
 		
@@ -666,14 +674,16 @@ func physics_process_normal(delta):
 				
 				
 			
-#	var actionlist = ["action", "grapple", "dual"]
-#	var index = 0
-	#if Input.is_action_just_pressed("toggle"):
-	#	if (len(actionlist) - 1) > index:
-	#		index += 1
-		#elif (len(actionlist) - 1) < index:
-		#	index = 0
-	
+	# Get player's direction axis
+	var direction: float = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
+	if Input.is_action_pressed("enemyfreeze"):
+		# Lock movement while grid-moving
+		direction = 0
+	# Prevent controller from allowing unlimited speed boost bugs
+	if direction < 0:
+		direction = -1
+	elif direction > 0:
+		direction = 1
 
 #POOPY GENERAL MOVESET
 	
@@ -695,17 +705,17 @@ func physics_process_normal(delta):
 	if abs(motion.x) < 20:
 		isairdashing = false
 	
-	if not is_on_floor():
+	if not grounded:
 		if Input.is_action_pressed("action") and Input.is_action_pressed("down") and canstomp and stomp_enabled:
-			if motion.y < 450:
+			if motion.y < 0:
 				motion.y = 450
 
 				canstomp = false
 				isstomping = true
 				play_all_audio_multiselect([stomp_sfx, screwdive_sfx])
 				isairdashing = false
-			elif motion.y >= 450:
-				motion.y += 225
+			elif motion.y >= 0:
+				motion.y += 450
 
 				canstomp = false
 				isstomping = true
@@ -718,86 +728,124 @@ func physics_process_normal(delta):
 			isairdashing = true
 			play_all_audio_multiselect([airdash_sfx, screwdive_sfx])
 			isstomping = false
+	elif grounded:
+		if Input.is_action_just_pressed("action") and not control_lock:
+			if (canbash or canperfectbash):
+				var bashingspeed = 375
+				var bashingfactor
+				
+				isbashing = true
+				
+				if canperfectbash:
+					canperfectbash = false
+					isperfectbashing = true
+					bashingfactor = 1.7
+				else:
+					bashingfactor = 1
+
+				if (direction != 0):
+					motion.x = bashingspeed * direction * bashingfactor
+				else:
+					motion.x = bashingspeed * sign($Collision/WallCast.target_position.x) * bashingfactor
+				
+				if (not isperfectbashing): #if you just bashed instead of perfect bashing
+					$NormalBashing_Duration.start()
+				print("you just bashed!")
+				
+			elif isbashing and (not canperfectbash) and (not isperfectbashing):
+				isbashing = false
+				motion.x = 150 * sign(motion.x)
+				#$Final_Bashing.stop()
+				#$Final_Bashing.wait_time = 1.8 #Set this to whatever the default wait time for the final bashing timer is!!!
+				#Sure is important!!!
+				#print($Final_Bashing.wait_time)
+				print("slowing down")
+				#when you miss the timing of perfect bashing, you get a penalty.
+	
+	if (not grounded or abs(motion.x) < 30):
+		#$Final_Bashing.stop()
+		#$Final_Bashing.wait_time = 1.8 #Set this to whatever the default wait time for the final bashing timer is!!!
+		#Sure is important!!!
+		isbashing = false
+	
+	#You can't bash while you're already bashing.
+	if isbashing:
+		canbash = false
+	else:
+		canbash = true
+				
 	
 	if not Input.is_action_pressed("action"):
 		stomp_enabled = true
 	
+	#This is for the speed display in the UI
 	main.display_speed(motion.x, motion.y)
 	
 	if abs(motion.x) != 0:
 		# If moving right (1), point right. If moving left (-1), point left.
 		# Multiply by whatever distance your raycast needs to reach (e.g., 20 pixels)
 		$Collision/WallCast.target_position.x = 7.0 * sign(motion.x)
-
-	#braking control seen in classic sonic games
-	var direction: float = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
-	if Input.is_action_pressed("enemyfreeze"):
-		# Lock movement while grid-moving
-		direction = 0
-	# Prevent controller from allowing unlimited speed boost bugs
-	if direction < 0:
-		direction = -1
-	elif direction > 0:
-		direction = 1
-		
 	
-	if direction == -(sign(motion.x)) and (abs(motion.x) >= (topspeed/1.5)) and is_on_floor():
-		if not isskidding and not is_taking_damage:
-			play_audio(skid_sfx)
-		isskidding = true
-	if abs(motion.x) == 0 or (not is_on_floor()) or direction != -(sign(motion.x)):
-		isskidding = false
-	if isskidding:
-		if direction == -(sign(motion.x)):
-			motion.x -= dec * sign(motion.x) * 1.3
-			
-	if direction and not control_lock and not isrolling and !springing: # If holding left or right, and not slipping down a slope...
-		if abs(motion.x) < 25:
-			motion.x += acc * 3 * direction
-		if is_on_floor(): # If touching the floor...	
-			if direction == sign(motion.x): # If you're holding in the direction you're moving...
-				if abs(motion.x) <= topspeed: # If you're not over your Top Speed...
-					motion.x += acc * direction
-					# Accelerate in the direction you're holding.
-					
-			else: # If you're trying to turn around...
-				if abs(slopefactor) < 0.4: # If you're standing on flat or slightly slanted ground...
-					if not isskidding:
-						motion.x += dec * direction * 2
-						
-					# Very quickly Deccelerate to a stop.
-					else: # If you're standing on a far too steep slope...
-						motion.x += acc * direction
-					# Turn at normal speed.
-					## Logically, it would be pretty hard to slow down when running down a hill.
-				
-				
-		else: # If mid-air...
-			
-			if direction == sign(motion.x): # If you're holding in the direction you're moving...
-				if abs(motion.x) <= topspeed: # If you're not over your Top Speed...
-					motion.x += (acc * 1.2) * direction
-					# Accelerate (a bit faster) in the direction you're holding.
-					
-			else: # If you're trying to turn around...
-				if abs(motion.x) <= topspeed - 50:
-					motion.x += (acc * 2.7) * direction
-				elif abs(motion.x) > topspeed - 50:
-					motion.x += (acc * 5.5) * direction
-				# Deccellerate at the same speed.
-			
-			# Note: Due to logic, you can't quickly turn around mid-air.
-			
-	else: # If not pressing anything...
-		if is_on_floor() and abs(slopefactor) < 0.25 or isrolling: # If you're on flat, or near-flat ground...
-			motion.x = move_toward(motion.x, 0, acc - 1)
-			# Slow to a stop.
-			## We shouldn't be able to stand perfectly still on a steep slope, right? Right.
-		elif is_on_floor() and abs(slopefactor) < 0.25:
-			motion.x = move_toward(motion.x, 0, acc)
-		elif not is_on_floor() and (abs(motion.x) <= topspeed):
-			motion.x = move_toward(motion.x,0, acc - 1)
+	if not isbashing: #This has it so that you can't influence the direction when you're bashing.
 		
+		#braking control seen in classic sonic games
+		if direction == -(sign(motion.x)) and (abs(motion.x) >= (topspeed/1.5)) and is_on_floor():
+			if not isskidding and not is_taking_damage:
+				play_audio(skid_sfx)
+			isskidding = true
+		if abs(motion.x) == 0 or (not is_on_floor()) or direction != -(sign(motion.x)):
+			isskidding = false
+		if isskidding:
+			if direction == -(sign(motion.x)):
+				motion.x -= dec * sign(motion.x) * 1.3
+				
+		if direction and not control_lock and not isrolling and !springing: # If holding left or right, and not slipping down a slope...
+			if abs(motion.x) < 25:
+				motion.x += acc * 3 * direction
+			if is_on_floor(): # If touching the floor...	
+				if direction == sign(motion.x): # If you're holding in the direction you're moving...
+					if abs(motion.x) <= topspeed: # If you're not over your Top Speed...
+						motion.x += acc * direction
+						# Accelerate in the direction you're holding.
+						
+				else: # If you're trying to turn around...
+					if abs(slopefactor) < 0.4: # If you're standing on flat or slightly slanted ground...
+						if not isskidding:
+							motion.x += dec * direction * 2
+							
+						# Very quickly Deccelerate to a stop.
+						else: # If you're standing on a far too steep slope...
+							motion.x += acc * direction
+						# Turn at normal speed.
+						## Logically, it would be pretty hard to slow down when running down a hill.
+					
+					
+			else: # If mid-air...
+				
+				if direction == sign(motion.x): # If you're holding in the direction you're moving...
+					if abs(motion.x) <= topspeed: # If you're not over your Top Speed...
+						motion.x += (acc * 1.2) * direction
+						# Accelerate (a bit faster) in the direction you're holding.
+						
+				else: # If you're trying to turn around...
+					if abs(motion.x) <= topspeed - 50:
+						motion.x += (acc * 2.7) * direction
+					elif abs(motion.x) > topspeed - 50:
+						motion.x += (acc * 5.5) * direction
+					# Deccellerate at the same speed.
+				
+				# Note: Due to logic, you can't quickly turn around mid-air.
+				
+		else: # If not pressing anything...
+			if is_on_floor() and abs(slopefactor) < 0.25 or isrolling: # If you're on flat, or near-flat ground...
+				motion.x = move_toward(motion.x, 0, acc - 1)
+				# Slow to a stop.
+				## We shouldn't be able to stand perfectly still on a steep slope, right? Right.
+			elif is_on_floor() and abs(slopefactor) < 0.25:
+				motion.x = move_toward(motion.x, 0, acc)
+			elif not is_on_floor() and (abs(motion.x) <= topspeed):
+				motion.x = move_toward(motion.x,0, acc - 1)
+			
 		
 	
 
@@ -1051,6 +1099,24 @@ func _on_jump_buffer_timer_timeout():
 func _on_coyote_timer_timeout():
 	canjump = false
 	# If you've been in the air for too long, your ability to jump is revoked.
+	
+func _on_normal_bashing_duration_timeout():
+	if isbashing: #If you get penalized for missing the timing of perfect bashing, you can't perfect bash
+		canperfectbash = true
+		play_audio(boost_sfx)
+		$PerfectBashing_Timing.start()
+		print("now's your chance!", canperfectbash)
+		$Final_Bashing.start()
+	
+
+func _on_perfect_bashing_timing_timeout():
+	canperfectbash = false
+
+func _on_final_bashing_timeout():
+	print("done bashing")
+	isbashing = false
+	isperfectbashing = false
+
 
 func die():
 	if death_tween.is_running():

@@ -88,7 +88,26 @@ default_color = Color(0.18359, 0.18359, 0.18359, 1)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1465423261]
 bus = &"SFX"
 
+[node name="PerfectBashing_Timing" type="Timer" parent="." unique_id=1505742045]
+wait_time = 0.4
+one_shot = true
+
+[node name="NormalBashing_Duration" type="Timer" parent="." unique_id=294381129]
+wait_time = 0.7
+one_shot = true
+
+[node name="Final_Bashing" type="Timer" parent="." unique_id=1941938012]
+wait_time = 1.7999999999999998
+one_shot = true
+
+[node name="perfectbash_miss" type="Timer" parent="." unique_id=1129663930]
+one_shot = true
+
 [connection signal="timeout" from="ControlLockTimer" to="." method="_on_control_lock_timer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="PerfectBashing_Timing" to="." method="_on_perfect_bashing_timing_timeout"]
+[connection signal="timeout" from="NormalBashing_Duration" to="." method="_on_normal_bashing_duration_timeout"]
+[connection signal="timeout" from="Final_Bashing" to="." method="_on_final_bashing_timeout"]
+[connection signal="timeout" from="perfectbash_miss" to="." method="_on_perfectbash_miss_timeout"]
