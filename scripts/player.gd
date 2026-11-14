@@ -373,7 +373,7 @@ func physics_process_grapple(delta: float):
 	
 	#Grapple animation
 	$Sprite.play("jump")
-	$Sprite.speed_scale = 4
+	$Sprite.speed_scale = 1
 	
 	# Rotate sprite to face velocity
 	#if motion.length() > 10:
@@ -767,6 +767,7 @@ func physics_process_normal(delta):
 		#$Final_Bashing.wait_time = 1.8 #Set this to whatever the default wait time for the final bashing timer is!!!
 		#Sure is important!!!
 		isbashing = false
+		isperfectbashing = false
 	
 	#You can't bash while you're already bashing.
 	if isbashing:
@@ -1018,7 +1019,7 @@ func animate():
 			$Sprite.flip_h = false
 	
 	if isrolling:
-		$Sprite.play("jump")
+		$Sprite.play("slide")
 		
 		var animspeed = abs(motion.x) / 80
 		animspeed = clamp(animspeed, 1.5, 8)
@@ -1026,21 +1027,29 @@ func animate():
 		$Sprite.speed_scale = animspeed
 		
 	elif grounded:
-		if isskidding:
+		
+		if (isbashing):
+			$Sprite.speed_scale = 1
+			if (isperfectbashing):
+				$Sprite.play("perfectbashing")
+			else:
+				$Sprite.play("bashing")
+		
+		elif isskidding:
 			$Sprite.play("skid")
 		
-		if abs(motion.x) < 1 and not isskidding: # If you're standing still, or at least EXTREMELY CLOSE to standing still...
+		elif abs(motion.x) < 1: # If you're standing still, or at least EXTREMELY CLOSE to standing still...
 			$Sprite.speed_scale = 1
 			stop_audio()
 			# Reset the Speed Scale.
 			
-		elif abs(motion.x) < topspeed - 10 and not isskidding: # If you're moving, but not at your Top Speed yet...
+		elif abs(motion.x) < topspeed - 10: # If you're moving, but not at your Top Speed yet...
 			$Sprite.play("walk")
 			$Sprite.speed_scale = 0.5 + (abs(motion.x) / 350)
 			stop_audio()
 			# Play Walking Animation at half speed, quickening it as you move faster and faster.
 			
-		elif abs(motion.x) >= topspeed and not isskidding: # If you've reached, or are at least close enough to your Top Speed...
+		elif abs(motion.x) >= topspeed: # If you've reached, or are at least close enough to your Top Speed...
 			$Sprite.play("run")
 			$Sprite.speed_scale = clamp(abs(motion.x)/90, 1.5, 8)
 			stop_audio()
@@ -1062,10 +1071,13 @@ func animate():
 	
 		elif isairdashing or jumping:
 			$Sprite.flip_h = false
-			$Sprite.rotation = lerp_angle($Sprite.rotation, motion.angle(), 1)
-			
-			$Sprite.play("airdash")
 			$Sprite.speed_scale = 1
+			if (jumping and abs(motion.x) < 20):
+				$Sprite.rotation = lerp_angle($Sprite.rotation, 0, 1)
+				$Sprite.play("jump")
+			else:
+				$Sprite.rotation = lerp_angle($Sprite.rotation, motion.angle(), 1)
+				$Sprite.play("airdash")
 	
 	# Idle animation
 	
