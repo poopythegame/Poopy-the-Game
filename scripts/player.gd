@@ -687,7 +687,7 @@ func physics_process_normal(delta):
 
 #POOPY GENERAL MOVESET
 	
-	if jumping or isrolling or isairdashing or isstomping:
+	if jumping or isrolling or isairdashing or isstomping or isbashing:
 		isattacking = true
 	else:
 		isattacking = false
@@ -754,18 +754,13 @@ func physics_process_normal(delta):
 				
 			elif isbashing and (not canperfectbash) and (not isperfectbashing):
 				isbashing = false
-				motion.x = 150 * sign(motion.x)
-				#$Final_Bashing.stop()
-				#$Final_Bashing.wait_time = 1.8 #Set this to whatever the default wait time for the final bashing timer is!!!
-				#Sure is important!!!
-				#print($Final_Bashing.wait_time)
-				print("slowing down")
+				#motion.x = 150 * sign(motion.x)
+				$Final_Bashing.stop() #If the timer doesn't reset, the timeout function makes the bashing state false even after the player exits bashing due to reasons other than the time running out
+				print("exiting bashing")
 				#when you miss the timing of perfect bashing, you get a penalty.
 	
-	if (not grounded or abs(motion.x) < 30):
-		#$Final_Bashing.stop()
-		#$Final_Bashing.wait_time = 1.8 #Set this to whatever the default wait time for the final bashing timer is!!!
-		#Sure is important!!!
+	if (not grounded or abs(motion.x) < 30 or isskidding or isrolling):
+		$Final_Bashing.stop()  #If the timer doesn't reset, the timeout function makes the bashing state false even after the player exits bashing due to reasons other than the time running out
 		isbashing = false
 		isperfectbashing = false
 	
@@ -786,20 +781,20 @@ func physics_process_normal(delta):
 		# If moving right (1), point right. If moving left (-1), point left.
 		# Multiply by whatever distance your raycast needs to reach (e.g., 20 pixels)
 		$Collision/WallCast.target_position.x = 7.0 * sign(motion.x)
-	
-	if not isbashing: #This has it so that you can't influence the direction when you're bashing.
 		
 		#braking control seen in classic sonic games
-		if direction == -(sign(motion.x)) and (abs(motion.x) >= (topspeed/1.5)) and is_on_floor():
-			if not isskidding and not is_taking_damage:
-				play_audio(skid_sfx)
-			isskidding = true
-		if abs(motion.x) == 0 or (not is_on_floor()) or direction != -(sign(motion.x)):
-			isskidding = false
-		if isskidding:
-			if direction == -(sign(motion.x)):
-				motion.x -= dec * sign(motion.x) * 1.3
-				
+	if direction == -(sign(motion.x)) and (abs(motion.x) >= (topspeed/1.5)) and is_on_floor():
+		if not isskidding and not is_taking_damage:
+			play_audio(skid_sfx)
+		isskidding = true
+	if abs(motion.x) == 0 or (not is_on_floor()) or direction != -(sign(motion.x)):
+		isskidding = false
+	if isskidding:
+		if direction == -(sign(motion.x)):
+			motion.x -= dec * sign(motion.x) * 1.3
+			
+	if not isbashing:#This has it so that you can't influence the direction when you're bashing.
+						
 		if direction and not control_lock and not isrolling and !springing: # If holding left or right, and not slipping down a slope...
 			if abs(motion.x) < 25:
 				motion.x += acc * 3 * direction
@@ -875,7 +870,7 @@ func physics_process_normal(delta):
 	else:
 		SLOPEMULT = 2
 		
-	if is_on_floor() and not stuck:
+	if is_on_floor() and not stuck and not isbashing: #when you're bashing, the slope doesn't affect your speed.
 		motion.x += (acc * SLOPEMULT) * slopefactor
 		# When you're moving down a slope, add more acceleration.
 		# When you're moving up a slope, slow the player down.
@@ -1072,7 +1067,7 @@ func animate():
 		elif isairdashing or jumping:
 			$Sprite.flip_h = false
 			$Sprite.speed_scale = 1
-			if (jumping and abs(motion.x) < 20):
+			if (jumping and abs(motion.x) < 100):
 				$Sprite.rotation = lerp_angle($Sprite.rotation, 0, 1)
 				$Sprite.play("jump")
 			else:

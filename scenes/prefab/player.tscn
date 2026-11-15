@@ -47,10 +47,8 @@ final_hit_sfx = Array[AudioStream]([ExtResource("15_rp2o6"), ExtResource("16_vc3
 position = Vector2(0, 1)
 scale = Vector2(0.0534135, 0.0534135)
 sprite_frames = ExtResource("2_mx6bk")
-animation = &"stomp"
+animation = &"bashing"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 offset = Vector2(0, -270.04)
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2098401984]
@@ -95,7 +93,7 @@ wait_time = 0.4
 one_shot = true
 
 [node name="NormalBashing_Duration" type="Timer" parent="." unique_id=294381129]
-wait_time = 0.7
+wait_time = 0.5
 one_shot = true
 
 [node name="Final_Bashing" type="Timer" parent="." unique_id=1941938012]

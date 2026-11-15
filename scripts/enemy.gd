@@ -544,7 +544,7 @@ func check_player_impact(delta):
 		if body.name == "Player" or body.is_in_group("Player"):
 			var player: Player = body 
 			
-			if (player.jumping or player.isrolling) and (not player.is_grappling):
+			if (player.isattacking) and (not player.is_grappling):
 				if player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
 					perform_bounce(player)
 				else:
@@ -558,7 +558,7 @@ func test_player_impact(_delta: float) -> TestResult:
 		if body.name == "Player" or body.is_in_group("Player"):
 			var player: Player = body 
 			
-			if (player.jumping or player.isrolling) and (not player.is_grappling):
+			if (player.isattacking) and (not player.is_grappling):
 				if player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
 					return TestResult.BOUNCE
 				else:
