@@ -401,7 +401,7 @@ func physics_process_grapple(delta: float):
 	$Sprite.speed_scale = 4
 
 	if free_grapple_animation_t < 1:
-		free_grapple_animation_t += delta * 3
+		free_grapple_animation_t += delta * 6
 
 func stop_grapple():
 	exitgrapple = true
