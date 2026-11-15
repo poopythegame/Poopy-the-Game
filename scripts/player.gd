@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+const free_grapple_distance: float = 120
+
 @onready var main: InGameOverlay = get_parent().get_node("InGameOverlay")
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var collision: CollisionShape2D = $Collision
@@ -40,32 +42,12 @@ var death_launch_velocity := Vector2.ZERO
 var death_animation_last_t := 0
 var death_animation_camera_origin: Vector2
 
-### ### Maddie's Ultra-Simple Sonic Physics!! ### ###
-## The absolute bare minimum needed to make a Sonic fangame.
-
-## Right now, it's just the 360 degree movement and slope physics, nothing else.
-
-## I've written tons of helpful comments in the hopes that you'll understand how this code works.
-## Then, if you do, I encourage you to try and add stuff like a spindash or a boost, if you want.
-
-
-## I've also set bookmarks for each segment of the script.
-
-## To access the bookmarks, look above that text field at the top left that says "Filter Scripts"-
-## -and click "Go To". Then, click "Bookmarks". Now you'll hopefully be able to-
-## -easily navigate this script.
-
-
-## If you end up using this for a game, credit is absolutely not required, but would be appreciated.
-
-
-## If the comments get annoying, find the script labelled "player (no comments)"-
-## -and swap this script out with that one.
-
-
-
-
-## Variables go at the top. Let's start with the most important ones.
+var is_grapple_action_active: bool
+var free_grapple_enabled: bool
+var free_grapple_can_enable: bool
+var free_grapple_desired_direction: Vector2i
+var free_grapple_position: Vector2
+var free_grapple_animation_t: float
 
 var motion := Vector2(0, 0)
 # Motion, the magical variable. Consider it a pseudo-Velocity.
@@ -190,7 +172,7 @@ const topspeed := 300.0
 
 ### ### GRAPPLING HOOK ADDITIONS ### ###
 var is_grappling := false
-var grapple_anchor_pos := Vector2.ZERO # Where are we hanging from?
+var grapple_anchor_pos: Vector2 = Vector2.ZERO
 var grapple_length := 0.0      # Radius (R)
 var grapple_angle := 0.0       # Angle (Theta)
 var grapple_ang_vel := 0.0     # Angular Velocity
@@ -250,11 +232,6 @@ func _physics_process(delta):
 	if dying:
 		return
 
-	# 1. CHECK FOR GRAPPLE START
-	# If we press the button and aren't already grappling...
-	if Input.is_action_pressed("grapple") and not is_grappling: 
-		attempt_grapple_start()
-
 	# 2. STATE MACHINE
 	if is_grappling:
 		# If grappling, we ignore ALL Maddie physics and run Pendulum physics
@@ -270,7 +247,7 @@ func _physics_process(delta):
 		physics_process_normal(delta)
 
 ### ### NEW GRAPPLE FUNCTIONS ### ###
-func attempt_grapple_start():
+func attempt_grapple_start() -> bool:
 	var all_anchors = get_tree().get_nodes_in_group("GrapplePoints")
 	var target_anchor = null
 	# We don't use a fixed distance number anymore. 
@@ -291,7 +268,6 @@ func attempt_grapple_start():
 		# Set the rope length to the current distance. 
 		grapple_length = global_position.distance_to(grapple_anchor_pos)
 		
-		# Reset Maddie's physics states
 		grounded = false
 		slopefactor = 0
 		isairdashing = false
@@ -300,6 +276,55 @@ func attempt_grapple_start():
 		canstomp = true
 		rot = 0
 		up_direction = Vector2.UP
+		return true
+	elif free_grapple_can_enable:
+		is_grappling = true
+		grapple_length = free_grapple_distance
+		grounded = false
+		slopefactor = 0
+		isairdashing = false
+		isstomping = false
+		canairdash = true
+		canstomp = true
+		rot = 0
+		up_direction = Vector2.UP
+		free_grapple_enabled = true
+		return true
+	return false	
+
+func ease_out_cubic(x: float) -> float:
+	return 1.0 - pow(1.0 - x, 3)
+
+func move_free_grapple_disired_direction(x: int, y: int):
+	var new_x := free_grapple_desired_direction.x
+	new_x += x
+	if new_x < -1:
+		new_x = -1
+	elif new_x > 1:
+		new_x = 1
+	var new_y := free_grapple_desired_direction.y
+	new_y += y
+	if new_y < -1:
+		new_y = -1
+	elif new_y > 1:
+		new_y = 1
+	free_grapple_desired_direction = Vector2(new_x, new_y)
+	free_grapple_animation_t = 0
+
+func find_free_grapple_position() -> void:
+	var direction := free_grapple_desired_direction * free_grapple_distance
+	if direction == Vector2.ZERO:
+		free_grapple_can_enable = false
+		return
+	var query_parameters := PhysicsRayQueryParameters2D.create(global_position, global_position + direction)
+	query_parameters.exclude = [get_rid()]
+	var result := get_world_2d().direct_space_state.intersect_ray(query_parameters)
+	if result:
+		var position = result["position"]
+		free_grapple_position = position
+		free_grapple_can_enable = true 
+	else:
+		free_grapple_can_enable = false
 
 func physics_process_grapple(delta: float):
 	# 1. APPLY GRAVITY
@@ -307,7 +332,13 @@ func physics_process_grapple(delta: float):
 	motion.y += GRAVITY * delta
 
 	# 2. CALCULATE ROPE GEOMETRY
-	var vector_to_player = global_position - grapple_anchor_pos
+	var anchor: Vector2
+	# Dirty hack to re-use this code
+	if free_grapple_enabled:
+		anchor = free_grapple_position
+	else:
+		anchor = grapple_anchor_pos
+	var vector_to_player = global_position - anchor 
 	var current_dist = vector_to_player.length()
 	
 	# 3. CONSTRAINT SOLVER
@@ -318,7 +349,7 @@ func physics_process_grapple(delta: float):
 		# --- A. HARD POSITION CORRECTION ---
 		# Instead of using velocity to pull you back (which caused the super speed bug),
 		# we simply force the position to stay on the circle edge.
-		global_position = grapple_anchor_pos + (rope_dir * grapple_length)
+		global_position = anchor + (rope_dir * grapple_length)
 		
 		# --- B. VELOCITY CONSTRAINT (NO FRICTION) ---
 			
@@ -363,20 +394,23 @@ func physics_process_grapple(delta: float):
 	rope_line.visible = true
 	rope_line.clear_points()
 	rope_line.add_point(Vector2.ZERO) 
-	rope_line.add_point(rope_line.to_local(grapple_anchor_pos))
+	rope_line.add_point(rope_line.to_local(anchor) * ease_out_cubic(free_grapple_animation_t))
 	
 	#Grapple animation
 	$Sprite.play("jump")
 	$Sprite.speed_scale = 4
-	
-	# Rotate sprite to face velocity
-	#if motion.length() > 10:
-		#var look_angle = motion.angle()
-		#$Sprite.rotation = rotate_toward($Sprite.rotation, look_angle, 0.15)
+
+	if free_grapple_animation_t < 1:
+		free_grapple_animation_t += delta * 3
 
 func stop_grapple():
 	exitgrapple = true
 	is_grappling = false
+	free_grapple_enabled = false
+	free_grapple_can_enable = false
+	free_grapple_desired_direction = Vector2i.ZERO
+	free_grapple_animation_t = 0
+	free_grapple_position = Vector2.ZERO
 	
 	# Since we used Vector2 physics the whole time, 
 	# 'motion' is already correct! We don't need to do any math conversion.
@@ -903,7 +937,9 @@ func _process(_delta: float) -> void:
 				min_dist = dist
 		if choice and !choice.isfrozen:
 			choice.engage_freeze()
-
+	if is_grapple_action_active:
+		if not is_grappling:
+			attempt_grapple_start()
 
 func take_damage(amount: float) -> void:
 	health -= amount
@@ -1128,14 +1164,21 @@ func slope_failsafe():
 			# It basically just reverses your movement if you get stuck.
 	else:
 		stuck = false
-# ...but it kinda broke something else. So I disabled it. Oh well.
 
-
-
-
-
-## Thanks for downloading.
-## I made this because I was sick of there being no tutorials on how to make Sonic physics in Godot.
-## Hope my comments were helpful.
-## Have fun developing!!
-## - Maddie
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("grapple"):
+		is_grapple_action_active = true
+	elif event.is_action_released("grapple"):
+		is_grapple_action_active = false 
+		free_grapple_can_enable = false
+	if is_grapple_action_active and not is_grappling:
+		if event.is_action_pressed("grid_up"):
+			move_free_grapple_disired_direction(0, -1)
+		elif event.is_action_pressed("grid_down"):
+			move_free_grapple_disired_direction(0, 1)
+		elif event.is_action_pressed("grid_left"):
+			move_free_grapple_disired_direction(-1, 0)
+		elif event.is_action_pressed("grid_right"):
+			move_free_grapple_disired_direction(1, 0)
+		print(free_grapple_desired_direction)
+		find_free_grapple_position()
