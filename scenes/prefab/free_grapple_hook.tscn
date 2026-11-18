@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://qjp2tm4naawh"]
+
+[ext_resource type="Texture2D" uid="uid://b27wmspjlyo4u" path="res://assets/textures/elements/anchor.png" id="1_2s5oa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0epon"]
+radius = 7.0
+
+[node name="Area2D" type="Area2D" unique_id=142341484]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=729042020]
+shape = SubResource("CircleShape2D_0epon")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1750503195]
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("1_2s5oa")

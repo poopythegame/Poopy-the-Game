@@ -1,9 +1,11 @@
 extends CharacterBody2D
 class_name Player
 
-const free_grapple_distance: float = 120
+const free_grapple_distance: float = 50
+const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 
 @onready var main: InGameOverlay = get_parent().get_node("InGameOverlay")
+@onready var free_grapple_hook_prefab: PackedScene = load(free_grapple_hook_prefab_path)
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var collision: CollisionShape2D = $Collision
 # @onready var anchor: Area2D = $"../anchor"
@@ -44,10 +46,12 @@ var death_animation_camera_origin: Vector2
 
 var is_grapple_action_active: bool
 var free_grapple_enabled: bool
-var free_grapple_can_enable: bool
+var free_grapple_hook_deployed: bool
 var free_grapple_desired_direction: Vector2i
 var free_grapple_position: Vector2
 var free_grapple_animation_t: float
+var free_grapple_hook: Area2D
+var free_grapple_hook_offset: Vector2
 
 var motion := Vector2(0, 0)
 # Motion, the magical variable. Consider it a pseudo-Velocity.
@@ -277,19 +281,6 @@ func attempt_grapple_start() -> bool:
 		rot = 0
 		up_direction = Vector2.UP
 		return true
-	elif free_grapple_can_enable:
-		is_grappling = true
-		grapple_length = free_grapple_distance
-		grounded = false
-		slopefactor = 0
-		isairdashing = false
-		isstomping = false
-		canairdash = true
-		canstomp = true
-		rot = 0
-		up_direction = Vector2.UP
-		free_grapple_enabled = true
-		return true
 	return false	
 
 func ease_out_cubic(x: float) -> float:
@@ -311,21 +302,54 @@ func move_free_grapple_disired_direction(x: int, y: int):
 	free_grapple_desired_direction = Vector2(new_x, new_y)
 	free_grapple_animation_t = 0
 
-func find_free_grapple_position() -> void:
+func engage_free_grapple_hook() -> void:
 	var direction := free_grapple_desired_direction * free_grapple_distance
 	if direction == Vector2.ZERO:
-		free_grapple_can_enable = false
 		return
-	var query_parameters := PhysicsRayQueryParameters2D.create(global_position, global_position + direction)
+	var target_position := direction + global_position
+	var query_parameters := PhysicsRayQueryParameters2D.create(global_position, target_position)
 	query_parameters.exclude = [get_rid()]
 	var result := get_world_2d().direct_space_state.intersect_ray(query_parameters)
 	if result:
-		var position = result["position"]
-		free_grapple_position = position
-		free_grapple_can_enable = true 
-	else:
-		free_grapple_can_enable = false
-
+		target_position = result["position"]
+	free_grapple_hook_deployed = true
+	free_grapple_hook = free_grapple_hook_prefab.instantiate()
+	free_grapple_hook.position = target_position
+	free_grapple_hook_offset = direction
+	get_parent().add_child(free_grapple_hook)
+	rope_line.visible = true
+	rope_line.clear_points()
+	rope_line.add_point(Vector2.ZERO) 
+	rope_line.add_point(rope_line.to_local(target_position))
+	
+func engage_free_grapple():	
+	print("made it")
+	free_grapple_position = free_grapple_hook.global_position
+	free_grapple_hook_deployed = false
+	is_grappling = true
+	grapple_length = free_grapple_distance
+	grounded = false
+	slopefactor = 0
+	isairdashing = false
+	isstomping = false
+	canairdash = true
+	canstomp = true
+	rot = 0
+	up_direction = Vector2.UP
+	free_grapple_enabled = true
+	
+func disengage_free_grapple():
+	exitgrapple = true
+	is_grappling = false
+	free_grapple_enabled = false
+	free_grapple_hook_deployed = false
+	free_grapple_desired_direction = Vector2i.ZERO
+	free_grapple_animation_t = 0
+	free_grapple_position = Vector2.ZERO
+	rope_line.visible = false
+	free_grapple_hook.queue_free()
+	$Sprite.rotation = 0
+	
 func physics_process_grapple(delta: float):
 	# 1. APPLY GRAVITY
 	# We apply gravity first so it naturally accelerates/decelerates you based on the slope of the swing.
@@ -394,29 +418,21 @@ func physics_process_grapple(delta: float):
 	rope_line.visible = true
 	rope_line.clear_points()
 	rope_line.add_point(Vector2.ZERO) 
-	rope_line.add_point(rope_line.to_local(anchor) * ease_out_cubic(free_grapple_animation_t))
+	rope_line.add_point(rope_line.to_local(anchor))
 	
 	#Grapple animation
 	$Sprite.play("jump")
 	$Sprite.speed_scale = 4
 
-	if free_grapple_animation_t < 1:
-		free_grapple_animation_t += delta * 6
 
 func stop_grapple():
 	exitgrapple = true
 	is_grappling = false
 	free_grapple_enabled = false
-	free_grapple_can_enable = false
+	free_grapple_hook_deployed = false
 	free_grapple_desired_direction = Vector2i.ZERO
 	free_grapple_animation_t = 0
 	free_grapple_position = Vector2.ZERO
-	
-	# Since we used Vector2 physics the whole time, 
-	# 'motion' is already correct! We don't need to do any math conversion.
-	
-	# Just a small boost or cap if you want, otherwise leave it raw.
-	
 	rope_line.visible = false
 	$Sprite.rotation = 0
 
@@ -939,7 +955,16 @@ func _process(_delta: float) -> void:
 			choice.engage_freeze()
 	if is_grapple_action_active:
 		if not is_grappling:
-			attempt_grapple_start()
+			var success := attempt_grapple_start()
+			if not success:
+				engage_free_grapple_hook()
+	if free_grapple_hook_deployed:
+		print("made it")
+		free_grapple_hook.position = position + free_grapple_hook_offset
+		var collisions := free_grapple_hook.get_overlapping_bodies()
+		if len(collisions) > 0:
+			# The area is colliding with something; attach to it
+			engage_free_grapple()
 
 func take_damage(amount: float) -> void:
 	health -= amount
@@ -1170,8 +1195,9 @@ func _input(event: InputEvent) -> void:
 		is_grapple_action_active = true
 	elif event.is_action_released("grapple"):
 		is_grapple_action_active = false 
-		free_grapple_can_enable = false
-	if is_grapple_action_active and not is_grappling:
+		free_grapple_hook_deployed = false
+		free_grapple_desired_direction = Vector2.ZERO
+	if is_grapple_action_active and not free_grapple_enabled and not free_grapple_hook_deployed:
 		if event.is_action_pressed("grid_up"):
 			move_free_grapple_disired_direction(0, -1)
 		elif event.is_action_pressed("grid_down"):
@@ -1181,4 +1207,3 @@ func _input(event: InputEvent) -> void:
 		elif event.is_action_pressed("grid_right"):
 			move_free_grapple_disired_direction(1, 0)
 		print(free_grapple_desired_direction)
-		find_free_grapple_position()
