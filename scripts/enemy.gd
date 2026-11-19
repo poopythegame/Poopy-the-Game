@@ -209,7 +209,7 @@ func physics_process_normal(delta):
 		var overlapping_bodies: Array[Node2D] = hitbox.get_overlapping_bodies()
 		for body in overlapping_bodies:
 			if body.name == "Player" or body.is_in_group("Player"):
-				if (player.jumping or player.isrolling) and not player.is_grappling:
+				if (player.isattacking) and not player.is_grappling:
 					pass
 				else:
 					isattacking = false
