@@ -363,7 +363,7 @@ func physics_process_grapple(delta: float):
 
 	# 6. Rotation reset to default (zero)
 	$Collision.rotation = 0
-	$Sprite.rotation = lerp_angle($Sprite.rotation, 0, 0.25)
+	#$Sprite.rotation = lerp_angle($Sprite.rotation, 0, 0.25)
 
 	# 7. VISUALS
 	rope_line.visible = true
@@ -372,7 +372,12 @@ func physics_process_grapple(delta: float):
 	rope_line.add_point(rope_line.to_local(grapple_anchor_pos))
 	
 	#Grapple animation
-	$Sprite.play("jump")
+	$Sprite.offset.y = 1
+	$Sprite.position.y = -15
+
+	$Sprite.flip_h = false
+	$Sprite.rotation = lerp_angle($Sprite.rotation, motion.angle(), 1)
+	$Sprite.play("airdash")
 	$Sprite.speed_scale = 1
 	
 	# Rotate sprite to face velocity
@@ -391,6 +396,9 @@ func stop_grapple():
 	
 	rope_line.visible = false
 	$Sprite.rotation = 0
+	
+	$Sprite.offset.y = -270.04
+	$Sprite.position.y = 1
 
 ### ### WRAPPER FOR YOUR ORIGINAL CODE ### ###
 
@@ -1123,6 +1131,7 @@ func _on_final_bashing_timeout():
 	print("done bashing")
 	isbashing = false
 	isperfectbashing = false
+
 
 
 func die():
