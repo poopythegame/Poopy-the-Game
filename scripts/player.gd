@@ -340,7 +340,7 @@ func engage_free_grapple():
 	free_grapple_position = free_grapple_hook.global_position
 	free_grapple_hook_deployed = false
 	is_grappling = true
-	grapple_length = free_grapple_distance
+	grapple_length = global_position.distance_to(free_grapple_position)
 	grounded = false
 	slopefactor = 0
 	isairdashing = false
