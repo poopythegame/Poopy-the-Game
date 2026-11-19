@@ -1,15 +1,15 @@
 extends CharacterBody2D
 class_name Player
 
-const free_grapple_distance: float = 50
+const free_grapple_distance: float = 105 
 const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 
 @onready var main: InGameOverlay = get_parent().get_node("InGameOverlay")
 @onready var free_grapple_hook_prefab: PackedScene = load(free_grapple_hook_prefab_path)
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var collision: CollisionShape2D = $Collision
-# @onready var anchor: Area2D = $"../anchor"
 @onready var rope_line: Line2D = $Line2D # Make sure the name matches your node
+@onready var sprite: AnimatedSprite2D = $Sprite
 @onready var floor_cast: RayCast2D = $Collision/Raycast
 @onready var death_tween := get_tree().create_tween()
 
@@ -231,6 +231,17 @@ func stop_audio():
 	if not audio_stream_player.playing:
 		audio_stream_player.stream = null
 
+func get_sprite_center() -> Vector2:
+	var frame := sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
+	var size := frame.get_size() * sprite.scale
+	# var position := sprite.offset * sprite.scale
+	var position := sprite.position
+	if sprite.centered:
+		position -= size / 2.0
+	var center := Rect2(position, size).get_center()
+	print(center)
+	return center
+
 func _physics_process(delta):
 	
 	if dying:
@@ -265,6 +276,8 @@ func attempt_grapple_start() -> bool:
 				break # Found one, stop looking
 
 	if target_anchor:
+		if free_grapple_hook_deployed:
+			disengage_free_grapple()
 		is_grappling = true
 		play_all_audio(grapple_sfx)
 		grapple_anchor_pos = target_anchor.global_position
@@ -286,7 +299,7 @@ func attempt_grapple_start() -> bool:
 func ease_out_cubic(x: float) -> float:
 	return 1.0 - pow(1.0 - x, 3)
 
-func move_free_grapple_disired_direction(x: int, y: int):
+func move_free_grapple_desired_direction(x: int, y: int):
 	var new_x := free_grapple_desired_direction.x
 	new_x += x
 	if new_x < -1:
@@ -314,16 +327,16 @@ func engage_free_grapple_hook() -> void:
 		target_position = result["position"]
 	free_grapple_hook_deployed = true
 	free_grapple_hook = free_grapple_hook_prefab.instantiate()
-	free_grapple_hook.position = target_position
-	free_grapple_hook_offset = direction
 	get_parent().add_child(free_grapple_hook)
 	rope_line.visible = true
 	rope_line.clear_points()
-	rope_line.add_point(Vector2.ZERO) 
+	var sprite_center = get_sprite_center()
+	rope_line.add_point(sprite_center) 
 	rope_line.add_point(rope_line.to_local(target_position))
+	free_grapple_hook.position = target_position
+	free_grapple_hook_offset = target_position - position
 	
 func engage_free_grapple():	
-	print("made it")
 	free_grapple_position = free_grapple_hook.global_position
 	free_grapple_hook_deployed = false
 	is_grappling = true
@@ -417,7 +430,8 @@ func physics_process_grapple(delta: float):
 	# 7. VISUALS
 	rope_line.visible = true
 	rope_line.clear_points()
-	rope_line.add_point(Vector2.ZERO) 
+	var sprite_center := get_sprite_center()
+	rope_line.add_point(sprite_center) 
 	rope_line.add_point(rope_line.to_local(anchor))
 	
 	#Grapple animation
@@ -956,15 +970,17 @@ func _process(_delta: float) -> void:
 	if is_grapple_action_active:
 		if not is_grappling:
 			var success := attempt_grapple_start()
-			if not success:
+			if not success and not free_grapple_hook_deployed:
 				engage_free_grapple_hook()
 	if free_grapple_hook_deployed:
-		print("made it")
-		free_grapple_hook.position = position + free_grapple_hook_offset
-		var collisions := free_grapple_hook.get_overlapping_bodies()
-		if len(collisions) > 0:
-			# The area is colliding with something; attach to it
-			engage_free_grapple()
+		if grounded:
+			disengage_free_grapple()
+		else:	
+			free_grapple_hook.position = position + free_grapple_hook_offset
+			var collisions := free_grapple_hook.get_overlapping_bodies()
+			if len(collisions) > 0:
+				# The area is colliding with something; attach to it
+				engage_free_grapple()
 
 func take_damage(amount: float) -> void:
 	health -= amount
@@ -1194,16 +1210,17 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("grapple"):
 		is_grapple_action_active = true
 	elif event.is_action_released("grapple"):
+		if free_grapple_hook_deployed or free_grapple_enabled:
+			disengage_free_grapple()
 		is_grapple_action_active = false 
-		free_grapple_hook_deployed = false
 		free_grapple_desired_direction = Vector2.ZERO
 	if is_grapple_action_active and not free_grapple_enabled and not free_grapple_hook_deployed:
 		if event.is_action_pressed("grid_up"):
-			move_free_grapple_disired_direction(0, -1)
+			move_free_grapple_desired_direction(0, -1)
 		elif event.is_action_pressed("grid_down"):
-			move_free_grapple_disired_direction(0, 1)
+			move_free_grapple_desired_direction(0, 1)
 		elif event.is_action_pressed("grid_left"):
-			move_free_grapple_disired_direction(-1, 0)
+			move_free_grapple_desired_direction(-1, 0)
 		elif event.is_action_pressed("grid_right"):
-			move_free_grapple_disired_direction(1, 0)
+			move_free_grapple_desired_direction(1, 0)
 		print(free_grapple_desired_direction)
