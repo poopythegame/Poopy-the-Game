@@ -769,11 +769,13 @@ func physics_process_normal(delta):
 				isbashing = false
 				#motion.x = 150 * sign(motion.x)
 				$Final_Bashing.stop() #If the timer doesn't reset, the timeout function makes the bashing state false even after the player exits bashing due to reasons other than the time running out
+				$NormalBashing_Duration.stop()
 				print("exiting bashing")
 				#when you miss the timing of perfect bashing, you get a penalty.
 	
 	if (not grounded or abs(motion.x) < 30 or isskidding or isrolling):
 		$Final_Bashing.stop()  #If the timer doesn't reset, the timeout function makes the bashing state false even after the player exits bashing due to reasons other than the time running out
+		$NormalBashing_Duration.stop()
 		isbashing = false
 		isperfectbashing = false
 	
