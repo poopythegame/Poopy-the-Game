@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://qjp2tm4naawh"]
 
 [ext_resource type="Texture2D" uid="uid://b27wmspjlyo4u" path="res://assets/textures/elements/anchor.png" id="1_2s5oa"]
+[ext_resource type="Script" uid="uid://bkyf3st40ech3" path="res://scripts/free_grapple_hook.gd" id="1_tsupj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0epon"]
 radius = 7.0
 
-[node name="Area2D" type="Area2D" unique_id=142341484]
+[node name="FreeGrappleHook" type="Area2D" unique_id=142341484]
+script = ExtResource("1_tsupj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=729042020]
 shape = SubResource("CircleShape2D_0epon")
