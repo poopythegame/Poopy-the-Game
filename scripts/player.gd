@@ -336,8 +336,11 @@ func engage_free_grapple_hook() -> void:
 	get_parent().add_child(free_grapple_hook)
 	rope_line.visible = true
 	rope_line.clear_points()
-	free_grapple_hook.position = target_position
 	free_grapple_hook_offset = target_position - position
+	free_grapple_hook.rotation = free_grapple_hook_offset.angle()
+	if result:
+		free_grapple_hook.ground_normal_vector = result["normal"]
+		free_grapple_hook.ground_normal_found = true
 	can_deploy_free_grapple_hook = false
 	
 func engage_free_grapple():	
