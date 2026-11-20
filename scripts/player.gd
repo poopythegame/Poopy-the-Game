@@ -355,12 +355,13 @@ func engage_free_grapple():
 	up_direction = Vector2.UP
 	free_grapple_enabled = true
 	
-func disengage_free_grapple():
+func disengage_free_grapple(preserve_desired_direction: bool = false):
 	exitgrapple = true
 	is_grappling = false
 	free_grapple_enabled = false
 	free_grapple_hook_deployed = false
-	free_grapple_desired_direction = Vector2i.ZERO
+	if not preserve_desired_direction:
+		free_grapple_desired_direction = Vector2i.ZERO
 	free_grapple_animation_t = 0
 	free_grapple_position = Vector2.ZERO
 	rope_line.visible = false
@@ -976,7 +977,7 @@ func _process(delta: float) -> void:
 			var success := attempt_grapple_start()
 			if not success and can_deploy_free_grapple_hook:
 				if free_grapple_hook_deployed:
-					disengage_free_grapple()
+					disengage_free_grapple(true)
 				engage_free_grapple_hook()
 	if free_grapple_hook_deployed:
 		if grounded:
