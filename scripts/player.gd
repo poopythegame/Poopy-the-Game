@@ -54,6 +54,7 @@ var free_grapple_position: Vector2
 var free_grapple_animation_t: float
 var free_grapple_hook: FreeGrappleHook 
 var free_grapple_hook_offset: Vector2
+var free_grapple_animation_last_hook_offset: Vector2
 
 var motion := Vector2(0, 0)
 # Motion, the magical variable. Consider it a pseudo-Velocity.
@@ -986,7 +987,7 @@ func _process(delta: float) -> void:
 		if grounded:
 			disengage_free_grapple()
 		else:	
-			var target_position = position + free_grapple_hook_offset * ease_out_cubic(free_grapple_animation_t)
+			var target_position = position + lerp(free_grapple_animation_last_hook_offset, free_grapple_hook_offset, ease_out_cubic(free_grapple_animation_t))
 			free_grapple_hook.position = target_position
 			var sprite_center = get_sprite_center()
 			rope_line.clear_points()
@@ -994,6 +995,8 @@ func _process(delta: float) -> void:
 			rope_line.add_point(rope_line.to_local(target_position))
 			if free_grapple_animation_t < 1:
 				free_grapple_animation_t += delta / free_grapple_animation_time
+			else:
+				free_grapple_animation_last_hook_offset = free_grapple_hook_offset
 			var collisions := free_grapple_hook.get_overlapping_bodies()
 			if free_grapple_hook.is_overlapping_with_ground():
 				# The area is colliding with something; attach to it
@@ -1231,6 +1234,7 @@ func _input(event: InputEvent) -> void:
 			disengage_free_grapple()
 		is_grapple_action_active = false 
 		free_grapple_desired_direction = Vector2.ZERO
+		free_grapple_animation_last_hook_offset = Vector2.ZERO
 	if is_grapple_action_active and not free_grapple_enabled:
 		var old_desired_direction := free_grapple_desired_direction
 		if event.is_action_pressed("grid_up"):
