@@ -165,6 +165,10 @@ var jumpbuffered = false
 # Briefly activates every time you press the Jump button.
 ## This one variable is necessary for our Jump Buffer.
 
+#This is for displaying the hurt animation.
+
+var hurt = false
+
 
 
 
@@ -629,6 +633,7 @@ func physics_process_normal(delta):
 		snap_exception = false
 		canjump = true
 		isbouncing = false
+		hurt = false
 		# Let the script know you're not jumping anymore, and return your ability to jump.
 
 	if not springing:
@@ -974,6 +979,7 @@ func bounce(strength: float) -> void:
 	motion = force
 	springing = true
 	snap_exception = true
+	hurt = true
 
 # That's the main part of the script done with.
 # Now let's move on to extra functions and timer signals.
@@ -1059,8 +1065,11 @@ func animate():
 			# Play Running Animation, quickening it even further if you escalate past your Top Speed.
 			
 	elif not grounded:
-			
-		if isstomping:
+		
+		if hurt:
+			$Sprite.play("hurt")
+				
+		elif isstomping:
 
 			var stomprot = -1 * motion.x / 1000
 		

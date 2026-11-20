@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bo78txhcs4c1j" path="res://assets/textures/player/jump/spinjump_fr0.png" id="6_gxf40"]
 [ext_resource type="Texture2D" uid="uid://ixsnkidq1e7x" path="res://assets/textures/player/bashing/bashing_fr1.png" id="6_rqddi"]
 [ext_resource type="Texture2D" uid="uid://c5nfeycblfcm4" path="res://assets/textures/player/jump/spinjump_fr1.png" id="7_7pcqj"]
+[ext_resource type="Texture2D" uid="uid://hii7rlxbopqj" path="res://assets/textures/player/hurt/hurt_fr0.png" id="7_eln8t"]
 [ext_resource type="Texture2D" uid="uid://cylddkk7g6o4h" path="res://assets/textures/player/jump/spinjump_fr2.png" id="8_2i3hj"]
 [ext_resource type="Texture2D" uid="uid://csdvt26fwf7vd" path="res://assets/textures/player/jump/spinjump_fr3.png" id="9_4k2b3"]
 [ext_resource type="Texture2D" uid="uid://djt6p4v3hmfuo" path="res://assets/textures/player/run/run_fr0.png" id="10_7pcqj"]
@@ -72,6 +73,14 @@ animations = [{
 "loop": 1,
 "name": &"bashing_transition",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_eln8t")
+}],
+"loop": 1,
+"name": &"hurt",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,

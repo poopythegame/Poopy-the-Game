@@ -4644,9 +4644,7 @@ position = Vector2(-240, -64)
 
 [node name="Player" parent="." unique_id=407612649 node_paths=PackedStringArray("camera") groups=["Player"] instance=ExtResource("5_4a02d")]
 position = Vector2(-264, 0)
-death_time = null
 camera = NodePath("../Camera2D")
-max_health = null
 
 [node name="LeftCamBound" parent="." unique_id=191055117 instance=ExtResource("6_uu0hj")]
 editor_description = "Move this node to where you want the left-hand camera limit to be."
