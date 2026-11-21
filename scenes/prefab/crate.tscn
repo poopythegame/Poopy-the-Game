@@ -35,14 +35,14 @@ shape = SubResource("RectangleShape2D_3br5d")
 [node name="DestructionFragments" type="Node2D" parent="." unique_id=1825348841]
 
 [node name="CrateFragment0" type="Sprite2D" parent="DestructionFragments" unique_id=222589052]
-position = Vector2(-5.0000005, -12)
+position = Vector2(-5, -8)
 scale = Vector2(0.05004053, 0.050040517)
 texture = ExtResource("7_4s6ms")
 region_enabled = true
 region_rect = Rect2(0, 0, 844.43286, 617.8678)
 
 [node name="CrateFragment1" type="Sprite2D" parent="DestructionFragments" unique_id=1113201947]
-position = Vector2(5.9999995, -9)
+position = Vector2(6, -6)
 scale = Vector2(0.048809923, 0.048809923)
 texture = ExtResource("8_bitju")
 region_enabled = true
@@ -56,21 +56,21 @@ region_enabled = true
 region_rect = Rect2(0, 590, 1025, 435)
 
 [node name="CrateBorderFragment0" type="Sprite2D" parent="DestructionFragments" unique_id=1406548871]
-position = Vector2(-4.999996, -14.000008)
+position = Vector2(-4, -13.999999)
 scale = Vector2(0.051158372, 0.051158365)
 texture = ExtResource("3_4of1e")
 region_enabled = true
 region_rect = Rect2(0, 0, 852, 518)
 
 [node name="CrateBorderFragment1" type="Sprite2D" parent="DestructionFragments" unique_id=973428614]
-position = Vector2(16, -11.459888)
+position = Vector2(15, -11)
 scale = Vector2(0.05882353, 0.058823522)
 texture = ExtResource("4_k0y1m")
 region_enabled = true
 region_rect = Rect2(651, 0, 374, 543)
 
 [node name="CrateBorderFragment2" type="Sprite2D" parent="DestructionFragments" unique_id=204369364]
-position = Vector2(-5.626141, 10.3125)
+position = Vector2(-5, 10)
 scale = Vector2(0.052701652, 0.052701674)
 texture = ExtResource("5_rem0e")
 region_enabled = true
