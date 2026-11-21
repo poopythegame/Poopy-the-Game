@@ -12,6 +12,7 @@ const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 @onready var rope_line: Line2D = $Line2D # Make sure the name matches your node
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var floor_cast: RayCast2D = $Collision/Raycast
+@onready var afterimage_manager: AfterimageManager = $AfterImageManager
 @onready var death_tween := get_tree().create_tween()
 
 @export var death_time: float = 0.5
@@ -248,6 +249,9 @@ func is_area_contacting_ground(area_2d: Area2D) -> bool:
 		if body is StaticBody2D:
 			return true
 	return false
+
+func _ready() -> void:
+	afterimage_manager.target = sprite
 
 func _physics_process(delta):
 	
@@ -1001,6 +1005,10 @@ func _process(delta: float) -> void:
 			if free_grapple_hook.is_overlapping_with_ground():
 				# The area is colliding with something; attach to it
 				engage_free_grapple()
+	if isairdashing or isstomping:
+		afterimage_manager.enabled = true
+	else:
+		afterimage_manager.enabled = false
 
 func take_damage(amount: float) -> void:
 	health -= amount

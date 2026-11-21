@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://bm5nmcn81vxmu" path="res://assets/audio/effects/poopy_hurt.ogg" id="14_isfnt"]
 [ext_resource type="AudioStream" uid="uid://dr1g6ao3afdws" path="res://assets/audio/effects/poopy_final_hit1.ogg" id="15_rp2o6"]
 [ext_resource type="AudioStream" uid="uid://bsn8omalnpl1d" path="res://assets/audio/effects/poopy_final_hit2.ogg" id="16_vc3vx"]
+[ext_resource type="Script" uid="uid://cvir30gwlqlrw" path="res://scripts/after_image_manager.gd" id="20_37wxj"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0s3b8"]
 b = Vector2(0, -32)
@@ -88,6 +89,9 @@ default_color = Color(0.18359, 0.18359, 0.18359, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1465423261]
 bus = &"SFX"
+
+[node name="AfterImageManager" type="Node" parent="." unique_id=2083046516]
+script = ExtResource("20_37wxj")
 
 [connection signal="timeout" from="ControlLockTimer" to="." method="_on_control_lock_timer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
