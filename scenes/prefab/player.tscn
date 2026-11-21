@@ -47,8 +47,10 @@ final_hit_sfx = Array[AudioStream]([ExtResource("15_rp2o6"), ExtResource("16_vc3
 position = Vector2(0, 1)
 scale = Vector2(0.0534135, 0.0534135)
 sprite_frames = ExtResource("2_mx6bk")
-animation = &"hurt"
+animation = &"bashing_transition"
 autoplay = "idle"
+frame = 1
+frame_progress = 1.0
 offset = Vector2(0, -270.04)
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2098401984]
@@ -103,6 +105,7 @@ one_shot = true
 [node name="perfectbash_miss" type="Timer" parent="." unique_id=1129663930]
 one_shot = true
 
+[connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
 [connection signal="timeout" from="ControlLockTimer" to="." method="_on_control_lock_timer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]

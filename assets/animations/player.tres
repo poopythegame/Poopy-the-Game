@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cy85l6vporplp" path="res://assets/textures/player/airdash/airdash_fr3_real.png" id="3_8p1s0"]
 [ext_resource type="Texture2D" uid="uid://euf3um3ler4m" path="res://assets/textures/player/airdash/airdash_fr3.png" id="4_vbv6c"]
 [ext_resource type="Texture2D" uid="uid://c0ykwbmlm7t08" path="res://assets/textures/player/bashing/bashing_fr0.png" id="5_1m7ma"]
+[ext_resource type="Texture2D" uid="uid://dg432dcseqdp5" path="res://assets/textures/player/bashing/bashing_fr2.png" id="5_d4lfm"]
 [ext_resource type="Texture2D" uid="uid://bfqm6tlkkjvwj" path="res://assets/textures/player/idle.png" id="5_sompp"]
 [ext_resource type="Texture2D" uid="uid://bo78txhcs4c1j" path="res://assets/textures/player/jump/spinjump_fr0.png" id="6_gxf40"]
+[ext_resource type="Texture2D" uid="uid://m5b1u5x1h8pl" path="res://assets/textures/player/bashing/bashing_fr3.png" id="6_h0yss"]
 [ext_resource type="Texture2D" uid="uid://ixsnkidq1e7x" path="res://assets/textures/player/bashing/bashing_fr1.png" id="6_rqddi"]
 [ext_resource type="Texture2D" uid="uid://c5nfeycblfcm4" path="res://assets/textures/player/jump/spinjump_fr1.png" id="7_7pcqj"]
 [ext_resource type="Texture2D" uid="uid://hii7rlxbopqj" path="res://assets/textures/player/hurt/hurt_fr0.png" id="7_eln8t"]
@@ -21,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://cuxkuen4bfd36" path="res://assets/textures/player/perfectbashing/perfectbashing_fr1.png" id="12_rqddi"]
 [ext_resource type="Texture2D" uid="uid://dym72f4v5vpc7" path="res://assets/textures/player/run/run_fr3.png" id="13_fsgbf"]
 [ext_resource type="Texture2D" uid="uid://cxoiopasw5ijk" path="res://assets/textures/player/walk/walk_fr1.png" id="14_1m7ma"]
+[ext_resource type="Texture2D" uid="uid://ddxolpnhbmaic" path="res://assets/textures/player/perfectbashing/perfectbashing_fr2.png" id="15_d4lfm"]
 [ext_resource type="Texture2D" uid="uid://n57eh3b6j5tj" path="res://assets/textures/player/walk/walk_fr2.png" id="15_rqddi"]
 [ext_resource type="Texture2D" uid="uid://bo0qb4e1301q4" path="res://assets/textures/player/walk/walk_fr3.png" id="16_eln8t"]
 [ext_resource type="Texture2D" uid="uid://5va7pdcu1gwp" path="res://assets/textures/ui/main_menu/player_turn_around/fr0.png" id="17_7um1e"]
@@ -57,9 +60,12 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_rqddi")
+"texture": ExtResource("5_d4lfm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_h0yss")
 }],
-"loop": 0,
+"loop": 1,
 "name": &"bashing",
 "speed": 12.0
 }, {
@@ -70,7 +76,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_rqddi")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"bashing_transition",
 "speed": 12.0
 }, {
@@ -110,8 +116,11 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("12_rqddi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_d4lfm")
 }],
-"loop": 0,
+"loop": 1,
 "name": &"perfectbashing",
 "speed": 12.0
 }, {
@@ -119,7 +128,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("12_eln8t")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"perfectbashing_transition",
 "speed": 12.0
 }, {

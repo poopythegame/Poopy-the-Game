@@ -169,7 +169,9 @@ var jumpbuffered = false
 
 var hurt = false
 
+#This is exclusively for animation: Determines when the transition animation finishes
 
+var animfinish = false
 
 
 ## The Player's stats.
@@ -1042,9 +1044,15 @@ func animate():
 		if (isbashing):
 			$Sprite.speed_scale = 1
 			if (isperfectbashing):
-				$Sprite.play("perfectbashing")
+				if(animfinish == false):
+					$Sprite.play("perfectbashing_transition")
+				else:
+					$Sprite.play("perfectbashing")
 			else:
-				$Sprite.play("bashing")
+				if(animfinish == false):
+					$Sprite.play("bashing_transition")
+				else:
+					$Sprite.play("bashing")
 		
 		elif isskidding:
 			$Sprite.play("skid")
@@ -1143,6 +1151,9 @@ func _on_final_bashing_timeout():
 	isbashing = false
 	isperfectbashing = false
 
+func _on_sprite_animation_finished(): #When the animation finishes playing..
+	#---(Usually transition animation in bashing, stomping, etc.)
+	animfinish = true
 
 
 func die():
