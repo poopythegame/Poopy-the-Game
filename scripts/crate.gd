@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-const destruction_particle_acceleration: float = 20
+const destruction_particle_acceleration: float = 100
 const destruction_time: float = 1
 
 class DestructionParticle:
@@ -8,7 +8,7 @@ class DestructionParticle:
 	var init_pos: Vector2
 	var trajectory: Vector2
 	static func quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float) -> Vector2:
-		return (1-t)**2*p0 + 2*(1-t)*p1 + t**2*p2
+		return (1-t)**2*p0 + 2*(1-t)*t*p1 + t**2*p2
 	func trajectory_position_at(t: float) -> Vector2:
 		var initial := init_pos
 		var control_point = trajectory * destruction_particle_acceleration
@@ -67,6 +67,7 @@ func _process(delta: float) -> void:
 	if destroyed:
 		for particle in destruction_fragments:
 			particle.sprite.position = particle.trajectory_position_at(destruction_t)
+			print(particle.sprite.position)
 		destruction_t += delta / destruction_time
 		if destruction_t >= 1:
 			queue_free()

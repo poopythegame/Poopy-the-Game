@@ -32,7 +32,7 @@ shape = SubResource("RectangleShape2D_ugsol")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1451150940]
 shape = SubResource("RectangleShape2D_3br5d")
 
-[node name="DestructionFragments" type="Node" parent="." unique_id=670446573]
+[node name="DestructionFragments" type="Node2D" parent="." unique_id=1825348841]
 
 [node name="CrateFragment0" type="Sprite2D" parent="DestructionFragments" unique_id=222589052]
 position = Vector2(-5.0000005, -12)
