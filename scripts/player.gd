@@ -93,9 +93,14 @@ var isskidding = false
 var cangrapple = false
 
 var canstomp = false
+
 var stomp_enabled: bool = true
 
 var canairdash = false
+
+var canbash = true
+
+var canperfectbash = false
 
 var canspeedboost = false
 
@@ -110,6 +115,10 @@ var isrolling = false
 var isairdashing = false
 
 var isstomping = false
+
+var isbashing = false
+
+var isperfectbashing = false
 
 var isbouncing = false
 ## Fixes for problems involving walls and steep slopes.
@@ -146,6 +155,10 @@ var jumpbuffered = false
 # Briefly activates every time you press the Jump button.
 ## This one variable is necessary for our Jump Buffer.
 
+#This is for displaying the hurt animation.
+
+var hurt = false
+
 
 
 
@@ -174,9 +187,6 @@ const dec := 15.0
 const topspeed := 300.0
 # Top Speed. Default: 300.0
 ## You won't be able to Accelerate past this point without some Momentum.
-
-## Note: If you'd like to change the player's stats mid-game, make them variables instead.
-## You can do this by changing the word "const" to "var".
 
 ### ### GRAPPLING HOOK ADDITIONS ### ###
 var is_grappling := false
@@ -438,7 +448,7 @@ func physics_process_grapple(delta: float):
 
 	# 6. Rotation reset to default (zero)
 	$Collision.rotation = 0
-	$Sprite.rotation = lerp_angle($Sprite.rotation, 0, 0.25)
+	#$Sprite.rotation = lerp_angle($Sprite.rotation, 0, 0.25)
 
 	# 7. VISUALS
 	rope_line.visible = true
@@ -451,6 +461,18 @@ func physics_process_grapple(delta: float):
 	$Sprite.play("jump")
 	$Sprite.speed_scale = 4
 
+	$Sprite.offset.y = 1
+	$Sprite.position.y = -15
+
+	$Sprite.flip_h = false
+	$Sprite.rotation = lerp_angle($Sprite.rotation, motion.angle(), 1)
+	$Sprite.play("airdash")
+	$Sprite.speed_scale = 1
+	
+	# Rotate sprite to face velocity
+	#if motion.length() > 10:
+		#var look_angle = motion.angle()
+		#$Sprite.rotation = rotate_toward($Sprite.rotation, look_angle, 0.15)
 
 func stop_grapple():
 	exitgrapple = true
@@ -462,6 +484,9 @@ func stop_grapple():
 	free_grapple_position = Vector2.ZERO
 	rope_line.visible = false
 	$Sprite.rotation = 0
+	
+	$Sprite.offset.y = -270.04
+	$Sprite.position.y = 1
 
 ### ### WRAPPER FOR YOUR ORIGINAL CODE ### ###
 
@@ -667,6 +692,7 @@ func physics_process_normal(delta):
 		# Jump.
 		
 		canjump = false
+		canbash = false
 		# Then revoke your ability to jump. Don't worry, this will get reactivated once you land.
 		## Without this part, you'd be able to fly up infinitely.
 		
@@ -691,6 +717,7 @@ func physics_process_normal(delta):
 		snap_exception = false
 		canjump = true
 		isbouncing = false
+		hurt = false
 		# Let the script know you're not jumping anymore, and return your ability to jump.
 
 	if not springing:
@@ -744,18 +771,20 @@ func physics_process_normal(delta):
 				
 				
 			
-#	var actionlist = ["action", "grapple", "dual"]
-#	var index = 0
-	#if Input.is_action_just_pressed("toggle"):
-	#	if (len(actionlist) - 1) > index:
-	#		index += 1
-		#elif (len(actionlist) - 1) < index:
-		#	index = 0
-	
+	# Get player's direction axis
+	var direction: float = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
+	if Input.is_action_pressed("enemyfreeze"):
+		# Lock movement while grid-moving
+		direction = 0
+	# Prevent controller from allowing unlimited speed boost bugs
+	if direction < 0:
+		direction = -1
+	elif direction > 0:
+		direction = 1
 
 #POOPY GENERAL MOVESET
 	
-	if jumping or isrolling or isairdashing or isstomping:
+	if jumping or isrolling or isairdashing or isstomping or isbashing:
 		isattacking = true
 	else:
 		isattacking = false
@@ -773,17 +802,17 @@ func physics_process_normal(delta):
 	if abs(motion.x) < 20:
 		isairdashing = false
 	
-	if not is_on_floor():
+	if not grounded:
 		if Input.is_action_pressed("action") and Input.is_action_pressed("down") and canstomp and stomp_enabled:
-			if motion.y < 450:
+			if motion.y < 0:
 				motion.y = 450
 
 				canstomp = false
 				isstomping = true
 				play_all_audio_multiselect([stomp_sfx, screwdive_sfx])
 				isairdashing = false
-			elif motion.y >= 450:
-				motion.y += 225
+			elif motion.y >= 0:
+				motion.y += 450
 
 				canstomp = false
 				isstomping = true
@@ -796,29 +825,63 @@ func physics_process_normal(delta):
 			isairdashing = true
 			play_all_audio_multiselect([airdash_sfx, screwdive_sfx])
 			isstomping = false
+	elif grounded:
+		if Input.is_action_just_pressed("action") and not control_lock:
+			if (canbash or canperfectbash):
+				var bashingspeed = 375
+				var bashingfactor
+				
+				isbashing = true
+				
+				if canperfectbash:
+					canperfectbash = false
+					isperfectbashing = true
+					bashingfactor = 1.7
+				else:
+					bashingfactor = 1
+
+				if (direction != 0):
+					motion.x = bashingspeed * direction * bashingfactor
+				else:
+					motion.x = bashingspeed * sign($Collision/WallCast.target_position.x) * bashingfactor
+				
+				if (not isperfectbashing): #if you just bashed instead of perfect bashing
+					$NormalBashing_Duration.start()
+				print("you just bashed!")
+				
+			elif isbashing and (not canperfectbash) and (not isperfectbashing):
+				isbashing = false
+				#motion.x = 150 * sign(motion.x)
+				$Final_Bashing.stop() #If the timer doesn't reset, the timeout function makes the bashing state false even after the player exits bashing due to reasons other than the time running out
+				$NormalBashing_Duration.stop()
+				print("exiting bashing")
+				#when you miss the timing of perfect bashing, you get a penalty.
+	
+	if (not grounded or abs(motion.x) < 30 or isskidding or isrolling):
+		$Final_Bashing.stop()  #If the timer doesn't reset, the timeout function makes the bashing state false even after the player exits bashing due to reasons other than the time running out
+		$NormalBashing_Duration.stop()
+		isbashing = false
+		isperfectbashing = false
+	
+	#You can't bash while you're already bashing.
+	if isbashing:
+		canbash = false
+	else:
+		canbash = true
+				
 	
 	if not Input.is_action_pressed("action"):
 		stomp_enabled = true
 	
+	#This is for the speed display in the UI
 	main.display_speed(motion.x, motion.y)
 	
 	if abs(motion.x) != 0:
 		# If moving right (1), point right. If moving left (-1), point left.
 		# Multiply by whatever distance your raycast needs to reach (e.g., 20 pixels)
 		$Collision/WallCast.target_position.x = 7.0 * sign(motion.x)
-
-	#braking control seen in classic sonic games
-	var direction: float = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
-	if Input.is_action_pressed("enemyfreeze"):
-		# Lock movement while grid-moving
-		direction = 0
-	# Prevent controller from allowing unlimited speed boost bugs
-	if direction < 0:
-		direction = -1
-	elif direction > 0:
-		direction = 1
 		
-	
+		#braking control seen in classic sonic games
 	if direction == -(sign(motion.x)) and (abs(motion.x) >= (topspeed/1.5)) and is_on_floor():
 		if not isskidding and not is_taking_damage:
 			play_audio(skid_sfx)
@@ -829,53 +892,55 @@ func physics_process_normal(delta):
 		if direction == -(sign(motion.x)):
 			motion.x -= dec * sign(motion.x) * 1.3
 			
-	if direction and not control_lock and not isrolling and !springing: # If holding left or right, and not slipping down a slope...
-		if abs(motion.x) < 25:
-			motion.x += acc * 3 * direction
-		if is_on_floor(): # If touching the floor...	
-			if direction == sign(motion.x): # If you're holding in the direction you're moving...
-				if abs(motion.x) <= topspeed: # If you're not over your Top Speed...
-					motion.x += acc * direction
-					# Accelerate in the direction you're holding.
-					
-			else: # If you're trying to turn around...
-				if abs(slopefactor) < 0.4: # If you're standing on flat or slightly slanted ground...
-					if not isskidding:
-						motion.x += dec * direction * 2
+	if not isbashing:#This has it so that you can't influence the direction when you're bashing.
 						
-					# Very quickly Deccelerate to a stop.
-					else: # If you're standing on a far too steep slope...
+		if direction and not control_lock and not isrolling and !springing: # If holding left or right, and not slipping down a slope...
+			if abs(motion.x) < 25:
+				motion.x += acc * 3 * direction
+			if is_on_floor(): # If touching the floor...	
+				if direction == sign(motion.x): # If you're holding in the direction you're moving...
+					if abs(motion.x) <= topspeed: # If you're not over your Top Speed...
 						motion.x += acc * direction
-					# Turn at normal speed.
-					## Logically, it would be pretty hard to slow down when running down a hill.
-				
-				
-		else: # If mid-air...
-			
-			if direction == sign(motion.x): # If you're holding in the direction you're moving...
-				if abs(motion.x) <= topspeed: # If you're not over your Top Speed...
-					motion.x += (acc * 1.2) * direction
-					# Accelerate (a bit faster) in the direction you're holding.
+						# Accelerate in the direction you're holding.
+						
+				else: # If you're trying to turn around...
+					if abs(slopefactor) < 0.4: # If you're standing on flat or slightly slanted ground...
+						if not isskidding:
+							motion.x += dec * direction * 2
+							
+						# Very quickly Deccelerate to a stop.
+						else: # If you're standing on a far too steep slope...
+							motion.x += acc * direction
+						# Turn at normal speed.
+						## Logically, it would be pretty hard to slow down when running down a hill.
 					
-			else: # If you're trying to turn around...
-				if abs(motion.x) <= topspeed - 50:
-					motion.x += (acc * 2.7) * direction
-				elif abs(motion.x) > topspeed - 50:
-					motion.x += (acc * 5.5) * direction
-				# Deccellerate at the same speed.
+					
+			else: # If mid-air...
+				
+				if direction == sign(motion.x): # If you're holding in the direction you're moving...
+					if abs(motion.x) <= topspeed: # If you're not over your Top Speed...
+						motion.x += (acc * 1.2) * direction
+						# Accelerate (a bit faster) in the direction you're holding.
+						
+				else: # If you're trying to turn around...
+					if abs(motion.x) <= topspeed - 50:
+						motion.x += (acc * 2.7) * direction
+					elif abs(motion.x) > topspeed - 50:
+						motion.x += (acc * 5.5) * direction
+					# Deccellerate at the same speed.
+				
+				# Note: Due to logic, you can't quickly turn around mid-air.
+				
+		else: # If not pressing anything...
+			if is_on_floor() and abs(slopefactor) < 0.25 or isrolling: # If you're on flat, or near-flat ground...
+				motion.x = move_toward(motion.x, 0, acc - 1)
+				# Slow to a stop.
+				## We shouldn't be able to stand perfectly still on a steep slope, right? Right.
+			elif is_on_floor() and abs(slopefactor) < 0.25:
+				motion.x = move_toward(motion.x, 0, acc)
+			elif not is_on_floor() and (abs(motion.x) <= topspeed):
+				motion.x = move_toward(motion.x,0, acc - 1)
 			
-			# Note: Due to logic, you can't quickly turn around mid-air.
-			
-	else: # If not pressing anything...
-		if is_on_floor() and abs(slopefactor) < 0.25 or isrolling: # If you're on flat, or near-flat ground...
-			motion.x = move_toward(motion.x, 0, acc - 1)
-			# Slow to a stop.
-			## We shouldn't be able to stand perfectly still on a steep slope, right? Right.
-		elif is_on_floor() and abs(slopefactor) < 0.25:
-			motion.x = move_toward(motion.x, 0, acc)
-		elif not is_on_floor() and (abs(motion.x) <= topspeed):
-			motion.x = move_toward(motion.x,0, acc - 1)
-		
 		
 	
 
@@ -904,7 +969,7 @@ func physics_process_normal(delta):
 	else:
 		SLOPEMULT = 2
 		
-	if is_on_floor() and not stuck:
+	if is_on_floor() and not stuck and not isbashing: #when you're bashing, the slope doesn't affect your speed.
 		motion.x += (acc * SLOPEMULT) * slopefactor
 		# When you're moving down a slope, add more acceleration.
 		# When you're moving up a slope, slow the player down.
@@ -1028,6 +1093,7 @@ func bounce(strength: float) -> void:
 	motion = force
 	springing = true
 	snap_exception = true
+	hurt = true
 
 # That's the main part of the script done with.
 # Now let's move on to extra functions and timer signals.
@@ -1056,13 +1122,27 @@ func animate():
 		# This is how the Sprite is able to turn when you move.
 	var direction = Input.get_axis("left", "right")
 	
-	if direction < 0 and not isskidding:
-		$Sprite.flip_h = true
-	elif direction > 0 and not isskidding:
-		$Sprite.flip_h = false
+	if (jumping or isairdashing):
+		$Sprite.offset.y = 1
+		$Sprite.position.y = -15
+	else:
+		$Sprite.offset.y = -270.04
+		$Sprite.position.y = 1
+	
+	#This one's for the sprite flippin' logic
+	if (isskidding):
+		if sign(motion.x) > 0:
+			$Sprite.flip_h = false
+		elif sign(motion.x) < 0:
+			$Sprite.flip_h = true
+	elif (not jumping or not isairdashing):	
+		if direction < 0 and not isskidding:
+			$Sprite.flip_h = true
+		elif direction > 0 and not isskidding:
+			$Sprite.flip_h = false
 	
 	if isrolling:
-		$Sprite.play("jump")
+		$Sprite.play("slide")
 		
 		var animspeed = abs(motion.x) / 80
 		animspeed = clamp(animspeed, 1.5, 8)
@@ -1070,25 +1150,29 @@ func animate():
 		$Sprite.speed_scale = animspeed
 		
 	elif grounded:
-		if isskidding:
-			if sign(motion.x) > 0:
-				$Sprite.flip_h = false
+		
+		if (isbashing):
+			$Sprite.speed_scale = 1
+			if (isperfectbashing):
+				$Sprite.play("perfectbashing")
 			else:
-				$Sprite.flip_h = true
+				$Sprite.play("bashing")
+		
+		elif isskidding:
 			$Sprite.play("skid")
 		
-		if abs(motion.x) < 1 and not isskidding: # If you're standing still, or at least EXTREMELY CLOSE to standing still...
+		elif abs(motion.x) < 1: # If you're standing still, or at least EXTREMELY CLOSE to standing still...
 			$Sprite.speed_scale = 1
 			stop_audio()
 			# Reset the Speed Scale.
 			
-		elif abs(motion.x) < topspeed - 10 and not isskidding: # If you're moving, but not at your Top Speed yet...
+		elif abs(motion.x) < topspeed - 10: # If you're moving, but not at your Top Speed yet...
 			$Sprite.play("walk")
 			$Sprite.speed_scale = 0.5 + (abs(motion.x) / 350)
 			stop_audio()
 			# Play Walking Animation at half speed, quickening it as you move faster and faster.
 			
-		elif abs(motion.x) >= topspeed and not isskidding: # If you've reached, or are at least close enough to your Top Speed...
+		elif abs(motion.x) >= topspeed: # If you've reached, or are at least close enough to your Top Speed...
 			$Sprite.play("run")
 			$Sprite.speed_scale = clamp(abs(motion.x)/90, 1.5, 8)
 			stop_audio()
@@ -1096,21 +1180,9 @@ func animate():
 			
 	elif not grounded:
 		
-		if isairdashing:
-			var airdashrot = motion.y / 750 * sign(motion.x)
-		
-			airdashrot = clamp(airdashrot, -PI/2, PI/2)
-		
-			$Sprite.rotation = lerp_angle($Sprite.rotation, airdashrot, 1)
+		if hurt:
+			$Sprite.play("hurt")
 				
-			if sign(motion.x) > 0:
-				$Sprite.flip_h = false
-			elif sign(motion.x) < 0:
-				$Sprite.flip_h = true
-			
-			$Sprite.play("airdash")
-			$Sprite.speed_scale = 1
-			
 		elif isstomping:
 
 			var stomprot = -1 * motion.x / 1000
@@ -1122,14 +1194,16 @@ func animate():
 			#Actual animation
 			$Sprite.play("stomp")
 			$Sprite.speed_scale = clamp(motion.y/250, 1, 3)
-			
-		elif jumping:
-			$Sprite.rotation = lerp_angle($Sprite.rotation, motion.angle(), 1)
-
+	
+		elif isairdashing or jumping:
 			$Sprite.flip_h = false
-			
-			$Sprite.play("airdash")
 			$Sprite.speed_scale = 1
+			if (jumping and abs(motion.x) < 100):
+				$Sprite.rotation = lerp_angle($Sprite.rotation, 0, 1)
+				$Sprite.play("jump")
+			else:
+				$Sprite.rotation = lerp_angle($Sprite.rotation, motion.angle(), 1)
+				$Sprite.play("airdash")
 	
 	# Idle animation
 	
@@ -1163,6 +1237,25 @@ func _on_jump_buffer_timer_timeout():
 func _on_coyote_timer_timeout():
 	canjump = false
 	# If you've been in the air for too long, your ability to jump is revoked.
+	
+func _on_normal_bashing_duration_timeout():
+	if isbashing: #If you get penalized for missing the timing of perfect bashing, you can't perfect bash
+		canperfectbash = true
+		play_audio(boost_sfx)
+		$PerfectBashing_Timing.start()
+		print("now's your chance!", canperfectbash)
+		$Final_Bashing.start()
+	
+
+func _on_perfect_bashing_timing_timeout():
+	canperfectbash = false
+
+func _on_final_bashing_timeout():
+	print("done bashing")
+	isbashing = false
+	isperfectbashing = false
+
+
 
 func die():
 	if death_tween.is_running():

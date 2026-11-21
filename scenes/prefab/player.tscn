@@ -48,9 +48,8 @@ final_hit_sfx = Array[AudioStream]([ExtResource("15_rp2o6"), ExtResource("16_vc3
 position = Vector2(0, 1)
 scale = Vector2(0.0534135, 0.0534135)
 sprite_frames = ExtResource("2_mx6bk")
-animation = &"stomp"
+animation = &"hurt"
 autoplay = "idle"
-frame_progress = 0.6610783
 offset = Vector2(0, -270.04)
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2098401984]
@@ -93,7 +92,26 @@ bus = &"SFX"
 [node name="AfterImageManager" type="Node" parent="." unique_id=2083046516]
 script = ExtResource("20_37wxj")
 
+[node name="PerfectBashing_Timing" type="Timer" parent="." unique_id=1505742045]
+wait_time = 0.4
+one_shot = true
+
+[node name="NormalBashing_Duration" type="Timer" parent="." unique_id=294381129]
+wait_time = 0.5
+one_shot = true
+
+[node name="Final_Bashing" type="Timer" parent="." unique_id=1941938012]
+wait_time = 1.7999999999999998
+one_shot = true
+
+[node name="perfectbash_miss" type="Timer" parent="." unique_id=1129663930]
+one_shot = true
+
 [connection signal="timeout" from="ControlLockTimer" to="." method="_on_control_lock_timer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="PerfectBashing_Timing" to="." method="_on_perfect_bashing_timing_timeout"]
+[connection signal="timeout" from="NormalBashing_Duration" to="." method="_on_normal_bashing_duration_timeout"]
+[connection signal="timeout" from="Final_Bashing" to="." method="_on_final_bashing_timeout"]
+[connection signal="timeout" from="perfectbash_miss" to="." method="_on_perfectbash_miss_timeout"]
