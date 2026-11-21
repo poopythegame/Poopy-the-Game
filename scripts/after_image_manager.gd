@@ -43,7 +43,6 @@ func create_afterimage() -> void:
 	sprite.flip_v = target.flip_v
 	add_child(sprite)
 	var afterimage := Afterimage.new(sprite)
-	print("made it")
 	afterimages.append(afterimage)
 
 func _process(delta: float) -> void:
