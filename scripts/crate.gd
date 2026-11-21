@@ -45,8 +45,8 @@ func _ready() -> void:
 		destruction_fragment.sprite.hide()
 
 func process_collision(player: Player) -> void:
-	if player.motion.x > 450 or player.isattacking:
-		destroy(player.motion.x / 225)
+	if abs(player.motion.x) > 450 or player.isattacking:
+		destroy(abs(player.motion.x) / 225)
 	else:
 		collision_shape_2d.set_deferred("disabled", false)
 	
