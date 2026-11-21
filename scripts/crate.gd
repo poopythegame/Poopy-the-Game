@@ -1,0 +1,72 @@
+extends StaticBody2D
+
+const destruction_particle_acceleration: float = 20
+const destruction_time: float = 1
+
+class DestructionParticle:
+	var sprite: Sprite2D
+	var init_pos: Vector2
+	var trajectory: Vector2
+	static func quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float) -> Vector2:
+		return (1-t)**2*p0 + 2*(1-t)*p1 + t**2*p2
+	func trajectory_position_at(t: float) -> Vector2:
+		var initial := init_pos
+		var control_point = trajectory * destruction_particle_acceleration
+		var final := Vector2(control_point.x, 720)
+		return quadratic_bezier(initial, control_point, final, t)
+	func _init(init_sprite: Sprite2D) -> void:
+		sprite = init_sprite
+		init_pos = sprite.position
+		trajectory = sprite.position.normalized()
+
+var area_2d: Area2D
+var sprite_2d: Sprite2D
+var collision_shape_2d: CollisionShape2D
+var destroyed: bool
+var destruction_fragments: Array[DestructionParticle]
+var destruction_t: float
+
+func _ready() -> void:
+	area_2d = $Area2D
+	area_2d.body_entered.connect(_handle_body_entered)
+	area_2d.body_exited.connect(_handle_body_exit)
+	sprite_2d = $Sprite2D
+	collision_shape_2d = $CollisionShape2D
+	collision_shape_2d.disabled = true
+	var destruction_fragments_container: Node = $DestructionFragments
+	var destruction_fragments_raw := destruction_fragments_container.get_children()
+	for destruction_fragment_cand in destruction_fragments_raw:
+		if destruction_fragment_cand is Sprite2D:
+			destruction_fragments.append(DestructionParticle.new(destruction_fragment_cand))
+	for destruction_fragment in destruction_fragments:
+		destruction_fragment.sprite.hide()
+
+func process_collision(player: Player) -> void:
+	if player.motion.x > 450 or player.isattacking:
+		destroy()
+	else:
+		collision_shape_2d.set_deferred("disabled", false)
+	
+func _handle_body_entered(body: PhysicsBody2D) -> void:
+	if destroyed:
+		return
+	if body is Player:
+		process_collision(body)	
+
+func _handle_body_exit(body: PhysicsBody2D):
+	collision_shape_2d.set_deferred("disabled", true)
+	
+func destroy() -> void:
+	destroyed = true
+	collision_shape_2d.disabled = true
+	sprite_2d.hide()
+	for fragment in destruction_fragments:
+		fragment.sprite.show()
+
+func _process(delta: float) -> void:
+	if destroyed:
+		for particle in destruction_fragments:
+			particle.sprite.position = particle.trajectory_position_at(destruction_t)
+		destruction_t += delta / destruction_time
+		if destruction_t >= 1:
+			queue_free()
