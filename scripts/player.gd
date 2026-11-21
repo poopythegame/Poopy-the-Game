@@ -634,6 +634,11 @@ func physics_process_normal(delta):
 		canjump = true
 		isbouncing = false
 		hurt = false
+		
+		isairdashing = false
+		isstomping = false
+		canairdash = true
+		canstomp = true
 		# Let the script know you're not jumping anymore, and return your ability to jump.
 
 	if not springing:
@@ -708,12 +713,6 @@ func physics_process_normal(delta):
 	if not is_on_floor():
 		if abs(motion.x) > topspeed:
 			motion.x = move_toward(motion.x, topspeed, AIRDRAG)
-			
-	if is_on_floor():
-		isairdashing = false
-		isstomping = false
-		canairdash = true
-		canstomp = true
 		
 	if abs(motion.x) < 20:
 		isairdashing = false
@@ -753,6 +752,7 @@ func physics_process_normal(delta):
 					canperfectbash = false
 					isperfectbashing = true
 					bashingfactor = 1.7
+					camera.screen_shake_for(.1) #Camera shake for impact
 				else:
 					bashingfactor = 1
 
@@ -872,11 +872,11 @@ func physics_process_normal(delta):
 
 
 #rolling
-	if Input.is_action_pressed("down") and is_on_floor() and abs(motion.x) > 25:
+	if Input.is_action_pressed("down") and grounded and abs(motion.x) > 25:
 		if not isrolling:
 			play_audio(roll_sfx)
 		isrolling = true
-	if Input.is_action_just_released("down") or not is_on_floor():# or abs(motion.x) <= 25:
+	if Input.is_action_just_released("down") or not grounded:# or abs(motion.x) <= 25:
 		isrolling = false
 		
 # Slopes
