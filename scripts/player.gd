@@ -171,7 +171,11 @@ var hurt = false
 
 #This is exclusively for animation: Determines when the transition animation finishes
 
-var animfinish = false
+var stomptransition = true
+
+var bashingtransition = true
+
+var perfectbashingtransition = true
 
 
 ## The Player's stats.
@@ -721,20 +725,22 @@ func physics_process_normal(delta):
 	
 	if not grounded:
 		if Input.is_action_pressed("action") and Input.is_action_pressed("down") and canstomp and stomp_enabled:
-			if motion.y < 0:
+			if motion.y < 450:
 				motion.y = 450
 
 				canstomp = false
 				isstomping = true
 				play_all_audio_multiselect([stomp_sfx, screwdive_sfx])
 				isairdashing = false
-			elif motion.y >= 0:
-				motion.y += 450
+			elif motion.y >= 450:
+				motion.y += 225
 
 				canstomp = false
 				isstomping = true
 				play_all_audio_multiselect([stomp_sfx, screwdive_sfx])
 				isairdashing = false
+				
+			stomptransition = true	
 			stomp_enabled = false
 		elif Input.is_action_just_pressed("action") and canairdash and abs(motion.x) >= 20:
 			motion.x += abs(motion.x) * 0.15 * Input.get_axis("left", "right")
@@ -755,6 +761,7 @@ func physics_process_normal(delta):
 					isperfectbashing = true
 					bashingfactor = 1.7
 					camera.screen_shake_for(.1) #Camera shake for impact
+					perfectbashingtransition = true #Triggers the transition animation
 				else:
 					bashingfactor = 1
 
@@ -765,6 +772,9 @@ func physics_process_normal(delta):
 				
 				if (not isperfectbashing): #if you just bashed instead of perfect bashing
 					$NormalBashing_Duration.start()
+					
+				bashingtransition = true #Triggers the transition animation
+				
 				print("you just bashed!")
 				
 			elif isbashing and (not canperfectbash) and (not isperfectbashing):
@@ -1044,13 +1054,14 @@ func animate():
 		if (isbashing):
 			$Sprite.speed_scale = 1
 			if (isperfectbashing):
-				if(animfinish == false):
+				if(perfectbashingtransition == true):
 					$Sprite.play("perfectbashing_transition")
 				else:
 					$Sprite.play("perfectbashing")
 			else:
-				if(animfinish == false):
+				if(bashingtransition == true):
 					$Sprite.play("bashing_transition")
+					print("this code is broken")
 				else:
 					$Sprite.play("bashing")
 		
@@ -1087,9 +1098,13 @@ func animate():
 		
 			$Sprite.rotation = lerp_angle($Sprite.rotation, stomprot, 1)
 				
-			#Actual animation
-			$Sprite.play("stomp")
-			$Sprite.speed_scale = clamp(motion.y/250, 1, 3)
+			if (stomptransition == true):
+				$Sprite.speed_scale = 1
+				$Sprite.play("stomp_transition")
+				print("This code is broken")
+			else:
+				$Sprite.play("stomp")
+				$Sprite.speed_scale = clamp(motion.y/250, 1, 3)
 	
 		elif isairdashing or jumping:
 			$Sprite.flip_h = false
@@ -1153,9 +1168,13 @@ func _on_final_bashing_timeout():
 
 func _on_sprite_animation_finished(): #When the animation finishes playing..
 	#---(Usually transition animation in bashing, stomping, etc.)
-	animfinish = true
-
-
+	if ($Sprite.animation == "bashing_transition"):
+		bashingtransition = false
+	elif ($Sprite.animation == "perfectbashing_transition"):
+		perfectbashingtransition = false
+	elif ($Sprite.animation == "stomp_transition"):
+		stomptransition = false	
+		
 func die():
 	if death_tween.is_running():
 		death_tween.kill()

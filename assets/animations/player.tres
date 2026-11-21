@@ -181,12 +181,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("17_fsgbf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_1m7ma")
-}, {
-"duration": 1.0,
 "texture": ExtResource("19_rqddi")
 }, {
 "duration": 1.0,
@@ -194,6 +188,17 @@ animations = [{
 }],
 "loop": 0,
 "name": &"stomp",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_fsgbf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_1m7ma")
+}],
+"loop": 0,
+"name": &"stomp_transition",
 "speed": 12.0
 }, {
 "frames": [{
