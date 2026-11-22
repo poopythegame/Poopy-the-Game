@@ -13,6 +13,7 @@ const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var floor_cast: RayCast2D = $Collision/Raycast
 @onready var afterimage_manager: AfterimageManager = $AfterImageManager
+@onready var perfect_bash_fx_manager: PerfectBashFxManager = $PerfectBashFxManager 
 @onready var death_tween := get_tree().create_tween()
 
 @export var death_time: float = 0.5
@@ -245,6 +246,9 @@ func stop_audio():
 	if not audio_stream_player.playing:
 		audio_stream_player.stream = null
 
+func spawn_perfect_bash_fx() -> void:
+	perfect_bash_fx_manager.spawn_particles()
+
 func get_sprite_center() -> Vector2:
 	var frame := sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
 	var size := frame.get_size() * sprite.scale
@@ -262,6 +266,7 @@ func is_area_contacting_ground(area_2d: Area2D) -> bool:
 
 func _ready() -> void:
 	afterimage_manager.target = sprite
+	perfect_bash_fx_manager.player_sprite = sprite
 
 func _physics_process(delta):
 	
@@ -754,13 +759,11 @@ func physics_process_normal(delta):
 		# If we were airborne and just touched a valid surface...
 			if get_slide_collision_count() > 0:
 				var bounce_surface_normal = get_slide_collision(0).get_normal()
-				print("collided...")
 				
 				if lastmotion.length() > 450:
 					snap_exception = true
 					grounded = false
 					
-					print("should bounce..")
 					motion = lastmotion.bounce(bounce_surface_normal)
 					
 					isbouncing = true
@@ -834,6 +837,7 @@ func physics_process_normal(delta):
 				isbashing = true
 				
 				if canperfectbash:
+					spawn_perfect_bash_fx()
 					canperfectbash = false
 					isperfectbashing = true
 					bashingfactor = 1.7
@@ -847,14 +851,12 @@ func physics_process_normal(delta):
 				
 				if (not isperfectbashing): #if you just bashed instead of perfect bashing
 					$NormalBashing_Duration.start()
-				print("you just bashed!")
 				
 			elif isbashing and (not canperfectbash) and (not isperfectbashing):
 				isbashing = false
 				#motion.x = 150 * sign(motion.x)
 				$Final_Bashing.stop() #If the timer doesn't reset, the timeout function makes the bashing state false even after the player exits bashing due to reasons other than the time running out
 				$NormalBashing_Duration.stop()
-				print("exiting bashing")
 				#when you miss the timing of perfect bashing, you get a penalty.
 	
 	if (not grounded or abs(motion.x) < 30 or isskidding or isrolling):
@@ -1026,7 +1028,6 @@ func physics_process_normal(delta):
 	# 	velocity.y *= 2
 	lastmotion = motion
 	move_and_slide()
-	# print("%d: dy=%d" % [Engine.get_frames_drawn(), global_position.y-prev_y])
 
 func _process(delta: float) -> void:
 	if health <= 0 and !dying:
@@ -1243,7 +1244,6 @@ func _on_normal_bashing_duration_timeout():
 		canperfectbash = true
 		play_audio(boost_sfx)
 		$PerfectBashing_Timing.start()
-		print("now's your chance!", canperfectbash)
 		$Final_Bashing.start()
 	
 
@@ -1251,11 +1251,8 @@ func _on_perfect_bashing_timing_timeout():
 	canperfectbash = false
 
 func _on_final_bashing_timeout():
-	print("done bashing")
 	isbashing = false
 	isperfectbashing = false
-
-
 
 func die():
 	if death_tween.is_running():
