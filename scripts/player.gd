@@ -810,7 +810,7 @@ func physics_process_normal(delta):
 		$Collision/WallCast.target_position.x = 7.0 * sign(motion.x)
 		
 		#braking control seen in classic sonic games
-	if direction == -(sign(motion.x)) and (abs(motion.x) >= (topspeed/1.5)) and is_on_floor():
+	if direction == -(sign(motion.x)) and (abs(motion.x) >= (topspeed/1.5)) and not isrolling and grounded:
 		if not isskidding and not is_taking_damage:
 			play_audio(skid_sfx)
 		isskidding = true
@@ -1030,7 +1030,7 @@ func animate():
 		$Sprite.position.y = 1
 	
 	#This one's for the sprite flippin' logic
-	if (isskidding):
+	if (isskidding) or isrolling:
 		if sign(motion.x) > 0:
 			$Sprite.flip_h = false
 		elif sign(motion.x) < 0:
@@ -1041,17 +1041,18 @@ func animate():
 		elif direction > 0 and not isskidding:
 			$Sprite.flip_h = false
 	
-	if isrolling:
-		$Sprite.play("slide")
 		
-		var animspeed = abs(motion.x) / 80
-		animspeed = clamp(animspeed, 1.5, 8)
+	if grounded:
+		
+		if isrolling:
+			$Sprite.play("slide")
+		
+			var animspeed = abs(motion.x) / 80
+			animspeed = clamp(animspeed, 1.5, 8)
 			
-		$Sprite.speed_scale = animspeed
+			$Sprite.speed_scale = animspeed
 		
-	elif grounded:
-		
-		if (isbashing):
+		elif (isbashing):
 			$Sprite.speed_scale = 1
 			if (isperfectbashing):
 				if(perfectbashingtransition == true):
@@ -1069,6 +1070,7 @@ func animate():
 			$Sprite.play("skid")
 		
 		elif abs(motion.x) < 1: # If you're standing still, or at least EXTREMELY CLOSE to standing still...
+			$Sprite.play("idle")
 			$Sprite.speed_scale = 1
 			stop_audio()
 			# Reset the Speed Scale.
@@ -1118,22 +1120,22 @@ func animate():
 	
 	# Idle animation
 	
-	if grounded and abs(motion.x) < 1:
-		idle = true
-	else:
-		idle = false
+	#if grounded and abs(motion.x) < 1:
+	#	idle = true
+	#else:
+	#	idle = false
 	
-	if idle:
-		if idleset:
-			stop_audio()
-			$Sprite.play("idle")
-			idleset = false
+	#if idle:
+	#	if idleset:
+	#		stop_audio()
+	#		$Sprite.play("idle")
+	#		idleset = false
 
-		if $IdleTimer.is_stopped():
-			$IdleTimer.start()
-	else:
-		idleset = true
-		$IdleTimer.stop()
+	#	if $IdleTimer.is_stopped():
+	#		$IdleTimer.start()
+	#else:
+	#	idleset = true
+	#	$IdleTimer.stop()
 
 # Timer signals
 
