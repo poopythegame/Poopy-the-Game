@@ -907,7 +907,7 @@ func _process(delta: float) -> void:
 			var query_parameters := PhysicsRayQueryParameters2D.create(global_position, target_position)
 			query_parameters.exclude = [get_rid()]
 			var result := get_world_2d().direct_space_state.intersect_ray(query_parameters)
-			if result:
+			if result and result["collider"] is StaticBody2D:
 				free_grapple_hook.deploy()
 				engage_free_grapple()
 			if free_grapple_hook_movement_combination_timeout > 0:
