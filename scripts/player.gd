@@ -884,7 +884,7 @@ func physics_process_normal(delta):
 
 
 #rolling
-	if Input.is_action_pressed("down") and grounded and abs(motion.x) > 25:
+	if Input.is_action_pressed("down") and grounded and abs(motion.x) > 100:
 		if not isrolling:
 			play_audio(roll_sfx)
 		isrolling = true
@@ -1036,9 +1036,9 @@ func animate():
 		elif sign(motion.x) < 0:
 			$Sprite.flip_h = true
 	elif (not jumping or not isairdashing):	
-		if direction < 0 and not isskidding:
+		if direction < 0:
 			$Sprite.flip_h = true
-		elif direction > 0 and not isskidding:
+		elif direction > 0:
 			$Sprite.flip_h = false
 	
 		
