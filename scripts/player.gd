@@ -266,8 +266,8 @@ func engage_free_grapple_hook() -> void:
 		free_grapple_hook.ground_normal_found = true
 	can_deploy_free_grapple_hook = false
 	
-func engage_free_grapple():	
-	free_grapple_position = free_grapple_hook.global_position
+func engage_free_grapple(position: Vector2):
+	free_grapple_position = position
 	free_grapple_hook_deployed = false
 	is_grappling = true
 	grapple_length = global_position.distance_to(free_grapple_position)
@@ -288,8 +288,8 @@ func disengage_free_grapple(preserve_desired_direction: bool = false):
 	free_grapple_hook_deployed = false
 	if not preserve_desired_direction:
 		free_grapple_desired_direction = Vector2i.ZERO
-		free_grapple_hook_movement_base_direction = Vector2i.ZERO
-		free_grapple_hook_movement_combination_timeout = 0
+	free_grapple_hook_movement_base_direction = Vector2i.ZERO
+	free_grapple_hook_movement_combination_timeout = 0
 	free_grapple_animation_t = 0
 	free_grapple_position = Vector2.ZERO
 	rope_line.visible = false
@@ -894,7 +894,8 @@ func _process(delta: float) -> void:
 		if grounded:
 			disengage_free_grapple()
 		else:	
-			var target_position = position + lerp(free_grapple_animation_last_hook_offset, free_grapple_hook_offset, ease_out_cubic(free_grapple_animation_t))
+			var offset := free_grapple_desired_direction * free_grapple_distance
+			var target_position: Vector2 = position + lerp(free_grapple_animation_last_hook_offset, offset, ease_out_cubic(free_grapple_animation_t))
 			free_grapple_hook.position = target_position
 			var sprite_center = get_sprite_center()
 			rope_line.clear_points()
@@ -904,12 +905,14 @@ func _process(delta: float) -> void:
 				free_grapple_animation_t += delta / free_grapple_animation_time
 			else:
 				free_grapple_animation_last_hook_offset = free_grapple_hook_offset
-			var query_parameters := PhysicsRayQueryParameters2D.create(global_position, target_position)
+			var query_parameters := PhysicsRayQueryParameters2D.create(global_position, free_grapple_hook.global_position)
 			query_parameters.exclude = [get_rid()]
 			var result := get_world_2d().direct_space_state.intersect_ray(query_parameters)
 			if result and result["collider"] is StaticBody2D:
+				var result_position: Vector2 = result["position"]
+				free_grapple_hook.global_position = result_position
 				free_grapple_hook.deploy()
-				engage_free_grapple()
+				engage_free_grapple(result_position)
 			if free_grapple_hook_movement_combination_timeout > 0:
 				free_grapple_hook_movement_combination_timeout -= delta
 			else:
