@@ -35,7 +35,7 @@ const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 
 var dying: bool = false
 var is_taking_damage: bool = false
-var springing: bool = false
+var hurt = false
 var health: float = max_health:
 	set(value):
 		health = value
@@ -60,149 +60,56 @@ var free_grapple_hook_movement_base_direction: Vector2i
 var free_grapple_hook_movement_combination_timeout: float
 
 var motion := Vector2(0, 0)
-
 var lastmotion := Vector2.ZERO
-
 var rot := 0.0
-# Rotation.
-## This helps your Sprite and Collision rotate.
-
 var grounded := false
-# The state that tracks if you've left the floor.
-## Walking on a wall or a ceiling also counts as being grounded.
-
 var slopeangle := 0.0
-# The exact angle (in Radians) of the floor you're standing on.
-## This number will be positive if the slope rises to the left, and negative if it rises to the right.
-# Why Radians?
-# Because Degrees calculations are finicky in this engine. Radians are far more accurate.
-
 var slopefactor := 0.0
-# The steepness of the slope you're standing on.
-## Straight floors and cielings will emit "0". Perfectly vertical walls will emit "1".
-## This number will be positive if the slope rises to the left, and negative if it rises to the right.
-
 var exitgrapple = false
-
+var springing: bool = false
 var isattacking = false
-
 var isskidding = false
-
 var cangrapple = false
-
 var canstomp = false
-
 var stomp_enabled: bool = true
-
 var canairdash = false
-
 var canbash = true
-
 var canperfectbash = false
-
 var canspeedboost = false
-
 var cantornadojump = false
-
-var jumpcharge = 0	#charge variable used to ascend the player for the tornado jump.
-
+var jumpcharge = 0
 var canbounce = true
-
 var isrolling = false
-
 var isairdashing = false
-
 var isstomping = false
-
 var isbashing = false
-
 var isperfectbashing = false
-
 var isbouncing = false
-## Fixes for problems involving walls and steep slopes.
-
 var falloffwall = false
-# This makes sure you can't permanently stick to the wall.
-## See the "Slope" section of the script for more info.
-
 var control_lock = false
-# This briefly removes your ability to move if you're trying to walk up a slope that's far too steep.
-## See the "Slope" section of the script for more info.
-
 var stuck = false
-# This one activates in a very specific situation involving a steep downward slope and a wall.
-## See the very bottom of this script for more info.
-
-
-
-
-## Jump variables. These help us make a Jump mechanic that feels really good.
-
 var jumping = false
-# Activates if you've successfully left the ground by Jumping.
-## This one is necessary for our Variable Jump Height.
-
 var snap_exception = false
-#It prevents the code from snapping the player back to the ground.
-
 var canjump = false
-# Whether or not you're able to jump. When deactivated, your jump button will become useless.
-## This one is necessary for our Coyote Timer.
-
 var jumpbuffered = false
-# Briefly activates every time you press the Jump button.
-## This one variable is necessary for our Jump Buffer.
-
-#This is for displaying the hurt animation.
-
-var hurt = false
-
-
-
-
-## The Player's stats.
-
 var SLOPEMULT = 2
-
 const AIRDRAG = 1.3
-
 const MINSPD = 3
-
 const JUMP_VELOCITY = 370
-# Jump height. Default: 350.0
-
 var GRAVITY = 850
-# Gravity force. Default: 600
-
 var acc := 3
-# Acceleration. Default: 2
-# This is what moves you forward.
-
 const dec := 15.0
-# Deccelleration. Default: 30.0
-## This is only used when you try to turn around.
-
 const topspeed := 300.0
-# Top Speed. Default: 300.0
-## You won't be able to Accelerate past this point without some Momentum.
 
-### ### GRAPPLING HOOK ADDITIONS ### ###
 var is_grappling := false
 var grapple_anchor_pos: Vector2 = Vector2.ZERO
 var grapple_length := 0.0      # Radius (R)
 var grapple_angle := 0.0       # Angle (Theta)
 var grapple_ang_vel := 0.0     # Angular Velocity
-# Max distance to grab an anchor
 const GRAPPLE_RANGE = 400.0 
-### ### ### ### ### ### ### ### ### ###
 
 func play_audio(streams: Array[AudioStream]):
 	var choice = randi_range(0, len(streams) - 1)
-	# var not_playing_current_sfx := true
-	# for stream in streams:
-	# 	if stream == audio_stream_player.stream:
-	# 		not_playing_current_sfx = false
-	# if not_playing_current_sfx:
 	audio_stream_player.stream = streams[choice]
 	audio_stream_player.play()
 
@@ -278,13 +185,10 @@ func _physics_process(delta):
 		# Check for release
 		if Input.is_action_just_released("grapple"):
 			stop_grapple()
-			
-				
 	else:
 		# If NOT grappling, we run your original Maddie Physics
 		physics_process_normal(delta)
 
-### ### NEW GRAPPLE FUNCTIONS ### ###
 func attempt_grapple_start() -> bool:
 	var all_anchors = get_tree().get_nodes_in_group("GrapplePoints")
 	var target_anchor = null
@@ -449,12 +353,9 @@ func physics_process_grapple(delta: float):
 		motion.x = 0
 	if $Collision/Raycast.is_colliding and is_on_floor():
 		motion.y = 0
-		# Optional: If you hit a floor, maybe end the grapple?
-		#stop_grapple() 
 
 	# 6. Rotation reset to default (zero)
 	$Collision.rotation = 0
-	#$Sprite.rotation = lerp_angle($Sprite.rotation, 0, 0.25)
 
 	# 7. VISUALS
 	rope_line.visible = true
@@ -474,11 +375,6 @@ func physics_process_grapple(delta: float):
 	$Sprite.rotation = lerp_angle($Sprite.rotation, motion.angle(), 1)
 	$Sprite.play("airdash")
 	$Sprite.speed_scale = 1
-	
-	# Rotate sprite to face velocity
-	#if motion.length() > 10:
-		#var look_angle = motion.angle()
-		#$Sprite.rotation = rotate_toward($Sprite.rotation, look_angle, 0.15)
 
 func stop_grapple():
 	exitgrapple = true
@@ -494,13 +390,9 @@ func stop_grapple():
 	$Sprite.offset.y = -270.04
 	$Sprite.position.y = 1
 
-### ### WRAPPER FOR YOUR ORIGINAL CODE ### ###
-
-## Alright, let's get started.
-
 func physics_process_normal(delta):
 
-# --- 1. SURFACE DETECTION ---
+	# --- 1. SURFACE DETECTION ---
 	# We need to know if we hit ANY surface (Floor, Wall, or Ceiling), not just the floor.
 	var is_touching_surface = false
 	var surface_normal = Vector2.UP # Default
@@ -641,29 +533,6 @@ func physics_process_normal(delta):
 			# This tries to help you stick to the ground, though it's not very-
 			# -effective at high speeds.
 
-
-
-# Jump
-
-# You'd think a Jumping mechanic would be simple, right? 
-# Just add -JUMP_VELOCITY when you press the Jump button while on the floor, and you're done.
-# That would make sense, but in reality, it's just not that simple.
-# Think of it this way: While the game has frame-perfect reaction time for every little thing, the-
-# -PLAYER does not.
-# For example, you might walk off a cliff for a single frame and THEN press the jump button.
-# In that situation, the game will NOT be forgiving.
-# It will only see that you're not on the ground, and will ignore the jump input accordingly,
-# -causing you to fall down embarrasingly.
-
-# To avoid this, let's make a forgiving Jump mechanic.
-
-
-## First, we make sure every jump input gets buffered.
-# This will let us detect a single jump input for several frames instead of just one.
-
-# The intention for this is to make it so that if you press jump slightly before hitting the ground, 
-# it'll execute the jump the moment you land.
-
 	if is_on_floor():
 		exitgrapple = false
 		
@@ -674,10 +543,6 @@ func physics_process_normal(delta):
 		# In the same breath, let's start a timer. Once that timer runs out,
 		# the jump will stop being buffered.
 		
-		## To see exactly what happens when this timer runs out, check near the very bottom of the script.
-
-## Now for the Coyote Timer.
-
 	if not grounded and canjump: # If you're not on the ground, but are still able to jump...
 		if $CoyoteTimer.is_stopped():
 			$CoyoteTimer.start()
@@ -688,8 +553,6 @@ func physics_process_normal(delta):
 		$CoyoteTimer.stop()
 		# If you're on the ground, or are already not able to jump, then there's no reason-
 		# -for us to start the timer.
-
-## Alright! Now let's actually execute the jump.
 
 	if jumpbuffered and canjump: # If your jump input is detected and you're currently able to jump...
 		motion.y = -JUMP_VELOCITY
@@ -702,7 +565,6 @@ func physics_process_normal(delta):
 		# Then revoke your ability to jump. Don't worry, this will get reactivated once you land.
 		## Without this part, you'd be able to fly up infinitely.
 		
-		
 		if abs(rot) > 1: # If you're sideways or upside-down (on a wall or cieling)...
 			position += Vector2(0, -(14)).rotated(rot)
 			# Shift your position a bit away from the floor.
@@ -710,13 +572,11 @@ func physics_process_normal(delta):
 			## getting stuck in a wall or ceiling is a big risk the player has.
 			## This tries to prevent that from happening.
 		
-		
 		$JumpBufferTimer.stop()
 		jumpbuffered = false
 		# Once all that's done, we stop the timer from running out-
 		# -so that we can deactivate the buffer manually.
 		# We are no longer detecting that Jump input.
-
 
 	if motion.y >= 0 and grounded: # If you're DEFINITELY on the ground...
 		jumping = false
@@ -770,10 +630,6 @@ func physics_process_normal(delta):
 					isbouncing = true
 					rot = 0
 					up_direction = Vector2.UP
-					
-					#canbounce = false
-				
-				
 			
 	# Get player's direction axis
 	var direction: float = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
@@ -786,8 +642,6 @@ func physics_process_normal(delta):
 	elif direction > 0:
 		direction = 1
 
-#POOPY GENERAL MOVESET
-	
 	if jumping or isrolling or isairdashing or isstomping or isbashing:
 		isattacking = true
 	else:
@@ -943,20 +797,7 @@ func physics_process_normal(delta):
 				motion.x = move_toward(motion.x, 0, acc)
 			elif not is_on_floor() and (abs(motion.x) <= topspeed):
 				motion.x = move_toward(motion.x,0, acc - 1)
-			
-		
-	
-
-# Set Velocity to the Motion variable, but rotated.
-	# if motion.y != 50:
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
-	
-	# Right here's where the magic happens.
-	# Since Velocity is a Vector2, we've cleverly created a separate Vector2 called "Motion" to-
-	# -take all the commands that Velocity would normally take, to then give it right back to-
-	# -Velocity with an added ".rotated()" function, which effortlessly rotates Motion based on
-	# -your actual rotation, therefore letting you run up walls and stuff.
-
 
 #rolling
 	if Input.is_action_pressed("down") and is_on_floor() and abs(motion.x) > 25:
@@ -1002,8 +843,6 @@ func physics_process_normal(delta):
 			
 			control_lock = true
 			$ControlLockTimer.start()
-			# Briefly lock the player's controls.
-			## We wouldn't want them to awkwardly re-attatch to the wall over and over again.
 	else:
 		falloffwall = false
 
@@ -1023,10 +862,7 @@ func physics_process_normal(delta):
 		# Stop moving.
 
 	animate()
-	#slope_failsafe()
-	# var prev_y = global_position.y
-	# if velocity.y > 300:
-	# 	velocity.y *= 2
+
 	lastmotion = motion
 	move_and_slide()
 
@@ -1103,31 +939,10 @@ func bounce(strength: float) -> void:
 	snap_exception = true
 	hurt = true
 
-# That's the main part of the script done with.
-# Now let's move on to extra functions and timer signals.
-
-
-# Animation
-## We don't set the animations in the physics_process() code because that would be messy.
-
-## Like the Amy sprites? I made them myself. Use them if you'd like, I don't care.
-## Though, you're obviously intended to swap them out with your own (probably ripped) sprites.
-
-## I mostly just did this part for some visual flair.
-## Could you imagine how boring it would be if you were just a box sliding around?
-
-## Anyway, I won't explain every line in this part, but I will explain some of it.
-
 var idle := true
 var idleset := false
 
 func animate():
-	#if abs(motion.x) > 1: # If you're moving...
-		#var direction = Input.get_axis("left", "right")
-		#$Sprite.scale.x = sign(motion.x)
-		#$Collision.scale.x = sign(motion.x)
-		# Set Sprite scale and Collision scale based your direction.
-		# This is how the Sprite is able to turn when you move.
 	var direction = Input.get_axis("left", "right")
 	
 	if (jumping or isairdashing):
@@ -1303,33 +1118,6 @@ func death_launch(t: float):
 func restart():
 	death_tween.kill()
 	Global.begin_level_crossfade(Global.current_level)
-
-#Fairer Cemera
-
-# WARNING
-## I tucked this part at the bottom of the script since this is just for a pretty rare scenario.
-## Basically, if you ran down a slope that looks like THIS:
-##
-##                                |
-## _ _ _ _ _ _ _ _ _ _ _ _        |
-##                         \      |
-##                           \    |
-##                             \  |
-##                               \|
-##
-## ...You'll get trapped in the corner forever. And get stuck in the wall.
-##  So... please don't do that.
-
-
-# I tried to write a thing to fix this:
-func slope_failsafe():
-	if is_on_floor() and ($Collision/WallCast.is_colliding() and abs(rot) > 0.4):
-		if abs(motion.x) > 100 and sign(rot) == sign(motion.x):
-			stuck = true
-			motion.x = -sign(slopefactor) * motion.x
-			# It basically just reverses your movement if you get stuck.
-	else:
-		stuck = false
 
 func _input(event: InputEvent) -> void:
 	var grapple_pressed := event.is_action_pressed("grapple")
