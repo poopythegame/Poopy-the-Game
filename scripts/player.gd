@@ -4,6 +4,7 @@ class_name Player
 const free_grapple_distance: float = 105 
 const free_grapple_animation_time: float = 0.100
 const free_grapple_hook_movement_combination_time: float = 0.100
+const free_grapple_ray_origin_offset: Vector2 = Vector2(0, -16)
 const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 
 @onready var main: InGameOverlay = get_parent().get_node("InGameOverlay")
@@ -249,7 +250,7 @@ func engage_free_grapple_hook() -> void:
 	if direction == Vector2.ZERO:
 		return
 	var target_position := direction + global_position
-	var query_parameters := PhysicsRayQueryParameters2D.create(global_position, target_position)
+	var query_parameters := PhysicsRayQueryParameters2D.create(global_position + free_grapple_ray_origin_offset, target_position)
 	query_parameters.exclude = [get_rid()]
 	var result := get_world_2d().direct_space_state.intersect_ray(query_parameters)
 	if result:
@@ -890,32 +891,32 @@ func _process(delta: float) -> void:
 					disengage_free_grapple(true)
 				engage_free_grapple_hook()
 	if free_grapple_hook_deployed:
-		if grounded:
+		var offset := free_grapple_desired_direction * free_grapple_distance
+		var target_position: Vector2 = position + lerp(free_grapple_animation_last_hook_offset, offset, ease_out_cubic(free_grapple_animation_t))
+		free_grapple_hook.position = target_position
+		var sprite_center = get_sprite_center()
+		rope_line.clear_points()
+		rope_line.add_point(rope_line.to_local(sprite_center))
+		rope_line.add_point(rope_line.to_local(target_position))
+		if free_grapple_animation_t < 1:
+			free_grapple_animation_t += delta / free_grapple_animation_time
+		else:
+			free_grapple_animation_last_hook_offset = free_grapple_hook_offset
+		var ray_origin := global_position + free_grapple_ray_origin_offset
+		var query_parameters := PhysicsRayQueryParameters2D.create(ray_origin, free_grapple_hook.global_position)
+		query_parameters.exclude = [get_rid()]
+		var result := get_world_2d().direct_space_state.intersect_ray(query_parameters)
+		if result and result["collider"] is StaticBody2D:
+			var result_position: Vector2 = result["position"]
+			free_grapple_hook.global_position = result_position
+			free_grapple_hook.deploy()
+			engage_free_grapple(result_position)
+		elif grounded:
 			disengage_free_grapple()
-		else:	
-			var offset := free_grapple_desired_direction * free_grapple_distance
-			var target_position: Vector2 = position + lerp(free_grapple_animation_last_hook_offset, offset, ease_out_cubic(free_grapple_animation_t))
-			free_grapple_hook.position = target_position
-			var sprite_center = get_sprite_center()
-			rope_line.clear_points()
-			rope_line.add_point(rope_line.to_local(sprite_center)) 
-			rope_line.add_point(rope_line.to_local(target_position))
-			if free_grapple_animation_t < 1:
-				free_grapple_animation_t += delta / free_grapple_animation_time
-			else:
-				free_grapple_animation_last_hook_offset = free_grapple_hook_offset
-			var query_parameters := PhysicsRayQueryParameters2D.create(global_position, free_grapple_hook.global_position)
-			query_parameters.exclude = [get_rid()]
-			var result := get_world_2d().direct_space_state.intersect_ray(query_parameters)
-			if result and result["collider"] is StaticBody2D:
-				var result_position: Vector2 = result["position"]
-				free_grapple_hook.global_position = result_position
-				free_grapple_hook.deploy()
-				engage_free_grapple(result_position)
-			if free_grapple_hook_movement_combination_timeout > 0:
-				free_grapple_hook_movement_combination_timeout -= delta
-			else:
-				free_grapple_hook_movement_base_direction = Vector2i.ZERO
+		if free_grapple_hook_movement_combination_timeout > 0:
+			free_grapple_hook_movement_combination_timeout -= delta
+		else:
+			free_grapple_hook_movement_base_direction = Vector2i.ZERO
 	if isairdashing or isstomping:
 		afterimage_manager.enabled = true
 	else:
