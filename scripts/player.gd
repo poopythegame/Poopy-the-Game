@@ -1332,7 +1332,8 @@ func slope_failsafe():
 		stuck = false
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("grapple"):
+	var grapple_pressed := event.is_action_pressed("grapple")
+	if grapple_pressed:
 		is_grapple_action_active = true
 	elif event.is_action_released("grapple"):
 		if free_grapple_hook_deployed or free_grapple_enabled:
@@ -1342,13 +1343,16 @@ func _input(event: InputEvent) -> void:
 		free_grapple_animation_last_hook_offset = Vector2.ZERO
 	if is_grapple_action_active and not free_grapple_enabled:
 		var old_desired_direction := free_grapple_desired_direction
-		if event.is_action_pressed("grid_up"):
-			move_free_grapple_desired_direction(0, -1)
-		elif event.is_action_pressed("grid_down"):
-			move_free_grapple_desired_direction(0, 1)
-		elif event.is_action_pressed("grid_left"):
-			move_free_grapple_desired_direction(-1, 0)
-		elif event.is_action_pressed("grid_right"):
-			move_free_grapple_desired_direction(1, 0)
+		var direction := Vector2i.ZERO
+		if event.is_action_pressed("grid_up", false) or (grapple_pressed and Input.is_action_pressed("grid_up")):
+			direction.y -= 1
+		if event.is_action_pressed("grid_down", false) or (grapple_pressed and Input.is_action_pressed("grid_down")):
+			direction.y += 1
+		if event.is_action_pressed("grid_left", false) or (grapple_pressed and Input.is_action_pressed("grid_left")):
+			direction.x -= 1
+		if event.is_action_pressed("grid_right", false) or (grapple_pressed and Input.is_action_pressed("grid_right")):
+			direction.x += 1
+		if direction != Vector2i.ZERO:
+			move_free_grapple_desired_direction(direction.x, direction.y)
 		if old_desired_direction != free_grapple_desired_direction:
 			can_deploy_free_grapple_hook = true
