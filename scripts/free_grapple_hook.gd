@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 class_name FreeGrappleHook
 
 const sprite_deploying_path: String = "uid://d1ik6ec8x2cf3"
@@ -12,12 +12,7 @@ const normal_finder_steps: int = 16
 
 var ground_normal_vector: Vector2
 var ground_normal_found: bool = false
-
-func is_overlapping_with_ground() -> bool:
-	for body in get_overlapping_bodies():
-		if body is StaticBody2D:
-			return true
-	return false
+var deployed: bool
 
 func find_ground_normal_vector():
 	if ground_normal_found:
@@ -30,8 +25,6 @@ func find_ground_normal_vector():
 			global_position + direction * normal_finder_length,
 			global_position - direction * normal_finder_length
 		)
-		query.exclude = [get_rid()]
-		query.collision_mask = collision_mask
 		var result := space_state.intersect_ray(query)
 		if result:
 			var distance := global_position.distance_to(result["position"])
@@ -43,9 +36,10 @@ func find_ground_normal_vector():
 func _ready() -> void:
 	sprite.texture = sprite_deploying
 
-func _process(delta: float) -> void:
-	if is_overlapping_with_ground():
-		find_ground_normal_vector()
+func deploy():
+	if not deployed:
 		sprite.texture = sprite_deployed
-		if ground_normal_found:
-			sprite.global_rotation = (-ground_normal_vector).angle()
+		deployed = true
+	find_ground_normal_vector()
+	if ground_normal_found:
+		sprite.global_rotation = (-ground_normal_vector).angle()

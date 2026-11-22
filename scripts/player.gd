@@ -384,6 +384,8 @@ func disengage_free_grapple(preserve_desired_direction: bool = false):
 	free_grapple_hook_deployed = false
 	if not preserve_desired_direction:
 		free_grapple_desired_direction = Vector2i.ZERO
+		free_grapple_hook_movement_base_direction = Vector2i.ZERO
+		free_grapple_hook_movement_combination_timeout = 0
 	free_grapple_animation_t = 0
 	free_grapple_position = Vector2.ZERO
 	rope_line.visible = false
@@ -1066,9 +1068,11 @@ func _process(delta: float) -> void:
 				free_grapple_animation_t += delta / free_grapple_animation_time
 			else:
 				free_grapple_animation_last_hook_offset = free_grapple_hook_offset
-			var collisions := free_grapple_hook.get_overlapping_bodies()
-			if free_grapple_hook.is_overlapping_with_ground():
-				# The area is colliding with something; attach to it
+			var query_parameters := PhysicsRayQueryParameters2D.create(global_position, target_position)
+			query_parameters.exclude = [get_rid()]
+			var result := get_world_2d().direct_space_state.intersect_ray(query_parameters)
+			if result:
+				free_grapple_hook.deploy()
 				engage_free_grapple()
 			if free_grapple_hook_movement_combination_timeout > 0:
 				free_grapple_hook_movement_combination_timeout -= delta
