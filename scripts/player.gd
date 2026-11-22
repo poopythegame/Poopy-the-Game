@@ -692,7 +692,6 @@ func physics_process_normal(delta):
 				isbashing = true
 				
 				if canperfectbash:
-					spawn_perfect_bash_fx()
 					canperfectbash = false
 					isperfectbashing = true
 					bashingfactor = 1.7
@@ -1064,6 +1063,7 @@ func _on_coyote_timer_timeout():
 func _on_normal_bashing_duration_timeout():
 	if isbashing: #If you get penalized for missing the timing of perfect bashing, you can't perfect bash
 		canperfectbash = true
+		spawn_perfect_bash_fx() #visual indicator of the perfect timing
 		play_audio(boost_sfx)
 		$PerfectBashing_Timing.start()
 		$Final_Bashing.start()
