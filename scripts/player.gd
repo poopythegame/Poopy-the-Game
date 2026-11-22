@@ -3,6 +3,7 @@ class_name Player
 
 const free_grapple_distance: float = 105 
 const free_grapple_animation_time: float = 0.100
+const free_grapple_hook_movement_combination_time: float = 0.100
 const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 
 @onready var main: InGameOverlay = get_parent().get_node("InGameOverlay")
@@ -24,8 +25,6 @@ const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 @export var screwdive_sfx: Array[AudioStream]
 @export var skid_sfx: Array[AudioStream]
 @export var grapple_sfx: Array[AudioStream]
-# @export var run_sfx: Array[AudioStream]
-# @export var fast_run_sfx: Array[AudioStream]
 @export var jump_sfx: Array[AudioStream]
 @export var roll_sfx: Array[AudioStream]
 @export var stomp_sfx: Array[AudioStream]
@@ -57,12 +56,10 @@ var free_grapple_animation_t: float
 var free_grapple_hook: FreeGrappleHook 
 var free_grapple_hook_offset: Vector2
 var free_grapple_animation_last_hook_offset: Vector2
+var free_grapple_hook_movement_base_direction: Vector2i
+var free_grapple_hook_movement_combination_timeout: float
 
 var motion := Vector2(0, 0)
-# Motion, the magical variable. Consider it a pseudo-Velocity.
-## Motion and Velocity are used in conjunction with each other to simulate the 360 degree movement-
-## -found in Classic Sonic games, only with much more theoretical effectiveness.
-## Check underneath the "Movement" segment of the script for a full explanation.
 
 var lastmotion := Vector2.ZERO
 
@@ -326,19 +323,21 @@ func ease_out_cubic(x: float) -> float:
 	return 1.0 - pow(1.0 - x, 3)
 
 func move_free_grapple_desired_direction(x: int, y: int):
-	var new_x := free_grapple_desired_direction.x
+	var new_x := free_grapple_hook_movement_base_direction.x
 	new_x += x
 	if new_x < -1:
 		new_x = -1
 	elif new_x > 1:
 		new_x = 1
-	var new_y := free_grapple_desired_direction.y
+	var new_y := free_grapple_hook_movement_base_direction.y
 	new_y += y
 	if new_y < -1:
 		new_y = -1
 	elif new_y > 1:
 		new_y = 1
 	free_grapple_desired_direction = Vector2(new_x, new_y)
+	free_grapple_hook_movement_base_direction = free_grapple_desired_direction
+	free_grapple_hook_movement_combination_timeout = free_grapple_hook_movement_combination_time
 	free_grapple_animation_t = 0
 
 func engage_free_grapple_hook() -> void:
@@ -1071,6 +1070,10 @@ func _process(delta: float) -> void:
 			if free_grapple_hook.is_overlapping_with_ground():
 				# The area is colliding with something; attach to it
 				engage_free_grapple()
+			if free_grapple_hook_movement_combination_timeout > 0:
+				free_grapple_hook_movement_combination_timeout -= delta
+			else:
+				free_grapple_hook_movement_base_direction = Vector2i.ZERO
 	if isairdashing or isstomping:
 		afterimage_manager.enabled = true
 	else:
