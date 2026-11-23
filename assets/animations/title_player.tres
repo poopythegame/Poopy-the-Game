@@ -43,7 +43,11 @@
 [ext_resource type="Texture2D" uid="uid://51akneplljx4" path="res://assets/textures/ui/rankings/player_animations/idle_fr0.png" id="42_usj63"]
 [ext_resource type="Texture2D" uid="uid://d02hqhai6lg5l" path="res://assets/textures/ui/rankings/player_animations/lookat_fr0.png" id="43_qdtp2"]
 [ext_resource type="Texture2D" uid="uid://bquslnqm0gatp" path="res://assets/textures/ui/rankings/player_animations/lookat_fr1.png" id="44_j0n4s"]
+[ext_resource type="Texture2D" uid="uid://bo78txhcs4c1j" path="res://assets/textures/player/jump/spinjump_fr0.png" id="45_85lom"]
 [ext_resource type="Texture2D" uid="uid://bfqm6tlkkjvwj" path="res://assets/textures/player/idle.png" id="45_ix0e7"]
+[ext_resource type="Texture2D" uid="uid://c5nfeycblfcm4" path="res://assets/textures/player/jump/spinjump_fr1.png" id="46_baw1t"]
+[ext_resource type="Texture2D" uid="uid://cylddkk7g6o4h" path="res://assets/textures/player/jump/spinjump_fr2.png" id="47_0685q"]
+[ext_resource type="Texture2D" uid="uid://csdvt26fwf7vd" path="res://assets/textures/player/jump/spinjump_fr3.png" id="48_n6rsl"]
 
 [resource]
 animations = [{
@@ -245,26 +249,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_kh0q5")
+"texture": ExtResource("45_85lom")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_epwnv")
+"texture": ExtResource("46_baw1t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_3d4he")
+"texture": ExtResource("47_0685q")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_nlyn6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_5kfsh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_ktsco")
+"texture": ExtResource("48_n6rsl")
 }],
 "loop": 1,
 "name": &"jump",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
