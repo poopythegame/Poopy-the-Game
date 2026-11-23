@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://s6jni5u5fy2v" path="res://assets/audio/effects/trans_out.ogg" id="10_ei00g"]
 [ext_resource type="AudioStream" uid="uid://cr7ncmb6hx2d6" path="res://assets/audio/effects/evil_laugh.ogg" id="11_ei00g"]
 [ext_resource type="PackedScene" uid="uid://nqpeaq2b7udk" path="res://scenes/prefab/ui/main_menu_screen.tscn" id="12_8ekit"]
+[ext_resource type="Texture2D" uid="uid://bjejowtmy7kpn" path="res://assets/textures/ui/main_menu/logo_incomplete.png" id="15_6ud2m"]
 [ext_resource type="Script" uid="uid://ckowyte5bq8wj" path="res://scripts/scrolling_background.gd" id="16_e6a60"]
 [ext_resource type="Texture2D" uid="uid://dh44qpr2m3ppx" path="res://assets/textures/ui/main_menu/press_enter.png" id="16_rbask"]
 [ext_resource type="PackedScene" uid="uid://bma5s00usjygf" path="res://scenes/prefab/ui/credits_screen.tscn" id="20_6ud2m"]
@@ -139,6 +140,7 @@ size_flags_vertical = 4
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -20)
 offset_transform_scale = Vector2(6, 6)
+texture = ExtResource("15_6ud2m")
 expand_mode = 5
 stretch_mode = 4
 
