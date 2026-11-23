@@ -948,7 +948,7 @@ func _process(delta: float) -> void:
 			free_grapple_hook_movement_combination_timeout -= delta
 		else:
 			free_grapple_hook_movement_base_direction = Vector2i.ZERO
-	if isairdashing or isstomping:
+	if isairdashing or isstomping or isperfectbashing:
 		afterimage_manager.enabled = true
 	else:
 		afterimage_manager.enabled = false
