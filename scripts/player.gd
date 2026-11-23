@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
+const free_grapple_ff_enable: bool = false
 const free_grapple_distance: float = 105 
 const free_grapple_animation_time: float = 0.100
 const free_grapple_hook_movement_combination_time: float = 0.100
@@ -1132,12 +1133,13 @@ func _input(event: InputEvent) -> void:
 	if grapple_pressed:
 		is_grapple_action_active = true
 	elif event.is_action_released("grapple"):
-		if free_grapple_hook_deployed or free_grapple_enabled:
-			disengage_free_grapple()
 		is_grapple_action_active = false 
-		free_grapple_desired_direction = Vector2.ZERO
-		free_grapple_animation_last_hook_offset = Vector2.ZERO
-	if is_grapple_action_active and not free_grapple_enabled:
+		if free_grapple_ff_enable:
+			if free_grapple_hook_deployed or free_grapple_enabled:
+				disengage_free_grapple()
+			free_grapple_desired_direction = Vector2.ZERO
+			free_grapple_animation_last_hook_offset = Vector2.ZERO
+	if free_grapple_ff_enable and is_grapple_action_active and not free_grapple_enabled:
 		var old_desired_direction := free_grapple_desired_direction
 		var direction := Vector2i.ZERO
 		if event.is_action_pressed("grid_up", false) or (grapple_pressed and Input.is_action_pressed("grid_up")):
