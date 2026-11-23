@@ -77,3 +77,8 @@ func _process(delta: float) -> void:
 		destruction_t += delta / destruction_time
 		if destruction_t >= 1:
 			queue_free()
+	else:
+		for collision_area in area_2d.get_overlapping_areas():
+			var player: Player = get_tree().get_first_node_in_group("Player")
+			if player and collision_area == player.get_collision_area():
+				process_collision(player)

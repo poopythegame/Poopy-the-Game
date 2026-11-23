@@ -4,6 +4,7 @@ var hook_sprite: Sprite2D
 
 func _ready() -> void:
 	hook_sprite = $HookSprite
+	hook_sprite.hide()
 
 func is_player_touching(player: Player) -> bool:
 	return overlaps_area(player.get_collision_area())
