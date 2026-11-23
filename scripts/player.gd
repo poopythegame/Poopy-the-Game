@@ -105,6 +105,7 @@ const dec := 15.0
 const topspeed := 300.0
 
 var is_grappling := false
+var grapple_anchor: Area2D
 var grapple_anchor_pos: Vector2 = Vector2.ZERO
 var grapple_length := 0.0      # Radius (R)
 var grapple_angle := 0.0       # Angle (Theta)
@@ -214,6 +215,7 @@ func attempt_grapple_start() -> bool:
 		is_grappling = true
 		play_all_audio(grapple_sfx)
 		grapple_anchor_pos = target_anchor.global_position
+		grapple_anchor = target_anchor
 		
 		# Set the rope length to the current distance. 
 		grapple_length = global_position.distance_to(grapple_anchor_pos)
@@ -390,9 +392,10 @@ func stop_grapple():
 	free_grapple_desired_direction = Vector2i.ZERO
 	free_grapple_animation_t = 0
 	free_grapple_position = Vector2.ZERO
+	grapple_anchor.end_grapple()
+	grapple_anchor = null
 	rope_line.visible = false
 	$Sprite.rotation = 0
-	
 	$Sprite.offset.y = -270.04
 	$Sprite.position.y = 1
 
@@ -926,6 +929,8 @@ func _process(delta: float) -> void:
 		afterimage_manager.enabled = true
 	else:
 		afterimage_manager.enabled = false
+	if is_grappling:
+		grapple_anchor.update_grapple(self)
 
 func take_damage(amount: float) -> void:
 	health -= amount

@@ -1,8 +1,16 @@
 extends Area2D
 
-func _ready() -> void:
-	pass
+var hook_sprite: Sprite2D
 
-# This function checks if the specific body (Sonic) is inside the circle
+func _ready() -> void:
+	hook_sprite = $HookSprite
+
 func is_player_touching(player: Player) -> bool:
 	return overlaps_area(player.get_collision_area())
+
+func update_grapple(player: Player) -> void:
+	hook_sprite.rotation = player.global_position.direction_to(global_position).angle()
+	hook_sprite.show()
+
+func end_grapple() -> void:
+	hook_sprite.hide()
