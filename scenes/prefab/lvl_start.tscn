@@ -32,4 +32,4 @@ scale = Vector2(0.07, 0.07)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1883975351]
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

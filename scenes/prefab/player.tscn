@@ -22,6 +22,9 @@
 [ext_resource type="Script" uid="uid://cvir30gwlqlrw" path="res://scripts/after_image_manager.gd" id="20_37wxj"]
 [ext_resource type="Script" uid="uid://bm03s6ek7mmx" path="res://scripts/perfect_bash_fx_manager.gd" id="21_isfnt"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0epon"]
+size = Vector2(35, 37)
+
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0s3b8"]
 b = Vector2(0, -32)
 
@@ -49,9 +52,15 @@ final_hit_sfx = Array[AudioStream]([ExtResource("15_rp2o6"), ExtResource("16_vc3
 position = Vector2(0, 1)
 scale = Vector2(0.0534135, 0.0534135)
 sprite_frames = ExtResource("2_mx6bk")
-animation = &"hurt"
+animation = &"idle"
 autoplay = "idle"
 offset = Vector2(0, -270.04)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=533753268]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=43848567]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_0epon")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2098401984]
 shape = SubResource("SegmentShape2D_0s3b8")

@@ -14,6 +14,7 @@ const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 @onready var rope_line: Line2D = $Line2D # Make sure the name matches your node
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var floor_cast: RayCast2D = $Collision/Raycast
+@onready var collision_area: Area2D = $Area2D
 @onready var afterimage_manager: AfterimageManager = $AfterImageManager
 @onready var perfect_bash_fx_manager: PerfectBashFxManager = $PerfectBashFxManager 
 @onready var death_tween := get_tree().create_tween()
@@ -163,11 +164,14 @@ func get_sprite_center() -> Vector2:
 	var center := Rect2(position, size).get_center()
 	return global_position
 
-func is_area_contacting_ground(area_2d: Area2D) -> bool:
+static func is_area_contacting_ground(area_2d: Area2D) -> bool:
 	for body in area_2d.get_overlapping_bodies():
 		if body is StaticBody2D:
 			return true
 	return false
+
+func get_collision_area() -> Area2D:
+	return collision_area
 
 func _ready() -> void:
 	afterimage_manager.target = sprite
@@ -199,7 +203,7 @@ func attempt_grapple_start() -> bool:
 	for anchor_node in all_anchors:
 		if anchor_node is Area2D:
 			# STRICT CHECK: Only grapple if we are PHYSICALLY inside the Area2D shape
-			if anchor_node.overlaps_body(self):
+			if anchor_node.overlaps_area(get_collision_area()):
 				target_anchor = anchor_node
 				break # Found one, stop looking
 

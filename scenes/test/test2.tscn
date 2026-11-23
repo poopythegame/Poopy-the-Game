@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://dted7xl7gy5vr" path="res://scripts/draw_circle.gd" id="14_ibgce"]
 [ext_resource type="PackedScene" uid="uid://bfqltmbha7f1" path="res://scenes/prefab/crate.tscn" id="15_x2xch"]
 [ext_resource type="PackedScene" uid="uid://c5oi22mpsg7se" path="res://scenes/prefab/dash_panel.tscn" id="16_obfhb"]
+[ext_resource type="PackedScene" uid="uid://cnaop4u3ja5n" path="res://scenes/prefab/enemy.tscn" id="17_chwfe"]
+[ext_resource type="PackedScene" uid="uid://c2xc812ee865j" path="res://scenes/prefab/coin.tscn" id="18_tf1a4"]
 
 [sub_resource type="Resource" id="Resource_6h6l0"]
 script = ExtResource("2_20jhc")
@@ -62,7 +64,7 @@ _point_order = PackedInt32Array(8, 3, 25, 23, 22, 17, 0)
 _constraints = {
 Vector2i(8, 0): 15
 }
-_next_key = 26
+_next_key = 27
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cp7l2"]
 shader = ExtResource("5_obfhb")
@@ -164,3 +166,11 @@ position = Vector2(317, 595)
 
 [node name="Crate2" parent="." unique_id=749144725 instance=ExtResource("15_x2xch")]
 position = Vector2(186, 589)
+
+[node name="Enemy" parent="." unique_id=1921139154 instance=ExtResource("17_chwfe")]
+position = Vector2(730, 590)
+
+[node name="Coin" parent="." unique_id=1725540365 instance=ExtResource("18_tf1a4")]
+position = Vector2(109.00001, 584)
+
+[connection signal="body_entered" from="anchor" to="anchor" method="_on_body_entered"]

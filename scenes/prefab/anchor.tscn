@@ -23,5 +23,3 @@ stroke_width = 0.75
 radius = 105.0
 color = Color(0.3389165, 0.48579144, 0.72365946, 1)
 metadata/_custom_type_script = "uid://dted7xl7gy5vr"
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -31,8 +31,8 @@ var destruction_t: float
 
 func _ready() -> void:
 	area_2d = $Area2D
-	area_2d.body_entered.connect(_handle_body_entered)
-	area_2d.body_exited.connect(_handle_body_exit)
+	area_2d.area_entered.connect(_handle_area_entered)
+	area_2d.area_exited.connect(_handle_area_exit)
 	sprite_2d = $Sprite2D
 	collision_shape_2d = $CollisionShape2D
 	collision_shape_2d.disabled = true
@@ -50,14 +50,17 @@ func process_collision(player: Player) -> void:
 	else:
 		collision_shape_2d.set_deferred("disabled", false)
 	
-func _handle_body_entered(body: PhysicsBody2D) -> void:
+func _handle_area_entered(collision_area: Area2D) -> void:
 	if destroyed:
 		return
-	if body is Player:
-		process_collision(body)	
+	var player: Player = get_tree().get_first_node_in_group("Player")
+	if player and collision_area == player.get_collision_area():
+		process_collision(player)
 
-func _handle_body_exit(body: PhysicsBody2D):
-	collision_shape_2d.set_deferred("disabled", true)
+func _handle_area_exit(collision_area: Area2D):
+	var player: Player = get_tree().get_first_node_in_group("Player")
+	if player and collision_area == player.get_collision_area():
+		collision_shape_2d.set_deferred("disabled", true)
 	
 func destroy(acceleration: float) -> void:
 	destroyed = true

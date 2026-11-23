@@ -36,11 +36,12 @@ func stop_audio():
 
 func _ready() -> void:
 	var area_2d = $Area2D
-	area_2d.body_entered.connect(_on_body_entered)
+	area_2d.area_entered.connect(_on_area_entered)
 
-func _on_body_entered(body: Node2D):
-	if body is Player and not used:
-		var speed_mult: float = body.motion.length() / Player.topspeed
+func _on_area_entered(collision_area: Area2D):
+	var player: Player = get_tree().get_first_node_in_group("Player")
+	if player and collision_area == player.get_collision_area() and not used:
+		var speed_mult: float = player.motion.length() / Player.topspeed
 		if speed_mult <= 1:
 			speed_mult = 1
 		# a player picked up the coin
@@ -51,7 +52,7 @@ func _on_body_entered(body: Node2D):
 		tween.parallel().tween_property(self, "position:y", position.y - 50, animation_duration / speed_mult)
 		tween.tween_callback(hide)
 		used = true
-		if body.health < body.max_health:
-			body.health += 5
+		if player.health < player.max_health:
+			player.health += 5
 		# This automatically adds the coin to the correct level "bucket"
 		Global.add_coin()
