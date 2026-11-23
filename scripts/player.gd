@@ -954,6 +954,7 @@ func _process(delta: float) -> void:
 		afterimage_manager.enabled = false
 	if is_grappling:
 		grapple_anchor.update_grapple(self)
+	collision_area.rotation = rot
 
 func take_damage(amount: float) -> void:
 	health -= amount
