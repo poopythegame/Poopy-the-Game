@@ -5,4 +5,4 @@
 [node name="level_end" type="Area2D" unique_id=496126979]
 script = ExtResource("1_6nvey")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

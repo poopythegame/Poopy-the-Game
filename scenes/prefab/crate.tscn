@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://bfqltmbha7f1"]
+
+[ext_resource type="Texture2D" uid="uid://cmj5kuwcyslu2" path="res://assets/textures/elements/crate/crate.png" id="1_hkq13"]
+[ext_resource type="Script" uid="uid://dryd0pp8j2vl3" path="res://scripts/crate.gd" id="1_vbhxe"]
+[ext_resource type="Texture2D" uid="uid://8xj4k0js2gdc" path="res://assets/textures/elements/crate/crate_border_fragment_0.png" id="3_4of1e"]
+[ext_resource type="Texture2D" uid="uid://dt4f4k0uchkm2" path="res://assets/textures/elements/crate/crate_border_fragment_1.png" id="4_k0y1m"]
+[ext_resource type="Texture2D" uid="uid://cw1qvtxf1klg6" path="res://assets/textures/elements/crate/crate_border_fragment_2.png" id="5_rem0e"]
+[ext_resource type="Texture2D" uid="uid://b1vqm6sw2166h" path="res://assets/textures/elements/crate/crate_border_fragment_3.png" id="6_hdiss"]
+[ext_resource type="Texture2D" uid="uid://bpu3l48v038x" path="res://assets/textures/elements/crate/crate_fragment_0.png" id="7_4s6ms"]
+[ext_resource type="Texture2D" uid="uid://3fatvhy6bd7j" path="res://assets/textures/elements/crate/crate_fragment_1.png" id="8_bitju"]
+[ext_resource type="Texture2D" uid="uid://dsjwjfuh6p0ob" path="res://assets/textures/elements/crate/crate_fragment_2.png" id="9_3fee5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ugsol"]
+size = Vector2(52, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3br5d"]
+size = Vector2(96, 98)
+
+[node name="Crate" type="StaticBody2D" unique_id=1813071327]
+script = ExtResource("1_vbhxe")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=931464486]
+position = Vector2(0, -9.536743e-07)
+scale = Vector2(0.050975602, 0.052926823)
+texture = ExtResource("1_hkq13")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=765893707]
+shape = SubResource("RectangleShape2D_ugsol")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2020232993]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1451150940]
+shape = SubResource("RectangleShape2D_3br5d")
+
+[node name="DestructionFragments" type="Node2D" parent="." unique_id=1825348841]
+
+[node name="CrateFragment0" type="Sprite2D" parent="DestructionFragments" unique_id=222589052]
+position = Vector2(-5, -8)
+scale = Vector2(0.05004053, 0.050040517)
+texture = ExtResource("7_4s6ms")
+region_enabled = true
+region_rect = Rect2(0, 0, 844.43286, 617.8678)
+
+[node name="CrateFragment1" type="Sprite2D" parent="DestructionFragments" unique_id=1113201947]
+position = Vector2(6, -6)
+scale = Vector2(0.048809923, 0.048809923)
+texture = ExtResource("8_bitju")
+region_enabled = true
+region_rect = Rect2(195, 0, 830, 751)
+
+[node name="CrateFragment2" type="Sprite2D" parent="DestructionFragments" unique_id=428336382]
+position = Vector2(0, 16)
+scale = Vector2(0.05114942, 0.051149424)
+texture = ExtResource("9_3fee5")
+region_enabled = true
+region_rect = Rect2(0, 590, 1025, 435)
+
+[node name="CrateBorderFragment0" type="Sprite2D" parent="DestructionFragments" unique_id=1406548871]
+position = Vector2(-4, -13.999999)
+scale = Vector2(0.051158372, 0.051158365)
+texture = ExtResource("3_4of1e")
+region_enabled = true
+region_rect = Rect2(0, 0, 852, 518)
+
+[node name="CrateBorderFragment1" type="Sprite2D" parent="DestructionFragments" unique_id=973428614]
+position = Vector2(15, -11)
+scale = Vector2(0.05882353, 0.058823522)
+texture = ExtResource("4_k0y1m")
+region_enabled = true
+region_rect = Rect2(651, 0, 374, 543)
+
+[node name="CrateBorderFragment2" type="Sprite2D" parent="DestructionFragments" unique_id=204369364]
+position = Vector2(-5, 10)
+scale = Vector2(0.052701652, 0.052701674)
+texture = ExtResource("5_rem0e")
+region_enabled = true
+region_rect = Rect2(0, 368, 814, 657)
+
+[node name="CrateBorderFragment3" type="Sprite2D" parent="DestructionFragments" unique_id=1685768880]
+position = Vector2(18, 12)
+scale = Vector2(0.0472874, 0.047287367)
+texture = ExtResource("6_hdiss")
+region_enabled = true
+region_rect = Rect2(684, 400, 341, 625)

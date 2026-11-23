@@ -17,8 +17,10 @@ func play_audio(streams: Array[AudioStream]):
 func _ready() -> void:
 	indicator_sprite.texture = hold_texture
 
-func _on_body_entered(_body: CharacterBody2D) -> void:
-	if main.stopwatch_paused:
-		play_audio(beep_sfx)
-		indicator_sprite.texture = go_texture
-	main.stopwatch_paused = false
+func _on_area_entered(collision_area: Area2D) -> void:
+	var player: Player = get_tree().get_first_node_in_group("Player")
+	if player and collision_area == player.get_collision_area():
+		if main.stopwatch_paused:
+			play_audio(beep_sfx)
+			indicator_sprite.texture = go_texture
+		main.stopwatch_paused = false

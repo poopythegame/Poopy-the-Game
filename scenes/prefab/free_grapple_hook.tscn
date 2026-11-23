@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://qjp2tm4naawh"]
+
+[ext_resource type="Script" uid="uid://bkyf3st40ech3" path="res://scripts/free_grapple_hook.gd" id="1_tsupj"]
+[ext_resource type="Texture2D" uid="uid://cn1sojfjdgfc4" path="res://assets/textures/elements/grapple_hook/grapple_hook_deployed.png" id="2_tsupj"]
+
+[node name="FreeGrappleHook" type="Node2D" unique_id=1914740861]
+script = ExtResource("1_tsupj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1750503195]
+unique_name_in_owner = true
+position = Vector2(-7.9999995, -5.684342e-14)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_tsupj")
+flip_h = true

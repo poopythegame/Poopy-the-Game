@@ -1,12 +1,23 @@
 extends CharacterBody2D
 class_name Player
 
+const free_grapple_ff_enable: bool = false
+const free_grapple_distance: float = 105 
+const free_grapple_animation_time: float = 0.100
+const free_grapple_hook_movement_combination_time: float = 0.100
+const free_grapple_ray_origin_offset: Vector2 = Vector2(0, -16)
+const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
+
 @onready var main: InGameOverlay = get_parent().get_node("InGameOverlay")
+@onready var free_grapple_hook_prefab: PackedScene = load(free_grapple_hook_prefab_path)
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var collision: CollisionShape2D = $Collision
-# @onready var anchor: Area2D = $"../anchor"
 @onready var rope_line: Line2D = $Line2D # Make sure the name matches your node
+@onready var sprite: AnimatedSprite2D = $Sprite
 @onready var floor_cast: RayCast2D = $Collision/Raycast
+@onready var collision_area: Area2D = $Area2D
+@onready var afterimage_manager: AfterimageManager = $AfterImageManager
+@onready var perfect_bash_fx_manager: PerfectBashFxManager = $PerfectBashFxManager 
 @onready var death_tween := get_tree().create_tween()
 
 @export var death_time: float = 0.5
@@ -17,8 +28,6 @@ class_name Player
 @export var screwdive_sfx: Array[AudioStream]
 @export var skid_sfx: Array[AudioStream]
 @export var grapple_sfx: Array[AudioStream]
-# @export var run_sfx: Array[AudioStream]
-# @export var fast_run_sfx: Array[AudioStream]
 @export var jump_sfx: Array[AudioStream]
 @export var roll_sfx: Array[AudioStream]
 @export var stomp_sfx: Array[AudioStream]
@@ -29,7 +38,6 @@ class_name Player
 
 var dying: bool = false
 var is_taking_damage: bool = false
-var springing: bool = false
 var health: float = max_health:
 	set(value):
 		health = value
@@ -40,127 +48,51 @@ var death_launch_velocity := Vector2.ZERO
 var death_animation_last_t := 0
 var death_animation_camera_origin: Vector2
 
-### ### Maddie's Ultra-Simple Sonic Physics!! ### ###
-## The absolute bare minimum needed to make a Sonic fangame.
-
-## Right now, it's just the 360 degree movement and slope physics, nothing else.
-
-## I've written tons of helpful comments in the hopes that you'll understand how this code works.
-## Then, if you do, I encourage you to try and add stuff like a spindash or a boost, if you want.
-
-
-## I've also set bookmarks for each segment of the script.
-
-## To access the bookmarks, look above that text field at the top left that says "Filter Scripts"-
-## -and click "Go To". Then, click "Bookmarks". Now you'll hopefully be able to-
-## -easily navigate this script.
-
-
-## If you end up using this for a game, credit is absolutely not required, but would be appreciated.
-
-
-## If the comments get annoying, find the script labelled "player (no comments)"-
-## -and swap this script out with that one.
-
-
-
-
-## Variables go at the top. Let's start with the most important ones.
+var is_grapple_action_active: bool
+var free_grapple_enabled: bool
+var free_grapple_hook_deployed: bool
+var can_deploy_free_grapple_hook: bool
+var free_grapple_desired_direction: Vector2i
+var free_grapple_position: Vector2
+var free_grapple_animation_t: float
+var free_grapple_hook: FreeGrappleHook 
+var free_grapple_hook_offset: Vector2
+var free_grapple_animation_last_hook_offset: Vector2
+var free_grapple_hook_movement_base_direction: Vector2i
+var free_grapple_hook_movement_combination_timeout: float
 
 var motion := Vector2(0, 0)
-# Motion, the magical variable. Consider it a pseudo-Velocity.
-## Motion and Velocity are used in conjunction with each other to simulate the 360 degree movement-
-## -found in Classic Sonic games, only with much more theoretical effectiveness.
-## Check underneath the "Movement" segment of the script for a full explanation.
-
 var lastmotion := Vector2.ZERO
-
 var rot := 0.0
-# Rotation.
-## This helps your Sprite and Collision rotate.
-
 var grounded := false
-# The state that tracks if you've left the floor.
-## Walking on a wall or a ceiling also counts as being grounded.
-
 var slopeangle := 0.0
-# The exact angle (in Radians) of the floor you're standing on.
-## This number will be positive if the slope rises to the left, and negative if it rises to the right.
-# Why Radians?
-# Because Degrees calculations are finicky in this engine. Radians are far more accurate.
-
 var slopefactor := 0.0
-# The steepness of the slope you're standing on.
-## Straight floors and cielings will emit "0". Perfectly vertical walls will emit "1".
-## This number will be positive if the slope rises to the left, and negative if it rises to the right.
-
 var exitgrapple = false
-
+var springing: bool = false
 var isattacking = false
-
 var isskidding = false
-
 var cangrapple = false
-
 var canstomp = false
-
 var stomp_enabled: bool = true
-
 var canairdash = false
-
 var canbash = true
-
 var canperfectbash = false
-
 var canspeedboost = false
-
 var cantornadojump = false
-
-var jumpcharge = 0	#charge variable used to ascend the player for the tornado jump.
-
+var jumpcharge = 0
 var canbounce = true
-
 var isrolling = false
-
 var isairdashing = false
-
 var isstomping = false
-
 var isbashing = false
-
 var isperfectbashing = false
-
 var isbouncing = false
-## Fixes for problems involving walls and steep slopes.
-
 var falloffwall = false
-# This makes sure you can't permanently stick to the wall.
-## See the "Slope" section of the script for more info.
-
 var control_lock = false
-# This briefly removes your ability to move if you're trying to walk up a slope that's far too steep.
-## See the "Slope" section of the script for more info.
-
 var stuck = false
-# This one activates in a very specific situation involving a steep downward slope and a wall.
-## See the very bottom of this script for more info.
-
-
-
-
-## Jump variables. These help us make a Jump mechanic that feels really good.
-
 var jumping = false
-# Activates if you've successfully left the ground by Jumping.
-## This one is necessary for our Variable Jump Height.
-
 var snap_exception = false
-#It prevents the code from snapping the player back to the ground.
-
 var canjump = false
-# Whether or not you're able to jump. When deactivated, your jump button will become useless.
-## This one is necessary for our Coyote Timer.
-
 var jumpbuffered = false
 # Briefly activates every time you press the Jump button.
 ## This one variable is necessary for our Jump Buffer.
@@ -181,46 +113,24 @@ var perfectbashingtransition = true
 ## The Player's stats.
 
 var SLOPEMULT = 2
-
 const AIRDRAG = 1.3
-
 const MINSPD = 3
-
 const JUMP_VELOCITY = 370
-# Jump height. Default: 350.0
-
 var GRAVITY = 850
-# Gravity force. Default: 600
-
 var acc := 3
-# Acceleration. Default: 2
-# This is what moves you forward.
-
 const dec := 15.0
-# Deccelleration. Default: 30.0
-## This is only used when you try to turn around.
-
 const topspeed := 300.0
-# Top Speed. Default: 300.0
-## You won't be able to Accelerate past this point without some Momentum.
 
-### ### GRAPPLING HOOK ADDITIONS ### ###
 var is_grappling := false
-var grapple_anchor_pos := Vector2.ZERO # Where are we hanging from?
+var grapple_anchor: Area2D
+var grapple_anchor_pos: Vector2 = Vector2.ZERO
 var grapple_length := 0.0      # Radius (R)
 var grapple_angle := 0.0       # Angle (Theta)
 var grapple_ang_vel := 0.0     # Angular Velocity
-# Max distance to grab an anchor
 const GRAPPLE_RANGE = 400.0 
-### ### ### ### ### ### ### ### ### ###
 
 func play_audio(streams: Array[AudioStream]):
 	var choice = randi_range(0, len(streams) - 1)
-	# var not_playing_current_sfx := true
-	# for stream in streams:
-	# 	if stream == audio_stream_player.stream:
-	# 		not_playing_current_sfx = false
-	# if not_playing_current_sfx:
 	audio_stream_player.stream = streams[choice]
 	audio_stream_player.play()
 
@@ -261,15 +171,35 @@ func stop_audio():
 	if not audio_stream_player.playing:
 		audio_stream_player.stream = null
 
+func spawn_perfect_bash_fx() -> void:
+	perfect_bash_fx_manager.spawn_particles()
+
+func get_sprite_center() -> Vector2:
+	var frame := sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
+	var size := frame.get_size() * sprite.scale
+	var position := sprite.position
+	if sprite.centered:
+		position -= size / 2.0
+	var center := Rect2(position, size).get_center()
+	return global_position
+
+static func is_area_contacting_ground(area_2d: Area2D) -> bool:
+	for body in area_2d.get_overlapping_bodies():
+		if body is StaticBody2D:
+			return true
+	return false
+
+func get_collision_area() -> Area2D:
+	return collision_area
+
+func _ready() -> void:
+	afterimage_manager.target = sprite
+	perfect_bash_fx_manager.player_sprite = sprite
+
 func _physics_process(delta):
 	
 	if dying:
 		return
-
-	# 1. CHECK FOR GRAPPLE START
-	# If we press the button and aren't already grappling...
-	if Input.is_action_pressed("grapple") and not is_grappling: 
-		attempt_grapple_start()
 
 	# 2. STATE MACHINE
 	if is_grappling:
@@ -279,14 +209,11 @@ func _physics_process(delta):
 		# Check for release
 		if Input.is_action_just_released("grapple"):
 			stop_grapple()
-			
-				
 	else:
 		# If NOT grappling, we run your original Maddie Physics
 		physics_process_normal(delta)
 
-### ### NEW GRAPPLE FUNCTIONS ### ###
-func attempt_grapple_start():
+func attempt_grapple_start() -> bool:
 	var all_anchors = get_tree().get_nodes_in_group("GrapplePoints")
 	var target_anchor = null
 	# We don't use a fixed distance number anymore. 
@@ -295,19 +222,21 @@ func attempt_grapple_start():
 	for anchor_node in all_anchors:
 		if anchor_node is Area2D:
 			# STRICT CHECK: Only grapple if we are PHYSICALLY inside the Area2D shape
-			if anchor_node.overlaps_body(self):
+			if anchor_node.overlaps_area(get_collision_area()):
 				target_anchor = anchor_node
 				break # Found one, stop looking
 
 	if target_anchor:
+		if free_grapple_hook_deployed:
+			disengage_free_grapple()
 		is_grappling = true
 		play_all_audio(grapple_sfx)
 		grapple_anchor_pos = target_anchor.global_position
+		grapple_anchor = target_anchor
 		
 		# Set the rope length to the current distance. 
 		grapple_length = global_position.distance_to(grapple_anchor_pos)
 		
-		# Reset Maddie's physics states
 		grounded = false
 		slopefactor = 0
 		isairdashing = false
@@ -316,14 +245,95 @@ func attempt_grapple_start():
 		canstomp = true
 		rot = 0
 		up_direction = Vector2.UP
+		return true
+	return false	
 
+func ease_out_cubic(x: float) -> float:
+	return 1.0 - pow(1.0 - x, 3)
+
+func move_free_grapple_desired_direction(x: int, y: int):
+	var new_x := free_grapple_hook_movement_base_direction.x
+	new_x += x
+	if new_x < -1:
+		new_x = -1
+	elif new_x > 1:
+		new_x = 1
+	var new_y := free_grapple_hook_movement_base_direction.y
+	new_y += y
+	if new_y < -1:
+		new_y = -1
+	elif new_y > 1:
+		new_y = 1
+	free_grapple_desired_direction = Vector2(new_x, new_y)
+	free_grapple_hook_movement_base_direction = free_grapple_desired_direction
+	free_grapple_hook_movement_combination_timeout = free_grapple_hook_movement_combination_time
+	free_grapple_animation_t = 0
+
+func engage_free_grapple_hook() -> void:
+	var direction := free_grapple_desired_direction * free_grapple_distance
+	if direction == Vector2.ZERO:
+		return
+	var target_position := direction + global_position
+	var query_parameters := PhysicsRayQueryParameters2D.create(global_position + free_grapple_ray_origin_offset, target_position)
+	query_parameters.exclude = [get_rid()]
+	var result := get_world_2d().direct_space_state.intersect_ray(query_parameters)
+	if result:
+		target_position = result["position"]
+	free_grapple_hook_deployed = true
+	free_grapple_hook = free_grapple_hook_prefab.instantiate()
+	get_parent().add_child(free_grapple_hook)
+	rope_line.visible = true
+	rope_line.clear_points()
+	free_grapple_hook_offset = target_position - position
+	free_grapple_hook.rotation = free_grapple_hook_offset.angle()
+	if result:
+		free_grapple_hook.ground_normal_vector = result["normal"]
+		free_grapple_hook.ground_normal_found = true
+	can_deploy_free_grapple_hook = false
+	
+func engage_free_grapple(position: Vector2):
+	free_grapple_position = position
+	free_grapple_hook_deployed = false
+	is_grappling = true
+	grapple_length = global_position.distance_to(free_grapple_position)
+	grounded = false
+	slopefactor = 0
+	isairdashing = false
+	isstomping = false
+	canairdash = true
+	canstomp = true
+	rot = 0
+	up_direction = Vector2.UP
+	free_grapple_enabled = true
+	
+func disengage_free_grapple(preserve_desired_direction: bool = false):
+	exitgrapple = true
+	is_grappling = false
+	free_grapple_enabled = false
+	free_grapple_hook_deployed = false
+	if not preserve_desired_direction:
+		free_grapple_desired_direction = Vector2i.ZERO
+	free_grapple_hook_movement_base_direction = Vector2i.ZERO
+	free_grapple_hook_movement_combination_timeout = 0
+	free_grapple_animation_t = 0
+	free_grapple_position = Vector2.ZERO
+	rope_line.visible = false
+	free_grapple_hook.queue_free()
+	$Sprite.rotation = 0
+	
 func physics_process_grapple(delta: float):
 	# 1. APPLY GRAVITY
 	# We apply gravity first so it naturally accelerates/decelerates you based on the slope of the swing.
 	motion.y += GRAVITY * delta
 
 	# 2. CALCULATE ROPE GEOMETRY
-	var vector_to_player = global_position - grapple_anchor_pos
+	var anchor: Vector2
+	# Dirty hack to re-use this code
+	if free_grapple_enabled:
+		anchor = free_grapple_position
+	else:
+		anchor = grapple_anchor_pos
+	var vector_to_player = global_position - anchor 
 	var current_dist = vector_to_player.length()
 	
 	# 3. CONSTRAINT SOLVER
@@ -334,7 +344,7 @@ func physics_process_grapple(delta: float):
 		# --- A. HARD POSITION CORRECTION ---
 		# Instead of using velocity to pull you back (which caused the super speed bug),
 		# we simply force the position to stay on the circle edge.
-		global_position = grapple_anchor_pos + (rope_dir * grapple_length)
+		global_position = anchor + (rope_dir * grapple_length)
 		
 		# --- B. VELOCITY CONSTRAINT (NO FRICTION) ---
 			
@@ -368,20 +378,21 @@ func physics_process_grapple(delta: float):
 		motion.x = 0
 	if $Collision/Raycast.is_colliding and is_on_floor():
 		motion.y = 0
-		# Optional: If you hit a floor, maybe end the grapple?
-		#stop_grapple() 
 
 	# 6. Rotation reset to default (zero)
 	$Collision.rotation = 0
-	#$Sprite.rotation = lerp_angle($Sprite.rotation, 0, 0.25)
 
 	# 7. VISUALS
 	rope_line.visible = true
 	rope_line.clear_points()
+	var sprite_center := get_sprite_center()
 	rope_line.add_point(Vector2.ZERO) 
-	rope_line.add_point(rope_line.to_local(grapple_anchor_pos))
+	rope_line.add_point(rope_line.to_local(anchor))
 	
 	#Grapple animation
+	$Sprite.play("jump")
+	$Sprite.speed_scale = 4
+
 	$Sprite.offset.y = 1
 	$Sprite.position.y = -15
 
@@ -389,34 +400,25 @@ func physics_process_grapple(delta: float):
 	$Sprite.rotation = lerp_angle($Sprite.rotation, motion.angle(), 1)
 	$Sprite.play("airdash")
 	$Sprite.speed_scale = 1
-	
-	# Rotate sprite to face velocity
-	#if motion.length() > 10:
-		#var look_angle = motion.angle()
-		#$Sprite.rotation = rotate_toward($Sprite.rotation, look_angle, 0.15)
 
 func stop_grapple():
 	exitgrapple = true
 	is_grappling = false
-	
-	# Since we used Vector2 physics the whole time, 
-	# 'motion' is already correct! We don't need to do any math conversion.
-	
-	# Just a small boost or cap if you want, otherwise leave it raw.
-	
+	free_grapple_enabled = false
+	free_grapple_hook_deployed = false
+	free_grapple_desired_direction = Vector2i.ZERO
+	free_grapple_animation_t = 0
+	free_grapple_position = Vector2.ZERO
+	grapple_anchor.end_grapple()
+	grapple_anchor = null
 	rope_line.visible = false
 	$Sprite.rotation = 0
-	
 	$Sprite.offset.y = -270.04
 	$Sprite.position.y = 1
 
-### ### WRAPPER FOR YOUR ORIGINAL CODE ### ###
-
-## Alright, let's get started.
-
 func physics_process_normal(delta):
 
-# --- 1. SURFACE DETECTION ---
+	# --- 1. SURFACE DETECTION ---
 	# We need to know if we hit ANY surface (Floor, Wall, or Ceiling), not just the floor.
 	var is_touching_surface = false
 	var surface_normal = Vector2.UP # Default
@@ -557,29 +559,6 @@ func physics_process_normal(delta):
 			# This tries to help you stick to the ground, though it's not very-
 			# -effective at high speeds.
 
-
-
-# Jump
-
-# You'd think a Jumping mechanic would be simple, right? 
-# Just add -JUMP_VELOCITY when you press the Jump button while on the floor, and you're done.
-# That would make sense, but in reality, it's just not that simple.
-# Think of it this way: While the game has frame-perfect reaction time for every little thing, the-
-# -PLAYER does not.
-# For example, you might walk off a cliff for a single frame and THEN press the jump button.
-# In that situation, the game will NOT be forgiving.
-# It will only see that you're not on the ground, and will ignore the jump input accordingly,
-# -causing you to fall down embarrasingly.
-
-# To avoid this, let's make a forgiving Jump mechanic.
-
-
-## First, we make sure every jump input gets buffered.
-# This will let us detect a single jump input for several frames instead of just one.
-
-# The intention for this is to make it so that if you press jump slightly before hitting the ground, 
-# it'll execute the jump the moment you land.
-
 	if is_on_floor():
 		exitgrapple = false
 		
@@ -590,10 +569,6 @@ func physics_process_normal(delta):
 		# In the same breath, let's start a timer. Once that timer runs out,
 		# the jump will stop being buffered.
 		
-		## To see exactly what happens when this timer runs out, check near the very bottom of the script.
-
-## Now for the Coyote Timer.
-
 	if not grounded and canjump: # If you're not on the ground, but are still able to jump...
 		if $CoyoteTimer.is_stopped():
 			$CoyoteTimer.start()
@@ -604,8 +579,6 @@ func physics_process_normal(delta):
 		$CoyoteTimer.stop()
 		# If you're on the ground, or are already not able to jump, then there's no reason-
 		# -for us to start the timer.
-
-## Alright! Now let's actually execute the jump.
 
 	if jumpbuffered and canjump: # If your jump input is detected and you're currently able to jump...
 		motion.y = -JUMP_VELOCITY
@@ -618,7 +591,6 @@ func physics_process_normal(delta):
 		# Then revoke your ability to jump. Don't worry, this will get reactivated once you land.
 		## Without this part, you'd be able to fly up infinitely.
 		
-		
 		if abs(rot) > 1: # If you're sideways or upside-down (on a wall or cieling)...
 			position += Vector2(0, -(14)).rotated(rot)
 			# Shift your position a bit away from the floor.
@@ -626,13 +598,11 @@ func physics_process_normal(delta):
 			## getting stuck in a wall or ceiling is a big risk the player has.
 			## This tries to prevent that from happening.
 		
-		
 		$JumpBufferTimer.stop()
 		jumpbuffered = false
 		# Once all that's done, we stop the timer from running out-
 		# -so that we can deactivate the buffer manually.
 		# We are no longer detecting that Jump input.
-
 
 	if motion.y >= 0 and grounded: # If you're DEFINITELY on the ground...
 		jumping = false
@@ -681,22 +651,16 @@ func physics_process_normal(delta):
 		# If we were airborne and just touched a valid surface...
 			if get_slide_collision_count() > 0:
 				var bounce_surface_normal = get_slide_collision(0).get_normal()
-				print("collided...")
 				
 				if lastmotion.length() > 450:
 					snap_exception = true
 					grounded = false
 					
-					print("should bounce..")
 					motion = lastmotion.bounce(bounce_surface_normal)
 					
 					isbouncing = true
 					rot = 0
 					up_direction = Vector2.UP
-					
-					#canbounce = false
-				
-				
 			
 	# Get player's direction axis
 	var direction: float = Input.get_axis("left", "right") # Emits "-1" if holding left, and "1" if holding right.
@@ -709,8 +673,6 @@ func physics_process_normal(delta):
 	elif direction > 0:
 		direction = 1
 
-#POOPY GENERAL MOVESET
-	
 	if jumping or isrolling or isairdashing or isstomping or isbashing:
 		isattacking = true
 	else:
@@ -775,14 +737,12 @@ func physics_process_normal(delta):
 					
 				bashingtransition = true #Triggers the transition animation
 				
-				print("you just bashed!")
 				
 			elif isbashing and (not canperfectbash) and (not isperfectbashing):
 				isbashing = false
 				#motion.x = 150 * sign(motion.x)
 				$Final_Bashing.stop() #If the timer doesn't reset, the timeout function makes the bashing state false even after the player exits bashing due to reasons other than the time running out
 				$NormalBashing_Duration.stop()
-				print("exiting bashing")
 				#when you miss the timing of perfect bashing, you get a penalty.
 	
 	if (not grounded or abs(motion.x) < 30 or isskidding or isrolling):
@@ -868,20 +828,7 @@ func physics_process_normal(delta):
 				motion.x = move_toward(motion.x, 0, acc)
 			elif not is_on_floor() and (abs(motion.x) <= topspeed):
 				motion.x = move_toward(motion.x,0, acc - 1)
-			
-		
-	
-
-# Set Velocity to the Motion variable, but rotated.
-	# if motion.y != 50:
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
-	
-	# Right here's where the magic happens.
-	# Since Velocity is a Vector2, we've cleverly created a separate Vector2 called "Motion" to-
-	# -take all the commands that Velocity would normally take, to then give it right back to-
-	# -Velocity with an added ".rotated()" function, which effortlessly rotates Motion based on
-	# -your actual rotation, therefore letting you run up walls and stuff.
-
 
 #rolling
 	if Input.is_action_pressed("down") and grounded and abs(motion.x) > 100:
@@ -927,8 +874,6 @@ func physics_process_normal(delta):
 			
 			control_lock = true
 			$ControlLockTimer.start()
-			# Briefly lock the player's controls.
-			## We wouldn't want them to awkwardly re-attatch to the wall over and over again.
 	else:
 		falloffwall = false
 
@@ -948,15 +893,11 @@ func physics_process_normal(delta):
 		# Stop moving.
 
 	animate()
-	#slope_failsafe()
-	# var prev_y = global_position.y
-	# if velocity.y > 300:
-	# 	velocity.y *= 2
+
 	lastmotion = motion
 	move_and_slide()
-	# print("%d: dy=%d" % [Engine.get_frames_drawn(), global_position.y-prev_y])
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if health <= 0 and !dying:
 		die()
 	if !has_initialized_health and main.is_node_ready():
@@ -973,7 +914,46 @@ func _process(_delta: float) -> void:
 				min_dist = dist
 		if choice and !choice.isfrozen:
 			choice.engage_freeze()
-
+	if is_grapple_action_active:
+		if not is_grappling:
+			var success := attempt_grapple_start()
+			if not success and can_deploy_free_grapple_hook:
+				if free_grapple_hook_deployed:
+					disengage_free_grapple(true)
+				engage_free_grapple_hook()
+	if free_grapple_hook_deployed:
+		var offset := free_grapple_desired_direction * free_grapple_distance
+		var target_position: Vector2 = position + lerp(free_grapple_animation_last_hook_offset, offset, ease_out_cubic(free_grapple_animation_t))
+		free_grapple_hook.position = target_position
+		var sprite_center = get_sprite_center()
+		rope_line.clear_points()
+		rope_line.add_point(rope_line.to_local(sprite_center))
+		rope_line.add_point(rope_line.to_local(target_position))
+		if free_grapple_animation_t < 1:
+			free_grapple_animation_t += delta / free_grapple_animation_time
+		else:
+			free_grapple_animation_last_hook_offset = free_grapple_hook_offset
+		var ray_origin := global_position + free_grapple_ray_origin_offset
+		var query_parameters := PhysicsRayQueryParameters2D.create(ray_origin, free_grapple_hook.global_position)
+		query_parameters.exclude = [get_rid()]
+		var result := get_world_2d().direct_space_state.intersect_ray(query_parameters)
+		if result and result["collider"] is StaticBody2D:
+			var result_position: Vector2 = result["position"]
+			free_grapple_hook.global_position = result_position
+			free_grapple_hook.deploy()
+			engage_free_grapple(result_position)
+		elif grounded:
+			disengage_free_grapple()
+		if free_grapple_hook_movement_combination_timeout > 0:
+			free_grapple_hook_movement_combination_timeout -= delta
+		else:
+			free_grapple_hook_movement_base_direction = Vector2i.ZERO
+	if isairdashing or isstomping:
+		afterimage_manager.enabled = true
+	else:
+		afterimage_manager.enabled = false
+	if is_grappling:
+		grapple_anchor.update_grapple(self)
 
 func take_damage(amount: float) -> void:
 	health -= amount
@@ -995,31 +975,10 @@ func bounce(strength: float) -> void:
 	snap_exception = true
 	hurt = true
 
-# That's the main part of the script done with.
-# Now let's move on to extra functions and timer signals.
-
-
-# Animation
-## We don't set the animations in the physics_process() code because that would be messy.
-
-## Like the Amy sprites? I made them myself. Use them if you'd like, I don't care.
-## Though, you're obviously intended to swap them out with your own (probably ripped) sprites.
-
-## I mostly just did this part for some visual flair.
-## Could you imagine how boring it would be if you were just a box sliding around?
-
-## Anyway, I won't explain every line in this part, but I will explain some of it.
-
 var idle := true
 var idleset := false
 
 func animate():
-	#if abs(motion.x) > 1: # If you're moving...
-		#var direction = Input.get_axis("left", "right")
-		#$Sprite.scale.x = sign(motion.x)
-		#$Collision.scale.x = sign(motion.x)
-		# Set Sprite scale and Collision scale based your direction.
-		# This is how the Sprite is able to turn when you move.
 	var direction = Input.get_axis("left", "right")
 	
 	if (jumping or isairdashing):
@@ -1154,9 +1113,9 @@ func _on_coyote_timer_timeout():
 func _on_normal_bashing_duration_timeout():
 	if isbashing: #If you get penalized for missing the timing of perfect bashing, you can't perfect bash
 		canperfectbash = true
+		spawn_perfect_bash_fx() #visual indicator of the perfect timing
 		play_audio(boost_sfx)
 		$PerfectBashing_Timing.start()
-		print("now's your chance!", canperfectbash)
 		$Final_Bashing.start()
 	
 
@@ -1164,7 +1123,6 @@ func _on_perfect_bashing_timing_timeout():
 	canperfectbash = false
 
 func _on_final_bashing_timeout():
-	print("done bashing")
 	isbashing = false
 	isperfectbashing = false
 
@@ -1220,40 +1178,29 @@ func restart():
 	death_tween.kill()
 	Global.begin_level_crossfade(Global.current_level)
 
-#Fairer Cemera
-
-# WARNING
-## I tucked this part at the bottom of the script since this is just for a pretty rare scenario.
-## Basically, if you ran down a slope that looks like THIS:
-##
-##                                |
-## _ _ _ _ _ _ _ _ _ _ _ _        |
-##                         \      |
-##                           \    |
-##                             \  |
-##                               \|
-##
-## ...You'll get trapped in the corner forever. And get stuck in the wall.
-##  So... please don't do that.
-
-
-# I tried to write a thing to fix this:
-func slope_failsafe():
-	if is_on_floor() and ($Collision/WallCast.is_colliding() and abs(rot) > 0.4):
-		if abs(motion.x) > 100 and sign(rot) == sign(motion.x):
-			stuck = true
-			motion.x = -sign(slopefactor) * motion.x
-			# It basically just reverses your movement if you get stuck.
-	else:
-		stuck = false
-# ...but it kinda broke something else. So I disabled it. Oh well.
-
-
-
-
-
-## Thanks for downloading.
-## I made this because I was sick of there being no tutorials on how to make Sonic physics in Godot.
-## Hope my comments were helpful.
-## Have fun developing!!
-## - Maddie
+func _input(event: InputEvent) -> void:
+	var grapple_pressed := event.is_action_pressed("grapple")
+	if grapple_pressed:
+		is_grapple_action_active = true
+	elif event.is_action_released("grapple"):
+		is_grapple_action_active = false 
+		if free_grapple_ff_enable:
+			if free_grapple_hook_deployed or free_grapple_enabled:
+				disengage_free_grapple()
+			free_grapple_desired_direction = Vector2.ZERO
+			free_grapple_animation_last_hook_offset = Vector2.ZERO
+	if free_grapple_ff_enable and is_grapple_action_active and not free_grapple_enabled:
+		var old_desired_direction := free_grapple_desired_direction
+		var direction := Vector2i.ZERO
+		if event.is_action_pressed("grid_up", false) or (grapple_pressed and Input.is_action_pressed("grid_up")):
+			direction.y -= 1
+		if event.is_action_pressed("grid_down", false) or (grapple_pressed and Input.is_action_pressed("grid_down")):
+			direction.y += 1
+		if event.is_action_pressed("grid_left", false) or (grapple_pressed and Input.is_action_pressed("grid_left")):
+			direction.x -= 1
+		if event.is_action_pressed("grid_right", false) or (grapple_pressed and Input.is_action_pressed("grid_right")):
+			direction.x += 1
+		if direction != Vector2i.ZERO:
+			move_free_grapple_desired_direction(direction.x, direction.y)
+		if old_desired_direction != free_grapple_desired_direction:
+			can_deploy_free_grapple_hook = true

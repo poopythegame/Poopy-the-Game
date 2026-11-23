@@ -24,6 +24,6 @@ func _ready() -> void:
 	video_stream_player.finished.connect(video_stream_player.hide)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("up") and player in area_2d.get_overlapping_bodies() and can_play:
+	if event.is_action_pressed("up") and player and area_2d.overlaps_area(player.get_collision_area()) and can_play:
 		video_stream_player.show()
 		video_stream_player.play()

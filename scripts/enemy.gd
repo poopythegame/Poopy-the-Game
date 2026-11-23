@@ -137,7 +137,8 @@ func physics_process_normal(delta):
 	elif is_on_ceiling() or is_on_wall():
 		for i in get_slide_collision_count():
 			var col: KinematicCollision2D = get_slide_collision(i)
-			if col.get_collider().is_in_group("Player"):
+			var player: Player = get_tree().get_first_node_in_group("Player")
+			if player and col.get_collider() == player:
 				continue
 			var n: Vector2 = col.get_normal()
 			
@@ -206,9 +207,10 @@ func physics_process_normal(delta):
 		$CollisionShape2D/WallCast.target_position.x = 7.0 * sign(motion.x)
 	
 	if isattacking:
-		var overlapping_bodies: Array[Node2D] = hitbox.get_overlapping_bodies()
-		for body in overlapping_bodies:
-			if body.name == "Player" or body.is_in_group("Player"):
+		var player_collision_area: Area2D = player.get_collision_area()
+		var overlapping_areas: Array[Area2D] = hitbox.get_overlapping_areas()
+		for collision_area in overlapping_areas:
+			if collision_area == player_collision_area:
 				if (player.isattacking) and not player.is_grappling:
 					pass
 				else:
@@ -353,11 +355,11 @@ func engage_freeze():
 	velocity = Vector2.ZERO
 	
 	# --- NEW: Start the 0.2s invulnerability timer ---
-	var overlapping_bodies := hitbox.get_overlapping_bodies()
+	var player: Player = get_tree().get_first_node_in_group("Player")
+	var overlapping_areas := hitbox.get_overlapping_areas()
 	var has_player := false
-	for body in overlapping_bodies:
-		if body.is_in_group("Player"):
-			has_player = true
+	if player:
+		has_player = hitbox.overlaps_area(player.get_collision_area())
 	if has_player:
 		freeze_ghost_timer = 0.2
 	else:
@@ -539,30 +541,24 @@ func check_player_impact(delta):
 		if hit_timer <= 0: hit_cooldown = false
 		return
 	
-	var overlapping_bodies: Array[Node2D] = hitbox.get_overlapping_bodies()
-	for body in overlapping_bodies:
-		if body.name == "Player" or body.is_in_group("Player"):
-			var player: Player = body 
-			
-			if (player.isattacking) and (not player.is_grappling):
-				if player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
-					perform_bounce(player)
-				else:
-					player_raw_motion = null
-					launch_enemy(player)
-				vulnerable = true
+	var player: Player = get_tree().get_first_node_in_group("Player")
+	if player and hitbox.overlaps_area(player.get_collision_area()):
+		if (player.isattacking) and (not player.is_grappling):
+			if player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
+				perform_bounce(player)
+			else:
+				player_raw_motion = null
+				launch_enemy(player)
+			vulnerable = true
 
 func test_player_impact(_delta: float) -> TestResult:
-	var overlapping_bodies: Array[Node2D] = hitbox.get_overlapping_bodies()
-	for body in overlapping_bodies:
-		if body.name == "Player" or body.is_in_group("Player"):
-			var player: Player = body 
-			
-			if (player.isattacking) and (not player.is_grappling):
-				if player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
-					return TestResult.BOUNCE
-				else:
-					return TestResult.LAUNCH
+	var player: Player = get_tree().get_first_node_in_group("Player")
+	if player and hitbox.overlaps_area(player.get_collision_area()):
+		if (player.isattacking) and (not player.is_grappling):
+			if player.motion.y >= 75 and (Input.is_action_pressed("jump") or Input.is_action_pressed("action")):
+				return TestResult.BOUNCE
+			else:
+				return TestResult.LAUNCH
 	return TestResult.NOOP
 
 func perform_bounce(player: Player):

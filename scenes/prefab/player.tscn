@@ -19,6 +19,11 @@
 [ext_resource type="AudioStream" uid="uid://bm5nmcn81vxmu" path="res://assets/audio/effects/poopy_hurt.ogg" id="14_isfnt"]
 [ext_resource type="AudioStream" uid="uid://dr1g6ao3afdws" path="res://assets/audio/effects/poopy_final_hit1.ogg" id="15_rp2o6"]
 [ext_resource type="AudioStream" uid="uid://bsn8omalnpl1d" path="res://assets/audio/effects/poopy_final_hit2.ogg" id="16_vc3vx"]
+[ext_resource type="Script" uid="uid://cvir30gwlqlrw" path="res://scripts/after_image_manager.gd" id="20_37wxj"]
+[ext_resource type="Script" uid="uid://bm03s6ek7mmx" path="res://scripts/perfect_bash_fx_manager.gd" id="21_isfnt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0epon"]
+size = Vector2(21, 31)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0s3b8"]
 b = Vector2(0, -32)
@@ -50,6 +55,12 @@ sprite_frames = ExtResource("2_mx6bk")
 animation = &"idle"
 autoplay = "idle"
 offset = Vector2(0, -270.04)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=533753268]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=43848567]
+position = Vector2(-0.5, -15.5)
+shape = SubResource("RectangleShape2D_0epon")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2098401984]
 shape = SubResource("SegmentShape2D_0s3b8")
@@ -87,6 +98,12 @@ default_color = Color(0.18359, 0.18359, 0.18359, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1465423261]
 bus = &"SFX"
+
+[node name="AfterImageManager" type="Node" parent="." unique_id=2083046516]
+script = ExtResource("20_37wxj")
+
+[node name="PerfectBashFxManager" type="Node2D" parent="." unique_id=1401426907]
+script = ExtResource("21_isfnt")
 
 [node name="PerfectBashing_Timing" type="Timer" parent="." unique_id=1505742045]
 wait_time = 0.4

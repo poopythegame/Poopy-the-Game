@@ -34,14 +34,14 @@ func stop_audio():
 		audio_stream_player.stream = null
 
 func _ready() -> void:
-	area.body_entered.connect(_contact)
+	area.area_entered.connect(_contact)
 	if flip and not sprite_flip_exception: #if the sprite exception is turned on, the sprite doesn't flip.
 		var sprite: AnimatedSprite2D = $AnimatedSprite2D
 		sprite.flip_h = true
 
-func _contact(body):
-	if body is Player:
-		var player: Player = body
+func _contact(collision_area: Area2D):
+	var player: Player = get_tree().get_first_node_in_group("Player")
+	if player and collision_area == player.get_collision_area():
 		var motion: Vector2 = Vector2(1, 0)
 		if flip:
 			motion.x = -1

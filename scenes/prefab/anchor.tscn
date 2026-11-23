@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ohgt47aq8qlg" path="res://scripts/anchor.gd" id="1_vwnqp"]
 [ext_resource type="Texture2D" uid="uid://b27wmspjlyo4u" path="res://assets/textures/elements/anchor.png" id="2_85r1h"]
 [ext_resource type="Script" uid="uid://dted7xl7gy5vr" path="res://scripts/draw_circle.gd" id="3_fr8iv"]
+[ext_resource type="Texture2D" uid="uid://cn1sojfjdgfc4" path="res://assets/textures/elements/grapple_hook/grapple_hook_deployed.png" id="3_irhe1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vwnqp"]
 radius = 105.0
@@ -14,6 +15,12 @@ script = ExtResource("1_vwnqp")
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("2_85r1h")
 
+[node name="HookSprite" type="Sprite2D" parent="." unique_id=2101808519]
+scale = Vector2(0.074, 0.074)
+texture = ExtResource("3_irhe1")
+offset = Vector2(-161.38, 0)
+flip_h = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=43915852]
 shape = SubResource("CircleShape2D_vwnqp")
 
@@ -23,5 +30,3 @@ stroke_width = 0.75
 radius = 105.0
 color = Color(0.3389165, 0.48579144, 0.72365946, 1)
 metadata/_custom_type_script = "uid://dted7xl7gy5vr"
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

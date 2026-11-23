@@ -1,6 +1,16 @@
 extends Area2D
 
-# This function checks if the specific body (Sonic) is inside the circle
-func is_player_touching(player_body: Node2D) -> bool:
-	# 'overlaps_body' is a built-in Godot function for Area2D
-	return overlaps_body(player_body)
+var hook_sprite: Sprite2D
+
+func _ready() -> void:
+	hook_sprite = $HookSprite
+
+func is_player_touching(player: Player) -> bool:
+	return overlaps_area(player.get_collision_area())
+
+func update_grapple(player: Player) -> void:
+	hook_sprite.rotation = player.global_position.direction_to(global_position).angle()
+	hook_sprite.show()
+
+func end_grapple() -> void:
+	hook_sprite.hide()
