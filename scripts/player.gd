@@ -78,10 +78,12 @@ var stomp_enabled: bool = true
 var canairdash = false
 var canbash = true
 var canperfectbash = false
-var canspeedboost = false
+
+var canspeedboost = true
 var cantornadojump = false
 var jumpcharge = 0
-var canbounce = true
+var canbounce = false
+
 var isrolling = false
 var isairdashing = false
 var isstomping = false
