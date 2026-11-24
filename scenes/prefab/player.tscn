@@ -110,7 +110,7 @@ wait_time = 0.4
 one_shot = true
 
 [node name="NormalBashing_Duration" type="Timer" parent="." unique_id=294381129]
-wait_time = 0.5
+wait_time = 0.4
 one_shot = true
 
 [node name="Final_Bashing" type="Timer" parent="." unique_id=1941938012]
