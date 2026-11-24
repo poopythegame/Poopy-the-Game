@@ -55,14 +55,14 @@ func _handle_area_entered(collision_area: Area2D) -> void:
 	if destroyed:
 		return
 	var player: Player = get_tree().get_first_node_in_group("Player")
-	player.is_touching_crate = true
 	if player and collision_area == player.get_collision_area():
+		player.is_touching_crate = true
 		process_collision(player)
 
 func _handle_area_exit(collision_area: Area2D):
 	var player: Player = get_tree().get_first_node_in_group("Player")
-	player.is_touching_crate = false
 	if player and collision_area == player.get_collision_area():
+		player.is_touching_crate = false
 		collision_shape_2d.set_deferred("disabled", true)
 	
 func destroy(acceleration: float) -> void:
