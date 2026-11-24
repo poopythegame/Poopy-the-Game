@@ -959,6 +959,7 @@ func _process(delta: float) -> void:
 		else:
 			free_grapple_hook_movement_base_direction = Vector2i.ZERO
 	if isairdashing or isstomping or isperfectbashing:
+	if isairdashing or isstomping or isperfectbashing or abs(motion.length()) >= 450:
 		afterimage_manager.enabled = true
 	else:
 		afterimage_manager.enabled = false
