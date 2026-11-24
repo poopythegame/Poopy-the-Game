@@ -15,6 +15,7 @@ const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 @onready var rope_line: Line2D = $Line2D # Make sure the name matches your node
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var floor_cast: RayCast2D = $Collision/Raycast
+@onready var wall_cast: RayCast2D = $Collision/WallCast
 @onready var collision_area: Area2D = $Area2D
 @onready var afterimage_manager: AfterimageManager = $AfterImageManager
 @onready var perfect_bash_fx_manager: PerfectBashFxManager = $PerfectBashFxManager 
@@ -94,6 +95,7 @@ var jumping = false
 var snap_exception = false
 var canjump = false
 var jumpbuffered = false
+var is_touching_crate := false
 # Briefly activates every time you press the Jump button.
 ## This one variable is necessary for our Jump Buffer.
 
@@ -195,6 +197,11 @@ func get_collision_area() -> Area2D:
 func _ready() -> void:
 	afterimage_manager.target = sprite
 	perfect_bash_fx_manager.player_sprite = sprite
+	collision_area.body_entered.connect(_handle_body_entered)
+
+func _handle_body_entered(body: CollisionObject2D) -> void:
+	if body is Crate:
+		wall_cast.add_exception(body)
 
 func _physics_process(delta):
 	
@@ -883,7 +890,7 @@ func physics_process_normal(delta):
 			motion.y = 100
 			# Get sent right back down.
 
-	if is_on_wall() and $Collision/WallCast.is_colliding() and not isbouncing:
+	if is_on_wall() and $Collision/WallCast.is_colliding() and not isbouncing and not is_touching_crate:
 		# If you bump into a wall...
 		if not grounded:
 			motion.x = 0
@@ -1022,7 +1029,6 @@ func animate():
 			else:
 				if(bashingtransition == true):
 					$Sprite.play("bashing_transition")
-					print("this code is broken")
 				else:
 					$Sprite.play("bashing")
 		
