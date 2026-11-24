@@ -47,7 +47,7 @@ func _ready() -> void:
 
 func process_collision(player: Player) -> void:
 	if abs(player.motion.x) > 450 or player.isattacking:
-		destroy(abs(player.motion.x) / 225)
+		destroy(player)
 	else:
 		collision_shape_2d.set_deferred("disabled", false)
 	
@@ -65,10 +65,12 @@ func _handle_area_exit(collision_area: Area2D):
 		player.is_touching_crate = false
 		collision_shape_2d.set_deferred("disabled", true)
 	
-func destroy(acceleration: float) -> void:
+func destroy(player: Player) -> void:
+	var acceleration: float = abs(player.motion.x) / 225
 	destroyed = true
 	collision_shape_2d.disabled = true
 	sprite_2d.hide()
+	player.camera.screen_shake_for(.25)
 	for fragment in destruction_fragments:
 		fragment.sprite.show()
 		fragment.acceleration *= acceleration
