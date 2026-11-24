@@ -893,7 +893,7 @@ func physics_process_normal(delta):
 			motion.y = 100
 			# Get sent right back down.
 
-	if is_on_wall() and $Collision/WallCast.is_colliding() and not isbouncing and not is_touching_crate:
+	if is_on_wall() and $Collision/WallCast.is_colliding() and not isbouncing and not (is_touching_crate and (isattacking or abs(motion.x) >= 450)):
 		# If you bump into a wall...
 		if not grounded:
 			motion.x = 0
