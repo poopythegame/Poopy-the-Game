@@ -66,6 +66,12 @@ animated_overlay_frames = Array[Texture2D]([ExtResource("15_v5r5l"), ExtResource
 animated_overlay_fps = 6.0
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
+[sub_resource type="Resource" id="Resource_input_mapping"]
+script = ExtResource("2_6l6qt")
+title = "Input Mapping"
+portrait = ExtResource("14_v5r5l")
+metadata/_custom_type_script = "uid://co0g5pmxbg578"
+
 [sub_resource type="Resource" id="Resource_r0gtl"]
 script = ExtResource("2_6l6qt")
 title = "Join the Official Discord"
@@ -76,7 +82,7 @@ animated_overlay_fps = 6.0
 metadata/_custom_type_script = "uid://co0g5pmxbg578"
 
 [node name="MultiselectScreen" unique_id=1181466732 instance=ExtResource("1_epp4d")]
-options = Array[ExtResource("2_6l6qt")]([SubResource("Resource_6l6qt"), SubResource("Resource_ydpsd"), SubResource("Resource_50wf3"), SubResource("Resource_vggm2"), SubResource("Resource_r0gtl")])
+options = Array[ExtResource("2_6l6qt")]([SubResource("Resource_6l6qt"), SubResource("Resource_ydpsd"), SubResource("Resource_50wf3"), SubResource("Resource_input_mapping"), SubResource("Resource_vggm2"), SubResource("Resource_r0gtl")])
 selected = 1
 
 [node name="Title" type="TextureRect" parent="VBoxContainer" parent_id_path=PackedInt32Array(346008450) index="0" unique_id=991393468]
