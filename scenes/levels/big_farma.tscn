@@ -48,6 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://cud41xd28f2x7" path="res://scenes/prefab/setdressing/billboard/secret_2.tscn" id="46_bmy12"]
 [ext_resource type="PackedScene" uid="uid://c8i1p086g3pt8" path="res://scenes/prefab/setdressing/billboard/secret_3.tscn" id="47_131jf"]
 [ext_resource type="PackedScene" uid="uid://drfjkeqagmics" path="res://scenes/prefab/4_grid_onewaycollision.tscn" id="53_wd5lm"]
+[ext_resource type="PackedScene" uid="uid://bfqltmbha7f1" path="res://scenes/prefab/crate.tscn" id="54_ba32g"]
 [ext_resource type="Texture2D" uid="uid://86jtax8gicuc" path="res://assets/textures/elements/impact/impact_fr0.png" id="62_pd67p"]
 [ext_resource type="Texture2D" uid="uid://cugu5k1k4hwgx" path="res://assets/textures/elements/impact/impact_fr1.png" id="63_ytct6"]
 [ext_resource type="Texture2D" uid="uid://dosrddpstfyfn" path="res://assets/textures/elements/impact/impact_fr2.png" id="64_v30tp"]
@@ -6239,3 +6240,6 @@ position = Vector2(18584, 2608)
 
 [node name="Node2D40" parent="." unique_id=1681181636 instance=ExtResource("36_wp5th")]
 position = Vector2(18824, 2608)
+
+[node name="Crate" parent="." unique_id=1813071327 instance=ExtResource("54_ba32g")]
+position = Vector2(-3720, -1016)
