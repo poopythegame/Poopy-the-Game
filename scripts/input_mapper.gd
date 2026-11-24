@@ -86,7 +86,8 @@ class ActionInfo:
 static func get_all_action_info() -> Dictionary[StringName, ActionInfo]:
 	var dictionary: Dictionary[StringName, ActionInfo] = {}
 	for action in InputMap.get_actions():
-		dictionary[action] = action_info_from_id(action)
+		if not action.begins_with("ui_"):
+			dictionary[action] = action_info_from_id(action)
 	return dictionary
 
 static func action_info_from_id(id: StringName) -> ActionInfo:
@@ -131,7 +132,7 @@ func stringify_event(event: InputEvent):
 	if event is InputEventJoypadButton:
 		return JOY_BUTTON_NAMES[event.button_index]
 	elif event is InputEventKey:
-		return event.key_label
+		return event.as_text().trim_suffix(" - Physical")
 	elif event is InputEventMouseButton:
 		return MOUSE_BUTTON_NAMES[event.button_index]
 	elif event is InputEventJoypadMotion:
@@ -155,4 +156,4 @@ func _input(event: InputEvent) -> void:
 			if event is InputEventKey or event is InputEventMouseButton:
 				_apply_event_to_action(record_target, event, false)
 				recording = false
-	get_viewport().set_input_as_handled()
+		get_viewport().set_input_as_handled()

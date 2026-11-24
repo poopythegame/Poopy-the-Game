@@ -137,7 +137,7 @@ metadata/_custom_type_script = "uid://dhdc4b8yddyej"
 polygon = PackedVector2Array(664, 488, -936, 495, -936, 303, 304, 295, 304, -41, 656, -41)
 
 [node name="Player" parent="." unique_id=1090100472 node_paths=PackedStringArray("camera") groups=["Player"] instance=ExtResource("10_gwt1l")]
-position = Vector2(52, 606)
+position = Vector2(52, 603)
 camera = NodePath("../Camera")
 
 [node name="InGameOverlay" parent="." unique_id=1911954101 instance=ExtResource("11_5jfqv")]
@@ -165,7 +165,7 @@ position = Vector2(602, 586)
 position = Vector2(317, 595)
 
 [node name="Crate2" parent="." unique_id=749144725 instance=ExtResource("15_x2xch")]
-position = Vector2(186, 589)
+position = Vector2(186, 585)
 
 [node name="Enemy" parent="." unique_id=1921139154 instance=ExtResource("17_chwfe")]
 position = Vector2(730, 590)

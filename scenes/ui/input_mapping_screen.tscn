@@ -18,13 +18,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=1281866580]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/margin_top = 250
+theme_override_constants/margin_bottom = 125
 
-[node name="GridContainer" type="GridContainer" parent="ScrollContainer/MarginContainer" unique_id=2124530364]
+[node name="ActionsContainer" type="GridContainer" parent="ScrollContainer/MarginContainer" unique_id=2124530364]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
@@ -33,30 +35,18 @@ theme_override_constants/h_separation = 40
 theme_override_constants/v_separation = 15
 columns = 3
 
-[node name="Column1Header" type="Label" parent="ScrollContainer/MarginContainer/GridContainer" unique_id=2104393415]
+[node name="Column1Header" type="Label" parent="ScrollContainer/MarginContainer/ActionsContainer" unique_id=2104393415]
 layout_mode = 2
 text = "Name"
 horizontal_alignment = 1
 
-[node name="Column2Header" type="Label" parent="ScrollContainer/MarginContainer/GridContainer" unique_id=1633608959]
+[node name="Column2Header" type="Label" parent="ScrollContainer/MarginContainer/ActionsContainer" unique_id=1633608959]
 layout_mode = 2
 text = "Keyboard/Mouse Action"
 horizontal_alignment = 1
 
-[node name="Column3Header" type="Label" parent="ScrollContainer/MarginContainer/GridContainer" unique_id=1931717395]
+[node name="Column3Header" type="Label" parent="ScrollContainer/MarginContainer/ActionsContainer" unique_id=1931717395]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 text = "Controller Action"
 horizontal_alignment = 1
-
-[node name="Sample" type="Label" parent="ScrollContainer/MarginContainer/GridContainer" unique_id=348737148]
-layout_mode = 2
-text = "Up"
-
-[node name="Button" type="Button" parent="ScrollContainer/MarginContainer/GridContainer" unique_id=1368534979]
-layout_mode = 2
-text = "Up"
-
-[node name="Button2" type="Button" parent="ScrollContainer/MarginContainer/GridContainer" unique_id=1540725726]
-layout_mode = 2
-text = "Left Joystick Up"

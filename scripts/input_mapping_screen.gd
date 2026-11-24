@@ -9,7 +9,7 @@ class InputActionControls:
 		self.mnk_record_btn = mnk_record_btn
 		self.controller_record_btn = controller_record_btn
 
-@onready var controls_container: GridContainer = $ActionsContainer
+@onready var controls_container: GridContainer = %ActionsContainer
 
 var input_action_controls: Dictionary[StringName, InputActionControls]
 
@@ -24,9 +24,15 @@ func _create_input_action_controls() -> void:
 		var label := Label.new()
 		label.text = input_action.display_name
 		var mnk_record_btn := Button.new()
-		mnk_record_btn.text = InputMapper.stringify_event(input_action.mnk_event)
+		if input_action.mnk_event == null:
+			mnk_record_btn.text = "Unbound"
+		else:
+			mnk_record_btn.text = InputMapper.stringify_event(input_action.mnk_event)
 		var controller_record_btn := Button.new()
-		controller_record_btn.text = InputMapper.stringify_event(input_action.controller_event)
+		if input_action.controller_event == null:
+			controller_record_btn.text = "Unbound"
+		else:
+			controller_record_btn.text = InputMapper.stringify_event(input_action.controller_event)
 		input_action_controls[input_action.id] = InputActionControls.new(label, mnk_record_btn, controller_record_btn)
 		controls_container.add_child(label)
 		controls_container.add_child(mnk_record_btn)
