@@ -714,7 +714,8 @@ func physics_process_normal(delta):
 			stomptransition = true	
 			stomp_enabled = false
 		elif Input.is_action_just_pressed("action") and canairdash and abs(motion.x) >= 20:
-			motion.x += abs(motion.x) * 0.15 * Input.get_axis("left", "right")
+			var dashspeed = abs(motion.x) * 0.15
+			motion.x += clamp(dashspeed, 75, 300) * direction
 			canairdash = false
 			isairdashing = true
 			play_all_audio_multiselect([airdash_sfx, screwdive_sfx])
