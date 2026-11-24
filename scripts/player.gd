@@ -635,7 +635,7 @@ func physics_process_normal(delta):
 #POOPY ELEMENTAL SHIELD ABILITIES 
 
 	if Input.is_action_just_pressed("boost") and canspeedboost:
-		motion.x = 690 * sign($Collision/WallCast.target_position.x)
+		motion.x += 690 * sign($Collision/WallCast.target_position.x)
 		play_audio(boost_sfx)
 		camera.screen_shake_for(.25)
 		canspeedboost = false
