@@ -112,7 +112,7 @@ func _apply_event_to_action(action_name: StringName, event: InputEvent, is_contr
 		InputMap.action_add_event(action_info.id, event)
 		input_action_updated.emit(action_info.id)
 	else:
-		if event is not InputEventKey or event is not InputEventMouseButton:
+		if event is not InputEventKey and event is not InputEventMouseButton:
 			push_error("Cannot apply event that isn't MnK to MnK channel.")
 			return
 		InputMap.action_erase_event(action_info.id, action_info.mnk_event)
