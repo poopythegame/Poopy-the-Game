@@ -450,7 +450,7 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 				music_player.play()
 			)
 		screen_cg = options_screen_cg
-		options_screen._on_enter()
+		options_screen._on_enter(self)
 	elif new_screen == Screen.INPUT_MAPPING:
 		whiteout.hide()
 		input_mapping_background.show()

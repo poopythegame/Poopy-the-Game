@@ -6,6 +6,7 @@ const HSLIDER_SCRIPT: GDScript = preload("uid://c43vk2s6cfq4g")
 @onready var options_container: GridContainer = %OptionsContainer
 
 var controls: Dictionary[StringName, Control] = {}
+var controller: MainMenu
 
 func _create_controls() -> void:
 	for result in UserSettingsInstance.list_settings():
@@ -36,10 +37,13 @@ func _create_controls() -> void:
 		options_container.add_child(control)
 		controls[result.id] = control
 
-func _on_enter() -> void:
+func _on_enter(controller: MainMenu) -> void:
+	self.controller = controller
 	options_container.get_child(1).grab_focus()
 
 func _ready() -> void:
+	var input_mapping_button: Button = %InputRemappingButton
+	input_mapping_button.pressed.connect(_on_go_to_input_mapping)
 	_create_controls()
 	UserSettingsInstance.setting_changed.connect(_on_setting_changed)
 
@@ -52,3 +56,6 @@ func _on_setting_changed(id: StringName, value: Variant) -> void:
 		elif typeof(value) == TYPE_FLOAT:
 			var slider: HSlider = control
 			slider.value = value
+
+func _on_go_to_input_mapping() -> void:
+	controller.change_screen(MainMenu.Screen.INPUT_MAPPING, true, MainMenu.Transition.WIPE)
