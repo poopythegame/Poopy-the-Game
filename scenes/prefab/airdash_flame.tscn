@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dhbvfou3bis7a"]
+
+[ext_resource type="SpriteFrames" uid="uid://c5l4n0hasdxv7" path="res://assets/animations/airdash_flame.tres" id="1_idqkv"]
+
+[node name="AirdashFlame" type="AnimatedSprite2D" unique_id=1830474974]
+scale = Vector2(0.015, 0.015)
+sprite_frames = ExtResource("1_idqkv")
+offset = Vector2(-372.995, 0)
