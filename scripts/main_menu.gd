@@ -30,6 +30,7 @@ enum Screen {
 	CREDITS,
 	LEVEL_SELECT,
 	OPTIONS,
+	INPUT_MAPPING,
 	CHARACTERS,
 	RANKINGS,
 	AUX,
@@ -44,7 +45,6 @@ enum Screen {
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var blackout: ColorRect = $Blackout
 
-
 @onready var title_screen_cg: CanvasGroup = $TitleScreenCanvasGroup
 @onready var title_screen: MarginContainer = $TitleScreenCanvasGroup/Screen
 @onready var title_logo: TextureRect = $TitleScreenCanvasGroup/Screen/VBoxContainer/Logo
@@ -55,6 +55,7 @@ enum Screen {
 @onready var menu_background: Control = $MenuCanvasGroup/Background
 @onready var level_select_background: Control = $LevelSelectCanvasGroup/Background
 @onready var options_background: Control = $OptionsMenuCanvasGroup/Background
+@onready var input_mapping_background: Control = $InputMappingCanvasGroup/Background
 @onready var characters_background: Control = $CharactersCanvasGroup/Background
 @onready var title_poopy: AnimatedSprite2D = $TitleScreenCanvasGroup/Screen/VBoxContainer/Logo/PoopyContainer/Poopy
 @onready var title_portraits_background: Node2D = $TitleScreenCanvasGroup/Screen/PortraitsBackground
@@ -73,6 +74,9 @@ enum Screen {
 @onready var options_screen_cg: CanvasGroup = $OptionsMenuCanvasGroup
 @onready var options_screen: OptionsMenu = $OptionsMenuCanvasGroup/Screen
 
+@onready var input_mapping_screen_cg: CanvasGroup = $InputMappingCanvasGroup
+@onready var input_mapping_screen: Control = $InputMappingCanvasGroup/Screen
+
 @onready var characters_screen_cg: CanvasGroup = $CharactersCanvasGroup
 @onready var characters_screen: MultiselectScreen = $CharactersCanvasGroup/Screen
 
@@ -84,7 +88,7 @@ enum Screen {
 
 @onready var levels := Global.levels.levels
 
-@onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, characters_screen_cg, rankings_screen_cg, credits_screen_cg, aux_cg]
+@onready var screen_cgs: Array[CanvasGroup] = [title_screen_cg, menu_screen_cg, level_select_cg, options_screen_cg, input_mapping_screen_cg, characters_screen_cg, rankings_screen_cg, credits_screen_cg, aux_cg]
 
 var rank_to_show: int = -1
 
@@ -135,6 +139,7 @@ func _ready() -> void:
 	title_screen_background.size = window_size
 	level_select_background.size = window_size
 	options_background.size = window_size
+	input_mapping_background.size = window_size
 	characters_background.size = window_size
 	rankings_background.size = window_size
 	rankings_screen.main_menu = self
@@ -150,8 +155,10 @@ func _on_menu_option_selected(index: int):
 	elif index == 2:
 		change_screen(Screen.OPTIONS, true, Transition.CROSSFADE)
 	elif index == 3:
-		change_screen(Screen.CHARACTERS, true, Transition.CROSSFADE)
+		change_screen(Screen.INPUT_MAPPING, true, Transition.CROSSFADE)
 	elif index == 4:
+		change_screen(Screen.CHARACTERS, true, Transition.CROSSFADE)
+	elif index == 5:
 		if OS.has_feature("web"):
 			JavaScriptBridge.eval("window.open('" + DISCORD_LINK + "', '_blank').focus();")
 		else:
@@ -443,7 +450,12 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 				music_player.play()
 			)
 		screen_cg = options_screen_cg
-		options_screen._on_enter()
+		options_screen._on_enter(self)
+	elif new_screen == Screen.INPUT_MAPPING:
+		whiteout.hide()
+		input_mapping_background.show()
+		screen_cg = input_mapping_screen_cg
+		input_mapping_screen._on_enter()
 	elif new_screen == Screen.RANKINGS:
 		whiteout.hide()
 		rankings_background.show()

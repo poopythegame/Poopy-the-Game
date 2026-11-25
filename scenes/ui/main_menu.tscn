@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://dpvsha2a5eit4" path="res://assets/textures/ui/main_menu/john_person/john_person_fr1.png" id="24_4ovp2"]
 [ext_resource type="PackedScene" uid="uid://cpvt7jfaq7yjl" path="res://scenes/ui/rankings.tscn" id="25_4ovp2"]
 [ext_resource type="PackedScene" uid="uid://5ofw62jqnci8" path="res://scenes/prefab/ui/level_select_screen.tscn" id="28_ei00g"]
+[ext_resource type="PackedScene" uid="uid://chka217xfnl8k" path="res://scenes/ui/input_mapping_screen.tscn" id="29_input_mapping"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbte4"]
 shader = ExtResource("7_jbte4")
@@ -49,6 +50,10 @@ shader = ExtResource("7_jbte4")
 shader_parameter/progress = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qilvv"]
+shader = ExtResource("7_jbte4")
+shader_parameter/progress = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_input_mapping"]
 shader = ExtResource("7_jbte4")
 shader_parameter/progress = 1.0
 
@@ -255,6 +260,20 @@ texture = ExtResource("2_n4uci")
 
 [node name="Screen" parent="OptionsMenuCanvasGroup" unique_id=1122078735 instance=ExtResource("22_jbte4")]
 offset_right = 1290.0
+offset_bottom = 720.0
+
+[node name="InputMappingCanvasGroup" type="CanvasGroup" parent="." unique_id=2016497331]
+visible = false
+material = SubResource("ShaderMaterial_input_mapping")
+
+[node name="Background" type="Control" parent="InputMappingCanvasGroup" unique_id=2016497332]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("16_e6a60")
+texture = ExtResource("2_n4uci")
+
+[node name="Screen" parent="InputMappingCanvasGroup" unique_id=2016497333 instance=ExtResource("29_input_mapping")]
+offset_right = 1280.0
 offset_bottom = 720.0
 
 [node name="RankingsCanvasGroup" type="CanvasGroup" parent="." unique_id=1369653347]
