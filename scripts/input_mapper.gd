@@ -1,5 +1,7 @@
 extends Node
 
+const INPUT_MAP_PATH := "bindings.json"
+
 const JOY_BUTTON_NAMES: Dictionary = {
 	JOY_BUTTON_INVALID: "Invalid",
 	JOY_BUTTON_A: "A",
@@ -71,6 +73,7 @@ class ActionInfo:
 	var display_name: String
 	var mnk_event: InputEvent
 	var controller_event: InputEvent
+	var modified: bool
 	func _init(id: StringName, display_name: String) -> void:
 		self.id = id
 		self.display_name = display_name
@@ -94,6 +97,23 @@ static func action_info_from_id(id: StringName) -> ActionInfo:
 	var display_name := id.capitalize()
 	return ActionInfo.new(id, display_name)
 	
+# Used for serializing InputEvent's
+static func serialize_resource(res: Resource) -> String:
+	var data := {}
+	data["__type"] = res.get_class()
+	for prop in res.get_property_list():
+		if prop.usage & PROPERTY_USAGE_STORAGE and prop.name != "script":
+			data[prop.name] = res.get(prop.name)
+	
+	return var_to_str(data)
+
+static func deserialize_resource(text: String) -> Resource:
+	var data: Dictionary = str_to_var(text)
+	var target = ClassDB.instantiate(data["__type"])
+	for key in data:
+		target.set(key, data[key])
+	return target 
+
 signal input_action_updated(id: StringName)
 
 var action_info: Dictionary[StringName, ActionInfo]
@@ -101,7 +121,7 @@ var recording := false
 var record_target: StringName
 var record_to_controller: bool
 
-func _apply_event_to_action(action_name: StringName, event: InputEvent, is_controller: bool = false) -> void:
+func apply_event_to_action(action_name: StringName, event: InputEvent, is_controller: bool = false, silent: bool = false) -> void:
 	var action_info: ActionInfo = action_info[action_name]
 	if is_controller:
 		if event is not InputEventJoypadButton and event is not InputEventJoypadMotion:
@@ -110,7 +130,9 @@ func _apply_event_to_action(action_name: StringName, event: InputEvent, is_contr
 		InputMap.action_erase_event(action_info.id, action_info.controller_event)
 		action_info.controller_event = event
 		InputMap.action_add_event(action_info.id, event)
-		input_action_updated.emit(action_info.id)
+		if not silent:
+			action_info.modified = true
+			input_action_updated.emit(action_info.id)
 	else:
 		if event is not InputEventKey and event is not InputEventMouseButton:
 			push_error("Cannot apply event that isn't MnK to MnK channel.")
@@ -118,7 +140,9 @@ func _apply_event_to_action(action_name: StringName, event: InputEvent, is_contr
 		InputMap.action_erase_event(action_info.id, action_info.mnk_event)
 		action_info.mnk_event = event
 		InputMap.action_add_event(action_info.id, event)
-		input_action_updated.emit(action_info.id)
+		if not silent:
+			action_info.modified = true
+			input_action_updated.emit(action_info.id)
 
 func activate_recording_for(action_name: StringName, target_controller: bool) -> void:
 	recording = true
@@ -143,17 +167,55 @@ func stringify_event(event: InputEvent):
 		else:
 			return JOY_AXIS_NAMES[index]
 
+func save_input_map() -> void:
+	var data_dir := OS.get_user_data_dir()
+	var input_map_path := data_dir.path_join(INPUT_MAP_PATH)
+	var input_map: Dictionary = {}
+	for input_action: ActionInfo in action_info.values():
+		if input_action.modified:
+			input_map[String(input_action.id)] = {
+				"mnk_binding": serialize_resource(input_action.mnk_event),
+				"controller_binding": serialize_resource(input_action.controller_event)
+			}
+	var input_map_json: String = JSON.stringify(input_map)
+	var file := FileAccess.open(input_map_path, FileAccess.ModeFlags.WRITE)
+	file.store_string(input_map_json)
+	file.close()
+
+func load_input_map() -> void:
+	var data_dir := OS.get_user_data_dir()
+	var input_map_path := data_dir.path_join(INPUT_MAP_PATH)
+	if FileAccess.file_exists(input_map_path):
+		var contents := FileAccess.open(input_map_path, FileAccess.ModeFlags.READ).get_as_text()
+		var json := JSON.new()
+		var error := json.parse(contents)
+		if error == OK and typeof(json.data) == TYPE_DICTIONARY:
+			deserialize_input_map(json.data)
+
+func deserialize_input_map(map: Dictionary):
+	for key: String in map.keys():
+		var data: Dictionary = map[key]
+		if key in action_info:
+			var mnk_action: InputEvent = deserialize_resource(data["mnk_binding"])
+			apply_event_to_action(key, mnk_action, false, true)
+			var controller_action: InputEvent = deserialize_resource(data["controller_binding"])
+			apply_event_to_action(key, controller_action, true, true)
+
 func _ready() -> void:
 	action_info = get_all_action_info()
+	load_input_map()
+
+func _exit_tree() -> void:
+	save_input_map()
 
 func _input(event: InputEvent) -> void:
 	if recording:
 		if record_to_controller:
 			if event is InputEventJoypadButton or event is InputEventJoypadMotion:
-				_apply_event_to_action(record_target, event, true)
+				apply_event_to_action(record_target, event, true)
 				recording = false
 		else:
 			if event is InputEventKey or event is InputEventMouseButton:
-				_apply_event_to_action(record_target, event, false)
+				apply_event_to_action(record_target, event, false)
 				recording = false
 		get_viewport().set_input_as_handled()
