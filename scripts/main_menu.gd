@@ -45,7 +45,6 @@ enum Screen {
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var blackout: ColorRect = $Blackout
 
-
 @onready var title_screen_cg: CanvasGroup = $TitleScreenCanvasGroup
 @onready var title_screen: MarginContainer = $TitleScreenCanvasGroup/Screen
 @onready var title_logo: TextureRect = $TitleScreenCanvasGroup/Screen/VBoxContainer/Logo
@@ -76,6 +75,7 @@ enum Screen {
 @onready var options_screen: OptionsMenu = $OptionsMenuCanvasGroup/Screen
 
 @onready var input_mapping_screen_cg: CanvasGroup = $InputMappingCanvasGroup
+@onready var input_mapping_screen: Control = $InputMappingCanvasGroup/Screen
 
 @onready var characters_screen_cg: CanvasGroup = $CharactersCanvasGroup
 @onready var characters_screen: MultiselectScreen = $CharactersCanvasGroup/Screen
@@ -455,6 +455,7 @@ func change_screen(new_screen: Screen, record_undo: bool = true, transition_type
 		whiteout.hide()
 		input_mapping_background.show()
 		screen_cg = input_mapping_screen_cg
+		input_mapping_screen._on_enter()
 	elif new_screen == Screen.RANKINGS:
 		whiteout.hide()
 		rankings_background.show()

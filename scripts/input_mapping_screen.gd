@@ -28,6 +28,12 @@ func _ready() -> void:
 		_create_input_action_controls()
 	InputMapper.input_action_updated.connect(_on_input_action_updated)
 
+func _on_enter() -> void:
+	# 0, 1, and 2 are the header labels. 3 is the action's name, so the first button will be 4, the first action's recording button for MnK.
+	var candidate := controls_container.get_child(4)
+	if candidate != null and candidate is Control:
+		candidate.grab_focus()
+
 func _on_input_action_updated(id: StringName) -> void:
 	var controls := input_action_controls[id]
 	var action_info := InputMapper.action_info[id]
