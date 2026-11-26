@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://bsn8omalnpl1d" path="res://assets/audio/effects/poopy_final_hit2.ogg" id="16_vc3vx"]
 [ext_resource type="Script" uid="uid://cvir30gwlqlrw" path="res://scripts/after_image_manager.gd" id="20_37wxj"]
 [ext_resource type="Script" uid="uid://bm03s6ek7mmx" path="res://scripts/perfect_bash_fx_manager.gd" id="21_isfnt"]
+[ext_resource type="Script" uid="uid://20gc6gywlt0k" path="res://scripts/airdash_particles_manager.gd" id="21_rp2o6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0epon"]
 size = Vector2(21, 31)
@@ -52,7 +53,7 @@ final_hit_sfx = Array[AudioStream]([ExtResource("15_rp2o6"), ExtResource("16_vc3
 position = Vector2(0, 1)
 scale = Vector2(0.0534135, 0.0534135)
 sprite_frames = ExtResource("2_mx6bk")
-animation = &"idle"
+animation = &"airdash"
 autoplay = "idle"
 offset = Vector2(0, -270.04)
 
@@ -102,6 +103,12 @@ bus = &"SFX"
 [node name="AfterImageManager" type="Node" parent="." unique_id=2083046516]
 script = ExtResource("20_37wxj")
 
+[node name="AirdashParticlesManager" type="Node" parent="." unique_id=2021871353]
+script = ExtResource("21_rp2o6")
+
+[node name="TargetPosition" type="Node2D" parent="AirdashParticlesManager" unique_id=1442042022]
+position = Vector2(-14, -15)
+
 [node name="PerfectBashFxManager" type="Node2D" parent="." unique_id=1401426907]
 script = ExtResource("21_isfnt")
 
@@ -119,6 +126,9 @@ one_shot = true
 
 [node name="perfectbash_miss" type="Timer" parent="." unique_id=1129663930]
 one_shot = true
+
+[node name="TargetPosition" type="Node2D" parent="." unique_id=1492644522]
+position = Vector2(-14, -15)
 
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
 [connection signal="timeout" from="ControlLockTimer" to="." method="_on_control_lock_timer_timeout"]
