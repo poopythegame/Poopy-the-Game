@@ -89,7 +89,10 @@ var isairdashing = false
 var isstomping = false
 var isbashing = false
 var isperfectbashing = false
+
 var isbouncing = false
+var enemybouncing = false #Not to be confused: This is only for enemy bouncing!!!
+
 var falloffwall = false
 var control_lock = false
 var stuck = false
@@ -618,6 +621,7 @@ func physics_process_normal(delta):
 		snap_exception = false
 		canjump = true
 		isbouncing = false
+		enemybouncing = false
 		hurt = false
 		
 		isairdashing = false
@@ -628,7 +632,7 @@ func physics_process_normal(delta):
 
 	if not springing:
 		if jumping and motion.y < -JUMP_VELOCITY / 1.625: # If your jumping motion goes beyond a certain point...
-			if not Input.is_action_pressed("jump") and not Input.is_action_pressed("action") and not exitgrapple: # ...but you're NOT pressing the jump button anymore...
+			if not Input.is_action_pressed("jump") and not enemybouncing and not exitgrapple: # ...but you're NOT pressing the jump button anymore...
 				motion.y = -JUMP_VELOCITY / 2.2
 
 
@@ -696,15 +700,15 @@ func physics_process_normal(delta):
 	
 	if not grounded:
 		if Input.is_action_pressed("action") and Input.is_action_pressed("down") and canstomp and stomp_enabled:
-			if motion.y < 450:
+			if motion.y < 0:
 				motion.y = 450
 
 				canstomp = false
 				isstomping = true
 				play_all_audio_multiselect([stomp_sfx, screwdive_sfx])
 				isairdashing = false
-			elif motion.y >= 450:
-				motion.y += 225
+			elif motion.y >= 0:
+				motion.y += 300
 
 				canstomp = false
 				isstomping = true
