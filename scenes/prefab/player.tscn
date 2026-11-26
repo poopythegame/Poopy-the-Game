@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://bea558noe02pm"]
 
 [ext_resource type="Script" uid="uid://bkxp05jsmh5cy" path="res://scripts/player.gd" id="1_3r5ht"]
+[ext_resource type="AudioStream" uid="uid://b128dyu1na0ue" path="res://assets/audio/effects/airdash.ogg" id="2_isfnt"]
 [ext_resource type="SpriteFrames" uid="uid://cxxlgiysiu6jf" path="res://assets/animations/player.tres" id="2_mx6bk"]
-[ext_resource type="AudioStream" uid="uid://dbwku6gblnxkn" path="res://assets/audio/effects/airdash1.ogg" id="2_ob2so"]
-[ext_resource type="AudioStream" uid="uid://cw31c8fmybvyj" path="res://assets/audio/effects/airdash2.ogg" id="3_l8smq"]
+[ext_resource type="AudioStream" uid="uid://pvp6uyh5is3e" path="res://assets/audio/effects/strong_airdash.ogg" id="3_som74"]
 [ext_resource type="AudioStream" uid="uid://cbnujwkd4ai1m" path="res://assets/audio/effects/screw_dive1.ogg" id="4_37wxj"]
+[ext_resource type="AudioStream" uid="uid://b08nlvi2mt3ru" path="res://assets/audio/effects/bash.ogg" id="4_p60x0"]
 [ext_resource type="AudioStream" uid="uid://bl8djkkg5iwbr" path="res://assets/audio/effects/brake_skid.ogg" id="4_psnur"]
 [ext_resource type="AudioStream" uid="uid://o7aom6ckhliv" path="res://assets/audio/effects/grapple1.ogg" id="5_gumar"]
 [ext_resource type="AudioStream" uid="uid://bwccju81byha0" path="res://assets/audio/effects/screw_dive2.ogg" id="5_isfnt"]
+[ext_resource type="AudioStream" uid="uid://ddcq1jbgbvs3d" path="res://assets/audio/effects/perfect_bash.ogg" id="5_sjqja"]
 [ext_resource type="AudioStream" uid="uid://dpqd3cyqpiyjm" path="res://assets/audio/effects/grapple2.ogg" id="6_2v2me"]
 [ext_resource type="AudioStream" uid="uid://8a3pls25jtt4" path="res://assets/audio/effects/jump1.ogg" id="7_5q2mw"]
 [ext_resource type="AudioStream" uid="uid://dbpltt6yp6cli" path="res://assets/audio/effects/roll.ogg" id="9_oq628"]
@@ -17,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://ba17x1dn3jchl" path="res://assets/audio/effects/poopy_dead2.ogg" id="12_oq628"]
 [ext_resource type="AudioStream" uid="uid://b0nufg1nkflq0" path="res://assets/audio/effects/poopy_hurt2.ogg" id="13_37wxj"]
 [ext_resource type="AudioStream" uid="uid://bm5nmcn81vxmu" path="res://assets/audio/effects/poopy_hurt.ogg" id="14_isfnt"]
+[ext_resource type="AudioStream" uid="uid://bmlsw7fkkuats" path="res://assets/audio/effects/break_crate.ogg" id="14_lmtrc"]
 [ext_resource type="AudioStream" uid="uid://dr1g6ao3afdws" path="res://assets/audio/effects/poopy_final_hit1.ogg" id="15_rp2o6"]
 [ext_resource type="AudioStream" uid="uid://bsn8omalnpl1d" path="res://assets/audio/effects/poopy_final_hit2.ogg" id="16_vc3vx"]
 [ext_resource type="Script" uid="uid://cvir30gwlqlrw" path="res://scripts/after_image_manager.gd" id="20_37wxj"]
@@ -37,13 +40,17 @@ floor_max_angle = 1.55334
 floor_snap_length = 12.0
 safe_margin = 0.16
 script = ExtResource("1_3r5ht")
-airdash_sfx = Array[AudioStream]([ExtResource("2_ob2so"), ExtResource("3_l8smq")])
+airdash_sfx = Array[AudioStream]([ExtResource("2_isfnt")])
+strong_airdash_sfx = Array[AudioStream]([ExtResource("3_som74")])
+bash_sfx = Array[AudioStream]([ExtResource("4_p60x0")])
+perfect_bash_sfx = Array[AudioStream]([ExtResource("5_sjqja")])
 screwdive_sfx = Array[AudioStream]([ExtResource("4_37wxj"), ExtResource("5_isfnt")])
 skid_sfx = Array[AudioStream]([ExtResource("4_psnur")])
 grapple_sfx = Array[AudioStream]([ExtResource("5_gumar"), ExtResource("6_2v2me")])
 jump_sfx = Array[AudioStream]([ExtResource("7_5q2mw")])
 roll_sfx = Array[AudioStream]([ExtResource("9_oq628")])
 stomp_sfx = Array[AudioStream]([ExtResource("10_37wxj")])
+break_crate_sfx = Array[AudioStream]([ExtResource("14_lmtrc")])
 boost_sfx = Array[AudioStream]([ExtResource("12_37wxj")])
 death_sfx = Array[AudioStream]([ExtResource("11_vg2fa"), ExtResource("12_oq628")])
 hit_sfx = Array[AudioStream]([ExtResource("13_37wxj"), ExtResource("14_isfnt")])
