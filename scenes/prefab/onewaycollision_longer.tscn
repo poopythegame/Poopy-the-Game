@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bocig45df8gb4"]
+
+[ext_resource type="Texture2D" uid="uid://cerwkjbbxbhcq" path="res://assets/textures/ground/wood_edge.png" id="1_iff0u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0s0qv"]
+size = Vector2(144, 8)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" unique_id=1744253714]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1369955758]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_0s0qv")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1630870527]
+position = Vector2(-0.23026276, 4.0000005)
+scale = Vector2(0.1409371, 0.06015038)
+texture = ExtResource("1_iff0u")
