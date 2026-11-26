@@ -47,4 +47,5 @@ func _contact(collision_area: Area2D):
 			motion.x = -1
 		motion *= strength
 		player.motion = motion
+		player.isbouncing = true #This prevents the wallcast from stopping the player
 		play_audio(use_sfx)
