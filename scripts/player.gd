@@ -27,12 +27,16 @@ const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 @export var max_health: int = 100
 @export_group("Sounds")
 @export var airdash_sfx: Array[AudioStream]
+@export var strong_airdash_sfx: Array[AudioStream]
+@export var bash_sfx: Array[AudioStream]
+@export var perfect_bash_sfx: Array[AudioStream]
 @export var screwdive_sfx: Array[AudioStream]
 @export var skid_sfx: Array[AudioStream]
 @export var grapple_sfx: Array[AudioStream]
 @export var jump_sfx: Array[AudioStream]
 @export var roll_sfx: Array[AudioStream]
 @export var stomp_sfx: Array[AudioStream]
+@export var break_crate_sfx: Array[AudioStream]
 @export var boost_sfx: Array[AudioStream]
 @export var death_sfx: Array[AudioStream]
 @export var hit_sfx: Array[AudioStream]
@@ -723,7 +727,10 @@ func physics_process_normal(delta):
 			motion.x += clamp(dashspeed, 75, 300) * direction
 			canairdash = false
 			isairdashing = true
-			play_all_audio_multiselect([airdash_sfx, screwdive_sfx])
+			if dashspeed > 150:
+				play_audio(strong_airdash_sfx)
+			else:
+				play_audio(airdash_sfx)
 			var timer := get_tree().create_timer(0.064)
 			timer.timeout.connect(airdash_particles_manager.spawn)
 			isstomping = false
@@ -753,6 +760,7 @@ func physics_process_normal(delta):
 					$NormalBashing_Duration.start()
 					
 				bashingtransition = true #Triggers the transition animation
+				play_audio(bash_sfx)
 				
 				
 			elif isbashing and (not canperfectbash) and (not isperfectbashing):
@@ -1131,7 +1139,7 @@ func _on_normal_bashing_duration_timeout():
 	if isbashing: #If you get penalized for missing the timing of perfect bashing, you can't perfect bash
 		canperfectbash = true
 		spawn_perfect_bash_fx() #visual indicator of the perfect timing
-		play_audio(boost_sfx)
+		play_audio(perfect_bash_sfx)
 		$PerfectBashing_Timing.start()
 		$Final_Bashing.start()
 	
@@ -1142,6 +1150,9 @@ func _on_perfect_bashing_timing_timeout():
 func _on_final_bashing_timeout():
 	isbashing = false
 	isperfectbashing = false
+
+func _on_crate_destroy() -> void:
+	play_audio(break_crate_sfx)
 
 func _on_sprite_animation_finished(): #When the animation finishes playing..
 	#---(Usually transition animation in bashing, stomping, etc.)

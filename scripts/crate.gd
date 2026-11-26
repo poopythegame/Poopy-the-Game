@@ -68,6 +68,7 @@ func _handle_area_exit(collision_area: Area2D):
 func destroy(player: Player) -> void:
 	var acceleration: float = abs(player.motion.x) / 225
 	destroyed = true
+	player._on_crate_destroy()
 	collision_shape_2d.disabled = true
 	sprite_2d.hide()
 	player.camera.screen_shake_for(.25)
