@@ -3,14 +3,34 @@
 [ext_resource type="FontFile" uid="uid://yiomo3w4lswh" path="res://assets/fonts/PatrickHand-Regular.ttf" id="1_lu33j"]
 [ext_resource type="StyleBox" uid="uid://dhyyd7ecxkqi" path="res://assets/style_boxes/blue_box.tres" id="2_wycmq"]
 [ext_resource type="Texture2D" uid="uid://bn80ws0ferclg" path="res://assets/textures/ui/focus_halo.png" id="3_x2pqw"]
+[ext_resource type="Texture2D" uid="uid://c83c0k3os7y5n" path="res://assets/textures/ui/widget/button_pressed.png" id="4_7g2p0"]
 [ext_resource type="Texture2D" uid="uid://djtlf5ambp0ec" path="res://assets/textures/ui/widget/checkbox_disabled.png" id="4_wycmq"]
 [ext_resource type="Texture2D" uid="uid://b3t0mq18d16j5" path="res://assets/textures/ui/widget/checkbox_enabled.png" id="4_x2pqw"]
+[ext_resource type="Texture2D" uid="uid://coq58n5bc7l3r" path="res://assets/textures/ui/widget/remap_recording.png" id="5_357y2"]
 [ext_resource type="StyleBox" uid="uid://c120gqdk7oh14" path="res://assets/style_boxes/options_focus.tres" id="6_bcf2e"]
 [ext_resource type="Texture2D" uid="uid://buugh8r0yy88v" path="res://assets/textures/ui/widget/h_slider_base.png" id="6_e8htd"]
 [ext_resource type="Texture2D" uid="uid://cdkp6o2vmerlb" path="res://assets/textures/ui/widget/slider_knob.png" id="6_wms38"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e8htd"]
 texture = ExtResource("3_x2pqw")
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_357y2"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("4_7g2p0")
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_llqld"]
+texture = ExtResource("5_357y2")
 expand_margin_left = 4.0
 expand_margin_top = 4.0
 expand_margin_right = 4.0
@@ -66,7 +86,6 @@ Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_focus_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/font_pressed_color = Color(0.6808, 0.8123601, 0.92, 1)
 Button/font_sizes/font_size = 40
 Button/fonts/font = ExtResource("1_lu33j")
 Button/styles/disabled = ExtResource("2_wycmq")
@@ -74,8 +93,10 @@ Button/styles/focus = SubResource("StyleBoxTexture_e8htd")
 Button/styles/hover = ExtResource("2_wycmq")
 Button/styles/hover_pressed = ExtResource("2_wycmq")
 Button/styles/normal = ExtResource("2_wycmq")
-Button/styles/pressed = ExtResource("2_wycmq")
+Button/styles/pressed = SubResource("StyleBoxTexture_357y2")
 Button/styles/pressed_mirrored = ExtResource("2_wycmq")
+ButtonRecording/base_type = &"Button"
+ButtonRecording/styles/focus = SubResource("StyleBoxTexture_llqld")
 CheckButton/constants/icon_max_width = 64
 CheckButton/icons/checked = ExtResource("4_wycmq")
 CheckButton/icons/checked_disabled = SubResource("DPITexture_x2pqw")

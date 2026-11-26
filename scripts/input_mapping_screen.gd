@@ -13,10 +13,12 @@ class InputActionControls:
 		self.mnk_record_btn.pressed.connect(on_mnk_record_start)
 		self.controller_record_btn.pressed.connect(on_controller_record_start)
 	func on_mnk_record_start() -> void:
+		self.mnk_record_btn.theme_type_variation = "ButtonRecording"
 		InputMapper.activate_recording_for(id, false)
 	func on_controller_record_start() -> void:
+		self.controller_record_btn.theme_type_variation = "ButtonRecording"
 		InputMapper.activate_recording_for(id, true)
-	
+
 @onready var controls_container: GridContainer = %ActionsContainer
 
 var input_action_controls: Dictionary[StringName, InputActionControls]
@@ -36,6 +38,8 @@ func _on_enter() -> void:
 
 func _on_input_action_updated(id: StringName) -> void:
 	var controls := input_action_controls[id]
+	controls.mnk_record_btn.theme_type_variation = ""
+	controls.controller_record_btn.theme_type_variation = ""
 	var action_info := InputMapper.action_info[id]
 	if action_info.mnk_event == null:
 		controls.mnk_record_btn.text = "Unbound"
