@@ -19,6 +19,7 @@ const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 @onready var collision_area: Area2D = $Area2D
 @onready var afterimage_manager: AfterimageManager = $AfterImageManager
 @onready var perfect_bash_fx_manager: PerfectBashFxManager = $PerfectBashFxManager 
+@onready var airdash_particles_manager: AirdashParticlesManager = $AirdashParticlesManager
 @onready var death_tween := get_tree().create_tween()
 
 @export var death_time: float = 0.5
@@ -719,6 +720,8 @@ func physics_process_normal(delta):
 			canairdash = false
 			isairdashing = true
 			play_all_audio_multiselect([airdash_sfx, screwdive_sfx])
+			var timer := get_tree().create_timer(0.064)
+			timer.timeout.connect(airdash_particles_manager.spawn)
 			isstomping = false
 	elif grounded:
 		if Input.is_action_just_pressed("action") and not control_lock:
