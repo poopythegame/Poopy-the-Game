@@ -20,5 +20,5 @@ func spawn() -> void:
 	instance.animation_finished.connect(instance.queue_free)
 	instance.rotation = parent.sprite.rotation
 	instance.flip_h = parent.sprite.flip_h
+	instance.play(&"default")
 	add_child(instance)
-	parent.process_mode = Node.PROCESS_MODE_DISABLED
