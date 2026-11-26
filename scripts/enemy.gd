@@ -281,8 +281,13 @@ func physics_process_normal(delta):
 		motion.x += (acc * SLOPEMULT) * slopefactor
 
 	# Flat Ground Friction (No Input State)
-	if is_on_floor() and abs(slopefactor) < 0.25: 
-		motion.x = move_toward(motion.x, 0, acc - 1)
+	if is_on_floor() and abs(slopefactor) < 0.25:
+		var frictionfactor
+		if (abs(motion.x) < 300):
+			frictionfactor = 1.7
+		else:
+			frictionfactor = 1
+		motion.x = move_toward(motion.x, 0, (acc - 1) * frictionfactor)
 	
 	velocity = Vector2(motion.x, motion.y).rotated(rot)
 	
