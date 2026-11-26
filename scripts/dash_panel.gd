@@ -11,11 +11,6 @@ extends Node
 
 func play_audio(streams: Array[AudioStream]):
 	var choice = randi_range(0, len(streams) - 1)
-	# var not_playing_current_sfx := true
-	# for stream in streams:
-	# 	if stream == audio_stream_player.stream:
-	# 		not_playing_current_sfx = false
-	# if not_playing_current_sfx:
 	audio_stream_player.stream = streams[choice]
 	audio_stream_player.play()
 
@@ -34,14 +29,14 @@ func stop_audio():
 		audio_stream_player.stream = null
 
 func _ready() -> void:
-	area.area_entered.connect(_contact)
+	area.body_entered.connect(_contact)
 	if flip and not sprite_flip_exception: #if the sprite exception is turned on, the sprite doesn't flip.
 		var sprite: AnimatedSprite2D = $AnimatedSprite2D
 		sprite.flip_h = true
 
-func _contact(collision_area: Area2D):
+func _contact(body: CollisionObject2D):
 	var player: Player = get_tree().get_first_node_in_group("Player")
-	if player and collision_area == player.get_collision_area():
+	if player == body:
 		var motion: Vector2 = Vector2(1, 0)
 		if flip:
 			motion.x = -1
