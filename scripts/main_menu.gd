@@ -155,10 +155,8 @@ func _on_menu_option_selected(index: int):
 	elif index == 2:
 		change_screen(Screen.OPTIONS, true, Transition.CROSSFADE)
 	elif index == 3:
-		change_screen(Screen.INPUT_MAPPING, true, Transition.CROSSFADE)
-	elif index == 4:
 		change_screen(Screen.CHARACTERS, true, Transition.CROSSFADE)
-	elif index == 5:
+	elif index == 4:
 		if OS.has_feature("web"):
 			JavaScriptBridge.eval("window.open('" + DISCORD_LINK + "', '_blank').focus();")
 		else:
