@@ -114,7 +114,7 @@ script = ExtResource("20_37wxj")
 script = ExtResource("21_rp2o6")
 
 [node name="TargetPosition" type="Node2D" parent="AirdashParticlesManager" unique_id=1442042022]
-position = Vector2(-14, -15)
+position = Vector2(-10, -15)
 
 [node name="PerfectBashFxManager" type="Node2D" parent="." unique_id=1401426907]
 script = ExtResource("21_isfnt")
@@ -133,9 +133,6 @@ one_shot = true
 
 [node name="perfectbash_miss" type="Timer" parent="." unique_id=1129663930]
 one_shot = true
-
-[node name="TargetPosition" type="Node2D" parent="." unique_id=1492644522]
-position = Vector2(-14, -15)
 
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
 [connection signal="timeout" from="ControlLockTimer" to="." method="_on_control_lock_timer_timeout"]
