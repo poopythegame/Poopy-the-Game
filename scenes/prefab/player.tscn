@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bea558noe02pm"]
 
 [ext_resource type="Script" uid="uid://bkxp05jsmh5cy" path="res://scripts/player.gd" id="1_3r5ht"]
-[ext_resource type="AudioStream" uid="uid://b128dyu1na0ue" path="res://assets/audio/effects/airdash.ogg" id="2_isfnt"]
+[ext_resource type="AudioStream" uid="uid://b128dyu1na0ue" path="res://assets/audio/effects/airdash2.ogg" id="2_isfnt"]
 [ext_resource type="SpriteFrames" uid="uid://cxxlgiysiu6jf" path="res://assets/animations/player.tres" id="2_mx6bk"]
-[ext_resource type="AudioStream" uid="uid://pvp6uyh5is3e" path="res://assets/audio/effects/strong_airdash.ogg" id="3_som74"]
+[ext_resource type="AudioStream" uid="uid://dbwku6gblnxkn" path="res://assets/audio/effects/airdash1.ogg" id="2_som74"]
 [ext_resource type="AudioStream" uid="uid://cbnujwkd4ai1m" path="res://assets/audio/effects/screw_dive1.ogg" id="4_37wxj"]
 [ext_resource type="AudioStream" uid="uid://b08nlvi2mt3ru" path="res://assets/audio/effects/bash.ogg" id="4_p60x0"]
 [ext_resource type="AudioStream" uid="uid://bl8djkkg5iwbr" path="res://assets/audio/effects/brake_skid.ogg" id="4_psnur"]
@@ -40,8 +40,7 @@ floor_max_angle = 1.55334
 floor_snap_length = 12.0
 safe_margin = 0.16
 script = ExtResource("1_3r5ht")
-airdash_sfx = Array[AudioStream]([ExtResource("2_isfnt")])
-strong_airdash_sfx = Array[AudioStream]([ExtResource("3_som74")])
+airdash_sfx = Array[AudioStream]([ExtResource("2_som74"), ExtResource("2_isfnt")])
 bash_sfx = Array[AudioStream]([ExtResource("4_p60x0")])
 perfect_bash_sfx = Array[AudioStream]([ExtResource("5_sjqja")])
 screwdive_sfx = Array[AudioStream]([ExtResource("4_37wxj"), ExtResource("5_isfnt")])
@@ -114,7 +113,7 @@ script = ExtResource("20_37wxj")
 script = ExtResource("21_rp2o6")
 
 [node name="TargetPosition" type="Node2D" parent="AirdashParticlesManager" unique_id=1442042022]
-position = Vector2(-14, -15)
+position = Vector2(-10, -15)
 
 [node name="PerfectBashFxManager" type="Node2D" parent="." unique_id=1401426907]
 script = ExtResource("21_isfnt")
@@ -133,9 +132,6 @@ one_shot = true
 
 [node name="perfectbash_miss" type="Timer" parent="." unique_id=1129663930]
 one_shot = true
-
-[node name="TargetPosition" type="Node2D" parent="." unique_id=1492644522]
-position = Vector2(-14, -15)
 
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
 [connection signal="timeout" from="ControlLockTimer" to="." method="_on_control_lock_timer_timeout"]
