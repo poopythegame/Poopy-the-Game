@@ -27,7 +27,6 @@ const free_grapple_hook_prefab_path: String = "uid://qjp2tm4naawh"
 @export var max_health: int = 100
 @export_group("Sounds")
 @export var airdash_sfx: Array[AudioStream]
-@export var strong_airdash_sfx: Array[AudioStream]
 @export var bash_sfx: Array[AudioStream]
 @export var perfect_bash_sfx: Array[AudioStream]
 @export var screwdive_sfx: Array[AudioStream]
@@ -727,10 +726,7 @@ func physics_process_normal(delta):
 			motion.x += clamp(dashspeed, 75, 300) * direction
 			canairdash = false
 			isairdashing = true
-			if dashspeed > 150:
-				play_audio(strong_airdash_sfx)
-			else:
-				play_audio(airdash_sfx)
+			play_all_audio(airdash_sfx)
 			airdash_particles_manager.call_deferred("spawn")
 			# var timer := get_tree().create_timer(0.064)
 			# timer.timeout.connect()
