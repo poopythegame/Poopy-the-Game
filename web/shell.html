@@ -13,7 +13,7 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            width: min(1110px, calc(100vw - 48px));
+            width: min(650px, calc(100% - 48px));
             transform: translateX(-50%);
         }
         #loading-track progress { display: block; width: 100%; height: 16px; }
@@ -22,7 +22,7 @@
             bottom: calc(100% + 8px);
             left: 0;
             width: 100%;
-            height: clamp(72px, 60vw, 250px);
+            height: min(250px, 35vw, 35vh);
         }
         #loading-characters img {
             position: absolute;
@@ -32,14 +32,14 @@
             max-width: 25%;
             object-fit: contain;
         }
-        #loading-mouse { left: 0; transform: translateX(-100%); }
-        #loading-bear { right: 0; transform: translateX(100%); }
+        #loading-mouse { left: 0; transform: translateX(-70%); }
+        #loading-bear { right: 0; }
         #loading-heart {
             left: 100%;
-            bottom: calc(100% + 8px);
+            bottom: calc(100% - 32px);
             width: clamp(40px, 8vw, 96px);
             height: auto;
-            transform: translateX(-50%) translateY(-100%);
+            transform: translateX(-50%);
         }
     </style>
     $GODOT_HEAD_INCLUDE
