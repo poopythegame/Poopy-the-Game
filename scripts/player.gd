@@ -731,8 +731,9 @@ func physics_process_normal(delta):
 				play_audio(strong_airdash_sfx)
 			else:
 				play_audio(airdash_sfx)
-			var timer := get_tree().create_timer(0.064)
-			timer.timeout.connect(airdash_particles_manager.spawn)
+			airdash_particles_manager.call_deferred("spawn")
+			# var timer := get_tree().create_timer(0.064)
+			# timer.timeout.connect()
 			isstomping = false
 	elif grounded:
 		if Input.is_action_just_pressed("action") and not control_lock:
