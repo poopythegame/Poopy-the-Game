@@ -16,9 +16,14 @@ func _ready() -> void:
 
 func spawn() -> void:
 	var instance: AnimatedSprite2D = particle_prefab.instantiate()
-	instance.global_position = parent.global_position + target_position.rotated(parent.sprite.rotation)
 	instance.animation_finished.connect(instance.queue_free)
 	instance.rotation = parent.sprite.rotation
 	instance.flip_h = parent.sprite.flip_h
-	instance.play(&"default")
 	add_child(instance)
+	var sprite := parent.sprite
+	var offset := target_position - sprite.position
+	if instance.flip_h:
+		offset.x = -offset.x
+	var position := sprite.position + offset.rotated(sprite.rotation)
+	instance.global_position = parent.to_global(position)
+	instance.play(&"default")
